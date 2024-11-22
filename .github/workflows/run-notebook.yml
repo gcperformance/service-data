@@ -22,6 +22,10 @@ jobs:
         with:
           python-version: '3.10'
 
+	# debug: list directory contents
+      - name: List directory contents
+        run: ls -R
+
       # Step 3: Install dependencies
       - name: Install Dependencies
         run: |
@@ -32,7 +36,7 @@ jobs:
       - name: Run Jupyter Notebook
         run: |
           jupyter nbconvert --to notebook --execute gc-service-data-script.ipynb \
-            --output my_notebook_output.ipynb
+            --output gc-service-data-script.ipynb
           mv *.csv output/
 
       # Step 5: Commit and push the results
