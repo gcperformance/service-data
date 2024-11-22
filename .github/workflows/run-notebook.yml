@@ -37,7 +37,7 @@ jobs:
         run: |
           git fetch origin
           git checkout -B generated-files
-          git add output/*.csv
+          git add -f output/*.csv
           git commit -m "Update CSV outputs from Jupyter notebook"
           git push origin generated-files
       - name: Clean up old csv files
