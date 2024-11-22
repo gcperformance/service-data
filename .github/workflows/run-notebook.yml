@@ -36,7 +36,7 @@ jobs:
       - name: Run Jupyter Notebook
         run: |
           jupyter nbconvert --to notebook --execute gc-service-data-script.ipynb \
-            --output gc-service-data-script.ipynb
+            --output gc-service-data-script-output.ipynb
           mv *.csv output/
 
       # Step 6: Commit and push the results
