@@ -31,7 +31,7 @@ jobs:
       # Step 4: Execute Jupyter Notebook
       - name: Run Jupyter Notebook
         run: |
-          jupyter nbconvert --to notebook --execute my_notebook.ipynb \
+          jupyter nbconvert --to notebook --execute gc-service-data-script.ipynb \
             --output my_notebook_output.ipynb
           mv *.csv output/
 
