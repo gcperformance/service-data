@@ -40,10 +40,15 @@ jobs:
           mv *.csv output/
 
       # Step 6: Commit and push the results
-      - name: Commit and Push Outputs
+      - name: Configure Git for Actions
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      -name: Push changes
+       env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+       run: |
           git add output/*.csv
           git commit -m "Update CSV outputs from Jupyter notebook"
           git push
