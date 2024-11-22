@@ -45,7 +45,7 @@ jobs:
           git fetch origin generated-files
           git checkout generated-files
           find output/ -type f -mtime +30 -delete
-          git add output/
+          git add -f output/
           git commit -m "Cleanup old files"
           git push origin generated-files
 
