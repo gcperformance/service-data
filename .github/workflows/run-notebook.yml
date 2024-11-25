@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing
-        run:| 
+        run: | 
           echo "Hello, manual trigger!"
