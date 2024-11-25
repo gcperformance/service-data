@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Testing
-        run: | 
+        run: |
           pwd
           ls -al
           cd ..
           ls -al
           cd ..
-	  ls -al
-	  cd /
           ls -al
+          cd /
+          ls -al
+
