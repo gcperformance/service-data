@@ -9,5 +9,4 @@ jobs:
     steps:
       - name: Testing
         run: | 
-          echo "Hello, manual trigger!"
-          git status
+          pwd
