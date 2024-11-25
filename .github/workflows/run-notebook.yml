@@ -7,15 +7,11 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Check directory
-        run: |
-          ls -al
-
       - name: Checkout repository 
         uses: actions/checkout@v3
 
-      - name: List directory contents
-        run: |
-          ls -al
-          cd ..
-          ls -al
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
