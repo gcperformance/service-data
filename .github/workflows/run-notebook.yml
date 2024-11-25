@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Jupyter Notebook 
         run: >
-          jupyter nbconvert --to-notebook --execute gc-service-data-script.ipynb
+          jupyter nbconvert --to notebook --execute gc-service-data-script.ipynb
 
       - name: List directory contents
         run: ls -R
