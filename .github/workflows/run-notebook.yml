@@ -7,14 +7,5 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Testing
-        run: |
-          pwd
-          ls -al
-          cd ..
-          ls -al
-          cd ..
-          ls -al
-          cd /
-          ls -al
-
+      - name: Checkout repository 
+        uses: actions/checkout@v3
