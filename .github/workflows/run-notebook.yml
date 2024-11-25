@@ -10,3 +10,10 @@ jobs:
       - name: Testing
         run: | 
           pwd
+          ls -al
+          cd ..
+          ls -al
+          cd ..
+	  ls -al
+	  cd /
+          ls -al
