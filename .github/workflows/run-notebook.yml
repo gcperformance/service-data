@@ -43,5 +43,5 @@ jobs:
           git checkout -B generated-files
           git add *.csv
           git commit -m "Update CSV outputs from Jupyter notebook"
-          git push origin generated-files
+          git push --force origin generated-files
 
