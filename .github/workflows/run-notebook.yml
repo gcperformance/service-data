@@ -29,3 +29,19 @@ jobs:
 
       - name: List directory contents
         run: ls -R
+
+      - name: Configure Git for Actions
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Push Changes to Generated Files Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch origin
+          git checkout -B generated-files
+          git add *.csv
+          git commit -m "Update CSV outputs from Jupyter notebook"
+          git push origin generated-files
+
