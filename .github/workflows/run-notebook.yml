@@ -26,7 +26,7 @@ jobs:
         run: ls -R
 
       - name: Run Jupyter Notebook 
-        run: >
+        run: |
           jupyter nbconvert --to notebook --execute --inplace gc-service-data-script.ipynb
           jupyter nbconvert --to notebook --execute --inplace qa.ipynb
 

@@ -1,31 +1,31 @@
 uri,is_valid,detail
-https://www.publicsafety.gc.ca/cnt/cntrng-crm/crrctns/cmmnt-sft-cntrbtn-prgrm-en.aspx,True,200
-https://www.publicsafety.gc.ca/cnt/rsrcs/fndng-prgrms/grnt-vlnch-cnd-fndtn/index-en.aspx,True,200
-https://www.publicsafety.gc.ca/cnt/cntrng-crm/hmn-trffckng/cpcsoc/cpcsoc-en.aspx,True,200
-https://www.publicsafety.gc.ca/cnt/ntnl-scrt/cbr-scrt/cbr-scrt-tl/index-en.aspx,True,200
-https://www.publicsafety.gc.ca/cnt/bt/mmrl-grnt-prgrm/index-en.aspx,True,200
-https://www.canada.ca/en/services/defence/researchsecurity/about.html,True,200
-https://open.canada.ca,True,200
-https://www.canada.ca/en/treasury-board-secretariat/corporate/contact.html,True,200
-https://gcxgce.sharepoint.com/teams/10001110/SitePages/Home.aspx,False,401
-https://tbs-clarity.ssc-spc.gc.ca/,False,"HTTPSConnectionPool(host='tbs-clarity.ssc-spc.gc.ca', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d77617650>, 'Connection to tbs-clarity.ssc-spc.gc.ca timed out. (connect timeout=60)'))"
-https://tracker.canada.ca/,False,"HTTPSConnectionPool(host='tracker.canada.ca', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d776282c0>, 'Connection to tracker.canada.ca timed out. (connect timeout=60)'))"
-https://portal-portail.tbs-sct.gc.ca/home-eng.aspx,False,"HTTPSConnectionPool(host='portal-portail.tbs-sct.gc.ca', port=443): Max retries exceeded with url: /home-eng.aspx (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d77628f80>, 'Connection to portal-portail.tbs-sct.gc.ca timed out. (connect timeout=60)'))"
-https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html,True,200
-https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics/diversity-inclusion-statistics.html,True,200
-https://pcis-sipc.tbs-sct.gc.ca/,False,"HTTPSConnectionPool(host='pcis-sipc.tbs-sct.gc.ca', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d7762b5f0>, 'Connection to pcis-sipc.tbs-sct.gc.ca timed out. (connect timeout=60)'))"
-https://solo.tbs-sct.gc.ca/Account/Login?ReturnUrl=%2F,False,"HTTPSConnectionPool(host='solo.tbs-sct.gc.ca', port=443): Max retries exceeded with url: /Account/Login?ReturnUrl=%2F (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d77640320>, 'Connection to solo.tbs-sct.gc.ca timed out. (connect timeout=60)'))"
-https://www.securitepublique.gc.ca/cnt/cntrng-crm/crrctns/cmmnt-sft-cntrbtn-prgrm-fr.aspx,True,200
-https://www.securitepublique.gc.ca/cnt/rsrcs/fndng-prgrms/grnt-vlnch-cnd-fndtn/index-fr.aspx,True,200
-https://www.securitepublique.gc.ca/cnt/cntrng-crm/hmn-trffckng/cpcsoc/cpcsoc-fr.aspx,True,200
-https://www.securitepublique.gc.ca/cnt/ntnl-scrt/cbr-scrt/cbr-scrt-tl/index-fr.aspx,True,200
-https://www.securitepublique.gc.ca/cnt/bt/mmrl-grnt-prgrm/index-fr.aspx,True,200
-https://gcxgce.sharepoint.com/teams/10001110/SitePages/fr/Accueil.aspx,False,401
-https://suivi.canada.ca/,False,"HTTPSConnectionPool(host='suivi.canada.ca', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d7765dc40>, 'Connection to suivi.canada.ca timed out. (connect timeout=60)'))"
-https://portal-portail.tbs-sct.gc.ca/home-fra.aspx,False,"HTTPSConnectionPool(host='portal-portail.tbs-sct.gc.ca', port=443): Max retries exceeded with url: /home-fra.aspx (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x780d7765e960>, 'Connection to portal-portail.tbs-sct.gc.ca timed out. (connect timeout=60)'))"
-https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html,True,200
-https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines/statistiques-diversite-inclusion.html,True,200
-https://open-data.github.io/status-statut/,True,200
+https://www.publicsafety.gc.ca/cnt/cntrng-crm/crrctns/cmmnt-sft-cntrbtn-prgrm-en.aspx,True,No Details
+https://www.publicsafety.gc.ca/cnt/rsrcs/fndng-prgrms/grnt-vlnch-cnd-fndtn/index-en.aspx,True,No Details
+https://www.publicsafety.gc.ca/cnt/cntrng-crm/hmn-trffckng/cpcsoc/cpcsoc-en.aspx,True,No Details
+https://www.publicsafety.gc.ca/cnt/ntnl-scrt/cbr-scrt/cbr-scrt-tl/index-en.aspx,True,No Details
+https://www.publicsafety.gc.ca/cnt/bt/mmrl-grnt-prgrm/index-en.aspx,True,No Details
+https://www.canada.ca/en/services/defence/researchsecurity/about.html,True,No Details
+https://open.canada.ca,True,No Details
+https://www.canada.ca/en/treasury-board-secretariat/corporate/contact.html,True,No Details
+https://gcxgce.sharepoint.com/teams/10001110/SitePages/Home.aspx,False,No Details
+https://tbs-clarity.ssc-spc.gc.ca/,False,No Details
+https://tracker.canada.ca/,False,No Details
+https://portal-portail.tbs-sct.gc.ca/home-eng.aspx,False,No Details
+https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics.html,True,No Details
+https://www.canada.ca/en/treasury-board-secretariat/services/innovation/human-resources-statistics/diversity-inclusion-statistics.html,True,No Details
+https://pcis-sipc.tbs-sct.gc.ca/,False,No Details
+https://solo.tbs-sct.gc.ca/Account/Login?ReturnUrl=%2F,False,No Details
+https://www.securitepublique.gc.ca/cnt/cntrng-crm/crrctns/cmmnt-sft-cntrbtn-prgrm-fr.aspx,True,No Details
+https://www.securitepublique.gc.ca/cnt/rsrcs/fndng-prgrms/grnt-vlnch-cnd-fndtn/index-fr.aspx,True,No Details
+https://www.securitepublique.gc.ca/cnt/cntrng-crm/hmn-trffckng/cpcsoc/cpcsoc-fr.aspx,True,No Details
+https://www.securitepublique.gc.ca/cnt/ntnl-scrt/cbr-scrt/cbr-scrt-tl/index-fr.aspx,True,No Details
+https://www.securitepublique.gc.ca/cnt/bt/mmrl-grnt-prgrm/index-fr.aspx,True,No Details
+https://gcxgce.sharepoint.com/teams/10001110/SitePages/fr/Accueil.aspx,False,No Details
+https://suivi.canada.ca/,False,No Details
+https://portal-portail.tbs-sct.gc.ca/home-fra.aspx,False,No Details
+https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines.html,True,No Details
+https://www.canada.ca/fr/secretariat-conseil-tresor/services/innovation/statistiques-ressources-humaines/statistiques-diversite-inclusion.html,True,No Details
+https://open-data.github.io/status-statut/,True,No Details
 https://www.rcaanc-cirnac.gc.ca/eng/1499711968320/1529105436687,False,No Details
 https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html,False,No Details
 https://www.statcan.gc.ca/eng/rdc/index,True,No Details
