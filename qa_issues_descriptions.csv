@@ -1,0 +1,11 @@
+﻿qa_field_name,severity,table,description_en
+qa_duplicate_sid,Critical (must fix),Service Identification Information & Metrics,This service id has already been assigned to a different service.
+qa_si_fiscal_yr_in_future,Critical (must fix),Service Identification Information & Metrics,This fiscal year is not in scope for reporting yet.
+qa_ss_vol_without_si_vol,Critical (must fix),Service Identification Information & Metrics,"This service has associated service standards that report interaction volumes, but this service has no interaction volumes reported at the service level"
+qa_duplicate_stdid,Critical (must fix),Service Standards and Performance Results,This service standard id has already been assigned to a different standard
+qa_ss_fiscal_yr_in_future,Critical (must fix),Service Standards and Performance Results,This fiscal year is not in scope for reporting yet.
+qa_no_ss_volume,Critical (must fix),Service Standards and Performance Results,There is no volume being reported for this service standard
+qa_client_feedback_contradiction,Low (should fix),Service Identification Information & Metrics,"There is a contradiction between the ""OS: Issue resolution and client feedback"" field and the ""Client feedback channel"" field"
+qa_service_recipient_type_society_with_interactions,Low (should fix),Service Identification Information & Metrics,unsure about this one
+qa_use_of_sin_applicable,Low (should fix),Service Identification Information & Metrics,"If the client target group includes persons, the use of SIN field should be ""Yes"" or ""No"", not ""Not applicable"""
+qa_use_of_cra_bn_applicable,Low (should fix),Service Identification Information & Metrics,"If the client target group includes businesses, the use of CRA Business number field should be ""Yes"" or ""No"", not ""Not applicable"""
