@@ -1,9 +1,9 @@
 ﻿qa_field_name,severity,table,description_en,action_en
-qa_duplicate_sid,Critical (must fix),Service Identification Information & Metrics,This service id has already been assigned to a different service.,Request new service id's from the TBS service policy team
-qa_si_fiscal_yr_in_future,Critical (must fix),Service Identification Information & Metrics,This fiscal year is not in scope for reporting yet.,Remove any incomplete future fiscal years.
-qa_ss_vol_without_si_vol,Critical (must fix),Service Identification Information & Metrics,"This service has associated service standards that report interaction volumes, but this service has no interaction volumes reported at the service level",Include application volumes at the overall service level
-qa_duplicate_stdid,Critical (must fix),Service Standards and Performance Results,This service standard id has already been assigned to a different standard,Request new service standard id's from the TBS service policy team
-qa_ss_fiscal_yr_in_future,Critical (must fix),Service Standards and Performance Results,This fiscal year is not in scope for reporting yet.,Remove any incomplete future fiscal years.
+qa_duplicate_sid,Critical (must fix),Service Identification Information & Metrics,This service id has already been assigned to a different service.,Request new service IDs from the service policy team
+qa_si_fiscal_yr_in_future,Critical (must fix),Service Identification Information & Metrics,This fiscal year is not in scope for reporting yet.,Delete this record and resubmit with the correct fiscal year
+qa_ss_vol_without_si_vol,Critical (must fix),Service Identification Information & Metrics,"The associated service standards report application volume information, but not at the service level",Include application volumes at the overall service level
+qa_duplicate_stdid,Critical (must fix),Service Standards and Performance Results,This service standard id has already been assigned to a different standard,Request new service standard iIDs from the service policy team
+qa_ss_fiscal_yr_in_future,Critical (must fix),Service Standards and Performance Results,This fiscal year is not in scope for reporting yet.,Delete this record and resubmit with the correct fiscal year
 qa_no_ss_volume,Critical (must fix),Service Standards and Performance Results,There is no volume being reported for this service standard,Remove service standards that do not track performance
 qa_client_feedback_contradiction,Low (should fix),Service Identification Information & Metrics,"There is a contradiction between the ""OS: Issue resolution and client feedback"" field and the ""Client feedback channel"" field",
 qa_service_recipient_type_society_with_interactions,Low (should fix),Service Identification Information & Metrics,unsure about this one,
