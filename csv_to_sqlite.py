@@ -17,10 +17,11 @@ csv_files = [f for f in os.listdir(directory) if f.endswith('.csv')]
 # Process each CSV file
 for csv_file in csv_files:
     try:
-        # Read CSV file with more flexible parsing
+        # Read CSV file with semicolon separator
         df = pd.read_csv(
             os.path.join(directory, csv_file),
             encoding='utf-8',
+            sep=';',  # Use semicolon as separator
             on_bad_lines='skip',  # Skip problematic lines
             quoting=csv.QUOTE_MINIMAL,  # Handle quoted fields
             low_memory=False  # Avoid mixed type inference issues
