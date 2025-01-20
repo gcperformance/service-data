@@ -1,7 +1,36 @@
 # Government of Canada Service Inventory
 # Data review and analysis
 
-This repository hosts tools for working with the Government of Canada Service Inventory.
+# Service performance data
+
+## Introduction - what is this for
+
+This notebook will ingest and process service-related data into ready-to-use csv files for visualization purposes or further analysis.
+
+The following datasets will be consulted:
+
+**GC Service Inventory and Service Performance**: An inventory of Government of Canada services, their associated service standards and performance<br>
+https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c
+
+**Departmental Plans and Departmental Results Reports**: Expenditures and Full Time Equivalents (FTE) by Program and by Organization<br>
+https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895
+
+### Utilities built and shared specifically for this purpose:
+https://github.com/gc-performance/utilities
+
+**Department name variant list**: A list of every organization, department, agency, with their various associated names in order to align to a single numeric ID per department.  
+
+**Program-service id correspondence**: Converting the long-form program names in the 2018 service inventory to the program id's from the Departmental Plans, Departmental Results Reports.
+
+### Utilities from elsewhere online
+**Inventory of federal organisations and interests**: A tidy list of organisation names that includes a single numeric ID. Is the basis for the variant list id. Built for GC Infobase.<br>
+English: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95
+
+French: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85
+
+### Conventions
+
+Whenever a 4-digit year represents a fiscal year, the 4-digit year is the calendar year during which the fiscal year **ended**
 
 ### Files produced by scripts
 
