@@ -7,6 +7,8 @@
 
 This notebook will ingest and process service-related data into ready-to-use csv files for visualization purposes or further analysis.
 
+Data collection changed in 2024 to allow departments to publish their own datasets directly to Open Government. With this change came some minor differences in the format and content between the 2018-2023 historical dataset currently on open government. In order to use the full dataset with all years, the following script merges the historical and current service inventory and service standard datasets.
+
 The following datasets will be consulted:
 
 **GC Service Inventory and Service Performance**: An inventory of Government of Canada services, their associated service standards and performance<br>
@@ -27,6 +29,9 @@ https://github.com/gc-performance/utilities
 English: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95
 
 French: https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85
+
+
+
 
 ### Conventions
 
