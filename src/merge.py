@@ -6,7 +6,7 @@ from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
 
-OUTPUT_DIR = Path(__file__).parent.parent / "data"
+OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 
 # Load org variant list and program-service correspondence table
 org_var = load_csv_from_raw('org_var.csv').set_index('org_name_variant')
@@ -14,7 +14,7 @@ serv_prog = load_csv_from_raw('serv_prog.csv')
 
 # Build department name list
 ifoi_en = load_csv_from_raw('ifoi_en.csv')
-ifoi_fr = load_csv_from_raw('ifoi_en.csv')
+ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
 
 dept_en = ifoi_en.iloc[:,:3]
 dept_en['department_en'] = dept_en.iloc[:,2].fillna(dept_en.iloc[:,1])
@@ -257,8 +257,3 @@ def merge_ss():
     )
 
     return ss
-
-    
-
-
-

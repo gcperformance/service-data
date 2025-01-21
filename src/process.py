@@ -6,7 +6,7 @@ from src.clean import clean_percentage, normalize_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
 
-OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
+OUTPUT_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 
 org_var = load_csv_from_raw('org_var.csv').set_index('org_name_variant')
 serv_prog = load_csv_from_raw('serv_prog.csv')
@@ -102,7 +102,6 @@ def process_files(si, ss):
     
     
     # ### Total number of services
-    # 
     # Given a fiscal year, how many services were reported?    
     si_fy_service_count = si.groupby(['fiscal_yr'])['service_id'].count().reset_index()
     

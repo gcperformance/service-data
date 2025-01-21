@@ -1,10 +1,11 @@
 from src.load import download_csv_files, CSV_URLS
 from src.merge import merge_si, merge_ss
 from src.process import process_files
+from src.qa import qa_check
 
 
-print("Downloading raw data to data/raw/...")
-download_csv_files(CSV_URLS)
+print("Downloading raw data to inputs/...")
+#download_csv_files(CSV_URLS)
 print("Data download complete.")
 
 print("Merging historical service inventory to latest...")
@@ -19,4 +20,6 @@ print("Generating summary/processed files...")
 process_files(si, ss)
 print("Summary/processed files created.")
 
-
+print("Running QA checks and exporting reports...")
+qa_check(si, ss)
+print("QA reports created.")
