@@ -5,7 +5,7 @@ from src.qa import qa_check
 
 
 print("Downloading raw data to inputs/...")
-#download_csv_files(CSV_URLS)
+download_csv_files(CSV_URLS)
 print("Data download complete.")
 
 print("Merging historical service inventory to latest...")
