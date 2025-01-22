@@ -1,2 +1,6 @@
 pandas>=2.0.0
 sqlite3-api>=2.0.1
+requests
+numpy
+pathlib
+pytz
