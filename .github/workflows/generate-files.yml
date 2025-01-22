@@ -35,7 +35,7 @@ jobs:
 
       # Delete workflow directory from repo
       - name: Delete workflow directory
-        run: rm -rf .github/
+        run: rm -rf .github/ .gitignore
 
       # Flatten structure: Copy CSV files to root, remove everything else
       - name: Flatten structure

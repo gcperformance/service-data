@@ -192,7 +192,7 @@ org_id;department_en;department_fr
 222;Farm Products Council of Canada;Conseil des produits agricoles du Canada
 223;National Film Board;Office national du film
 224;National Gallery of Canada;Musée des beaux-arts du Canada
-226;Canada Science and Technology Museum;Musée des sciences et de la technologie du Canada
+226;National Museum of Science and Technology;Musée national des sciences et de la technologie
 227;Parole Board of Canada;Commission des libérations conditionnelles du Canada
 228;National Research Council Canada;Conseil national de recherches Canada
 229;National Round Table on the Environment and the Economy;Table ronde nationale sur l’environnement et l’économie
@@ -202,7 +202,7 @@ org_id;department_en;department_fr
 233;Joint Public Advisory Committee (JPAC) of the Commission for Environmental Cooperation (CEC);Comité consultatif public mixte (CCPM) de la Commission de coopération environnementale (CCE)
 234;North Portage Development Corporation (operating as The Forks North Portage Partnership);North Portage Development Corporation (exploitée sous le nom de The Forks North Portage Partnership)
 235;Northern Pipeline Agency Canada;Administration du pipe-line du Nord Canada
-237;Infrastructure Canada;Infrastructure Canada
+237;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada
 238;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada
 239;Office of the Chief Electoral Officer;Bureau du directeur général des élections
 240;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada
@@ -325,5 +325,6 @@ org_id;department_en;department_fr
 560;Pacific Economic Development Agency of Canada;Agence de développement économique du Pacifique Canada
 561;Federal Economic Development Agency for Northern Ontario;Agence fédérale de développement économique pour le Nord de l’Ontario
 562;VIA HFR - VIA TGF Inc.;VIA HFR - VIA TGF Inc.
+563;Canada Water Agency;Agence canadienne de l’eau
 
-Timestamp:2025-01-21_15:36:11
+Timestamp:2025-01-22_16:32:49
