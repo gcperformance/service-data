@@ -1,3 +1,8 @@
+import logging
+import sys
+import time
+from pathlib import Path
+
 from src.load import download_csv_files, CSV_URLS
 from src.merge import merge_si, merge_ss
 from src.process import process_files
@@ -5,26 +10,49 @@ from src.qa import qa_check
 from src.export import csv_to_sqlite
 
 
-print("Downloading raw data to inputs/...")
-download_csv_files(CSV_URLS)
-print("Data download complete.")
+def main():
+    """Process service data and generate outputs."""
+    # Setup basic logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[logging.StreamHandler()]
+    )
 
-print("Merging historical service inventory to latest...")
-si = merge_si()
-print("Service inventory merged.")
+    try:
+        # Track total time
+        start_time = time.time()
+        logging.info("Starting data processing")
 
-print("Merging historical service service standards to latest...")
-ss = merge_ss()
-print("Service standards merged.")
+        # Download and process raw data
+        logging.info("Downloading raw data...")
+        download_csv_files(CSV_URLS)
 
-print("Generating summary/processed files...")
-process_files(si, ss)
-print("Summary/processed files created.")
+        # Merge historical data
+        logging.info("Merging historical data...")
+        si = merge_si()
+        ss = merge_ss()
 
-print("Running QA checks and exporting reports...")
-qa_check(si, ss)
-print("QA reports created.")
+        # Generate processed files
+        logging.info("Generating processed files...")
+        process_files(si, ss)
 
-print("Converting CSV files to SQLite database...")
-db_path = csv_to_sqlite()
-print(f"SQLite database created at: {db_path}")
+        # Run QA checks
+        logging.info("Running QA checks...")
+        qa_check(si, ss)
+
+        # Create SQLite database
+        logging.info("Creating SQLite database...")
+        db_path = csv_to_sqlite()
+
+        # Log completion time
+        elapsed_time = time.time() - start_time
+        logging.info(f"Processing completed in {elapsed_time:.2f} seconds")
+
+    except Exception as e:
+        logging.error(f"Error: {str(e)}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
