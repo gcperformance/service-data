@@ -37,10 +37,10 @@ def export_to_csv(data_dict, output_dir):
 
 def csv_to_sqlite(directory=None, output_dir=None):
     """
-    Convert CSV files in the specified directory to SQLite database.
+    Convert CSV files from the inputs directory to SQLite database.
     
     Args:
-        directory (str or Path, optional): Directory containing CSV files. 
+        directory (str or Path, optional): Base directory containing the inputs folder. 
             If None, uses the parent directory of the current file.
         output_dir (str or Path, optional): Directory to save the SQLite database.
             If None, uses the 'outputs' directory in the project root.
@@ -53,6 +53,9 @@ def csv_to_sqlite(directory=None, output_dir=None):
     else:
         directory = Path(directory)
 
+    # Set input directory
+    input_dir = directory / 'inputs'
+    
     if output_dir is None:
         output_dir = directory / 'outputs'
     else:
@@ -65,12 +68,19 @@ def csv_to_sqlite(directory=None, output_dir=None):
     db_path = output_dir / 'service_data.db'
     conn = sqlite3.connect(db_path)
 
-    # Get all CSV files in the directory
-    csv_files = list(directory.glob('*.csv'))
+    # Get all CSV files in the inputs directory
+    csv_files = list(input_dir.glob('*.csv'))
+
+    # Keep track of processed tables to avoid duplicates
+    processed_tables = set()
 
     # Process each CSV file
     for csv_file in csv_files:
         try:
+            # Skip files in certain directories
+            if any(part in csv_file.parts for part in ['.git', '__pycache__']):
+                continue
+
             # Read CSV file with semicolon separator
             df = pd.read_csv(
                 csv_file,
@@ -79,11 +89,17 @@ def csv_to_sqlite(directory=None, output_dir=None):
                 on_bad_lines='skip'  # Skip problematic lines
             )
             
-            # Use the CSV filename (without extension) as the table name
+            # Use the filename as table name
             table_name = csv_file.stem
+            
+            # Skip if we've already processed this table name
+            if table_name in processed_tables:
+                print(f"Skipping duplicate table name: {table_name}")
+                continue
             
             # Write to SQLite database
             df.to_sql(table_name, conn, if_exists='replace', index=False)
+            processed_tables.add(table_name)
             print(f"Processed {csv_file.name} -> {table_name} table")
             
         except Exception as e:
