@@ -26,10 +26,10 @@ def export_to_csv(data_dict, output_dir):
         # Generate the full file path
         file_path = output_dir / f"{name}.csv"
 
-        # Export the DataFrame to CSV
+        # Export the DataFrame to CSV with semicolon separator (;)
         df.to_csv(file_path, index=False, sep=';')
 
-        # Append a timestamp if provided
+        # Append a timestamp
         with open(file_path, 'a') as timestamped_file:
             timestamped_file.write(f"\nTimestamp:{current_datetime_str}\n")
 

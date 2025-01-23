@@ -20,7 +20,7 @@ def qa_check(si, ss):
     file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
     qa_issues_description = pd.read_csv(file_path)
 
-    # Import department list from utilities
+    # Build then import department list from utilities
     dept = dept_list()
 
     # Determine the current date

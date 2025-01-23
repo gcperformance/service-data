@@ -4103,12 +4103,12 @@ fiscal_yr;service_id;online_interaction_point;activation;online_interaction_poin
 2023-2024;1726;decision;;4
 2023-2024;1726;issuance;Y;5
 2023-2024;1726;issue_resolution_feedback;Y;6
-2021-2022;1728;account_registration;Y;1
-2021-2022;1728;authentication;N;2
-2021-2022;1728;application;Y;3
-2021-2022;1728;decision;N;4
-2021-2022;1728;issuance;N;5
-2021-2022;1728;issue_resolution_feedback;N;6
+2023-2024;1728;account_registration;Y;1
+2023-2024;1728;authentication;Y;2
+2023-2024;1728;application;Y;3
+2023-2024;1728;decision;Y;4
+2023-2024;1728;issuance;Y;5
+2023-2024;1728;issue_resolution_feedback;N;6
 2023-2024;1729;account_registration;;1
 2023-2024;1729;authentication;;2
 2023-2024;1729;application;N;3
@@ -7936,13 +7936,13 @@ fiscal_yr;service_id;online_interaction_point;activation;online_interaction_poin
 2023-2024;2641;application;Y;3
 2023-2024;2641;decision;Y;4
 2023-2024;2641;issuance;Y;5
-2023-2024;2641;issue_resolution_feedback;;6
+2023-2024;2641;issue_resolution_feedback;N;6
 2023-2024;2642;account_registration;Y;1
 2023-2024;2642;authentication;Y;2
 2023-2024;2642;application;Y;3
 2023-2024;2642;decision;Y;4
 2023-2024;2642;issuance;Y;5
-2023-2024;2642;issue_resolution_feedback;;6
+2023-2024;2642;issue_resolution_feedback;Y;6
 2023-2024;265;account_registration;Y;1
 2023-2024;265;authentication;Y;2
 2023-2024;265;application;Y;3
@@ -15024,4 +15024,4 @@ fiscal_yr;service_id;online_interaction_point;activation;online_interaction_poin
 2023-2024;SRV3735;issuance;N;5
 2023-2024;SRV3735;issue_resolution_feedback;N;6
 
-Timestamp:2025-01-22_16:32:49
+Timestamp:2025-01-23_11:33:12

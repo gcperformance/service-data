@@ -34,4 +34,22 @@ def dept_list():
         output_dir=UTILS_DIR
     )
     
-    return dept    
+    return dept
+
+def copy_raw_to_utils():
+    ifoi_en = load_csv_from_raw('ifoi_en.csv')
+    ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
+    org_var = load_csv_from_raw('org_var.csv')
+
+    utils_file_dict = {
+        'ifoi_en':ifoi_en,
+        'ifoi_fr':ifoi_fr,
+        'org_var':org_var
+    }
+    
+    export_to_csv(
+        data_dict=utils_file_dict,
+        output_dir=UTILS_DIR
+    )
+
+        

@@ -6,7 +6,8 @@ from src.clean import clean_percentage, normalize_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
 
-OUTPUT_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
+INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
+UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
 org_var = load_csv_from_raw('org_var.csv').set_index('org_name_variant')
 serv_prog = load_csv_from_raw('serv_prog.csv')
@@ -371,9 +372,10 @@ def process_files(si, ss):
     
     # then join with expanded service inventory
     service_fte_spending = temp3.join(temp4, lsuffix='_si', rsuffix='_program').reset_index()
-  
+
+    
     # Define the DataFrames to export to CSV and their corresponding names
-    csv_exports = {
+    indicator_exports = {
         "si_vol": si_vol,
         "si_oip": si_oip,
         "ss_tml_perf_vol": ss_tml_perf_vol,
@@ -386,10 +388,19 @@ def process_files(si, ss):
         "maf2": maf2,
         "maf5": maf5,
         "maf6": maf6,
-        "maf8": maf8
+        "maf8": maf8,
+    }
+
+    utils_exports = {
+        "drf": rbpo_melted
     }
     
     export_to_csv(
-        data_dict=csv_exports,
-        output_dir=OUTPUT_DIR,
+        data_dict=indicator_exports,
+        output_dir=INDICATORS_DIR
+    )
+
+    export_to_csv(
+        data_dict=utils_exports,
+        output_dir=UTILS_DIR
     )

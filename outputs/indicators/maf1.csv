@@ -33,10 +33,10 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2018-2019;Fisheries and Oceans Canada;125;55;54;98.18181818181819
 2018-2019;Global Affairs Canada;126;36;17;47.22222222222222
 2018-2019;Health Canada;127;84;56;66.66666666666666
+2018-2019;Housing, Infrastructure and Communities Canada;237;19;12;63.1578947368421
 2018-2019;Immigration and Refugee Board of Canada;174;6;6;100.0
 2018-2019;Immigration, Refugees and Citizenship Canada;123;74;25;33.78378378378378
 2018-2019;Impact Assessment Agency of Canada;63;8;5;62.5
-2018-2019;Infrastructure Canada;237;19;12;63.1578947368421
 2018-2019;Innovation, Science and Economic Development Canada;130;44;41;93.18181818181817
 2018-2019;Invest in Canada Hub;347;5;0;0.0
 2018-2019;Library and Archives Canada;199;8;6;75.0
@@ -107,10 +107,10 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2019-2020;Fisheries and Oceans Canada;125;64;63;98.4375
 2019-2020;Global Affairs Canada;126;35;17;48.57142857142857
 2019-2020;Health Canada;127;82;54;65.85365853658537
+2019-2020;Housing, Infrastructure and Communities Canada;237;12;12;100.0
 2019-2020;Immigration and Refugee Board of Canada;174;6;6;100.0
 2019-2020;Immigration, Refugees and Citizenship Canada;123;72;25;34.72222222222222
 2019-2020;Impact Assessment Agency of Canada;63;12;8;66.66666666666666
-2019-2020;Infrastructure Canada;237;12;12;100.0
 2019-2020;Innovation, Science and Economic Development Canada;130;47;44;93.61702127659575
 2019-2020;Invest in Canada Hub;347;3;0;0.0
 2019-2020;Library and Archives Canada;199;9;7;77.77777777777779
@@ -183,10 +183,10 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2020-2021;Fisheries and Oceans Canada;125;71;65;91.54929577464789
 2020-2021;Global Affairs Canada;126;30;21;70.0
 2020-2021;Health Canada;127;88;59;67.04545454545455
+2020-2021;Housing, Infrastructure and Communities Canada;237;3;3;100.0
 2020-2021;Immigration and Refugee Board of Canada;174;6;6;100.0
 2020-2021;Immigration, Refugees and Citizenship Canada;123;73;26;35.61643835616438
 2020-2021;Impact Assessment Agency of Canada;63;9;7;77.77777777777779
-2020-2021;Infrastructure Canada;237;3;3;100.0
 2020-2021;Innovation, Science and Economic Development Canada;130;72;59;81.94444444444444
 2020-2021;Invest in Canada Hub;347;3;0;0.0
 2020-2021;Library and Archives Canada;199;20;8;40.0
@@ -260,10 +260,10 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2021-2022;Fisheries and Oceans Canada;125;73;67;91.78082191780823
 2021-2022;Global Affairs Canada;126;49;34;69.38775510204081
 2021-2022;Health Canada;127;88;49;55.68181818181818
+2021-2022;Housing, Infrastructure and Communities Canada;237;3;3;100.0
 2021-2022;Immigration and Refugee Board of Canada;174;6;6;100.0
 2021-2022;Immigration, Refugees and Citizenship Canada;123;73;26;35.61643835616438
 2021-2022;Impact Assessment Agency of Canada;63;10;8;80.0
-2021-2022;Infrastructure Canada;237;3;3;100.0
 2021-2022;Innovation, Science and Economic Development Canada;130;75;61;81.33333333333333
 2021-2022;Invest in Canada Hub;347;3;0;0.0
 2021-2022;Library and Archives Canada;199;20;8;40.0
@@ -339,10 +339,10 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2022-2023;Fisheries and Oceans Canada;125;93;66;70.96774193548387
 2022-2023;Global Affairs Canada;126;97;45;46.391752577319586
 2022-2023;Health Canada;127;83;48;57.831325301204814
+2022-2023;Housing, Infrastructure and Communities Canada;237;16;16;100.0
 2022-2023;Immigration and Refugee Board of Canada;174;1;0;0.0
 2022-2023;Immigration, Refugees and Citizenship Canada;123;22;13;59.09090909090909
 2022-2023;Impact Assessment Agency of Canada;63;10;8;80.0
-2022-2023;Infrastructure Canada;237;16;16;100.0
 2022-2023;Innovation, Science and Economic Development Canada;130;75;64;85.33333333333334
 2022-2023;Library and Archives Canada;199;20;8;40.0
 2022-2023;Military Police Complaints Commission of Canada;210;1;1;100.0
@@ -414,15 +414,15 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2023-2024;Fisheries and Oceans Canada;125;76;45;59.210526315789465
 2023-2024;Global Affairs Canada;126;38;38;100.0
 2023-2024;Health Canada;127;84;47;55.952380952380956
+2023-2024;Housing, Infrastructure and Communities Canada;237;17;17;100.0
 2023-2024;Immigration and Refugee Board of Canada;174;1;0;0.0
 2023-2024;Immigration, Refugees and Citizenship Canada;123;20;13;65.0
 2023-2024;Impact Assessment Agency of Canada;63;10;8;80.0
-2023-2024;Infrastructure Canada;237;17;17;100.0
 2023-2024;Innovation, Science and Economic Development Canada;130;77;66;85.71428571428571
 2023-2024;Library and Archives Canada;199;12;2;16.666666666666664
 2023-2024;Military Police Complaints Commission of Canada;210;2;1;50.0
 2023-2024;National Defence;133;16;4;25.0
-2023-2024;National Film Board;223;4;4;100.0
+2023-2024;National Film Board;223;5;5;100.0
 2023-2024;National Research Council Canada;228;15;15;100.0
 2023-2024;National Security and Intelligence Review Agency Secretariat;302;2;0;0.0
 2023-2024;Natural Resources Canada;134;80;69;86.25
@@ -456,4 +456,4 @@ fiscal_yr;department_en;org_id;service_count;service_with_std_count;maf1_score
 2023-2024;Women and Gender Equality Canada;246;3;3;100.0
 2024-2025;Royal Canadian Mounted Police;295;1;0;0.0
 
-Timestamp:2025-01-22_16:32:49
+Timestamp:2025-01-23_11:33:12
