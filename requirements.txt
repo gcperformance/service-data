@@ -1,6 +1,4 @@
 pandas>=2.0.0
-sqlite3-api>=2.0.1
-requests
-numpy
-pathlib
-pytz
+requests>=2.31.0
+numpy>=1.24.0
+pytz>=2023.3
