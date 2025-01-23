@@ -35,13 +35,15 @@ def export_to_csv(data_dict, output_dir):
 
         print(f"Exported {name}.csv to {output_dir}")
 
-def csv_to_sqlite(directory=None):
+def csv_to_sqlite(directory=None, output_dir=None):
     """
     Convert CSV files in the specified directory to SQLite database.
     
     Args:
         directory (str or Path, optional): Directory containing CSV files. 
             If None, uses the parent directory of the current file.
+        output_dir (str or Path, optional): Directory to save the SQLite database.
+            If None, uses the 'outputs' directory in the project root.
             
     Returns:
         str: Path to the created SQLite database
@@ -51,8 +53,16 @@ def csv_to_sqlite(directory=None):
     else:
         directory = Path(directory)
 
-    # Create SQLite database
-    db_path = directory / 'service_data.db'
+    if output_dir is None:
+        output_dir = directory / 'outputs'
+    else:
+        output_dir = Path(output_dir)
+
+    # Ensure output directory exists
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Create SQLite database in outputs directory
+    db_path = output_dir / 'service_data.db'
     conn = sqlite3.connect(db_path)
 
     # Get all CSV files in the directory
@@ -65,7 +75,7 @@ def csv_to_sqlite(directory=None):
             df = pd.read_csv(
                 csv_file,
                 encoding='utf-8',
-                sep=';',  # Use semicolon as separator
+                sep=';',  # Use semicolon separator
                 on_bad_lines='skip'  # Skip problematic lines
             )
             

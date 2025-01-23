@@ -119,12 +119,12 @@ In addition to CSV files, the script also generates a SQLite database (`service_
 │   │   ├── si_qa_report.csv
 │   │   ├── ss_qa.csv
 │   │   └── ss_qa_report.csv
+│   ├── service_data.db
 │   ├── si.csv
 │   ├── ss.csv
 │   └── utils
 │       └── dept.csv
 ├── requirements.txt
-├── service_data.db
 └── src
     ├── __init__.py
     ├── clean.py
