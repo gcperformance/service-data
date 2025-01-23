@@ -72,8 +72,6 @@ jobs:
             - SQLite database with all processed data
             - Database tables are prefixed with their source directory
           files: outputs/service_data.db
-          draft: false
-          prerelease: false
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
