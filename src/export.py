@@ -37,10 +37,11 @@ def export_to_csv(data_dict, output_dir):
 
 def csv_to_sqlite(directory=None, output_dir=None):
     """
-    Convert CSV files from the inputs directory to SQLite database.
+    Convert CSV files from the outputs directory to SQLite database.
+    Table names will be prefixed with their directory name, e.g., 'indicators_si_vol'.
     
     Args:
-        directory (str or Path, optional): Base directory containing the inputs folder. 
+        directory (str or Path, optional): Base directory containing the outputs folder. 
             If None, uses the parent directory of the current file.
         output_dir (str or Path, optional): Directory to save the SQLite database.
             If None, uses the 'outputs' directory in the project root.
@@ -53,11 +54,10 @@ def csv_to_sqlite(directory=None, output_dir=None):
     else:
         directory = Path(directory)
 
-    # Set input directory
-    input_dir = directory / 'inputs'
-    
+    # Set input and output directories
+    input_dir = directory / 'outputs'
     if output_dir is None:
-        output_dir = directory / 'outputs'
+        output_dir = input_dir
     else:
         output_dir = Path(output_dir)
 
@@ -68,8 +68,8 @@ def csv_to_sqlite(directory=None, output_dir=None):
     db_path = output_dir / 'service_data.db'
     conn = sqlite3.connect(db_path)
 
-    # Get all CSV files in the inputs directory
-    csv_files = list(input_dir.glob('*.csv'))
+    # Recursively get all CSV files in the outputs directory
+    csv_files = list(input_dir.rglob('*.csv'))
 
     # Keep track of processed tables to avoid duplicates
     processed_tables = set()
@@ -89,8 +89,17 @@ def csv_to_sqlite(directory=None, output_dir=None):
                 on_bad_lines='skip'  # Skip problematic lines
             )
             
-            # Use the filename as table name
-            table_name = csv_file.stem
+            # Create table name from directory structure
+            relative_path = csv_file.relative_to(input_dir)
+            parts = list(relative_path.parts)
+            
+            # If file is directly in outputs, don't use a prefix
+            if len(parts) == 1:
+                table_name = csv_file.stem
+            else:
+                # Use directory name as prefix, e.g., 'indicators_si_vol'
+                prefix = parts[0]  # First part is the directory name
+                table_name = f"{prefix}_{csv_file.stem}"
             
             # Skip if we've already processed this table name
             if table_name in processed_tables:
@@ -100,7 +109,7 @@ def csv_to_sqlite(directory=None, output_dir=None):
             # Write to SQLite database
             df.to_sql(table_name, conn, if_exists='replace', index=False)
             processed_tables.add(table_name)
-            print(f"Processed {csv_file.name} -> {table_name} table")
+            print(f"Processed {relative_path} -> {table_name} table")
             
         except Exception as e:
             print(f"Error processing {csv_file.name}: {str(e)}")
