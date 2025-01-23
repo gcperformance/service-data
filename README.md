@@ -64,7 +64,7 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 
 #### `src/`: Source Code for Script
 - `clean.py`: functions to clean and set up data
-- `export.py`: function to export data to csv
+- `export.py`: functions to export data to CSV and SQLite database
 - `load.py`: functions to load csv files to dataframes and download / refresh all inputs
 - `merge.py`: process to align 2018 and 2024 datasets
 - `process.py`: produces summaries
@@ -72,12 +72,17 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions
 
+### Data Formats
+
+All CSV text files produced by the script are **semi-colon separated** (`;`).
+
+In addition to CSV files, the script also generates a SQLite database (`service_data.db`) containing all CSV data in table format for easier querying and analysis.
+
 ---
 
 ## Directory structure
 ```
 ├── README.md
-├── csv_to_sqlite.py
 ├── inputs
 │   ├── ifoi_en.csv
 │   ├── ifoi_fr.csv
@@ -119,6 +124,7 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 │   └── utils
 │       └── dept.csv
 ├── requirements.txt
+├── service_data.db
 └── src
     ├── __init__.py
     ├── clean.py
@@ -129,4 +135,3 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
     ├── qa.py
     ├── qa_issues_descriptions.csv
     └── utils.py
-```

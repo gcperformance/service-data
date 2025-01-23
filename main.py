@@ -2,6 +2,7 @@ from src.load import download_csv_files, CSV_URLS
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
+from src.export import csv_to_sqlite
 
 
 print("Downloading raw data to inputs/...")
@@ -23,3 +24,7 @@ print("Summary/processed files created.")
 print("Running QA checks and exporting reports...")
 qa_check(si, ss)
 print("QA reports created.")
+
+print("Converting CSV files to SQLite database...")
+db_path = csv_to_sqlite()
+print(f"SQLite database created at: {db_path}")
