@@ -9,11 +9,9 @@ jobs:
   generate-files:
     runs-on: ubuntu-latest
     steps:
-      # Check out the repository with full history
+      # Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Fetch all history for all branches
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -38,24 +36,31 @@ jobs:
       - name: Run the main.py script
         run: python main.py
 
-      # Get current date for release tag
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      # Get current date and time for release tag
+      - name: Get current date and time
+        id: datetime
+        run: |
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+          echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
+          echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       # Create GitHub release with SQLite database
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ steps.date.outputs.date }}
-          name: Data Release ${{ steps.date.outputs.date }}
+          tag_name: service_data-${{ steps.datetime.outputs.date }}-${{ steps.datetime.outputs.time }}
+          name: Service Data Release ${{ steps.datetime.outputs.date }}
           body: |
-            Automated data release for ${{ steps.date.outputs.date }}
+            Automated service data release for ${{ steps.datetime.outputs.date }}
+            
+            Release Information:
+            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} UTC
+            - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
             
             This release contains:
             - SQLite database with all processed data
-            - Generated on: ${{ steps.date.outputs.date }}
+            - Database tables are prefixed with their source directory
           files: outputs/service_data.db
           draft: false
           prerelease: false
