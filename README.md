@@ -85,9 +85,33 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 
 All CSV text files produced by the script are **semi-colon separated** (`;`).
 
-In addition to CSV files, the script also generates a SQLite database containing all processed data in table format for easier querying and analysis. The database is published as a GitHub release and can be downloaded from the [releases page](https://github.com/gc-performance/service-data/releases).
+### SQLite Database Releases
 
-Each table in the SQLite database is prefixed with its source directory name for better organization (e.g., 'indicators_si_vol' for the file 'si_vol.csv' from the indicators directory).
+In addition to CSV files, this repository automatically generates a SQLite database containing all processed data in table format for easier querying and analysis. The database is published as a GitHub release and can be downloaded from the [releases page](https://github.com/gc-performance/service-data/releases).
+
+#### Release Schedule
+- **Automatic**: New release created on every push to master branch
+- **Daily**: Scheduled release at midnight Eastern Time
+- **Manual**: Can be triggered through GitHub Actions workflow
+
+#### Release Format
+- **Tag**: `service_data-[commit_hash]`
+- **Name**: `Service Data Release YYYY-MM-DD (commit_hash)`
+- Each release includes:
+  - SQLite database file
+  - Timestamp of generation (Eastern Time)
+  - Git commit hash for traceability
+
+#### Database Structure
+- Tables are prefixed with their source directory for better organization
+  - Example: `indicators_si_vol` for the file `si_vol.csv` from the indicators directory
+- All CSV data is preserved with original column names and data types
+- Tables use the same semicolon separator as CSV files
+
+#### Accessing the Database
+1. Go to the [releases page](https://github.com/gc-performance/service-data/releases)
+2. Download the `service_data.db` file from the latest release
+3. Use any SQLite client (e.g., DBeaver, SQLite Browser) to open and query the database
 
 ---
 
