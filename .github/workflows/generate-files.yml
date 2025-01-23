@@ -1,4 +1,4 @@
-name: Generate CSV Files
+name: Process and Release Service Data
 
 on:
   push:
@@ -46,6 +46,10 @@ jobs:
       - name: Get current date and time
         id: datetime
         run: |
+          # Install tzdata for timezone support
+          sudo apt-get install -y tzdata
+          # Set timezone to Eastern
+          export TZ="America/Toronto"
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
           echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
@@ -55,13 +59,13 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ steps.datetime.outputs.date }}-${{ steps.datetime.outputs.time }}
-          name: Service Data Release ${{ steps.datetime.outputs.date }}
+          tag_name: service_data-${{ steps.datetime.outputs.commit_hash }}
+          name: Service Data - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
           body: |
             Automated service data release for ${{ steps.datetime.outputs.date }}
             
             Release Information:
-            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} UTC
+            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} EST
             - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
             
             This release contains:
