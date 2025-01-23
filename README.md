@@ -35,41 +35,43 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 ## Project Structure
 
 ### Files
+#### `main.py`: Orchestration script that calls other modules
+#### `requirements.txt`: Python libraries used in scripts
 
-#### `inputs/`: Files Downloaded for Processing (Unmodified)
-- Data such as `ifoi_en.csv`, `ifoi_fr.csv`, `si_2018.csv`, `si_2024.csv`, etc.
+#### `inputs/`: Downloaded for Processing (Unmodified)
+Data used by script to produce processed files.
 
 #### `outputs/`: Produced by the Script
 - `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset.
 - `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset.
 
-##### `utils/`: Supporting Files
-- `dept.csv`: A tidy list of departments with their IFOI IDs.
-- `drf.csv`: A flattened Departmental plans and Departmental results report.
-- `ifoi_en.csv`: Exhaustive list of departmental info in english
-- `ifoi_fr.csv`: Exhaustive list of departmental info in french
-- `org_var.csv`: List of variant department names and their IFOI ID.
-
-##### `indicators/`: Summary Files for Visualization and Review
-- `maf1.csv`: .
-- `maf2.csv`: .
-- `maf5.csv`: Total service interactions by fiscal year.
-- `maf6.csv`: Total service interactions by fiscal year.
-- `maf8.csv`: Total service interactions by fiscal year.
+##### `outputs/indicators/`: Summary Files for Visualization and Review
+- `maf1.csv`: percentage of services that have service standards by department
+- `maf2.csv`: percentage of service standards that met their target by department
+- `maf5.csv`: percentage of applicable services that can be completed online end-to-end by department
+- `maf6.csv`: percentage of client interaction points that are available online for services
+- `maf8.csv`: percentage of services which have used client feedback to improve services in the year prior to reporting
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `service_id_list.csv`: List of service IDs with reporting year and department.
-- `si_fy_interaction_sum.csv`: Unique services count by fiscal year.
+- `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
 - `si_oip.csv`: Online interaction points activation status by service and fiscal year.
 - `si_reviews.csv`: Count of services reviewed or improved over the last 5 years.
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
 - `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
 
-##### `qa/`: Quality Assurance Files
-- `si_qa.csv`: Full service inventory dataset with QA issues identified.
-- `ss_qa.csv`: Full service standards dataset with QA issues identified.
+##### `outputs/qa/`: Quality Assurance Files
+- `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns.
+- `ss_qa.csv`: Full service standards dataset with QA issues identified as separate columns.
 - `si_qa_report.csv`: Critical errors for service inventory.
 - `ss_qa_report.csv`: Critical errors for service standards.
+
+##### `outputs/utils/`: Supporting Files
+- `dept.csv`: A tidy list of departments with their IFOI IDs.
+- `drf.csv`: A flattened Departmental plans and Departmental results report.
+- `ifoi_en.csv`: Exhaustive list of departmental info in english
+- `ifoi_fr.csv`: Exhaustive list of departmental info in french
+- `org_var.csv`: List of variant department names and their IFOI ID.
 
 #### `src/`: Source Code for Script
 - `clean.py`: functions to clean and set up data
@@ -80,6 +82,9 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 - `qa.py`: performs quality assurance checks and produces qa outputs (`outputs/qa/` directory)
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
+
+#### `notebooks/`: Jupyter notebooks for testing and experiments
+
 
 ### Data Formats
 
