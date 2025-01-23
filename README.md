@@ -75,11 +75,11 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 - `clean.py`: functions to clean and set up data
 - `export.py`: functions to export data to CSV and SQLite database
 - `load.py`: functions to load csv files to dataframes and download / refresh all inputs
-- `merge.py`: process to align 2018 and 2024 datasets
-- `process.py`: produces summaries
-- `qa.py`: performs quality assurance checks and produces qa outputs (in `outputs/qa/` directory)
+- `merge.py`: process to align 2018 and 2024 service inventory and service standard datasets
+- `process.py`: produces summaries and indicator files (`outputs/indicators/` directory)
+- `qa.py`: performs quality assurance checks and produces qa outputs (`outputs/qa/` directory)
 - `qa_issues_descriptions.csv`: definitions file for qa issues
-- `utils.py`: misc utility functions
+- `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
 ### Data Formats
 
