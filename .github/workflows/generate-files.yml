@@ -33,16 +33,39 @@ jobs:
       - name: Run the main.py script
         run: python main.py
 
+      # Get current date for release tag
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      # Create GitHub release with SQLite database
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: service_data-${{ steps.date.outputs.date }}
+          name: Data Release ${{ steps.date.outputs.date }}
+          body: |
+            Automated data release for ${{ steps.date.outputs.date }}
+            
+            This release contains:
+            - SQLite database with all processed data
+            - Generated on: ${{ steps.date.outputs.date }}
+          files: outputs/service_data.db
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # Delete workflow directory from repo
       - name: Delete workflow directory
         run: rm -rf .github/ .gitignore
 
-      # Flatten structure: Copy CSV files and SQLite database to root, remove everything else
+      # Flatten structure: Copy CSV files to root, remove everything else
       - name: Flatten structure
         run: |
           mkdir temp_files  # Temporary directory for files
           find . -type f -name '*.csv' -exec mv {} temp_files/ \;  # Move all CSVs to temp
-          find . -type f -name 'service_data.db' -exec mv {} temp_files/ \;  # Move SQLite database to temp
           find . -mindepth 1 \( -path './temp_files*' -o -path './README.md' -o -path './.*' -prune \) -o -exec rm -rf {} + # Delete everything else
           mv temp_files/* .  # Move files back to root
           rmdir temp_files  # Remove temporary directory

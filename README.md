@@ -85,7 +85,9 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 
 All CSV text files produced by the script are **semi-colon separated** (`;`).
 
-In addition to CSV files, the script also generates a SQLite database (`service_data.db`) containing all CSV data in table format for easier querying and analysis.
+In addition to CSV files, the script also generates a SQLite database containing all processed data in table format for easier querying and analysis. The database is published as a GitHub release and can be downloaded from the [releases page](https://github.com/gc-performance/service-data/releases).
+
+Each table in the SQLite database is prefixed with its source directory name for better organization (e.g., 'indicators_si_vol' for the file 'si_vol.csv' from the indicators directory).
 
 ---
 
