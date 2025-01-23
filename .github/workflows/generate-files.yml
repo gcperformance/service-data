@@ -1,9 +1,15 @@
 name: Generate CSV Files
 
 on:
+  push:
+    branches:
+      - master  # Run on all pushes to master
+  pull_request:
+    branches:
+      - master  # Run on all PRs targeting master
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight
-  workflow_dispatch:  # Allows manual trigger
+    - cron: '0 0 * * *'  # Also keep daily runs at midnight
+  workflow_dispatch:  # Allow manual triggers
 
 jobs:
   generate-files:
