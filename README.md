@@ -44,17 +44,26 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 - `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset.
 
 ##### `utils/`: Supporting Files
-- `dept.csv`: A tidy list of departments with their unique IDs.
+- `dept.csv`: A tidy list of departments with their IFOI IDs.
+- `drf.csv`: A flattened Departmental plans and Departmental results report.
+- `ifoi_en.csv`: Exhaustive list of departmental info in english
+- `ifoi_fr.csv`: Exhaustive list of departmental info in french
+- `org_var.csv`: List of variant department names and their IFOI ID.
 
 ##### `indicators/`: Summary Files for Visualization and Review
-- `si_fy_interaction_sum.csv`: Total service interactions by fiscal year.
+- `maf1.csv`: .
+- `maf2.csv`: .
+- `maf5.csv`: Total service interactions by fiscal year.
+- `maf6.csv`: Total service interactions by fiscal year.
+- `maf8.csv`: Total service interactions by fiscal year.
+- `service_fte_spending.csv`: FTEs and spending for programs delivering services.
+- `service_id_list.csv`: List of service IDs with reporting year and department.
+- `si_fy_interaction_sum.csv`: Unique services count by fiscal year.
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
 - `si_oip.csv`: Online interaction points activation status by service and fiscal year.
 - `si_reviews.csv`: Count of services reviewed or improved over the last 5 years.
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
 - `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
-- `service_fte_spending.csv`: FTEs and spending for programs delivering services.
-- `service_id_list.csv`: List of service IDs with reporting year and department.
 
 ##### `qa/`: Quality Assurance Files
 - `si_qa.csv`: Full service inventory dataset with QA issues identified.
@@ -119,11 +128,14 @@ In addition to CSV files, the script also generates a SQLite database (`service_
 │   │   ├── si_qa_report.csv
 │   │   ├── ss_qa.csv
 │   │   └── ss_qa_report.csv
-│   ├── service_data.db
 │   ├── si.csv
 │   ├── ss.csv
 │   └── utils
-│       └── dept.csv
+│       ├── dept.csv
+│       ├── drf.csv
+│       ├── ifoi_en.csv
+│       ├── ifoi_fr.csv
+│       └── org_var.csv
 ├── requirements.txt
 └── src
     ├── __init__.py
