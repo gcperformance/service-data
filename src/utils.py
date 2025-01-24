@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import re
 
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
@@ -53,6 +54,9 @@ def copy_raw_to_utils():
         'ifoi_fr':ifoi_fr,
         'org_var':org_var
     }
+
+    for key in utils_file_dict.keys():
+        utils_file_dict[key] = standardize_column_names(utils_file_dict[key])
     
     export_to_csv(
         data_dict=utils_file_dict,
@@ -71,13 +75,42 @@ def standardize_column_names(df):
     """
     # Create a mapping of common variations to standardized names
     name_mapping = {
-        'OrgID': 'org_id',
-        'OrganizationID': 'org_id',
+        'orgid': 'org_id',
+        'organizationid': 'org_id',
         'organization_id': 'org_id',
-        'ServiceID': 'service_id',
-        'ProgramID': 'program_id'
+        'serviceid': 'service_id',
+        'programid': 'program_id'
     }
     
+    # Normalize column names to lowercase
+    df.columns = df.columns.str.lower()
+    df.columns = df.columns.str.strip()
+
     # Apply the mapping to column names
     df = df.rename(columns=name_mapping)
+    
+    # Apply the mapping to column names
+    df = df.rename(columns=lambda col: to_snake_case(col))
+    
     return df
+
+def to_snake_case(input_string):
+    """
+    Converts a given string to snake_case.
+
+    Args:
+        input_string (str): The input string to convert.
+
+    Returns:
+        str: The converted string in snake_case.
+    """
+    # Replace spaces and hyphens with underscores
+    processed_string = re.sub(r'[\s\-]+', '_', input_string)
+    # Convert CamelCase or PascalCase to snake_case
+    processed_string = re.sub(r'(?<!^)(?=[A-Z])', '_', processed_string)
+    # Lowercase the entire string
+    processed_string = processed_string.lower()
+    # Remove any leading or trailing underscores
+    processed_string = processed_string.strip('_')
+
+    return processed_string

@@ -5,6 +5,7 @@ from pathlib import Path
 from src.clean import clean_percentage, normalize_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
+from src.utils import standardize_column_names
 
 INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
@@ -279,7 +280,7 @@ def process_files(si, ss):
     si_reviews = si_reviews.groupby(['fiscal_yr']).agg(
         total_services = ('service_id', 'count'),
         services_reviewed_in_past_5_yrs = ('last_service_review_within_5_yrs', 'sum'),
-        servives_improved_in_past_5_yrs = ('last_service_improvement_within_5_yrs', 'sum')
+        services_improved_in_past_5_yrs = ('last_service_improvement_within_5_yrs', 'sum')
         ).reset_index()
     
     
@@ -391,9 +392,11 @@ def process_files(si, ss):
         "maf8": maf8,
     }
 
+    rbpo_melted = standardize_column_names(rbpo_melted)
     utils_exports = {
         "drf": rbpo_melted
     }
+
     
     export_to_csv(
         data_dict=indicator_exports,
