@@ -16,7 +16,7 @@ def main():
     # Setup basic logging
     logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
+        format='%(asctime)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s',
         handlers=[logging.StreamHandler()]
     )
 
@@ -55,7 +55,7 @@ def main():
         logging.info(f"Processing completed in {elapsed_time:.2f} seconds")
 
     except Exception as e:
-        logging.error(f"Error: {str(e)}")
+        logging.error("Error:",exc_info=True)
         sys.exit(1)
 
 

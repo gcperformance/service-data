@@ -5,31 +5,16 @@ from pathlib import Path
 from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
+from src.utils import dept_list
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 
 # Load org variant list and program-service correspondence table
-org_var = load_csv_from_raw('org_var.csv').set_index('org_name_variant')
+org_var = load_csv_from_raw('org_var.csv')
 serv_prog = load_csv_from_raw('serv_prog.csv')
 
-# Build department name list
-ifoi_en = load_csv_from_raw('ifoi_en.csv')
-ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
-
-dept_en = ifoi_en.iloc[:,:3]
-dept_en['department_en'] = dept_en.iloc[:,2].fillna(dept_en.iloc[:,1])
-
-dept_fr = ifoi_fr.iloc[:,:3]
-dept_fr['department_fr'] = dept_fr.iloc[:,2].fillna(dept_fr.iloc[:,1])
-
-dept = pd.merge(
-    dept_en,
-    dept_fr,
-    on='OrgID',
-)
-
-dept = dept.loc[:, ['OrgID', 'department_en', 'department_fr']]
-dept.rename(columns={'OrgID':'org_id'}, inplace=True)
+# Load department list from utils
+dept = dept_list()
 
 def merge_si():
     """Combining historical and live service inventory data"""
@@ -85,6 +70,10 @@ def merge_si():
     # Drop specific org name fields from both
     si_2018_tidy = si_2018_tidy.drop(columns=['department_name_en', 'department_name_fr'])
     si_2024_tidy = si_2024_tidy.drop(columns=['owner_org', 'owner_org_title'])
+
+    # Treat org_id as a string
+    si_2018_tidy['org_id'] = si_2018_tidy['org_id'].astype(str)
+    si_2024_tidy['org_id'] = si_2024_tidy['org_id'].astype(str)
     
     # Merge in en/fr department names from dept table
     si_2018_tidy = pd.merge(
@@ -198,6 +187,10 @@ def merge_ss():
     # Drop specific org name fields from both
     ss_2018_tidy = ss_2018_tidy.drop(columns=['department_name_en', 'department_name_fr'])
     ss_2024_tidy = ss_2024_tidy.drop(columns=['owner_org', 'owner_org_title'])
+
+    # Treat org_id as a string
+    ss_2018_tidy['org_id'] = ss_2018_tidy['org_id'].astype(str)
+    ss_2024_tidy['org_id'] = ss_2024_tidy['org_id'].astype(str)
     
     # Merge in en/fr department names from dept table
     ss_2018_tidy = pd.merge(

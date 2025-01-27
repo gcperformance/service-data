@@ -274,7 +274,7 @@ def qa_check(si, ss):
     
     collapsed_si_prog = (
             si_prog.groupby(['fiscal_yr', 'service_id', 'org_id_si'], as_index=False)
-            .agg({'program_correct_org': lambda x: '<>'.join(sorted(x))})
+            .agg({'program_correct_org': lambda x: '<>'.join(sorted(map(str, x.dropna())))})
         )
     
     collapsed_si_prog.rename(columns={'org_id_si': 'org_id'}, inplace=True)
