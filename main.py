@@ -27,7 +27,7 @@ def main():
 
         # Download and process raw data
         logging.info("Downloading raw data...")
-        download_csv_files(CSV_URLS)
+        download_csv_files()
 
         # Merge historical data
         logging.info("Merging historical data...")

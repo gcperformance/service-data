@@ -11,11 +11,12 @@ from src.utils import dept_list
 QA_DIR = Path(__file__).parent.parent / "outputs" / "qa"
 CURRENT_DIR = Path(__file__).parent
 
-rbpo = load_csv_from_raw('rbpo.csv')
-org_var = load_csv_from_raw('org_var.csv')
-
 def qa_check(si, ss):
     # Setup
+    # Load extra files
+    rbpo = load_csv_from_raw('rbpo.csv')
+    org_var = load_csv_from_raw('org_var.csv')
+    
     # Import qa issues descriptions file
     file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
     qa_issues_description = pd.read_csv(file_path)

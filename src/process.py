@@ -10,11 +10,11 @@ from src.utils import standardize_column_names
 INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
-org_var = load_csv_from_raw('org_var.csv').set_index('org_name_variant')
-serv_prog = load_csv_from_raw('serv_prog.csv')
-rbpo = load_csv_from_raw('rbpo.csv')
-
 def process_files(si, ss):
+    org_var = load_csv_from_raw('org_var.csv')
+    serv_prog = load_csv_from_raw('serv_prog.csv')
+    rbpo = load_csv_from_raw('rbpo.csv')    
+    
     # Service ID list
     service_id_list = si.loc[si.groupby('service_id')['fiscal_yr'].idxmax(), ['service_id', 'service_name_en', 'service_name_fr', 'fiscal_yr', 'department_en', 'department_fr', 'org_id']]
    

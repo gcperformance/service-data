@@ -22,7 +22,7 @@ CSV_URLS = {
     'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   
 }
 
-def download_csv_files(urls):
+def download_csv_files(urls=CSV_URLS):
     """
     Download CSV files from the given URLs into the RAW_DATA_DIR directory.
 

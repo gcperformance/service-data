@@ -9,16 +9,17 @@ from src.utils import dept_list
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 
-# Load org variant list and program-service correspondence table
-org_var = load_csv_from_raw('org_var.csv')
-serv_prog = load_csv_from_raw('serv_prog.csv')
-
-# Load department list from utils
-dept = dept_list()
 
 def merge_si():
     """Combining historical and live service inventory data"""
-
+    
+    # Load org variant list and program-service correspondence table
+    org_var = load_csv_from_raw('org_var.csv')
+    serv_prog = load_csv_from_raw('serv_prog.csv')
+    
+    # Load department list from utils
+    dept = dept_list()
+    
     si_2018 = load_csv_from_raw('si_2018.csv')
     si_2024 = load_csv_from_raw('si_2024.csv')
     
@@ -158,6 +159,14 @@ def merge_si():
 
 def merge_ss():
     """Combining historical and live service standards data"""
+
+    # Load org variant list and program-service correspondence table
+    org_var = load_csv_from_raw('org_var.csv')
+    serv_prog = load_csv_from_raw('serv_prog.csv')
+    
+    # Load department list from utils
+    dept = dept_list()
+    
     ss_2018 = load_csv_from_raw('ss_2018.csv')
     ss_2024 = load_csv_from_raw('ss_2024.csv')
     
