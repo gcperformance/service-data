@@ -385,6 +385,8 @@ fiscal_yr;department_en;org_id;activated_point_count;point_count;maf6_score
 2023-2024;Canadian Space Agency;95;58;83;69.87951807228916
 2023-2024;Canadian Transportation Agency;99;14;16;87.5
 2023-2024;Civilian Review and Complaints Commission for the RCMP;297;3;6;50.0
+2023-2024;Communications Security Establishment Canada;110;31;41;75.60975609756098
+2023-2024;Copyright Board Canada;114;2;4;50.0
 2023-2024;Correctional Service Canada;117;6;12;50.0
 2023-2024;Courts Administration Service;118;0;30;0.0
 2023-2024;Crown-Indigenous Relations and Northern Affairs Canada;129;24;53;45.28301886792453
@@ -437,4 +439,4 @@ fiscal_yr;department_en;org_id;activated_point_count;point_count;maf6_score
 2023-2024;Veterans Review and Appeal Board;333;5;6;83.33333333333334
 2023-2024;Women and Gender Equality Canada;246;18;18;100.0
 
-Timestamp:2025-01-24_14:41:00
+Timestamp:2025-01-27_11:41:13

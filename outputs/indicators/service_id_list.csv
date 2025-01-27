@@ -1,4 +1,5 @@
 service_id;service_name_en;service_name_fr;fiscal_yr;department_en;department_fr;org_id
+0849;Media Relations;Bureau des relations avec les médias;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 1;Permit to Operate a Rendering Plant;Permis d'exploitation d'une usine de traitement;2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65
 10;Procurement;Approvisionnement;2023-2024;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136
 1000;Reconciliation;Réconciliation;2018-2019;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129
@@ -97,8 +98,8 @@ déclaration de la redevance sur les combustibles";2023-2024;Canada Revenue Agen
 1116;Business Number (BN) Registration;Inscription d'un Numéro d'Entreprise (NE);2023-2024;Canada Revenue Agency;Agence du revenu du Canada;46
 1117;Access to Information and Privacy;Accès à l'information et à la protection des renseignements personnels;2023-2024;Canada Revenue Agency;Agence du revenu du Canada;46
 1118;Prime Minister's Email;Courriel du premier ministre;2019-2020;Privy Council Office;Bureau du Conseil privé;278
-1119;Copyright Tariff Setting;Établissement de tarifs liés au droit d'auteur;2021-2022;Copyright Board Canada;Commission du droit d'auteur Canada;114
-1120;Issuance of licences for the use of copyright works when the owner is unlocatabl;Délivrance de licences pour les oeuvres protégées par un droit d'auteur lorsque le titulaire est introuvable;2021-2022;Copyright Board Canada;Commission du droit d'auteur Canada;114
+1119;Copyright Tariff Setting;Établissement de tarifs liés au droit d’auteur;2023-2024;Copyright Board Canada;Commission du droit d'auteur Canada;114
+1120;Issuance of licences for the use of copyright works when the owner is unlocatable;Délivrance de licences pour les oeuvres protégées par un droit d'auteur lorsque le titulaire est introuvable;2023-2024;Copyright Board Canada;Commission du droit d'auteur Canada;114
 1121;Public Notices of funding opportunities;Avis publics concernant les possibilités de financement;2023-2024;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74
 1122;Public enquiries;Demandes de renseignements du publique;2023-2024;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74
 1123;Public Notices of Successful Funding Applications;Avis publics concernant les demandes de financement retenues;2023-2024;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74
@@ -1372,6 +1373,7 @@ passeport ou un autre titre de voyage";2018-2019;Immigration, Refugees and Citiz
 31;Refugee Protection;Protection des réfugiés;2021-2022;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174
 314;Responding to Library Requests;Demandes à la bibliothèque;2023-2024;Canada Energy Regulator;Régie de l'énergie du Canada;221
 315;Access to Information Requests;Accès à l'information;2023-2024;Canada Energy Regulator;Régie de l'énergie du Canada;221
+3181;Cyber Defence Services;Services de cyberdéfense;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 3193;Administration of the Explosives Act and Explosives Regulations, 2013;Administration de la loi sur les explosifs et du règlement sur les explosifs de 2013;2023-2024;Natural Resources Canada;Ressources naturelles Canada;134
 32;Refugee Appeals;Appels des réfugiés;2021-2022;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174
 3215;Zero Emission Vehicles Infrastructure Program (ZEVIP);Programme d’infrastructure pour les véhicules à émission zéro (PIVEZ);2023-2024;Natural Resources Canada;Ressources naturelles Canada;134
@@ -1393,7 +1395,14 @@ passeport ou un autre titre de voyage";2018-2019;Immigration, Refugees and Citiz
 3378;Wildland Fire Resilience;Contribution à l'appui de Programme Résilience des feux de forêt;2023-2024;Natural Resources Canada;Ressources naturelles Canada;134
 339;International Association of Fire Fighters;Programme de contribution a l'Association international des pompiers;2023-2024;Public Safety Canada;Sécurité publique Canada;135
 34;Fixed Line Phones;Téléphones fixes (filaires);2023-2024;Shared Services Canada;Services partagés Canada;305
+3403;Collaboration with Priority Critical Infrastructure Owners and Operators;Collaboration avec des propriétaires et exploitants d’infrastructures essentielles prioritaires;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3404;Incident Handling and Support;Intervention et soutien en cas d’incident;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3408;Service Coordination;Coordination des services;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 341;Northern and Indigenous Crime Prevention Fund;Fonds de prévention du crime chez les collectivités Autochtones et du Nord;2023-2024;Public Safety Canada;Sécurité publique Canada;135
+3410;Cyber Threat Surface Analysis;Analyse de l’exposition aux cybermenaces;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3411;Cybersecurity Advice & Guidance - System Security Architecture;Avis et conseils en matière de cybersécurité – Architecture de sécurité du système;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3413;Access to Information and Privacy - Privacy Act;Accès à l’information et protection des renseignements personnels  - Loi sur la protection des renseignements personnels;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3414;Access to Information and Privacy - Access to Information Act;Accès à l’information et protection des renseignements personnels - Loi sur l'accès à l'information;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 344;Communities at Risk: Security Infrastructure Program;Programme de financement des projets d'infrastructure de sécurité pour les collectivités à risque;2023-2024;Public Safety Canada;Sécurité publique Canada;135
 35;Bulk Print;Impression en bloc;2018-2019;Shared Services Canada;Services partagés Canada;305
 351;Gun and Gang Violence Action Fund;Fonds de lutte contre la violence liée aux armes à feu et aux gangs;2023-2024;Public Safety Canada;Sécurité publique Canada;135
@@ -1467,6 +1476,12 @@ passeport ou un autre titre de voyage";2018-2019;Immigration, Refugees and Citiz
 3640;CCOHS Publications;Publications du CCHST;2023-2024;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55
 3641;CCOHS Legislation Service;Service législation du CCHST;2023-2024;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55
 3642;CCOHS Databases/Collections;Bases de données et collections du CCHST;2023-2024;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55
+3643;Cyber Centre Learning Hub - Learning Management System;Carrefour de l’apprentissage du Centre pour la cybersécurité – Système de gestion de l’apprentissage;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3644;Cyber Centre Learning Hub - Curriculum Review;Carrefour de l’apprentissage du Centre pour la cybersécurité – Examen des programmes;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3645;Advice and Guidance - Supply Chain Integrity;Avis et conseils en matière de cybersécurité – Architecture de sécurité du système;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3646;Compliance Reviews / Certifications - Cryptographic Module Validation Program;Certifications/examens de conformité – Programme de validation des modules cryptographiques;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3647;Compliance Reviews / Certifications - Common Criteria Recognition Arrangement (CCRA);Certifications/examens de conformité – Arrangement de reconnaissance des Critères communs;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
+3648;Cyber Centre Learning Hub - Custom Course Development;Carrefour de l’apprentissage du Centre pour la cybersécurité – Élaboration de cours sur mesure;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 3649;Digital Communications – Web Communications;Communications numériques –  Communications Web;2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295
 3650;Cyber Flipbook;Le livre d epoche cybernétique;2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295
 3651;"Canadian Anti-Fraud Centre-
@@ -2519,4 +2534,4 @@ SRV03597;Deferred Income and Savings Plans written enquiries;Régimes de revenu 
 SRV3433;Ocean And Freshwater Science Contribution Program;Programme de contributions pour la science de l’habitat d’eau douce;2023-2024;Fisheries and Oceans Canada;Pêches et Océans Canada;125
 SRV3735;Federal Policing Security Intelligence;Renseignement de sécurité de la Police Fédérale;2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295
 
-Timestamp:2025-01-24_14:41:00
+Timestamp:2025-01-27_11:41:13
