@@ -84,8 +84,12 @@ jobs:
       - name: Flatten structure
         run: |
           mkdir temp_files  # Temporary directory for files
-          find . -type f -name '*.csv' -exec mv {} temp_files/ \;  # Move all CSVs to temp
-          find . -mindepth 1 \( -path './temp_files*' -o -path './README.md' -o -path './.*' -prune \) -o -exec rm -rf {} + # Delete everything else
+          find . -type f -name '*.csv' ! -path './temp_files/*' -exec mv {} temp_files/ \;  # Move all CSVs to temp
+          find . -mindepth 1 \
+              -path './temp_files*' -prune -o \
+              -path './README.md' -prune -o \
+              -path './.*' -prune -o \
+              -exec rm -rf {} + # Delete everything else
           mv temp_files/* .  # Move files back to root
           rmdir temp_files  # Remove temporary directory
 
