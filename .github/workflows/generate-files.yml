@@ -58,56 +58,38 @@ jobs:
           echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Create GitHub release with SQLite database
-      - name: Create SQLite Release
-        id: create_sqlite_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: sqlite-${{ steps.datetime.outputs.commit_hash }}
-          name: SQLite Database - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
-          body: |
-            Automated service data SQLite release for ${{ steps.datetime.outputs.date }}
-            
-            Release Information:
-            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} EST
-            - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
-            
-            This release contains:
-            - SQLite database with all processed data
-            - Database tables are prefixed with their source directory
-          files: outputs/service_data.db
-          make_latest: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       # Create temporary directory for flattened structure
       - name: Prepare Flattened Files
         run: |
-          mkdir flattened_files
-          cd flattened_files
-          find .. -type f -name '*.csv' ! -path '../flattened_files/*' -exec cp {} . \;
+          mkdir -p release_files/csv
+          cp outputs/service_data.db release_files/
+          cd release_files/csv
+          find ../.. -type f -name '*.csv' ! -path '../../release_files/*' -exec cp {} . \;
 
-      # Create GitHub release with flattened CSV files
-      - name: Create CSV Files Release
-        id: create_csv_release
+      # Create GitHub release with all files
+      - name: Create Release
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: csv-${{ steps.datetime.outputs.commit_hash }}
-          name: Flattened CSV Files - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
+          tag_name: service_data-${{ steps.datetime.outputs.commit_hash }}
+          name: Service Data - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
           body: |
-            Automated flattened CSV files release for ${{ steps.datetime.outputs.date }}
+            Automated service data release for ${{ steps.datetime.outputs.date }}
             
             Release Information:
             - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} EST
             - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
             
             This release contains:
-            - All CSV files from the repository in a flattened structure
-          files: flattened_files/*
+            - SQLite database with all processed data (database tables are prefixed with their source directory)
+            - All CSV files in a flattened structure under the 'csv' directory
+          files: |
+            release_files/service_data.db
+            release_files/csv/*
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Cleanup
       - name: Cleanup
-        run: rm -rf flattened_files/
+        run: rm -rf release_files/
