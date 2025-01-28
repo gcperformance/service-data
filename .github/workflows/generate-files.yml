@@ -61,9 +61,9 @@ jobs:
       # Create temporary directory for flattened structure
       - name: Prepare Flattened Files
         run: |
-          mkdir -p release_files/csv
+          mkdir -p release_files/flattened_csv
           cp outputs/service_data.db release_files/
-          cd release_files/csv
+          cd release_files/flattened_csv
           find ../.. -type f -name '*.csv' ! -path '../../release_files/*' -exec cp {} . \;
 
       # Create GitHub release with all files
@@ -85,7 +85,7 @@ jobs:
             - All CSV files in a flattened structure under the 'csv' directory
           files: |
             release_files/service_data.db
-            release_files/csv/*
+            release_files/flattened_csv
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
