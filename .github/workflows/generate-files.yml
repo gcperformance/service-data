@@ -27,69 +27,30 @@ jobs:
       - name: Install requirements for python
         run: pip install -r requirements.txt
 
-      # Ensure we have latest master
-      - name: Get latest master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git fetch origin master
-          git checkout master
-          git pull origin master
-
-      # WHERE AM I
-      - name: Print current working directory
-        run: pwd
-
-      # Run the main.py script
-      - name: Run the main.py script
+      - name: Run main py script
         run: python main.py
 
-      # Get current date and time for release tag
-      - name: Get current date and time
-        id: datetime
+      - name: Get current date and commit hash
+        id: metadata
         run: |
-          # Install tzdata for timezone support
-          sudo apt-get install -y tzdata
-          # Set timezone to Eastern
-          export TZ="America/Montreal"
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-          echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Create temporary directory for flattened structure
-      - name: Prepare Flattened Files
-        run: |
-          mkdir -p release_files/flattened_csv
-          cp outputs/service_data.db release_files/
-          cd release_files/flattened_csv
-          find ../.. -type f -name '*.csv' ! -path '../../release_files/*' -exec cp {} . \;
-
-      # Create GitHub release with all files
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ steps.datetime.outputs.commit_hash }}
-          name: Service Data - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
+          tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
+          name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
           body: |
-            Automated service data release for ${{ steps.datetime.outputs.date }}
-            
-            Release Information:
-            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} EST
-            - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
-            
-            This release contains:
-            - SQLite database with all processed data (database tables are prefixed with their source directory)
-            - All CSV files in a flattened structure under the 'csv' directory
-          files: |
-            release_files/service_data.db
-            release_files/flattened_csv
+            Automated service data release for ${{ steps.metadata.outputs.date }}
+                - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
+                - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
+            Contains SQLite database with all processed data
+          files: outputs/service_data.db
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Cleanup
       - name: Cleanup
-        run: rm -rf release_files/
+        run: rm -rf outputs
