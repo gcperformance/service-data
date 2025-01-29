@@ -304,13 +304,14 @@ def qa_check(si, ss):
         'qa_si_fiscal_yr_in_future',
         'qa_ss_vol_without_si_vol',
         'qa_reused_sid',
-        'qa_program_id'
+        'qa_program_from_wrong_org'
     ]
     
     critical_ss_qa_cols = [
         'qa_duplicate_stdid',
         'qa_no_ss_volume',
-        'qa_ss_fiscal_yr_in_future'
+        'qa_ss_fiscal_yr_in_future',
+        'qa_performance_over_100'
     ]   
     
     # Preparing SI QA report
@@ -323,6 +324,7 @@ def qa_check(si, ss):
         'num_applications_total',
         'total_volume_ss',
         'reused_id_from',
+        'program_id',
         'program_correct_org'
     ]
     
