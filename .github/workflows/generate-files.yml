@@ -27,85 +27,30 @@ jobs:
       - name: Install requirements for python
         run: pip install -r requirements.txt
 
-      # Ensure we have latest generated-files branch
-      - name: Get latest master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git fetch origin generated-files
-          git checkout generated-files
-          git pull origin generated-files
-
-      # WHERE AM I
-      - name: Print current working directory
-        run: pwd
-
-      # Run the main.py script
-      - name: Run the main.py script
+      - name: Run main py script
         run: python main.py
 
-      # Get current date and time for release tag
-      - name: Get current date and time
-        id: datetime
+      - name: Get current date and commit hash
+        id: metadata
         run: |
-          # Install tzdata for timezone support
-          sudo apt-get install -y tzdata
-          # Set timezone to Eastern
-          export TZ="America/Montreal"
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-          echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Create GitHub release with SQLite database
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ steps.datetime.outputs.commit_hash }}
-          name: Service Data - ${{ steps.datetime.outputs.date }} (${{ steps.datetime.outputs.commit_hash }})
+          tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
+          name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
           body: |
-            Automated service data release for ${{ steps.datetime.outputs.date }}
-            
-            Release Information:
-            - Generated on: ${{ steps.datetime.outputs.date }} at ${{ steps.datetime.outputs.time }} EST
-            - Git Commit: ${{ steps.datetime.outputs.commit_hash }}
-            
-            This release contains:
-            - SQLite database with all processed data
-            - Database tables are prefixed with their source directory
+            Automated service data release for ${{ steps.metadata.outputs.date }}
+                - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
+                - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
+            Contains SQLite database with all processed data
           files: outputs/service_data.db
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Delete workflow directory from repo
-      - name: Delete workflow directory
-        run: rm -rf .github/ .gitignore
-
-      # Flatten structure: Copy CSV files to root, remove everything else
-      - name: Flatten structure
-        run: |
-          pwd
-          mkdir temp_files  # Temporary directory for files
-          find . -type f -name '*.csv' ! -path './temp_files/*' -exec mv {} temp_files/ \;  # Move all CSVs to temp
-          find . -mindepth 1 \
-              -path './temp_files*' -prune -o \
-              -path './README.md' -prune -o \
-              -path './.*' -prune -o \
-              -exec rm -rf {} + # Delete everything else
-          mv temp_files/* .  # Move files back to root
-          rmdir temp_files  # Remove temporary directory
-
-      # Commit and push changes
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git checkout -B generated-files
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Update csv outputs by github action"
-          git push --force origin generated-files
+      # Cleanup
+      - name: Cleanup
+        run: rm -rf outputs
