@@ -106,6 +106,7 @@ def process_files(si, ss):
     # ### Total number of services
     # Given a fiscal year, how many services were reported?    
     si_fy_service_count = si.groupby(['fiscal_yr'])['service_id'].count().reset_index()
+    si_fy_service_count.rename(columns={'service_id': 'total_services'}, inplace=True)
     
     
     # ### Total number of service interactions
@@ -123,16 +124,16 @@ def process_files(si, ss):
     # #### Question 1: Existence of service standards
     # As service standards are required under the Policy on Service and Digital, what is the percentage of services that have service standards?
     
-    maf1 = si.loc[:, ['fiscal_yr', 'service_id', 'department_en', 'org_id']]
+    maf1 = si.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
     maf1['service_std_tf'] = si[['fiscal_yr', 'service_id']].isin(ss[['fiscal_yr', 'service_id']].to_dict(orient='list')).all(axis=1)
     
-    maf1_num = maf1.groupby(['fiscal_yr', 'department_en', 'org_id'])['service_id'].count().reset_index()
-    maf1_denom = maf1.groupby(['fiscal_yr', 'department_en','org_id'])['service_std_tf'].sum().reset_index()
+    maf1_num = maf1.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_id'].count().reset_index()
+    maf1_denom = maf1.groupby(['fiscal_yr', 'department_en','department_fr','org_id'])['service_std_tf'].sum().reset_index()
     
     maf1 = pd.merge(
         maf1_num,
         maf1_denom,
-        on=['fiscal_yr', 'department_en', 'org_id'],
+        on=['fiscal_yr', 'department_en','department_fr', 'org_id'],
         how='left'
     ).rename(columns={'service_id':'service_count', 'service_std_tf':'service_with_std_count'})
     
@@ -142,16 +143,16 @@ def process_files(si, ss):
     # #### Question 2: Service standard targets
     # What is the percentage of service standards that met their target?
     
-    maf2 = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'org_id', 'target_met']].dropna()
+    maf2 = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en','department_fr', 'org_id', 'target_met']].dropna()
     
-    maf2_num = maf2[maf2['target_met']=='Y'].groupby(['fiscal_yr', 'department_en', 'org_id'])['service_standard_id'].count().reset_index()
-    maf2_denom = maf2.groupby(['fiscal_yr', 'department_en', 'org_id'])['service_standard_id'].count().reset_index()
+    maf2_num = maf2[maf2['target_met']=='Y'].groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_standard_id'].count().reset_index()
+    maf2_denom = maf2.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_standard_id'].count().reset_index()
     
     maf2 = pd.merge(
         maf2_num,
         maf2_denom,
         suffixes=['_met','_total'],
-        on=['fiscal_yr', 'department_en', 'org_id'],
+        on=['fiscal_yr', 'department_en','department_fr', 'org_id'],
         how='left'
     )
     
@@ -179,7 +180,7 @@ def process_files(si, ss):
     ]
     
     # Melt the DataFrame
-    maf5 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation')
+    maf5 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation')
     
     # Create boolean columns for activation states
     maf5['activation_y'] = (maf5['activation'] == 'Y')
@@ -187,7 +188,7 @@ def process_files(si, ss):
     maf5['activation_na'] = (maf5['activation'] == 'NA')
     
     # Group by and sum the activation columns
-    maf5 = maf5.groupby(['fiscal_yr', 'department_en', 'org_id', 'service_id'])[['activation_y', 'activation_n', 'activation_na']].sum().reset_index()
+    maf5 = maf5.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id', 'service_id'])[['activation_y', 'activation_n', 'activation_na']].sum().reset_index()
     
     # Determine conditions for online_e2e
     conditions = [
@@ -202,7 +203,7 @@ def process_files(si, ss):
     maf5 = maf5.dropna(subset=['online_e2e'])
     
     # Determine department-level counts for online e2e services and all services
-    maf5 = maf5.groupby(['fiscal_yr', 'department_en', 'org_id']).agg(
+    maf5 = maf5.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
         online_e2e_count=('online_e2e', 'sum'), # this is wizardry to me... still not sure what is happening
         service_count=('service_id', 'nunique')
     ).reset_index()
@@ -224,11 +225,11 @@ def process_files(si, ss):
     ]
     
     # Melt the DataFrame
-    maf6 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation').dropna()
+    maf6 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation').dropna()
     
     maf6['activation'] = (maf6['activation'] == 'Y')
     
-    maf6 = maf6.groupby(['fiscal_yr', 'department_en', 'org_id']).agg(
+    maf6 = maf6.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
         activated_point_count=('activation', 'sum'), # this is wizardry to me... still not sure what is happening
         point_count=('service_id', 'count')
     ).reset_index()
@@ -245,7 +246,7 @@ def process_files(si, ss):
     # #### Question 8: Client feedback
     # As ensuring client feedback is used to inform continuous improvement of services is a requirement under the Directive on Service and Digital, what is the percentage of services which have used client feedback to improve services in the last year?
     
-    maf8 = si.loc[:,['fiscal_yr', 'service_id', 'org_id', 'department_en', 'last_service_review', 'last_service_improvement']]
+    maf8 = si.loc[:,['fiscal_yr', 'service_id', 'org_id', 'department_en','department_fr', 'last_service_review', 'last_service_improvement']]
     
     maf8['report_yr'] = pd.to_numeric(maf8['fiscal_yr'].str.split('-').str[1], errors='coerce').astype(int)
     maf8['last_service_improvement_yr'] = pd.to_numeric(maf8['last_service_improvement'].str.split('-').str[1], errors='coerce')
