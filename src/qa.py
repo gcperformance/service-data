@@ -288,11 +288,8 @@ def qa_check(si, ss):
     si['program_correct_org'] = si['program_correct_org'].fillna(False)
 
     # QA Check: Service standard performance is greater than 100%
-    ss['qa_performance_over_100'] = ss['performance']>1
+    ss['qa_performance_over_100'] = ss['volume_meeting_target']>ss['total_volume']
 
-
-    
-    
     # Clean QA report
     # In order to have a clean report of issues to send to departments & agencies, the following bit of script re-organizes the information in the qa columns to a simple report for 2023-2024 data.
     si_qa_cols = si.columns.str.startswith('qa')
@@ -304,13 +301,14 @@ def qa_check(si, ss):
         'qa_si_fiscal_yr_in_future',
         'qa_ss_vol_without_si_vol',
         'qa_reused_sid',
-        'qa_program_id'
+        'qa_program_from_wrong_org'
     ]
     
     critical_ss_qa_cols = [
         'qa_duplicate_stdid',
         'qa_no_ss_volume',
-        'qa_ss_fiscal_yr_in_future'
+        'qa_ss_fiscal_yr_in_future',
+        'qa_performance_over_100'
     ]   
     
     # Preparing SI QA report
@@ -323,6 +321,7 @@ def qa_check(si, ss):
         'num_applications_total',
         'total_volume_ss',
         'reused_id_from',
+        'program_id',
         'program_correct_org'
     ]
     
