@@ -325,7 +325,7 @@ fiscal_yr;department_en;org_id;service_standard_id_met;service_standard_id_total
 2023-2024;Privy Council Office;278;3;3;100.0
 2023-2024;Public Health Agency of Canada;280;22;23;95.65217391304348
 2023-2024;Public Safety Canada;135;50;75;66.66666666666666
-2023-2024;Public Service Commission of Canada;282;4;7;57.14285714285714
+2023-2024;Public Service Commission of Canada;282;6;9;66.66666666666666
 2023-2024;Public Services and Procurement Canada;136;40;60;66.66666666666666
 2023-2024;Royal Canadian Mounted Police;295;9;12;75.0
 2023-2024;Shared Services Canada;305;7;7;100.0
@@ -336,4 +336,4 @@ fiscal_yr;department_en;org_id;service_standard_id_met;service_standard_id_total
 2023-2024;Veterans Affairs Canada;139;18;23;78.26086956521739
 2023-2024;Women and Gender Equality Canada;246;4;6;66.66666666666666
 
-Timestamp:2025-01-27_15:46:55
+Timestamp:2025-01-29_14:14:36

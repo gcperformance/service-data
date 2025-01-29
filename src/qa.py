@@ -286,6 +286,12 @@ def qa_check(si, ss):
     si=si.merge(collapsed_si_prog, on=['fiscal_yr', 'service_id', 'org_id'], how='left')
     si['qa_program_from_wrong_org'] = ~(si['program_correct_org'].isna())
     si['program_correct_org'] = si['program_correct_org'].fillna(False)
+
+    # QA Check: Service standard performance is greater than 100%
+    ss['qa_performance_over_100'] = ss['performance']>1
+
+
+    
     
     # Clean QA report
     # In order to have a clean report of issues to send to departments & agencies, the following bit of script re-organizes the information in the qa columns to a simple report for 2023-2024 data.
@@ -297,7 +303,8 @@ def qa_check(si, ss):
         'qa_duplicate_sid',
         'qa_si_fiscal_yr_in_future',
         'qa_ss_vol_without_si_vol',
-        'qa_reused_sid'
+        'qa_reused_sid',
+        'qa_program_id'
     ]
     
     critical_ss_qa_cols = [
@@ -315,7 +322,8 @@ def qa_check(si, ss):
         'service_name_fr',
         'num_applications_total',
         'total_volume_ss',
-        'reused_id_from'
+        'reused_id_from',
+        'program_correct_org'
     ]
     
     si_qa_report = pd.melt(si, id_vars=si_report_cols, value_vars=critical_si_qa_cols, var_name='issue', value_name='issue_present')
@@ -352,6 +360,7 @@ def qa_check(si, ss):
         'service_standard_fr',
         'volume_meeting_target',
         'total_volume',
+        'performance'
     ]
     
     ss_qa_report = pd.melt(ss, id_vars=ss_report_cols, value_vars=critical_ss_qa_cols, var_name='issue', value_name='issue_present')
