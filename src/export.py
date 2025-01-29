@@ -71,6 +71,31 @@ def csv_to_sqlite(directory=None, output_dir=None):
     db_path = output_dir / 'service_data.db'
     conn = sqlite3.connect(db_path)
 
+    # Get current git commit hash
+    try:
+        import subprocess
+        git_hash = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=directory).decode('utf-8').strip()
+    except:
+        git_hash = 'unknown'
+
+    # Create metadata table with creation timestamp
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS metadata (
+            key TEXT PRIMARY KEY,
+            value TEXT
+        )
+    """)
+    cursor.execute("""
+        INSERT OR REPLACE INTO metadata (key, value)
+        VALUES ('db_created_at', datetime('now'))
+    """)
+    cursor.execute("""
+        INSERT OR REPLACE INTO metadata (key, value)
+        VALUES ('db_commit_hash', ?)
+    """, (git_hash,))
+    conn.commit()
+
     # Keep track of processed tables to avoid duplicates
     processed_tables = set()
 
