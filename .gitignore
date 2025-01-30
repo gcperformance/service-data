@@ -1,5 +1,4 @@
-.ipynb_checkpoints
-src/__pycache__/
-*.pyc
+.ipynb_checkpoints/
 generate-files-wf
 outputs/service_data.db
+__pycache__/
