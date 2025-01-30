@@ -2,10 +2,9 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-from src.clean import clean_percentage, normalize_string
+from src.clean import clean_percentage, normalize_string, standardize_column_names
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
-from src.utils import standardize_column_names
 
 INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"

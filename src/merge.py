@@ -23,6 +23,9 @@ def merge_si():
     si_2018 = load_csv_from_raw('si_2018.csv')
     si_2024 = load_csv_from_raw('si_2024.csv')
     
+    # Test breaker - uncomment to break merge_si() and check the row count test
+    # si_2024 = si_2024.head()
+    
     # Compare columns
     # si_2018_columns = set(si_2018.columns)
     # si_2024_columns = set(si_2024.columns)
@@ -169,6 +172,9 @@ def merge_ss():
     
     ss_2018 = load_csv_from_raw('ss_2018.csv')
     ss_2024 = load_csv_from_raw('ss_2024.csv')
+
+    # Test breaker - uncomment to break merge_ss() and check the row count test
+    # ss_2024 = ss_2024.head()
     
     # Rename columns in 2018 dataset to align to the 2024 dataset's conventions
     rename_2018_ss_columns = {

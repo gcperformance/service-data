@@ -83,6 +83,10 @@ Data used by script to produce processed files.
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
+### `tests/`: Script tests
+- `conftest.py`: configuration file for pytest
+- `test_merge.py`: testing script for merge.py
+
 #### `notebooks/`: Jupyter notebooks for testing and experiments
 
 
@@ -136,6 +140,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   └── ss_2024.csv
 ├── main.py
 ├── notebooks
+│   ├── experiments.ipynb
 │   ├── gc-service-data-script.ipynb
 │   ├── qa-uris.ipynb
 │   └── qa.ipynb
@@ -159,6 +164,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   │   ├── si_qa_report.csv
 │   │   ├── ss_qa.csv
 │   │   └── ss_qa_report.csv
+│   ├── service_data.db
 │   ├── si.csv
 │   ├── ss.csv
 │   └── utils
@@ -168,13 +174,16 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │       ├── ifoi_fr.csv
 │       └── org_var.csv
 ├── requirements.txt
-└── src
-    ├── __init__.py
-    ├── clean.py
-    ├── export.py
-    ├── load.py
-    ├── merge.py
-    ├── process.py
-    ├── qa.py
-    ├── qa_issues_descriptions.csv
-    └── utils.py
+├── src
+│   ├── clean.py
+│   ├── export.py
+│   ├── load.py
+│   ├── merge.py
+│   ├── process.py
+│   ├── qa.py
+│   ├── qa_issues_descriptions.csv
+│   └── utils.py
+└── tests
+    ├── conftest.py
+    └── test_merge.py
+```
