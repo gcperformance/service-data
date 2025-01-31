@@ -9,8 +9,24 @@ def clean_percentage(value):
     except (ValueError, TypeError):
         return None
 
-def split_and_uppercase_to_sorted_string(value):
-    return ', '.join(sorted(val.replace(' ','').upper() for val in value.split(',')))
+def clean_fiscal_yr(yr):
+    """Convert fiscal years to XXXX-YYYY format"""
+    # Dictionary-based simple replacements
+    fy_cleanup = {'FY ': '', '/': '-'}
+    for old, new in fy_cleanup.items():
+        yr = yr.replace(old, new)
+
+    # Regex transformation for fiscal years (XXXX-YY → XXXX-YYYY)
+    yr = re.sub(
+        r"(\d{4})-\d{2}", 
+        lambda m: f"{m.group(1)}-{int(m.group(1)) + 1}",
+        yr
+    )
+
+    return yr
+
+def split_and_uppercase_to_sorted_string(s):
+    return ', '.join(sorted(val.replace(' ','').upper() for val in s.split(',')))
     
 def normalize_string(s):
     """Clean and normalize a string."""
@@ -33,7 +49,8 @@ def standardize_column_names(df):
         'organizationid': 'org_id',
         'organization_id': 'org_id',
         'serviceid': 'service_id',
-        'programid': 'program_id'
+        'programid': 'program_id',
+        'fy_ef': 'fiscal_yr'
     }
     
     # Normalize column names to lowercase
