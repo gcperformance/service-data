@@ -5,7 +5,7 @@ from pathlib import Path
 from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
-from src.utils import dept_list
+from src.utils import dept_list, sid_list
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 
@@ -157,6 +157,8 @@ def merge_si():
     data_dict={'si': si},
     output_dir=OUTPUT_DIR
     )
+
+    sid_list(si)
 
     return si
 
