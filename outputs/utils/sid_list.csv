@@ -1,4 +1,4 @@
-service_id;service_name_en;service_name_fr;fiscal_yr;department_en;department_fr;org_id
+service_id;service_name_en;service_name_fr;latest_fiscal_yr;department_en;department_fr;org_id
 0849;Media Relations;Bureau des relations avec les médias;2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110
 1;Permit to Operate a Rendering Plant;Permis d'exploitation d'une usine de traitement;2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65
 10;Procurement;Approvisionnement;2023-2024;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136
@@ -1561,6 +1561,7 @@ Climate action incentive payment)";Remise canadienne sur le carbone (auparavant 
 3732;Outline of Production - Veterinary Biologics;Protocole de production pour produits biologiques vétérinaires;2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65
 3733;Adjudication of Immigration and Refugee cases;Décision des cas d’immigration et de statut de réfugié;2023-2024;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174
 3734;Ministerial Exemption for the Purpose of Selling a Test Market Food;Exemptions ministérielles pour vendre un aliment d'essai;2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65
+3735;Federal Policing Security Intelligence;Renseignement de sécurité de la Police Fédérale;2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295
 38;Secure Remote Access;Accès à distance protégé;2023-2024;Shared Services Canada;Services partagés Canada;305
 39;Midrange;Ordinateurs de milieu de gamme;2018-2019;Shared Services Canada;Services partagés Canada;305
 4;Food Recalls and safety alerts;Rappels d'aliments et avis de sécurité;2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65
@@ -2514,4 +2515,4 @@ SRV03568;Air operator certificate;Certificat d'exploitant aérien;2023-2024;Tran
 SRV03569;Adjudication of Immigration and Refugee cases;Décision des cas d’immigration et de statut de réfugié;2022-2023;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174
 SRV3735;Federal Policing Security Intelligence;Renseignement de sécurité de la Police Fédérale;2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295
 
-Timestamp:2025-01-31_16:41:08
+Timestamp:2025-02-03_15:48:14

@@ -9311,6 +9311,12 @@ fiscal_yr;service_id;online_interaction_point;activation;online_interaction_poin
 2023-2024;3734;decision;N;4
 2023-2024;3734;issuance;N;5
 2023-2024;3734;issue_resolution_feedback;N;6
+2023-2024;3735;account_registration;N;1
+2023-2024;3735;authentication;N;2
+2023-2024;3735;application;N;3
+2023-2024;3735;decision;N;4
+2023-2024;3735;issuance;N;5
+2023-2024;3735;issue_resolution_feedback;N;6
 2023-2024;38;account_registration;Y;1
 2023-2024;38;authentication;Y;2
 2023-2024;38;application;;3
@@ -14994,4 +15000,4 @@ fiscal_yr;service_id;online_interaction_point;activation;online_interaction_poin
 2023-2024;SRV3735;issuance;N;5
 2023-2024;SRV3735;issue_resolution_feedback;N;6
 
-Timestamp:2025-01-31_16:41:09
+Timestamp:2025-02-03_15:48:16
