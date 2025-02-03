@@ -60,6 +60,8 @@ def sid_list(si):
         ]
     ]
 
+    sid_list = sid_list.rename(columns={'fiscal_yr': 'latest_fiscal_yr'})
+
     export_to_csv(
         data_dict={'sid_list': sid_list},
         output_dir=UTILS_DIR
