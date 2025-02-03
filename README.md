@@ -52,7 +52,6 @@ Data used by script to produce processed files.
 - `maf6.csv`: percentage of client interaction points that are available online for services
 - `maf8.csv`: percentage of services which have used client feedback to improve services in the year prior to reporting
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
-- `service_id_list.csv`: List of service IDs with reporting year and department.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
 - `si_oip.csv`: Online interaction points activation status by service and fiscal year.
@@ -72,6 +71,7 @@ Data used by script to produce processed files.
 - `ifoi_en.csv`: Exhaustive list of departmental info in english
 - `ifoi_fr.csv`: Exhaustive list of departmental info in french
 - `org_var.csv`: List of variant department names and their IFOI ID.
+- `sid_list.csv`: Unique list of service IDs with latest reporting year and department.
 
 #### `src/`: Source Code for Script
 - `clean.py`: functions to clean and set up data
@@ -141,9 +141,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 ├── main.py
 ├── notebooks
 │   ├── experiments.ipynb
-│   ├── gc-service-data-script.ipynb
-│   ├── qa-uris.ipynb
-│   └── qa.ipynb
+│   └── qa-uris.ipynb
 ├── outputs
 │   ├── indicators
 │   │   ├── maf1.csv
@@ -152,7 +150,6 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   │   ├── maf6.csv
 │   │   ├── maf8.csv
 │   │   ├── service_fte_spending.csv
-│   │   ├── service_id_list.csv
 │   │   ├── si_fy_interaction_sum.csv
 │   │   ├── si_fy_service_count.csv
 │   │   ├── si_oip.csv
@@ -172,7 +169,8 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │       ├── drf.csv
 │       ├── ifoi_en.csv
 │       ├── ifoi_fr.csv
-│       └── org_var.csv
+│       ├── org_var.csv
+│       └── sid_list.csv
 ├── requirements.txt
 ├── src
 │   ├── clean.py

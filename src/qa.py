@@ -314,6 +314,7 @@ def qa_check(si, ss):
     # Preparing SI QA report
     si_report_cols = [
         'department_en',
+        'org_id',
         'fiscal_yr', 
         'service_id', 
         'service_name_en', 
@@ -350,6 +351,7 @@ def qa_check(si, ss):
     # Preparing SS QA report
     ss_report_cols = [
         'department_en',
+        'org_id',
         'fiscal_yr', 
         'service_id', 
         'service_name_en', 
