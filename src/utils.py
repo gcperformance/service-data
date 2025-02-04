@@ -162,11 +162,23 @@ def copy_raw_to_utils():
     ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
     org_var = load_csv_from_raw('org_var.csv')
 
-    ifoi_en = standardize_column_names(ifoi_en)
-    ifoi_fr = standardize_column_names(ifoi_fr)
+    # Set first column (OrgID) as index, drop the column from the actual table, add the en/fr suffix
+    ifoi_en = ifoi_en.set_index(ifoi_en.columns[0], drop=True).add_suffix('_en')
+    ifoi_fr = ifoi_fr.set_index(ifoi_fr.columns[0], drop=True).add_suffix('_fr')
 
-    ifoi = pd.merge(ifoi_en, ifoi_fr, on='org_id', suffixes=('_en', '_fr'))
+    # Merge the two ifoi's together. concat works because the index is the same
+    ifoi = pd.concat([ifoi_en, ifoi_fr], axis=1)
     
+    # Extract column lists
+    en_cols = ifoi_en.columns.tolist()
+    fr_cols = ifoi_fr.columns.tolist()
+    
+    # Interleave them by index
+    merged_cols = [col for pair in zip(en_cols, fr_cols) for col in pair]
+    
+    # Apply new column order, reset the index to make org_id reappear
+    ifoi = standardize_column_names(ifoi[merged_cols].reset_index())
+
     utils_file_dict = {
         'ifoi':ifoi,
         'org_var':org_var
