@@ -48,8 +48,8 @@ def dept_list():
 
 def sid_list(si):
     # Unique list of service IDs as reported in the latest fy
-    sid_list = si.loc[
-        si.groupby('service_id')['fiscal_yr'].idxmax(), [
+    sid_list = si.loc[:,
+        [
             'service_id', 
             'service_name_en', 
             'service_name_fr', 
@@ -60,8 +60,14 @@ def sid_list(si):
         ]
     ]
 
-    sid_list = sid_list.rename(columns={'fiscal_yr': 'latest_fiscal_yr'})
-
+    sid_latest_fy = sid_list.loc[sid_list.groupby('service_id')['fiscal_yr'].idxmax(), ['service_id', 'fiscal_yr']]
+    sid_first_fy = sid_list.loc[sid_list.groupby('service_id')['fiscal_yr'].idxmin(), ['service_id', 'fiscal_yr']]
+    
+    sid_list = sid_list.merge(sid_first_fy, on='service_id', suffixes=('', '_first'))
+    sid_list = sid_list.merge(sid_latest_fy, on='service_id', suffixes=('', '_latest'))
+    sid_list = sid_list[sid_list['fiscal_yr'] == sid_list['fiscal_yr_latest']]
+    sid_list = sid_list.drop(columns='fiscal_yr')
+    
     export_to_csv(
         data_dict={'sid_list': sid_list},
         output_dir=UTILS_DIR
