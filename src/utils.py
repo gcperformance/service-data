@@ -162,14 +162,18 @@ def copy_raw_to_utils():
     ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
     org_var = load_csv_from_raw('org_var.csv')
 
+    ifoi_en = standardize_column_names(ifoi_en)
+    ifoi_fr = standardize_column_names(ifoi_fr)
+
+    ifoi = pd.merge(ifoi_en, ifoi_fr, on='org_id', suffixes=('_en', '_fr'))
+    
     utils_file_dict = {
-        'ifoi_en':ifoi_en,
-        'ifoi_fr':ifoi_fr,
+        'ifoi':ifoi,
         'org_var':org_var
     }
 
     for key in utils_file_dict.keys():
-        utils_file_dict[key] = standardize_column_names(utils_file_dict[key])
+        utils_file_dict[key] = standardize_column_names(utils_file_dict[key]) 
     
     export_to_csv(
         data_dict=utils_file_dict,
