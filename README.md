@@ -127,6 +127,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 ## Directory structure
 ```
 ├── README.md
+├── database.dbml
 ├── inputs
 │   ├── ifoi_en.csv
 │   ├── ifoi_fr.csv
@@ -140,7 +141,8 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   └── ss_2024.csv
 ├── main.py
 ├── notebooks
-│   ├── experiments.ipynb
+│   ├── experiments-drf.ipynb
+│   ├── experiments-unique-sids.ipynb
 │   └── qa-uris.ipynb
 ├── outputs
 │   ├── indicators
