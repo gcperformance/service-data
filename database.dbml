@@ -145,11 +145,13 @@ Table utils.sid_list {
   service_id varchar [pk]
   service_name_en varchar
   service_name_fr varchar
-  latest_fiscal_yr varchar
   department_en varchar
   department_fr varchar
   org_id varchar [ref: > utils.dept.org_id]
+  fiscal_yr_latest varchar
+  fiscal_yr_first varchar
 }
+
 
 Table utils.org_var {
   org_name_variant varchar [pk]

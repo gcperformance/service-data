@@ -1,0 +1,211 @@
+//only the records from the latest fiscal year
+Table si {
+  service_id varchar [pk]
+  service_name_en varchar
+  service_description_en varchar
+  service_description_fr varchar
+  client_target_groups varchar
+  last_service_review varchar
+  last_service_improvement varchar
+  sin_usage yes_no_na
+  cra_bn_identifier_usage yes_no_na
+  special_remarks_en varchar
+  special_remarks_fr varchar
+  service_uri_en varchar
+  service_uri_fr varchar
+  automated_decision_system_description_en varchar
+  automated_decision_system_description_fr varchar
+  automated_decision_system yes_no_na
+  reported_fiscal_yr_latest varchar
+  reported_fiscal_yr_first varchar
+}
+
+//only the records from the latest fiscal year
+Table ss {
+  service_standard_id varchar [pk]
+  service_standard_en varchar
+  service_standard_fr varchar
+  service_id varchar [pk, ref: > si.service_id]
+  type varchar
+  channel varchar
+  channel_comments_en varchar
+  channel_comments_fr varchar
+  standards_targets_uri_en varchar
+  standards_targets_uri_fr varchar
+  performance_results_uri_en varchar
+  performance_results_uri_fr varchar
+}
+
+// records from all fy
+Table drf {
+  program_id varchar [pk]
+  program_name_en varchar
+  program_name_fr varchar
+  measure_yr integer [pk]
+  org_id varchar [ref: > utils.dept.org_id]
+}
+
+//This table combines si, ss, drf measures 
+Table measures {
+  fiscal_yr varchar [pk, note: "measure_yr from drf"]
+  service_id varchar [pk, ref: > si.service_id]
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  service_channel varchar
+  service_volume integer
+  program_id varchar [pk]
+  planned_actual varchar
+  program_ftes float
+  program_spending decimal
+  service_standard_id varchar [pk, ref: > ss.service_standard_id]
+  ss_target_type varchar
+  ss_target varchar
+  ss_volume_meeting_target integer
+  ss_total_volume integer
+  ss_performance varchar
+  ss_target_met varchar
+}
+
+//// Utils Schema Tables
+Table utils.dept {
+  org_id varchar [pk]
+  department_en varchar
+  department_fr varchar
+}
+
+Table utils.ifoi {
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  legal_title varchar
+  applied_title varchar
+  website varchar
+  enabling_instruments varchar
+  description_en varchar
+  ministerial_portfolio varchar
+  institutional_form varchar
+  population_code varchar
+  faa_institutional_schedule varchar
+  faa_hr_schedule varchar
+  appropriate_minister_1 varchar
+  appropriate_minister_2 varchar
+  appropriate_minister_3 varchar
+  appropriate_minister_4 varchar
+  year_of_incorporation varchar
+  auditor varchar
+  federal_ownership_or_representation varchar
+  status varchar
+  end_date varchar
+  notes_en varchar
+  appellation_légale varchar
+  titre_appliqué varchar
+  site_web varchar
+  instruments_habilitants varchar
+  description_fr varchar
+  portefeuille_ministériel varchar
+  structure_institutionnelle varchar
+  code_de_la_population varchar
+  annexe_des_institutions_de_la_lrc varchar
+  annexe_des_rh_de_la_lrc varchar
+  ministre_de_tutelle_1 varchar
+  ministre_de_tutelle_2 varchar
+  ministre_de_tutelle_3 varchar
+  ministre_de_tutelle_4 varchar
+  année_de_constituion_en_société varchar
+  vérificateur varchar
+  participation_fédérale_ou_représentants varchar
+  statut varchar
+  date_de_fin varchar
+  notes_fr varchar
+}
+
+Table utils.org_var {
+  org_name_variant varchar [pk]
+  org_id varchar [ref: > utils.dept.org_id]
+}
+
+Table indicators.si_oip {
+  fiscal_yr varchar [pk]
+  service_id varchar [pk, ref: > si.service_id]
+  online_interaction_point varchar
+  activation yes_no_na
+  online_interaction_point_sort integer
+}
+
+Table indicators.si_reviews {
+  fiscal_yr varchar [pk]
+  total_services integer
+  services_reviewed_in_past_5_yrs varchar
+  services_improved_in_past_5_yrs varchar
+}
+
+Table indicators.si_fy_interaction_sum {
+  fiscal_yr varchar [pk]
+  volume integer
+}
+
+Table indicators.si_fy_service_count {
+  fiscal_yr varchar [pk]
+  total_services integer
+}
+
+Table indicators.ss_tml_perf_vol {
+  fiscal_yr varchar [pk]
+  service_id varchar [pk, ref: > si.service_id]
+  volume_meeting_target integer
+  total_volume integer
+  volume_not_meeting_target integer
+}
+
+Table indicators.maf1 {
+  fiscal_yr varchar [pk]
+  department_en varchar
+  department_fr varchar
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  service_count integer
+  service_with_std_count integer
+  maf1_score percentage
+}
+
+Table indicators.maf2 {
+  fiscal_yr varchar [pk]
+  department_en varchar
+  department_fr varchar
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  service_standard_id_met integer
+  service_standard_id_total integer
+  maf2_score percentage
+}
+
+Table indicators.maf5 {
+  fiscal_yr varchar [pk]
+  department_en varchar
+  department_fr varchar
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  online_e2e_count integer
+  service_count integer
+  maf5_score percentage
+}
+
+Table indicators.maf6 {
+  fiscal_yr varchar [pk]
+  department_en varchar
+  department_fr varchar
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  activated_point_count integer
+  point_count integer
+  maf6_score percentage
+}
+
+Table indicators.maf8 {
+  fiscal_yr varchar [pk]
+  department_en varchar
+  department_fr varchar
+  org_id varchar [pk, ref: > utils.dept.org_id]
+  improved_services_count integer
+  service_count integer
+  maf8_score percentage
+}
+
+Enum yes_no_na {
+  Y
+  N
+  NA
+}
