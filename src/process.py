@@ -11,6 +11,13 @@ INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
 def process_files(si, ss):
+    # === RE-SCOPE SERVICE INVENTORY ===
+    # Only include external or enterprise services in all indicators and analysis
+    si = si.loc[
+        (si['service_scope'].str.contains('EXTERN', regex=True)) | 
+        (si['service_scope'].str.contains('ENTERPRISE', regex=True))
+    ] 
+        
     # === SPECIFIC INDICATOR TABLES ===   
     # =================================
     # si_vol: Applications by service
@@ -269,6 +276,15 @@ def process_files(si, ss):
     maf8['maf8_score'] = (maf8['improved_services_count']/maf8['service_count'])*100
     # maf8['maf8_result'] = pd.cut(maf8['maf8_score'], bins=score_bins, labels=score_results, right=False)
 
+    # === SUMMARY MAF TABLE === 
+    maf_dfs = [maf1, maf2, maf5, maf6, maf8]
+    index_cols = ['fiscal_yr', 'org_id', 'department_en', 'department_fr']
+    
+    # Set index for each DataFrame in the list
+    maf_temps = [df.set_index(index_cols) for df in maf_dfs]
+    
+    # Concatenate along columns and reset index
+    maf_all = pd.concat(maf_temps, axis=1).reset_index()
     
     # === SPENDING & FTEs BY PROGRAM ===
     # Load DRF data from utils (i.e. RBPO)
@@ -306,6 +322,7 @@ def process_files(si, ss):
         "maf5": maf5,
         "maf6": maf6,
         "maf8": maf8,
+        "maf_all": maf_all
     }
     
     export_to_csv(
