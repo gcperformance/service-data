@@ -1,5 +1,5 @@
 fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_count;maf1_score
-2018-2019;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;3;75.0
+2018-2019;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;2;50.0
 2018-2019;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;30;30;100.0
 2018-2019;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
 2018-2019;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
@@ -71,7 +71,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2018-2019;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;7;6;85.71428571428571
 2018-2019;Veterans Affairs Canada;Anciens Combattants Canada;139;30;18;60.0
 2018-2019;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;2;2;100.0
-2019-2020;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;5;3;60.0
+2019-2020;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;5;2;40.0
 2019-2020;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;35;35;100.0
 2019-2020;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
 2019-2020;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
@@ -113,7 +113,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2019-2020;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;12;8;66.66666666666666
 2019-2020;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;47;44;93.61702127659575
 2019-2020;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2019-2020;Library and Archives Canada;Bibliothèque et Archives Canada;199;9;7;77.77777777777779
+2019-2020;Library and Archives Canada;Bibliothèque et Archives Canada;199;9;6;66.66666666666666
 2019-2020;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;2;1;50.0
 2019-2020;National Defence;Défense nationale;133;10;6;60.0
 2019-2020;National Film Board;Office national du film;223;3;3;100.0
@@ -147,7 +147,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2019-2020;Veterans Affairs Canada;Anciens Combattants Canada;139;28;19;67.85714285714286
 2019-2020;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;2;2;100.0
 2019-2020;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2020-2021;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;3;75.0
+2020-2021;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;2;50.0
 2020-2021;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;39;39;100.0
 2020-2021;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
 2020-2021;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
@@ -189,7 +189,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2020-2021;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;9;7;77.77777777777779
 2020-2021;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;72;59;81.94444444444444
 2020-2021;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2020-2021;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;8;40.0
+2020-2021;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
 2020-2021;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
 2020-2021;National Defence;Défense nationale;133;10;6;60.0
 2020-2021;National Film Board;Office national du film;223;5;5;100.0
@@ -266,7 +266,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2021-2022;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;10;8;80.0
 2021-2022;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;75;61;81.33333333333333
 2021-2022;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2021-2022;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;8;40.0
+2021-2022;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
 2021-2022;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
 2021-2022;National Defence;Défense nationale;133;10;4;40.0
 2021-2022;National Film Board;Office national du film;223;5;5;100.0
@@ -344,7 +344,7 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2022-2023;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;22;13;59.09090909090909
 2022-2023;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;10;8;80.0
 2022-2023;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;75;64;85.33333333333334
-2022-2023;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;8;40.0
+2022-2023;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
 2022-2023;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
 2022-2023;National Defence;Défense nationale;133;12;4;33.33333333333333
 2022-2023;National Research Council Canada;Conseil national de recherches Canada;228;15;15;100.0
@@ -458,4 +458,4 @@ fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_coun
 2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
 2024-2025;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;1;0;0.0
 
-Timestamp:2025-02-05_15:01:20
+Timestamp:2025-02-05_16:20:57

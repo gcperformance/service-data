@@ -7,17 +7,44 @@ from src.load import load_csv_from_raw
 from src.export import export_to_csv
 from src.utils import build_drf
 
+OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
 def process_files(si, ss):
     # === RE-SCOPE SERVICE INVENTORY ===
     # Only include external or enterprise services in all indicators and analysis
-    si = si.loc[
-        (si['service_scope'].str.contains('EXTERN', regex=True)) | 
-        (si['service_scope'].str.contains('ENTERPRISE', regex=True))
-    ] 
-        
+    # Filter out NaN and False values from 'service_scope_ext_or_ent'
+    si = si.loc[si['service_scope_ext_or_ent'] == True]
+    
+    # Set index for `si`
+    si = si.set_index(['fiscal_yr', 'service_id'])
+    
+    # Merge `ss` with `si` using left join and keep only matching rows
+    ss = ss.set_index(['fiscal_yr', 'service_id']).merge(
+        si[['service_scope_ext_or_ent']],  # Ensure only the necessary column is merged
+        how='left',
+        left_index=True,
+        right_index=True
+    )
+    
+    # Filter out NaN and False values from 'service_scope_ext_or_ent'
+    ss = ss.loc[ss['service_scope_ext_or_ent'] == True]
+    ss = ss.drop(columns=['service_scope_ext_or_ent']).reset_index()
+
+    # Reset the index for si, drop the filtering column from the final si
+    si = si.drop(columns=['service_scope_ext_or_ent']).reset_index()
+
+    output_exports = {
+        "si": si,
+        "ss": ss,
+    }
+    
+    export_to_csv(
+        data_dict=output_exports,
+        output_dir=OUTPUT_DIR
+    )
+    
     # === SPECIFIC INDICATOR TABLES ===   
     # =================================
     # si_vol: Applications by service

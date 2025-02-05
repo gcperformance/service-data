@@ -6,6 +6,8 @@ This Python script ingests and processes service-related data into ready-to-use 
 
 In 2024, data collection processes changed to allow departments to publish their datasets directly to Open Government. This introduced minor differences in format and content between the 2018–2023 historical dataset and the 2024+ dataset. To create a comprehensive dataset spanning all years, this script merges historical and current service inventory and service standard datasets.
 
+These data are collected as a requirement under the [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603).
+
 ### Datasets Consulted
 
 **[GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c):**  
@@ -25,8 +27,9 @@ A tidy list of organization names with unique numeric IDs, forming the basis for
 - French: [Répertoire des organisations et intérêts fédéraux](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85)
 
 ---
-
 ### Conventions
+The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) requirement to publish service inventory information only applies to external and internal enterprise services. For this reason, any service with a `service_scope` that does not include `EXTERN` or `ENTERPRISE` is removed from indicator table calculations. However, note that the consolidated datasets (`si.csv` and `ss.csv`) will contain all scopes.
+
 When a 4-digit year represents a fiscal year, it refers to the calendar year **ending** in that fiscal year.
 
 All csv text files produced by the script are **semi-colon separated** (`;`)
@@ -42,15 +45,17 @@ All csv text files produced by the script are **semi-colon separated** (`;`)
 Data used by script to produce processed files.
 
 #### `outputs/`: Produced by the Script
-- `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset.
-- `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset.
+- `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. Only services in scope included.
+- `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. Only services in scope included.
 
 ##### `outputs/indicators/`: Summary Files for Visualization and Review
+`service_scope` must contain `EXTERN` or `ENTERPRISE`
 - `maf1.csv`: percentage of services that have service standards by department
 - `maf2.csv`: percentage of service standards that met their target by department
 - `maf5.csv`: percentage of applicable services that can be completed online end-to-end by department
 - `maf6.csv`: percentage of client interaction points that are available online for services
 - `maf8.csv`: percentage of services which have used client feedback to improve services in the year prior to reporting
+- `maf_all.csv`: a concatenated table with all the maf columns and scores
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
@@ -72,6 +77,8 @@ Data used by script to produce processed files.
 - `ifoi_fr.csv`: Exhaustive list of departmental info in french
 - `org_var.csv`: List of variant department names and their IFOI ID.
 - `sid_list.csv`: Unique list of service IDs with latest reporting year and department.
+- `si_all.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
+- `ss_all.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 
 #### `src/`: Source Code for Script
 - `clean.py`: functions to clean and set up data

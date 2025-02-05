@@ -8,6 +8,7 @@ from src.export import export_to_csv
 from src.utils import dept_list, sid_list
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
+UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
 
 def merge_si():
@@ -153,9 +154,15 @@ def merge_si():
     si['last_service_review'] = si['last_service_review'].replace({np.nan: None, 'N':None})
     si['last_service_improvement'] = si['last_service_improvement'].replace({np.nan: None, 'N':None})
 
+    # Boolean field to identify which services are in scope for typical reporting
+    si['service_scope_ext_or_ent'] = (
+        (si['service_scope'].str.contains('EXTERN', regex=True)) | 
+        (si['service_scope'].str.contains('ENTERPRISE', regex=True))
+    )
+    
     export_to_csv(
-    data_dict={'si': si},
-    output_dir=OUTPUT_DIR
+    data_dict={'si_all': si},
+    output_dir=UTILS_DIR
     )
 
     sid_list(si)
@@ -262,8 +269,8 @@ def merge_ss():
     ss['channel'] = ss['channel'].str.upper()
 
     export_to_csv(
-        data_dict={'ss': ss},
-        output_dir=OUTPUT_DIR
+        data_dict={'ss_all': ss},
+        output_dir=UTILS_DIR
     )
 
     return ss
