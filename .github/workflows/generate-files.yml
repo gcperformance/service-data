@@ -46,7 +46,9 @@ jobs:
                 - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
                 - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
             Contains SQLite database with all processed data
-          files: outputs/service_data.db
+          files: |
+            outputs/service_data.db
+            outputs/**/*.csv
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
