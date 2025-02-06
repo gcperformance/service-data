@@ -190,7 +190,7 @@ def process_files(si, ss):
         maf2_denom,
         suffixes=['_met','_total'],
         on=['fiscal_yr', 'department_en','department_fr', 'org_id'],
-        how='left'
+        how='outer'
     )
     
     maf2['maf2_score'] = (maf2['service_standard_id_met']/maf2['service_standard_id_total'])*100
