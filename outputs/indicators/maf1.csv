@@ -1,461 +1,461 @@
-fiscal_yr;department_en;department_fr;org_id;service_count;service_with_std_count;maf1_score
-2018-2019;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;2;50.0
-2018-2019;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;30;30;100.0
-2018-2019;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
-2018-2019;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
-2018-2019;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;3;3;100.0
-2018-2019;Canada Energy Regulator;Régie de l'énergie du Canada;221;12;12;100.0
-2018-2019;Canada Revenue Agency;Agence du revenu du Canada;46;24;21;87.5
-2018-2019;Canada School of Public Service;École de la fonction publique du Canada;47;3;2;66.66666666666666
-2018-2019;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;6;6;100.0
-2018-2019;Canadian Grain Commission;Commission canadienne des grains;69;1;0;0.0
-2018-2019;Canadian Heritage;Patrimoine canadien;122;25;23;92.0
-2018-2019;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;3;1;33.33333333333333
-2018-2019;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;7;1;14.285714285714285
+fiscal_yr;department_en;department_fr;org_id;service_with_std_count;service_count_maf1;maf1_score
+2018-2019;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;2;4;50.0
+2018-2019;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;123;123;100.0
+2018-2019;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;7;9;77.77777777777779
+2018-2019;Canada Border Services Agency;Agence des services frontaliers du Canada;26;43;58;74.13793103448276
+2018-2019;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;7;8;87.5
+2018-2019;Canada Energy Regulator;Régie de l'énergie du Canada;221;17;17;100.0
+2018-2019;Canada Revenue Agency;Agence du revenu du Canada;46;16;30;53.333333333333336
+2018-2019;Canada School of Public Service;École de la fonction publique du Canada;47;5;6;83.33333333333334
+2018-2019;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;8;8;100.0
+2018-2019;Canadian Grain Commission;Commission canadienne des grains;69;0;1;0.0
+2018-2019;Canadian Heritage;Patrimoine canadien;122;48;50;96.0
+2018-2019;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;0;3;0.0
+2018-2019;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;3;9;33.33333333333333
 2018-2019;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2018-2019;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;3;2;66.66666666666666
-2018-2019;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;7;7;100.0
-2018-2019;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;4;4;100.0
-2018-2019;Canadian Space Agency;Agence spatiale canadienne;95;11;11;100.0
-2018-2019;Canadian Transportation Agency;Office des transports du Canada;99;5;3;60.0
-2018-2019;Copyright Board Canada;Commission du droit d'auteur Canada;114;3;3;100.0
-2018-2019;Correctional Service Canada;Service correctionnel Canada;117;3;3;100.0
+2018-2019;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;5;80.0
+2018-2019;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;11;11;100.0
+2018-2019;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;13;13;100.0
+2018-2019;Canadian Space Agency;Agence spatiale canadienne;95;14;15;93.33333333333333
+2018-2019;Canadian Transportation Agency;Office des transports du Canada;99;5;7;71.42857142857143
+2018-2019;Copyright Board Canada;Commission du droit d'auteur Canada;114;2;3;66.66666666666666
+2018-2019;Correctional Service Canada;Service correctionnel Canada;117;13;13;100.0
 2018-2019;Courts Administration Service;Service administratif des tribunaux judiciaires;118;1;1;100.0
-2018-2019;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;63;33;52.38095238095239
+2018-2019;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;23;65;35.38461538461539
 2018-2019;Department of Finance Canada;Ministère des Finances Canada;124;1;1;100.0
-2018-2019;Department of Indigenous Services;Ministère des Services aux Autochtones;348;65;8;12.307692307692308
-2018-2019;Department of Justice Canada;Ministère de la Justice Canada;132;6;6;100.0
-2018-2019;Employment and Social Development Canada;Emploi et Développement social Canada;128;36;36;100.0
-2018-2019;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;33;28;84.84848484848484
-2018-2019;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;4;0;0.0
-2018-2019;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;3;2;66.66666666666666
-2018-2019;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;7;5;71.42857142857143
-2018-2019;Fisheries and Oceans Canada;Pêches et Océans Canada;125;55;54;98.18181818181819
-2018-2019;Global Affairs Canada;Affaires mondiales Canada;126;36;17;47.22222222222222
-2018-2019;Health Canada;Santé Canada;127;84;56;66.66666666666666
-2018-2019;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;19;12;63.1578947368421
-2018-2019;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;6;6;100.0
-2018-2019;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;74;25;33.78378378378378
-2018-2019;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;8;5;62.5
-2018-2019;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;44;41;93.18181818181817
-2018-2019;Invest in Canada Hub;Investir au Canada;347;5;0;0.0
-2018-2019;Library and Archives Canada;Bibliothèque et Archives Canada;199;8;6;75.0
-2018-2019;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;2;1;50.0
-2018-2019;National Defence;Défense nationale;133;11;6;54.54545454545454
-2018-2019;National Film Board;Office national du film;223;3;3;100.0
-2018-2019;National Research Council Canada;Conseil national de recherches Canada;228;15;15;100.0
-2018-2019;Natural Resources Canada;Ressources naturelles Canada;134;33;27;81.81818181818183
-2018-2019;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
-2018-2019;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;6;0;0.0
-2018-2019;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;7;7;100.0
-2018-2019;Parks Canada;Parcs Canada;263;14;7;50.0
-2018-2019;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;11;6;54.54545454545454
-2018-2019;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;2;1;50.0
-2018-2019;Polar Knowledge Canada;Savoir polaire Canada;552;3;3;100.0
-2018-2019;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;4;3;75.0
-2018-2019;Privy Council Office;Bureau du Conseil privé;278;11;0;0.0
-2018-2019;Public Health Agency of Canada;Agence de la santé publique du Canada;280;13;12;92.3076923076923
-2018-2019;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;1;0;0.0
-2018-2019;Public Safety Canada;Sécurité publique Canada;135;53;39;73.58490566037736
-2018-2019;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;25;21;84.0
-2018-2019;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;43;32;74.4186046511628
+2018-2019;Department of Indigenous Services;Ministère des Services aux Autochtones;348;5;67;7.462686567164178
+2018-2019;Department of Justice Canada;Ministère de la Justice Canada;132;16;16;100.0
+2018-2019;Employment and Social Development Canada;Emploi et Développement social Canada;128;77;77;100.0
+2018-2019;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;88;95;92.63157894736842
+2018-2019;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;4;0.0
+2018-2019;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;3;66.66666666666666
+2018-2019;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;8;10;80.0
+2018-2019;Fisheries and Oceans Canada;Pêches et Océans Canada;125;92;94;97.87234042553192
+2018-2019;Global Affairs Canada;Affaires mondiales Canada;126;4;36;11.11111111111111
+2018-2019;Health Canada;Santé Canada;127;70;107;65.42056074766354
+2018-2019;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;26;36;72.22222222222221
+2018-2019;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;1;6;16.666666666666664
+2018-2019;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;41;90;45.55555555555556
+2018-2019;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;6;9;66.66666666666666
+2018-2019;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;121;128;94.53125
+2018-2019;Invest in Canada Hub;Investir au Canada;347;0;5;0.0
+2018-2019;Library and Archives Canada;Bibliothèque et Archives Canada;199;6;8;75.0
+2018-2019;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;0;2;0.0
+2018-2019;National Defence;Défense nationale;133;0;11;0.0
+2018-2019;National Film Board;Office national du film;223;6;6;100.0
+2018-2019;National Research Council Canada;Conseil national de recherches Canada;228;24;27;88.88888888888889
+2018-2019;Natural Resources Canada;Ressources naturelles Canada;134;3;33;9.090909090909092
+2018-2019;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;11;11;100.0
+2018-2019;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;6;0.0
+2018-2019;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;12;12;100.0
+2018-2019;Parks Canada;Parcs Canada;263;6;16;37.5
+2018-2019;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;4;11;36.36363636363637
+2018-2019;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;1;2;50.0
+2018-2019;Polar Knowledge Canada;Savoir polaire Canada;552;9;9;100.0
+2018-2019;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;6;7;85.71428571428571
+2018-2019;Privy Council Office;Bureau du Conseil privé;278;0;11;0.0
+2018-2019;Public Health Agency of Canada;Agence de la santé publique du Canada;280;18;19;94.73684210526315
+2018-2019;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;1;0.0
+2018-2019;Public Safety Canada;Sécurité publique Canada;135;94;113;83.1858407079646
+2018-2019;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;13;25;52.0
+2018-2019;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;69;83;83.13253012048193
 2018-2019;RCMP External Review Committee;Comité externe d'examen de la GRC;296;1;1;100.0
-2018-2019;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;15;13;86.66666666666667
-2018-2019;Shared Services Canada;Services partagés Canada;305;26;17;65.38461538461539
-2018-2019;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;7;7;100.0
-2018-2019;Statistics Canada;Statistique Canada;313;23;23;100.0
-2018-2019;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
-2018-2019;The National Battlefields Commission;Commission des champs de bataille nationaux;218;7;7;100.0
-2018-2019;Transport Canada;Transports Canada;138;96;62;64.58333333333334
-2018-2019;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;3;0;0.0
-2018-2019;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;7;6;85.71428571428571
-2018-2019;Veterans Affairs Canada;Anciens Combattants Canada;139;30;18;60.0
+2018-2019;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;18;20;90.0
+2018-2019;Shared Services Canada;Services partagés Canada;305;21;30;70.0
+2018-2019;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;14;14;100.0
+2018-2019;Statistics Canada;Statistique Canada;313;91;91;100.0
+2018-2019;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;5;5;100.0
+2018-2019;The National Battlefields Commission;Commission des champs de bataille nationaux;218;5;7;71.42857142857143
+2018-2019;Transport Canada;Transports Canada;138;254;290;87.58620689655172
+2018-2019;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;0;3;0.0
+2018-2019;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;5;10;50.0
+2018-2019;Veterans Affairs Canada;Anciens Combattants Canada;139;22;36;61.111111111111114
 2018-2019;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;2;2;100.0
-2019-2020;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;5;2;40.0
-2019-2020;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;35;35;100.0
-2019-2020;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
-2019-2020;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
-2019-2020;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;3;3;100.0
-2019-2020;Canada Energy Regulator;Régie de l'énergie du Canada;221;16;16;100.0
-2019-2020;Canada Revenue Agency;Agence du revenu du Canada;46;24;21;87.5
-2019-2020;Canada School of Public Service;École de la fonction publique du Canada;47;3;2;66.66666666666666
-2019-2020;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;9;9;100.0
-2019-2020;Canadian Grain Commission;Commission canadienne des grains;69;14;11;78.57142857142857
-2019-2020;Canadian Heritage;Patrimoine canadien;122;27;23;85.18518518518519
-2019-2020;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;3;1;33.33333333333333
-2019-2020;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;6;2;33.33333333333333
-2019-2020;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2019-2020;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;3;2;66.66666666666666
-2019-2020;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;7;7;100.0
-2019-2020;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;4;4;100.0
-2019-2020;Canadian Space Agency;Agence spatiale canadienne;95;11;11;100.0
-2019-2020;Canadian Transportation Agency;Office des transports du Canada;99;6;4;66.66666666666666
-2019-2020;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;2;66.66666666666666
-2019-2020;Copyright Board Canada;Commission du droit d'auteur Canada;114;3;3;100.0
-2019-2020;Correctional Service Canada;Service correctionnel Canada;117;3;3;100.0
+2019-2020;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;2;5;40.0
+2019-2020;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;146;146;100.0
+2019-2020;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;7;9;77.77777777777779
+2019-2020;Canada Border Services Agency;Agence des services frontaliers du Canada;26;45;60;75.0
+2019-2020;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;9;9;100.0
+2019-2020;Canada Energy Regulator;Régie de l'énergie du Canada;221;24;24;100.0
+2019-2020;Canada Revenue Agency;Agence du revenu du Canada;46;18;29;62.06896551724138
+2019-2020;Canada School of Public Service;École de la fonction publique du Canada;47;4;5;80.0
+2019-2020;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;15;15;100.0
+2019-2020;Canadian Grain Commission;Commission canadienne des grains;69;11;14;78.57142857142857
+2019-2020;Canadian Heritage;Patrimoine canadien;122;50;54;92.5925925925926
+2019-2020;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;1;3;33.33333333333333
+2019-2020;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;6;10;60.0
+2019-2020;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;3;3;100.0
+2019-2020;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;5;80.0
+2019-2020;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;11;11;100.0
+2019-2020;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;13;13;100.0
+2019-2020;Canadian Space Agency;Agence spatiale canadienne;95;19;19;100.0
+2019-2020;Canadian Transportation Agency;Office des transports du Canada;99;6;8;75.0
+2019-2020;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;0;3;0.0
+2019-2020;Copyright Board Canada;Commission du droit d'auteur Canada;114;2;3;66.66666666666666
+2019-2020;Correctional Service Canada;Service correctionnel Canada;117;15;15;100.0
 2019-2020;Courts Administration Service;Service administratif des tribunaux judiciaires;118;1;1;100.0
-2019-2020;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;32;25;78.125
-2019-2020;Department of Finance Canada;Ministère des Finances Canada;124;3;1;33.33333333333333
-2019-2020;Department of Indigenous Services;Ministère des Services aux Autochtones;348;88;15;17.045454545454543
-2019-2020;Department of Justice Canada;Ministère de la Justice Canada;132;7;6;85.71428571428571
-2019-2020;Employment and Social Development Canada;Emploi et Développement social Canada;128;29;29;100.0
-2019-2020;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;43;36;83.72093023255815
-2019-2020;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;4;0;0.0
-2019-2020;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;1;50.0
-2019-2020;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;3;2;66.66666666666666
-2019-2020;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;7;5;71.42857142857143
-2019-2020;Fisheries and Oceans Canada;Pêches et Océans Canada;125;64;63;98.4375
-2019-2020;Global Affairs Canada;Affaires mondiales Canada;126;35;17;48.57142857142857
-2019-2020;Health Canada;Santé Canada;127;82;54;65.85365853658537
-2019-2020;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;12;12;100.0
-2019-2020;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;6;6;100.0
-2019-2020;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;72;25;34.72222222222222
-2019-2020;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;12;8;66.66666666666666
-2019-2020;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;47;44;93.61702127659575
-2019-2020;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2019-2020;Library and Archives Canada;Bibliothèque et Archives Canada;199;9;6;66.66666666666666
-2019-2020;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;2;1;50.0
-2019-2020;National Defence;Défense nationale;133;10;6;60.0
-2019-2020;National Film Board;Office national du film;223;3;3;100.0
-2019-2020;National Research Council Canada;Conseil national de recherches Canada;228;15;15;100.0
-2019-2020;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;2;0;0.0
-2019-2020;Natural Resources Canada;Ressources naturelles Canada;134;33;27;81.81818181818183
-2019-2020;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
-2019-2020;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;6;0;0.0
-2019-2020;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;8;7;87.5
-2019-2020;Parks Canada;Parcs Canada;263;12;7;58.333333333333336
-2019-2020;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;11;6;54.54545454545454
-2019-2020;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;2;1;50.0
-2019-2020;Polar Knowledge Canada;Savoir polaire Canada;552;2;2;100.0
-2019-2020;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;4;3;75.0
-2019-2020;Privy Council Office;Bureau du Conseil privé;278;6;0;0.0
-2019-2020;Public Health Agency of Canada;Agence de la santé publique du Canada;280;13;12;92.3076923076923
-2019-2020;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;1;0;0.0
-2019-2020;Public Safety Canada;Sécurité publique Canada;135;54;39;72.22222222222221
-2019-2020;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;25;21;84.0
-2019-2020;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;46;34;73.91304347826086
+2019-2020;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;10;32;31.25
+2019-2020;Department of Finance Canada;Ministère des Finances Canada;124;1;3;33.33333333333333
+2019-2020;Department of Indigenous Services;Ministère des Services aux Autochtones;348;14;92;15.217391304347828
+2019-2020;Department of Justice Canada;Ministère de la Justice Canada;132;16;17;94.11764705882352
+2019-2020;Employment and Social Development Canada;Emploi et Développement social Canada;128;66;67;98.50746268656717
+2019-2020;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;113;121;93.38842975206612
+2019-2020;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;4;0.0
+2019-2020;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;4;5;80.0
+2019-2020;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;3;4;75.0
+2019-2020;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;8;10;80.0
+2019-2020;Fisheries and Oceans Canada;Pêches et Océans Canada;125;119;120;99.16666666666667
+2019-2020;Global Affairs Canada;Affaires mondiales Canada;126;4;35;11.428571428571429
+2019-2020;Health Canada;Santé Canada;127;68;102;66.66666666666666
+2019-2020;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;31;31;100.0
+2019-2020;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;1;6;16.666666666666664
+2019-2020;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;47;95;49.473684210526315
+2019-2020;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;9;13;69.23076923076923
+2019-2020;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;151;157;96.17834394904459
+2019-2020;Invest in Canada Hub;Investir au Canada;347;0;3;0.0
+2019-2020;Library and Archives Canada;Bibliothèque et Archives Canada;199;2;9;22.22222222222222
+2019-2020;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;0;2;0.0
+2019-2020;National Defence;Défense nationale;133;17;22;77.27272727272727
+2019-2020;National Film Board;Office national du film;223;6;6;100.0
+2019-2020;National Research Council Canada;Conseil national de recherches Canada;228;21;24;87.5
+2019-2020;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;0;2;0.0
+2019-2020;Natural Resources Canada;Ressources naturelles Canada;134;4;33;12.121212121212121
+2019-2020;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;11;11;100.0
+2019-2020;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;6;0.0
+2019-2020;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;12;13;92.3076923076923
+2019-2020;Parks Canada;Parcs Canada;263;5;14;35.714285714285715
+2019-2020;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;10;15;66.66666666666666
+2019-2020;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;3;4;75.0
+2019-2020;Polar Knowledge Canada;Savoir polaire Canada;552;4;4;100.0
+2019-2020;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;6;7;85.71428571428571
+2019-2020;Privy Council Office;Bureau du Conseil privé;278;0;6;0.0
+2019-2020;Public Health Agency of Canada;Agence de la santé publique du Canada;280;18;19;94.73684210526315
+2019-2020;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;1;0.0
+2019-2020;Public Safety Canada;Sécurité publique Canada;135;94;114;82.45614035087719
+2019-2020;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;15;25;60.0
+2019-2020;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;64;80;80.0
 2019-2020;RCMP External Review Committee;Comité externe d'examen de la GRC;296;1;1;100.0
-2019-2020;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;18;13;72.22222222222221
-2019-2020;Shared Services Canada;Services partagés Canada;305;12;10;83.33333333333334
-2019-2020;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;7;7;100.0
-2019-2020;Statistics Canada;Statistique Canada;313;23;23;100.0
-2019-2020;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
-2019-2020;The National Battlefields Commission;Commission des champs de bataille nationaux;218;7;7;100.0
-2019-2020;Transport Canada;Transports Canada;138;102;68;66.66666666666666
-2019-2020;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;5;0;0.0
-2019-2020;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;15;13;86.66666666666667
-2019-2020;Veterans Affairs Canada;Anciens Combattants Canada;139;28;19;67.85714285714286
+2019-2020;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;21;26;80.76923076923077
+2019-2020;Shared Services Canada;Services partagés Canada;305;20;22;90.9090909090909
+2019-2020;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;14;14;100.0
+2019-2020;Statistics Canada;Statistique Canada;313;98;98;100.0
+2019-2020;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;5;5;100.0
+2019-2020;The National Battlefields Commission;Commission des champs de bataille nationaux;218;4;7;57.14285714285714
+2019-2020;Transport Canada;Transports Canada;138;275;311;88.42443729903538
+2019-2020;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;0;5;0.0
+2019-2020;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;12;20;60.0
+2019-2020;Veterans Affairs Canada;Anciens Combattants Canada;139;22;33;66.66666666666666
 2019-2020;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;2;2;100.0
-2019-2020;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2020-2021;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;4;2;50.0
-2020-2021;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;39;39;100.0
-2020-2021;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
-2020-2021;Canada Border Services Agency;Agence des services frontaliers du Canada;26;42;27;64.28571428571429
-2020-2021;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;2;2;100.0
-2020-2021;Canada Energy Regulator;Régie de l'énergie du Canada;221;16;16;100.0
-2020-2021;Canada Revenue Agency;Agence du revenu du Canada;46;33;22;66.66666666666666
-2020-2021;Canada School of Public Service;École de la fonction publique du Canada;47;3;2;66.66666666666666
-2020-2021;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;8;8;100.0
-2020-2021;Canadian Grain Commission;Commission canadienne des grains;69;14;11;78.57142857142857
-2020-2021;Canadian Heritage;Patrimoine canadien;122;29;25;86.20689655172413
-2020-2021;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;3;1;33.33333333333333
-2020-2021;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;6;2;33.33333333333333
-2020-2021;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2020-2021;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;3;75.0
-2020-2021;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;9;7;77.77777777777779
-2020-2021;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;4;4;100.0
-2020-2021;Canadian Space Agency;Agence spatiale canadienne;95;10;10;100.0
-2020-2021;Canadian Transportation Agency;Office des transports du Canada;99;5;3;60.0
-2020-2021;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;2;66.66666666666666
+2019-2020;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;6;6;100.0
+2020-2021;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;0;4;0.0
+2020-2021;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;162;162;100.0
+2020-2021;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;7;9;77.77777777777779
+2020-2021;Canada Border Services Agency;Agence des services frontaliers du Canada;26;45;60;75.0
+2020-2021;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;8;8;100.0
+2020-2021;Canada Energy Regulator;Régie de l'énergie du Canada;221;24;24;100.0
+2020-2021;Canada Revenue Agency;Agence du revenu du Canada;46;20;38;52.63157894736842
+2020-2021;Canada School of Public Service;École de la fonction publique du Canada;47;4;5;80.0
+2020-2021;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;15;15;100.0
+2020-2021;Canadian Grain Commission;Commission canadienne des grains;69;9;14;64.28571428571429
+2020-2021;Canadian Heritage;Patrimoine canadien;122;56;62;90.32258064516128
+2020-2021;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;1;3;33.33333333333333
+2020-2021;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;6;10;60.0
+2020-2021;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;3;3;100.0
+2020-2021;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;5;6;83.33333333333334
+2020-2021;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;11;13;84.61538461538461
+2020-2021;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;8;8;100.0
+2020-2021;Canadian Space Agency;Agence spatiale canadienne;95;16;16;100.0
+2020-2021;Canadian Transportation Agency;Office des transports du Canada;99;5;7;71.42857142857143
+2020-2021;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;4;75.0
 2020-2021;Copyright Board Canada;Commission du droit d'auteur Canada;114;3;3;100.0
-2020-2021;Correctional Service Canada;Service correctionnel Canada;117;3;3;100.0
+2020-2021;Correctional Service Canada;Service correctionnel Canada;117;15;15;100.0
 2020-2021;Courts Administration Service;Service administratif des tribunaux judiciaires;118;1;1;100.0
-2020-2021;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;44;36;81.81818181818183
-2020-2021;Department of Finance Canada;Ministère des Finances Canada;124;3;1;33.33333333333333
-2020-2021;Department of Indigenous Services;Ministère des Services aux Autochtones;348;85;14;16.470588235294116
-2020-2021;Department of Justice Canada;Ministère de la Justice Canada;132;13;12;92.3076923076923
-2020-2021;Employment and Social Development Canada;Emploi et Développement social Canada;128;31;29;93.54838709677419
-2020-2021;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;42;35;83.33333333333334
-2020-2021;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;4;0;0.0
-2020-2021;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;1;50.0
-2020-2021;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;1;50.0
-2020-2021;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;7;5;71.42857142857143
-2020-2021;Fisheries and Oceans Canada;Pêches et Océans Canada;125;71;65;91.54929577464789
-2020-2021;Global Affairs Canada;Affaires mondiales Canada;126;30;21;70.0
-2020-2021;Health Canada;Santé Canada;127;88;59;67.04545454545455
-2020-2021;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;3;3;100.0
-2020-2021;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;6;6;100.0
-2020-2021;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;73;26;35.61643835616438
-2020-2021;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;9;7;77.77777777777779
-2020-2021;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;72;59;81.94444444444444
-2020-2021;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2020-2021;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
-2020-2021;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
-2020-2021;National Defence;Défense nationale;133;10;6;60.0
-2020-2021;National Film Board;Office national du film;223;5;5;100.0
-2020-2021;National Research Council Canada;Conseil national de recherches Canada;228;16;16;100.0
-2020-2021;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;2;0;0.0
-2020-2021;Natural Resources Canada;Ressources naturelles Canada;134;70;62;88.57142857142857
-2020-2021;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
-2020-2021;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;6;0;0.0
-2020-2021;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;8;7;87.5
-2020-2021;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;11;8;72.72727272727273
-2020-2021;Parks Canada;Parcs Canada;263;12;7;58.333333333333336
-2020-2021;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;11;6;54.54545454545454
-2020-2021;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;2;1;50.0
-2020-2021;Polar Knowledge Canada;Savoir polaire Canada;552;2;2;100.0
-2020-2021;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;3;2;66.66666666666666
-2020-2021;Privy Council Office;Bureau du Conseil privé;278;10;1;10.0
-2020-2021;Public Health Agency of Canada;Agence de la santé publique du Canada;280;20;19;95.0
-2020-2021;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;3;0;0.0
-2020-2021;Public Safety Canada;Sécurité publique Canada;135;57;41;71.9298245614035
-2020-2021;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;20;16;80.0
-2020-2021;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;48;35;72.91666666666666
+2020-2021;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;25;44;56.81818181818182
+2020-2021;Department of Finance Canada;Ministère des Finances Canada;124;1;3;33.33333333333333
+2020-2021;Department of Indigenous Services;Ministère des Services aux Autochtones;348;16;89;17.97752808988764
+2020-2021;Department of Justice Canada;Ministère de la Justice Canada;132;25;26;96.15384615384616
+2020-2021;Employment and Social Development Canada;Emploi et Développement social Canada;128;73;78;93.58974358974359
+2020-2021;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;98;107;91.58878504672897
+2020-2021;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;4;0.0
+2020-2021;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;4;5;80.0
+2020-2021;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;3;66.66666666666666
+2020-2021;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;6;8;75.0
+2020-2021;Fisheries and Oceans Canada;Pêches et Océans Canada;125;123;129;95.34883720930233
+2020-2021;Global Affairs Canada;Affaires mondiales Canada;126;17;37;45.94594594594595
+2020-2021;Health Canada;Santé Canada;127;71;107;66.35514018691589
+2020-2021;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;6;6;100.0
+2020-2021;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;7;7;100.0
+2020-2021;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;52;100;52.0
+2020-2021;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;19;21;90.47619047619048
+2020-2021;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;459;489;93.86503067484662
+2020-2021;Invest in Canada Hub;Investir au Canada;347;0;3;0.0
+2020-2021;Library and Archives Canada;Bibliothèque et Archives Canada;199;4;20;20.0
+2020-2021;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;14;14;100.0
+2020-2021;National Defence;Défense nationale;133;15;19;78.94736842105263
+2020-2021;National Film Board;Office national du film;223;10;10;100.0
+2020-2021;National Research Council Canada;Conseil national de recherches Canada;228;30;30;100.0
+2020-2021;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;0;2;0.0
+2020-2021;Natural Resources Canada;Ressources naturelles Canada;134;81;111;72.97297297297297
+2020-2021;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;11;11;100.0
+2020-2021;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;6;0.0
+2020-2021;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;12;13;92.3076923076923
+2020-2021;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;8;11;72.72727272727273
+2020-2021;Parks Canada;Parcs Canada;263;7;15;46.666666666666664
+2020-2021;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;6;14;42.857142857142854
+2020-2021;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;3;4;75.0
+2020-2021;Polar Knowledge Canada;Savoir polaire Canada;552;4;4;100.0
+2020-2021;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;5;6;83.33333333333334
+2020-2021;Privy Council Office;Bureau du Conseil privé;278;0;10;0.0
+2020-2021;Public Health Agency of Canada;Agence de la santé publique du Canada;280;26;27;96.29629629629629
+2020-2021;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;3;0.0
+2020-2021;Public Safety Canada;Sécurité publique Canada;135;90;116;77.58620689655173
+2020-2021;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;7;21;33.33333333333333
+2020-2021;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;69;87;79.3103448275862
 2020-2021;RCMP External Review Committee;Comité externe d'examen de la GRC;296;1;1;100.0
-2020-2021;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;27;16;59.25925925925925
-2020-2021;Shared Services Canada;Services partagés Canada;305;12;10;83.33333333333334
-2020-2021;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;6;6;100.0
-2020-2021;Statistics Canada;Statistique Canada;313;23;23;100.0
-2020-2021;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
-2020-2021;The National Battlefields Commission;Commission des champs de bataille nationaux;218;7;7;100.0
-2020-2021;Transport Canada;Transports Canada;138;107;73;68.22429906542055
-2020-2021;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;4;0;0.0
-2020-2021;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;24;21;87.5
-2020-2021;Veterans Affairs Canada;Anciens Combattants Canada;139;29;20;68.96551724137932
+2020-2021;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;24;37;64.86486486486487
+2020-2021;Shared Services Canada;Services partagés Canada;305;19;21;90.47619047619048
+2020-2021;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;13;13;100.0
+2020-2021;Statistics Canada;Statistique Canada;313;98;98;100.0
+2020-2021;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;5;5;100.0
+2020-2021;The National Battlefields Commission;Commission des champs de bataille nationaux;218;4;7;57.14285714285714
+2020-2021;Transport Canada;Transports Canada;138;278;314;88.53503184713377
+2020-2021;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;0;4;0.0
+2020-2021;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;29;32;90.625
+2020-2021;Veterans Affairs Canada;Anciens Combattants Canada;139;21;33;63.63636363636363
 2020-2021;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;1;1;100.0
-2020-2021;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2021-2022;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;3;2;66.66666666666666
-2021-2022;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;41;41;100.0
-2021-2022;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
-2021-2022;Canada Border Services Agency;Agence des services frontaliers du Canada;26;35;26;74.28571428571429
-2021-2022;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;2;2;100.0
-2021-2022;Canada Energy Regulator;Régie de l'énergie du Canada;221;14;14;100.0
-2021-2022;Canada Revenue Agency;Agence du revenu du Canada;46;40;27;67.5
-2021-2022;Canada School of Public Service;École de la fonction publique du Canada;47;1;1;100.0
-2021-2022;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;1;0;0.0
-2021-2022;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;114;32;28.07017543859649
-2021-2022;Canadian Grain Commission;Commission canadienne des grains;69;13;10;76.92307692307693
-2021-2022;Canadian Heritage;Patrimoine canadien;122;28;24;85.71428571428571
-2021-2022;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;3;1;33.33333333333333
-2021-2022;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;6;2;33.33333333333333
-2021-2022;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2021-2022;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;3;75.0
-2021-2022;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;9;7;77.77777777777779
-2021-2022;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;4;4;100.0
-2021-2022;Canadian Space Agency;Agence spatiale canadienne;95;16;14;87.5
-2021-2022;Canadian Transportation Agency;Office des transports du Canada;99;5;3;60.0
+2020-2021;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;6;6;100.0
+2021-2022;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;0;3;0.0
+2021-2022;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;172;172;100.0
+2021-2022;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;7;9;77.77777777777779
+2021-2022;Canada Border Services Agency;Agence des services frontaliers du Canada;26;43;52;82.6923076923077
+2021-2022;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;8;8;100.0
+2021-2022;Canada Energy Regulator;Régie de l'énergie du Canada;221;22;22;100.0
+2021-2022;Canada Revenue Agency;Agence du revenu du Canada;46;30;43;69.76744186046511
+2021-2022;Canada School of Public Service;École de la fonction publique du Canada;47;2;2;100.0
+2021-2022;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;0;1;0.0
+2021-2022;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;29;121;23.96694214876033
+2021-2022;Canadian Grain Commission;Commission canadienne des grains;69;9;13;69.23076923076923
+2021-2022;Canadian Heritage;Patrimoine canadien;122;55;59;93.22033898305084
+2021-2022;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;1;3;33.33333333333333
+2021-2022;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;10;14;71.42857142857143
+2021-2022;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;3;3;100.0
+2021-2022;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;5;6;83.33333333333334
+2021-2022;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;10;12;83.33333333333334
+2021-2022;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;8;8;100.0
+2021-2022;Canadian Space Agency;Agence spatiale canadienne;95;21;23;91.30434782608695
+2021-2022;Canadian Transportation Agency;Office des transports du Canada;99;5;7;71.42857142857143
 2021-2022;Copyright Board Canada;Commission du droit d'auteur Canada;114;3;3;100.0
-2021-2022;Correctional Service Canada;Service correctionnel Canada;117;5;2;40.0
+2021-2022;Correctional Service Canada;Service correctionnel Canada;117;12;15;80.0
 2021-2022;Courts Administration Service;Service administratif des tribunaux judiciaires;118;1;1;100.0
-2021-2022;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;39;35;89.74358974358975
-2021-2022;Department of Finance Canada;Ministère des Finances Canada;124;6;1;16.666666666666664
-2021-2022;Department of Indigenous Services;Ministère des Services aux Autochtones;348;87;14;16.091954022988507
-2021-2022;Department of Justice Canada;Ministère de la Justice Canada;132;16;15;93.75
-2021-2022;Employment and Social Development Canada;Emploi et Développement social Canada;128;30;28;93.33333333333333
-2021-2022;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;48;38;79.16666666666666
-2021-2022;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;2;0;0.0
-2021-2022;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;1;50.0
-2021-2022;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;1;50.0
-2021-2022;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;6;4;66.66666666666666
-2021-2022;Fisheries and Oceans Canada;Pêches et Océans Canada;125;73;67;91.78082191780823
-2021-2022;Global Affairs Canada;Affaires mondiales Canada;126;49;34;69.38775510204081
-2021-2022;Health Canada;Santé Canada;127;88;49;55.68181818181818
-2021-2022;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;3;3;100.0
+2021-2022;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;39;43;90.69767441860465
+2021-2022;Department of Finance Canada;Ministère des Finances Canada;124;1;6;16.666666666666664
+2021-2022;Department of Indigenous Services;Ministère des Services aux Autochtones;348;21;94;22.340425531914892
+2021-2022;Department of Justice Canada;Ministère de la Justice Canada;132;28;29;96.55172413793103
+2021-2022;Employment and Social Development Canada;Emploi et Développement social Canada;128;74;77;96.1038961038961
+2021-2022;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;101;114;88.59649122807018
+2021-2022;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;2;0.0
+2021-2022;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;3;4;75.0
+2021-2022;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;3;66.66666666666666
+2021-2022;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;3;6;50.0
+2021-2022;Fisheries and Oceans Canada;Pêches et Océans Canada;125;115;130;88.46153846153845
+2021-2022;Global Affairs Canada;Affaires mondiales Canada;126;30;54;55.55555555555556
+2021-2022;Health Canada;Santé Canada;127;58;105;55.23809523809524
+2021-2022;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;5;5;100.0
 2021-2022;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;6;6;100.0
-2021-2022;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;73;26;35.61643835616438
-2021-2022;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;10;8;80.0
-2021-2022;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;75;61;81.33333333333333
-2021-2022;Invest in Canada Hub;Investir au Canada;347;3;0;0.0
-2021-2022;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
-2021-2022;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
-2021-2022;National Defence;Défense nationale;133;10;4;40.0
-2021-2022;National Film Board;Office national du film;223;5;5;100.0
-2021-2022;National Research Council Canada;Conseil national de recherches Canada;228;16;16;100.0
-2021-2022;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;2;0;0.0
-2021-2022;Natural Resources Canada;Ressources naturelles Canada;134;82;75;91.46341463414635
-2021-2022;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
+2021-2022;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;49;97;50.51546391752577
+2021-2022;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;20;22;90.9090909090909
+2021-2022;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;318;344;92.44186046511628
+2021-2022;Invest in Canada Hub;Investir au Canada;347;0;3;0.0
+2021-2022;Library and Archives Canada;Bibliothèque et Archives Canada;199;4;20;20.0
+2021-2022;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;14;14;100.0
+2021-2022;National Defence;Défense nationale;133;12;18;66.66666666666666
+2021-2022;National Film Board;Office national du film;223;10;10;100.0
+2021-2022;National Research Council Canada;Conseil national de recherches Canada;228;32;32;100.0
+2021-2022;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;0;2;0.0
+2021-2022;Natural Resources Canada;Ressources naturelles Canada;134;144;170;84.70588235294117
+2021-2022;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;11;11;100.0
 2021-2022;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;9;9;100.0
-2021-2022;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;6;0;0.0
-2021-2022;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;8;6;75.0
-2021-2022;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;11;8;72.72727272727273
-2021-2022;Parks Canada;Parcs Canada;263;18;8;44.44444444444444
-2021-2022;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;12;6;50.0
-2021-2022;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;2;1;50.0
-2021-2022;Polar Knowledge Canada;Savoir polaire Canada;552;2;2;100.0
-2021-2022;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;3;2;66.66666666666666
-2021-2022;Privy Council Office;Bureau du Conseil privé;278;3;3;100.0
-2021-2022;Public Health Agency of Canada;Agence de la santé publique du Canada;280;24;23;95.83333333333334
-2021-2022;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;3;0;0.0
-2021-2022;Public Safety Canada;Sécurité publique Canada;135;59;44;74.57627118644068
-2021-2022;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;20;16;80.0
-2021-2022;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;45;32;71.11111111111111
+2021-2022;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;6;0.0
+2021-2022;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;11;13;84.61538461538461
+2021-2022;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;7;11;63.63636363636363
+2021-2022;Parks Canada;Parcs Canada;263;2;18;11.11111111111111
+2021-2022;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;6;15;40.0
+2021-2022;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;3;4;75.0
+2021-2022;Polar Knowledge Canada;Savoir polaire Canada;552;3;3;100.0
+2021-2022;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;5;6;83.33333333333334
+2021-2022;Privy Council Office;Bureau du Conseil privé;278;2;3;66.66666666666666
+2021-2022;Public Health Agency of Canada;Agence de la santé publique du Canada;280;25;30;83.33333333333334
+2021-2022;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;3;0.0
+2021-2022;Public Safety Canada;Sécurité publique Canada;135;104;127;81.88976377952756
+2021-2022;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;7;22;31.818181818181817
+2021-2022;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;59;78;75.64102564102564
 2021-2022;RCMP External Review Committee;Comité externe d'examen de la GRC;296;1;1;100.0
-2021-2022;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;51;15;29.411764705882355
-2021-2022;Shared Services Canada;Services partagés Canada;305;12;10;83.33333333333334
-2021-2022;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;6;6;100.0
-2021-2022;Statistics Canada;Statistique Canada;313;23;23;100.0
-2021-2022;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
-2021-2022;The National Battlefields Commission;Commission des champs de bataille nationaux;218;7;7;100.0
-2021-2022;Transport Canada;Transports Canada;138;107;74;69.1588785046729
-2021-2022;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;4;0;0.0
-2021-2022;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;23;21;91.30434782608695
-2021-2022;Veterans Affairs Canada;Anciens Combattants Canada;139;29;20;68.96551724137932
+2021-2022;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;31;67;46.26865671641791
+2021-2022;Shared Services Canada;Services partagés Canada;305;19;21;90.47619047619048
+2021-2022;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;13;13;100.0
+2021-2022;Statistics Canada;Statistique Canada;313;37;37;100.0
+2021-2022;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;5;5;100.0
+2021-2022;The National Battlefields Commission;Commission des champs de bataille nationaux;218;4;7;57.14285714285714
+2021-2022;Transport Canada;Transports Canada;138;268;302;88.74172185430463
+2021-2022;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;0;4;0.0
+2021-2022;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;30;32;93.75
+2021-2022;Veterans Affairs Canada;Anciens Combattants Canada;139;23;33;69.6969696969697
 2021-2022;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;1;1;100.0
-2021-2022;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2022-2023;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;3;1;33.33333333333333
-2022-2023;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;43;43;100.0
-2022-2023;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;5;3;60.0
-2022-2023;Canada Border Services Agency;Agence des services frontaliers du Canada;26;41;26;63.41463414634146
-2022-2023;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;2;2;100.0
-2022-2023;Canada Energy Regulator;Régie de l'énergie du Canada;221;13;13;100.0
-2022-2023;Canada Revenue Agency;Agence du revenu du Canada;46;49;38;77.55102040816327
-2022-2023;Canada School of Public Service;École de la fonction publique du Canada;47;1;1;100.0
-2022-2023;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;1;0;0.0
-2022-2023;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;122;32;26.229508196721312
-2022-2023;Canadian Grain Commission;Commission canadienne des grains;69;13;10;76.92307692307693
-2022-2023;Canadian Heritage;Patrimoine canadien;122;69;51;73.91304347826086
-2022-2023;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;2;0;0.0
-2022-2023;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;5;2;40.0
-2022-2023;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2022-2023;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;3;75.0
-2022-2023;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;9;7;77.77777777777779
-2022-2023;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;3;3;100.0
-2022-2023;Canadian Space Agency;Agence spatiale canadienne;95;17;16;94.11764705882352
+2021-2022;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;6;6;100.0
+2022-2023;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;0;3;0.0
+2022-2023;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;181;181;100.0
+2022-2023;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;7;9;77.77777777777779
+2022-2023;Canada Border Services Agency;Agence des services frontaliers du Canada;26;43;58;74.13793103448276
+2022-2023;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;8;8;100.0
+2022-2023;Canada Energy Regulator;Régie de l'énergie du Canada;221;26;26;100.0
+2022-2023;Canada Revenue Agency;Agence du revenu du Canada;46;35;52;67.3076923076923
+2022-2023;Canada School of Public Service;École de la fonction publique du Canada;47;2;2;100.0
+2022-2023;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;0;1;0.0
+2022-2023;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;34;130;26.153846153846157
+2022-2023;Canadian Grain Commission;Commission canadienne des grains;69;9;13;69.23076923076923
+2022-2023;Canadian Heritage;Patrimoine canadien;122;138;158;87.34177215189874
+2022-2023;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;0;2;0.0
+2022-2023;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;10;13;76.92307692307693
+2022-2023;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;3;3;100.0
+2022-2023;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;5;6;83.33333333333334
+2022-2023;Canadian Nuclear Safety Commission;Commission canadienne de sûreté nucléaire;87;10;12;83.33333333333334
+2022-2023;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;7;7;100.0
+2022-2023;Canadian Space Agency;Agence spatiale canadienne;95;24;27;88.88888888888889
 2022-2023;Canadian Transportation Agency;Office des transports du Canada;99;1;1;100.0
-2022-2023;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;2;66.66666666666666
-2022-2023;Correctional Service Canada;Service correctionnel Canada;117;5;2;40.0
+2022-2023;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;4;75.0
+2022-2023;Correctional Service Canada;Service correctionnel Canada;117;12;15;80.0
 2022-2023;Courts Administration Service;Service administratif des tribunaux judiciaires;118;1;1;100.0
-2022-2023;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;42;38;90.47619047619048
-2022-2023;Department of Finance Canada;Ministère des Finances Canada;124;6;1;16.666666666666664
-2022-2023;Department of Indigenous Services;Ministère des Services aux Autochtones;348;88;15;17.045454545454543
-2022-2023;Department of Justice Canada;Ministère de la Justice Canada;132;16;15;93.75
-2022-2023;Employment and Social Development Canada;Emploi et Développement social Canada;128;32;30;93.75
-2022-2023;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;47;38;80.85106382978722
-2022-2023;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;2;0;0.0
-2022-2023;Federal Economic Development Agency for Northern Ontario;Agence fédérale de développement économique pour le Nord de l’Ontario;561;2;1;50.0
-2022-2023;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;1;50.0
-2022-2023;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;1;50.0
-2022-2023;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;6;4;66.66666666666666
-2022-2023;Fisheries and Oceans Canada;Pêches et Océans Canada;125;93;66;70.96774193548387
-2022-2023;Global Affairs Canada;Affaires mondiales Canada;126;97;45;46.391752577319586
-2022-2023;Health Canada;Santé Canada;127;83;48;57.831325301204814
-2022-2023;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;16;16;100.0
-2022-2023;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;1;0;0.0
-2022-2023;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;22;13;59.09090909090909
-2022-2023;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;10;8;80.0
-2022-2023;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;75;64;85.33333333333334
-2022-2023;Library and Archives Canada;Bibliothèque et Archives Canada;199;20;7;35.0
-2022-2023;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;1;1;100.0
-2022-2023;National Defence;Défense nationale;133;12;4;33.33333333333333
-2022-2023;National Research Council Canada;Conseil national de recherches Canada;228;15;15;100.0
-2022-2023;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;2;0;0.0
-2022-2023;Natural Resources Canada;Ressources naturelles Canada;134;87;76;87.35632183908046
-2022-2023;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
+2022-2023;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;40;46;86.95652173913044
+2022-2023;Department of Finance Canada;Ministère des Finances Canada;124;1;6;16.666666666666664
+2022-2023;Department of Indigenous Services;Ministère des Services aux Autochtones;348;23;96;23.958333333333336
+2022-2023;Department of Justice Canada;Ministère de la Justice Canada;132;28;29;96.55172413793103
+2022-2023;Employment and Social Development Canada;Emploi et Développement social Canada;128;77;80;96.25
+2022-2023;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;106;117;90.5982905982906
+2022-2023;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;2;0.0
+2022-2023;Federal Economic Development Agency for Northern Ontario;Agence fédérale de développement économique pour le Nord de l’Ontario;561;3;4;75.0
+2022-2023;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;3;4;75.0
+2022-2023;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;3;66.66666666666666
+2022-2023;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;3;6;50.0
+2022-2023;Fisheries and Oceans Canada;Pêches et Océans Canada;125;43;119;36.134453781512605
+2022-2023;Global Affairs Canada;Affaires mondiales Canada;126;26;107;24.299065420560748
+2022-2023;Health Canada;Santé Canada;127;58;96;60.416666666666664
+2022-2023;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;34;34;100.0
+2022-2023;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;0;1;0.0
+2022-2023;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;50;59;84.7457627118644
+2022-2023;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;20;22;90.9090909090909
+2022-2023;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;288;303;95.04950495049505
+2022-2023;Library and Archives Canada;Bibliothèque et Archives Canada;199;5;20;25.0
+2022-2023;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;14;14;100.0
+2022-2023;National Defence;Défense nationale;133;12;20;60.0
+2022-2023;National Research Council Canada;Conseil national de recherches Canada;228;31;31;100.0
+2022-2023;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;0;2;0.0
+2022-2023;Natural Resources Canada;Ressources naturelles Canada;134;187;201;93.03482587064677
+2022-2023;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;11;11;100.0
 2022-2023;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;9;9;100.0
-2022-2023;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;6;0;0.0
-2022-2023;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;7;5;71.42857142857143
-2022-2023;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;11;8;72.72727272727273
-2022-2023;Pacific Economic Development Agency of Canada;Agence de développement économique du Pacifique Canada;560;3;2;66.66666666666666
-2022-2023;Parks Canada;Parcs Canada;263;24;8;33.33333333333333
-2022-2023;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;10;4;40.0
-2022-2023;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;1;0;0.0
-2022-2023;Polar Knowledge Canada;Savoir polaire Canada;552;2;2;100.0
-2022-2023;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;3;2;66.66666666666666
+2022-2023;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;6;0.0
+2022-2023;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;10;12;83.33333333333334
+2022-2023;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;7;11;63.63636363636363
+2022-2023;Pacific Economic Development Agency of Canada;Agence de développement économique du Pacifique Canada;560;5;6;83.33333333333334
+2022-2023;Parks Canada;Parcs Canada;263;11;27;40.74074074074074
+2022-2023;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;6;13;46.15384615384615
+2022-2023;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;0;1;0.0
+2022-2023;Polar Knowledge Canada;Savoir polaire Canada;552;4;4;100.0
+2022-2023;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;5;6;83.33333333333334
 2022-2023;Privy Council Office;Bureau du Conseil privé;278;3;3;100.0
-2022-2023;Public Health Agency of Canada;Agence de la santé publique du Canada;280;19;19;100.0
-2022-2023;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;2;0;0.0
-2022-2023;Public Safety Canada;Sécurité publique Canada;135;59;41;69.49152542372882
-2022-2023;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;20;16;80.0
-2022-2023;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;47;35;74.46808510638297
-2022-2023;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;49;15;30.612244897959183
-2022-2023;Shared Services Canada;Services partagés Canada;305;11;9;81.81818181818183
-2022-2023;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;7;7;100.0
-2022-2023;Statistics Canada;Statistique Canada;313;23;23;100.0
-2022-2023;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
-2022-2023;Transport Canada;Transports Canada;138;107;68;63.55140186915887
-2022-2023;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;4;0;0.0
-2022-2023;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;27;25;92.5925925925926
-2022-2023;Veterans Affairs Canada;Anciens Combattants Canada;139;30;20;66.66666666666666
+2022-2023;Public Health Agency of Canada;Agence de la santé publique du Canada;280;24;24;100.0
+2022-2023;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;2;0.0
+2022-2023;Public Safety Canada;Sécurité publique Canada;135;104;127;81.88976377952756
+2022-2023;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;18;22;81.81818181818183
+2022-2023;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;67;84;79.76190476190477
+2022-2023;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;32;66;48.484848484848484
+2022-2023;Shared Services Canada;Services partagés Canada;305;18;20;90.0
+2022-2023;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;16;16;100.0
+2022-2023;Statistics Canada;Statistique Canada;313;37;37;100.0
+2022-2023;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;5;5;100.0
+2022-2023;Transport Canada;Transports Canada;138;253;300;84.33333333333334
+2022-2023;Transportation Safety Board of Canada;Bureau de la sécurité des transports du Canada;98;0;4;0.0
+2022-2023;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;31;36;86.11111111111111
+2022-2023;Veterans Affairs Canada;Anciens Combattants Canada;139;24;34;70.58823529411765
 2022-2023;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;1;1;100.0
-2022-2023;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2023-2024;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;3;0;0.0
-2023-2024;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;35;35;100.0
-2023-2024;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;4;2;50.0
-2023-2024;Canada Border Services Agency;Agence des services frontaliers du Canada;26;41;26;63.41463414634146
-2023-2024;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;3;3;100.0
-2023-2024;Canada Energy Regulator;Régie de l'énergie du Canada;221;14;14;100.0
-2023-2024;Canada Revenue Agency;Agence du revenu du Canada;46;48;37;77.08333333333334
-2023-2024;Canada School of Public Service;École de la fonction publique du Canada;47;1;1;100.0
-2023-2024;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;5;0;0.0
-2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;125;29;23.200000000000003
-2023-2024;Canadian Grain Commission;Commission canadienne des grains;69;13;10;76.92307692307693
-2023-2024;Canadian Heritage;Patrimoine canadien;122;69;51;73.91304347826086
-2023-2024;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;9;0;0.0
-2023-2024;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;5;2;40.0
-2023-2024;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;2;2;100.0
-2023-2024;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;4;3;75.0
-2023-2024;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;3;3;100.0
-2023-2024;Canadian Space Agency;Agence spatiale canadienne;95;19;18;94.73684210526315
-2023-2024;Canadian Transportation Agency;Office des transports du Canada;99;5;4;80.0
-2023-2024;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;2;66.66666666666666
-2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110;15;15;100.0
+2022-2023;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;6;6;100.0
+2023-2024;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;0;3;0.0
+2023-2024;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;100;101;99.00990099009901
+2023-2024;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;4;6;66.66666666666666
+2023-2024;Canada Border Services Agency;Agence des services frontaliers du Canada;26;43;58;74.13793103448276
+2023-2024;Canada Economic Development for Quebec Regions;Développement économique Canada pour les régions du Québec;141;8;8;100.0
+2023-2024;Canada Energy Regulator;Régie de l'énergie du Canada;221;27;27;100.0
+2023-2024;Canada Revenue Agency;Agence du revenu du Canada;46;34;51;66.66666666666666
+2023-2024;Canada School of Public Service;École de la fonction publique du Canada;47;0;1;0.0
+2023-2024;Canadian Centre for Occupational Health and Safety;Centre canadien d’hygiène et de sécurité au travail;55;0;5;0.0
+2023-2024;Canadian Food Inspection Agency;Agence canadienne d'inspection des aliments;65;34;134;25.37313432835821
+2023-2024;Canadian Grain Commission;Commission canadienne des grains;69;9;13;69.23076923076923
+2023-2024;Canadian Heritage;Patrimoine canadien;122;139;159;87.42138364779875
+2023-2024;Canadian Human Rights Commission;Commission canadienne des droits de la personne;71;0;9;0.0
+2023-2024;Canadian Institutes of Health Research;Instituts de recherche en santé du Canada;74;10;13;76.92307692307693
+2023-2024;Canadian Intergovernmental Conference Secretariat;Secrétariat des conférences intergouvernementales canadiennes;76;3;3;100.0
+2023-2024;Canadian Northern Economic Development Agency;Agence canadienne de développement économique du Nord;86;5;6;83.33333333333334
+2023-2024;Canadian Radio-television and Telecommunications Commission;Conseil de la radiodiffusion et des télécommunications canadiennes;93;7;7;100.0
+2023-2024;Canadian Space Agency;Agence spatiale canadienne;95;31;32;96.875
+2023-2024;Canadian Transportation Agency;Office des transports du Canada;99;6;7;85.71428571428571
+2023-2024;Civilian Review and Complaints Commission for the RCMP;Commission civile d’examen et de traitement des plaintes relatives à la GRC;297;3;4;75.0
+2023-2024;Communications Security Establishment Canada;Centre de la sécurité des télécommunications Canada;110;18;18;100.0
 2023-2024;Copyright Board Canada;Commission du droit d'auteur Canada;114;2;2;100.0
-2023-2024;Correctional Service Canada;Service correctionnel Canada;117;5;2;40.0
-2023-2024;Courts Administration Service;Service administratif des tribunaux judiciaires;118;2;0;0.0
-2023-2024;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;39;35;89.74358974358975
-2023-2024;Department of Finance Canada;Ministère des Finances Canada;124;4;0;0.0
-2023-2024;Department of Indigenous Services;Ministère des Services aux Autochtones;348;88;15;17.045454545454543
-2023-2024;Department of Justice Canada;Ministère de la Justice Canada;132;15;13;86.66666666666667
-2023-2024;Employment and Social Development Canada;Emploi et Développement social Canada;128;31;30;96.7741935483871
-2023-2024;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;49;40;81.63265306122449
-2023-2024;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;2;0;0.0
-2023-2024;Federal Economic Development Agency for Northern Ontario;Agence fédérale de développement économique pour le Nord de l’Ontario;561;2;1;50.0
-2023-2024;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;1;50.0
-2023-2024;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;1;50.0
-2023-2024;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;6;4;66.66666666666666
-2023-2024;Fisheries and Oceans Canada;Pêches et Océans Canada;125;75;45;60.0
-2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;38;38;100.0
-2023-2024;Health Canada;Santé Canada;127;84;47;55.952380952380956
-2023-2024;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;17;17;100.0
-2023-2024;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;1;0;0.0
-2023-2024;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;20;13;65.0
-2023-2024;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;10;8;80.0
-2023-2024;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;77;66;85.71428571428571
-2023-2024;Library and Archives Canada;Bibliothèque et Archives Canada;199;12;2;16.666666666666664
-2023-2024;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;2;1;50.0
-2023-2024;National Defence;Défense nationale;133;16;4;25.0
-2023-2024;National Film Board;Office national du film;223;5;5;100.0
-2023-2024;National Research Council Canada;Conseil national de recherches Canada;228;15;15;100.0
-2023-2024;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;2;0;0.0
-2023-2024;Natural Resources Canada;Ressources naturelles Canada;134;80;69;86.25
-2023-2024;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;6;6;100.0
+2023-2024;Correctional Service Canada;Service correctionnel Canada;117;12;15;80.0
+2023-2024;Courts Administration Service;Service administratif des tribunaux judiciaires;118;0;2;0.0
+2023-2024;Crown-Indigenous Relations and Northern Affairs Canada;Relations Couronne-Autochtones et Affaires du Nord Canada;129;34;43;79.06976744186046
+2023-2024;Department of Finance Canada;Ministère des Finances Canada;124;0;4;0.0
+2023-2024;Department of Indigenous Services;Ministère des Services aux Autochtones;348;29;102;28.431372549019606
+2023-2024;Department of Justice Canada;Ministère de la Justice Canada;132;0;15;0.0
+2023-2024;Employment and Social Development Canada;Emploi et Développement social Canada;128;75;77;97.40259740259741
+2023-2024;Environment and Climate Change Canada;Environnement et Changement climatique Canada;137;118;127;92.91338582677166
+2023-2024;Farm Products Council of Canada;Conseil des produits agricoles du Canada;222;0;2;0.0
+2023-2024;Federal Economic Development Agency for Northern Ontario;Agence fédérale de développement économique pour le Nord de l’Ontario;561;3;4;75.0
+2023-2024;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;3;66.66666666666666
+2023-2024;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;2;3;66.66666666666666
+2023-2024;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;3;6;50.0
+2023-2024;Fisheries and Oceans Canada;Pêches et Océans Canada;125;0;75;0.0
+2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;60;60;100.0
+2023-2024;Health Canada;Santé Canada;127;58;97;59.79381443298969
+2023-2024;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;36;36;100.0
+2023-2024;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;0;1;0.0
+2023-2024;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;50;57;87.71929824561403
+2023-2024;Impact Assessment Agency of Canada;Agence d'évaluation d'impact du Canada;63;23;25;92.0
+2023-2024;Innovation, Science and Economic Development Canada;Innovation, Sciences et Développement économique Canada;130;353;364;96.97802197802197
+2023-2024;Library and Archives Canada;Bibliothèque et Archives Canada;199;0;12;0.0
+2023-2024;Military Police Complaints Commission of Canada;Commission d'examen des plaintes concernant la police militaire du Canada;210;0;2;0.0
+2023-2024;National Defence;Défense nationale;133;11;24;45.83333333333333
+2023-2024;National Film Board;Office national du film;223;9;9;100.0
+2023-2024;National Research Council Canada;Conseil national de recherches Canada;228;31;32;96.875
+2023-2024;National Security and Intelligence Review Agency Secretariat;Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement;302;0;2;0.0
+2023-2024;Natural Resources Canada;Ressources naturelles Canada;134;174;186;93.54838709677419
+2023-2024;Natural Sciences and Engineering Research Council of Canada;Conseil de recherches en sciences naturelles et en génie du Canada;230;12;12;100.0
 2023-2024;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;9;9;100.0
-2023-2024;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;7;0;0.0
-2023-2024;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;7;5;71.42857142857143
-2023-2024;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;10;8;80.0
-2023-2024;Pacific Economic Development Agency of Canada;Agence de développement économique du Pacifique Canada;560;3;2;66.66666666666666
-2023-2024;Parks Canada;Parcs Canada;263;26;10;38.46153846153847
-2023-2024;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;10;4;40.0
-2023-2024;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;1;0;0.0
-2023-2024;Polar Knowledge Canada;Savoir polaire Canada;552;3;3;100.0
-2023-2024;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;3;2;66.66666666666666
+2023-2024;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;0;7;0.0
+2023-2024;Office of the Superintendent of Financial Institutions Canada;Bureau du surintendant des institutions financières Canada;253;10;12;83.33333333333334
+2023-2024;Offices of the Information and Privacy Commissioners of Canada;Commissariats à l’information et à la protection de la vie privée du Canada;256;7;10;70.0
+2023-2024;Pacific Economic Development Agency of Canada;Agence de développement économique du Pacifique Canada;560;5;6;83.33333333333334
+2023-2024;Parks Canada;Parcs Canada;263;12;28;42.857142857142854
+2023-2024;Parole Board of Canada;Commission des libérations conditionnelles du Canada;227;5;12;41.66666666666667
+2023-2024;Patented Medicine Prices Review Board Canada;Conseil d'examen du prix des médicaments brevetés Canada;266;0;1;0.0
+2023-2024;Polar Knowledge Canada;Savoir polaire Canada;552;5;5;100.0
+2023-2024;Prairies Economic Development Canada;Développement économique Canada pour les Prairies;140;5;6;83.33333333333334
 2023-2024;Privy Council Office;Bureau du Conseil privé;278;3;3;100.0
-2023-2024;Public Health Agency of Canada;Agence de la santé publique du Canada;280;20;19;95.0
-2023-2024;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;2;0;0.0
-2023-2024;Public Safety Canada;Sécurité publique Canada;135;49;39;79.59183673469387
-2023-2024;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;19;15;78.94736842105263
-2023-2024;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;48;34;70.83333333333334
-2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;50;15;30.0
-2023-2024;Shared Services Canada;Services partagés Canada;305;11;9;81.81818181818183
-2023-2024;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;7;7;100.0
-2023-2024;Statistics Canada;Statistique Canada;313;23;23;100.0
-2023-2024;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;3;3;100.0
+2023-2024;Public Health Agency of Canada;Agence de la santé publique du Canada;280;24;25;96.0
+2023-2024;Public Prosecution Service of Canada;Service des poursuites pénales du Canada;248;0;2;0.0
+2023-2024;Public Safety Canada;Sécurité publique Canada;135;112;124;90.32258064516128
+2023-2024;Public Service Commission of Canada;Commission de la fonction publique du Canada;282;8;20;40.0
+2023-2024;Public Services and Procurement Canada;Services publics et Approvisionnement Canada;136;72;86;83.72093023255815
+2023-2024;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;28;63;44.44444444444444
+2023-2024;Shared Services Canada;Services partagés Canada;305;16;18;88.88888888888889
+2023-2024;Social Sciences and Humanities Research Council of Canada;Conseil de recherches en sciences humaines du Canada;306;15;16;93.75
+2023-2024;Statistics Canada;Statistique Canada;313;37;37;100.0
+2023-2024;The Correctional Investigator Canada;L'Enquêteur correctionnel Canada;247;0;3;0.0
 2023-2024;The National Battlefields Commission;Commission des champs de bataille nationaux;218;12;12;100.0
-2023-2024;Transport Canada;Transports Canada;138;117;75;64.1025641025641
-2023-2024;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;32;28;87.5
-2023-2024;Veterans Affairs Canada;Anciens Combattants Canada;139;30;20;66.66666666666666
+2023-2024;Transport Canada;Transports Canada;138;282;324;87.03703703703704
+2023-2024;Treasury Board of Canada Secretariat;Secrétariat du Conseil du Trésor du Canada;326;39;43;90.69767441860465
+2023-2024;Veterans Affairs Canada;Anciens Combattants Canada;139;24;34;70.58823529411765
 2023-2024;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;1;1;100.0
-2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
-2024-2025;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;1;0;0.0
+2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;6;6;100.0
+2024-2025;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;0;1;0.0
 
-Timestamp:2025-02-07_10:20:43
+Timestamp:2025-02-07_14:15:49

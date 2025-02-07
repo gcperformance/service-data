@@ -1,4 +1,4 @@
-fiscal_yr;department_en;department_fr;org_id;improved_services_count;service_count;maf8_score
+fiscal_yr;department_en;department_fr;org_id;improved_services_count;service_count_maf8;maf8_score
 2018-2019;Administrative Tribunals Support Service of Canada;Service canadien d'appui aux tribunaux administratifs;539;0;4;0.0
 2018-2019;Agriculture and Agri-Food Canada;Agriculture et Agroalimentaire Canada;1;0;30;0.0
 2018-2019;Atlantic Canada Opportunities Agency;Agence de promotion économique du Canada atlantique;12;0;5;0.0
@@ -458,4 +458,4 @@ fiscal_yr;department_en;department_fr;org_id;improved_services_count;service_cou
 2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
 2024-2025;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;0;1;0.0
 
-Timestamp:2025-02-07_10:20:43
+Timestamp:2025-02-07_14:15:49

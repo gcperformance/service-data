@@ -63,18 +63,31 @@ def process_files(si, ss):
     ]
 
     # Unpivot (i.e. melt) application volume columnns
-    si_vol = pd.melt(si, id_vars=['fiscal_yr', 'service_id'], value_vars=app_cols, var_name='channel', value_name='volume')
+    si_vol = pd.melt(
+        si, 
+        id_vars=['fiscal_yr', 'service_id'], 
+        var_name='channel',
+        value_vars=app_cols,
+        value_name='volume'
+    )
     
     # remove "_applications" from the channel column to get a clean channel name
-    si_vol['channel'] = si_vol['channel'].str.replace('num_applications_', '', regex=True).str.replace('by_', '', regex=True)
+    si_vol['channel'] = (
+        si_vol['channel']
+        .str.replace('num_applications_', '', regex=True)
+        .str.replace('by_', '', regex=True)
+    )
+
     
     # remove 'NaN', 'ND' values in volume
-    si_vol = si_vol.dropna(subset=['volume'])
-    si_vol = si_vol[si_vol['volume'] != 'ND']
-    si_vol = si_vol[si_vol['volume'] != 'NA']
+    si_vol = (
+        si_vol
+        .dropna(subset=['volume'])
+        .loc[~si_vol['volume'].isin(['ND', 'NA'])]
+    )
     
     # only take entries where the volume is > 0
-    si_vol['volume'] = pd.to_numeric(si_vol['volume'])
+    si_vol['volume'] = pd.to_numeric(si_vol['volume'], errors='coerce')
     si_vol = si_vol[si_vol['volume'] > 0]
     
     # =================================
@@ -92,7 +105,12 @@ def process_files(si, ss):
     ]
        
     # Unpivot (i.e. melt) online interaction point columns
-    si_oip = pd.melt(si, id_vars=['fiscal_yr', 'service_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation')
+    si_oip = pd.melt(
+        si, 
+        id_vars=['fiscal_yr', 'service_id'],
+        var_name='online_interaction_point', 
+        value_vars=oip_cols, 
+        value_name='activation')
     
     # Add a column to indicate the sort position of the online interaction point
     si_oip['online_interaction_point_sort'] = si_oip['online_interaction_point'].apply(lambda x: oip_cols.index(x)+1)
@@ -107,13 +125,25 @@ def process_files(si, ss):
     # ss_tml_perf_vol: Timeliness service standard performance
     # Given a service, what is the volume of interactions that met the target vs not, by fiscal year?
     
-    # Filter the DataFrame for rows where (service standard type) 'type' is 'TML' (Timeliness), group by 'fiscal_yr' 
-    # and 'service_id', sum the 'volume_meeting_target' and 'total_volume' columns, and reset the index.
-    ss_tml_perf_vol = ss.loc[ss['type'] == 'TML'].groupby(['fiscal_yr', 'service_id'])[['volume_meeting_target', 'total_volume']].sum().reset_index()
+    # Filter for 'TML' type and aggregate volume-related columns
+    ss_tml_perf_vol = (
+        ss.loc[ss['type'] == 'TML']
+        .groupby(['fiscal_yr', 'service_id'])[['volume_meeting_target', 'total_volume']]
+        .sum()
+        .reset_index()
+    )
     
-    ss_tml_perf_vol['total_volume'] = pd.to_numeric(ss_tml_perf_vol['total_volume'], errors='coerce').fillna(0)
-    ss_tml_perf_vol['volume_meeting_target'] = pd.to_numeric(ss_tml_perf_vol['volume_meeting_target'], errors='coerce').fillna(0)
-    ss_tml_perf_vol['volume_not_meeting_target'] = ss_tml_perf_vol['total_volume']-ss_tml_perf_vol['volume_meeting_target']
+    # Convert volume columns to numeric and fill missing values with 0
+    ss_tml_perf_vol[['total_volume', 'volume_meeting_target']] = (
+        ss_tml_perf_vol[['total_volume', 'volume_meeting_target']]
+        .apply(pd.to_numeric, errors='coerce')
+        .fillna(0)
+    )
+    
+    # Calculate the volume that did not meet the target
+    ss_tml_perf_vol['volume_not_meeting_target'] = (
+        ss_tml_perf_vol['total_volume'] - ss_tml_perf_vol['volume_meeting_target']
+    )
 
     # =================================
     # si_fy_service_count: Total number of services by fiscal year
@@ -159,41 +189,50 @@ def process_files(si, ss):
     # =================================
     # MAF Question 1: Existence of service standards
     # As service standards are required under the Policy on Service and Digital, what is the percentage of services that have service standards?
-    
+
+    # Select relevant columns from service inventory
     maf1 = si.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
-    maf1['service_std_tf'] = si[['fiscal_yr', 'service_id']].isin(ss[['fiscal_yr', 'service_id']].to_dict(orient='list')).all(axis=1)
+
+    # Determine whether each service has a standard by checking for existence in 'service standards'
+    # Merge with 'ss' to check if (fiscal_yr, service_id) exists
+    maf1 = maf1.merge(
+        ss[['fiscal_yr', 'service_id']],  # Only need these two columns for the existence check
+        on=['fiscal_yr', 'service_id'],  # Merge on fiscal year and service ID
+        how='left',  # Keep all 'maf1' records, add matches from 'ss'
+        indicator=True  # Adds a column "_merge" to show if a match was found
+    )
     
-    maf1_num = maf1.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_id'].count().reset_index()
-    maf1_denom = maf1.groupby(['fiscal_yr', 'department_en','department_fr','org_id'])['service_std_tf'].sum().reset_index()
+    # Create boolean column: True if the service exists in 'ss', otherwise False
+    maf1['service_std_tf'] = maf1['_merge'] == 'both'
     
-    maf1 = pd.merge(
-        maf1_num,
-        maf1_denom,
-        on=['fiscal_yr', 'department_en','department_fr', 'org_id'],
-        how='left'
-    ).rename(columns={'service_id':'service_count', 'service_std_tf':'service_with_std_count'})
+    # Drop the '_merge' column (no longer needed)
+    maf1 = maf1.drop(columns=['_merge'])
     
-    maf1['maf1_score'] = (maf1['service_with_std_count']/maf1['service_count'])*100
+    # Group by department and fiscal year, counting services with and without standards
+    maf1 = maf1.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id']).agg(
+        service_with_std_count=('service_std_tf', 'sum'),  # Count services that have standards (True = 1)
+        service_count_maf1=('service_id', 'count')  # Count all services
+    ).reset_index()
+    
+    maf1['maf1_score'] = (maf1['service_with_std_count']/maf1['service_count_maf1'])*100
     # maf1['maf1_result'] = pd.cut(maf1['maf1_score'], bins=score_bins, labels=score_results, right=False)
 
     # =================================
     # MAF Question 2: Service standard targets
     # What is the percentage of service standards that met their target?
     
-    maf2 = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en','department_fr', 'org_id', 'target_met']].dropna()
+    # Select relevant columns and drop rows with missing values
+    maf2 = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'department_fr', 'org_id', 'target_met']].dropna()
+
+    maf2['service_standard_met'] = maf2['target_met'] == 'Y'
+    maf2['service_standard_total'] = maf2['target_met'].isin(['Y', 'N'])
     
-    maf2_num = maf2[maf2['target_met']=='Y'].groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_standard_id'].count().reset_index()
-    maf2_denom = maf2.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id'])['service_standard_id'].count().reset_index()
-    
-    maf2 = pd.merge(
-        maf2_num,
-        maf2_denom,
-        suffixes=['_met','_total'],
-        on=['fiscal_yr', 'department_en','department_fr', 'org_id'],
-        how='outer'
-    )
-    
-    maf2['maf2_score'] = (maf2['service_standard_id_met']/maf2['service_standard_id_total'])*100
+    maf2 = maf2.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id']).agg(
+        service_standard_met=('service_standard_met', 'sum'),
+        service_standard_total=('service_standard_total', 'sum')
+    ).reset_index()
+
+    maf2['maf2_score'] = (maf2['service_standard_met']/maf2['service_standard_total'])*100
     # maf2['maf2_result'] = pd.cut(maf2['maf2_score'], bins=score_bins, labels=score_results, right=False)
     
     # =================================
@@ -232,8 +271,12 @@ def process_files(si, ss):
     maf5['activation_na'] = (maf5['activation'] == 'NA')
     
     # Group by and sum the activation columns
-    maf5 = maf5.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id', 'service_id'])[['activation_y', 'activation_n', 'activation_na']].sum().reset_index()
-    
+    maf5 = maf5.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id', 'service_id']).agg(
+        activation_y=('activation_y', 'sum'),
+        activation_n=('activation_n', 'sum'),
+        activation_na=('activation_na', 'sum')
+    ).reset_index()
+
     # Determine conditions for online_e2e
     conditions = [
         (maf5['activation_na'] == 6),  # All interaction points are NaN
@@ -243,17 +286,17 @@ def process_files(si, ss):
     
     maf5['online_e2e'] = np.select(conditions, choices, default=True).astype(bool)
     
-    # remove all Nan/Nones
+    # Remove all NaN/Nones
     maf5 = maf5.dropna(subset=['online_e2e'])
     
     # Determine department-level counts for online e2e services and all services
     maf5 = maf5.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
-        online_e2e_count=('online_e2e', 'sum'), # this is wizardry to me... still not sure what is happening
-        service_count=('service_id', 'nunique')
+        online_e2e_count=('online_e2e', 'sum'),
+        service_count_maf5=('service_id', 'nunique')
     ).reset_index()
     
     # Determine score and associated result
-    maf5['maf5_score'] = (maf5['online_e2e_count']/maf5['service_count'])*100
+    maf5['maf5_score'] = (maf5['online_e2e_count']/maf5['service_count_maf5'])*100
     # maf5['maf5_result'] = pd.cut(maf5['maf5_score'], bins=score_bins, labels=score_results, right=False)
     
     # =================================
@@ -269,12 +312,20 @@ def process_files(si, ss):
     ]
     
     # Melt the DataFrame
-    maf6 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation').dropna()
-    
+    maf6 = pd.melt(
+        si, 
+        id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], 
+        value_vars=oip_cols, 
+        var_name='online_interaction_point', 
+        value_name='activation')
+
+    # Exclude points that are not applicable or blank
+    maf6 = maf6.loc[maf6['activation'].isin(['Y','N'])]
+
     maf6['activation'] = (maf6['activation'] == 'Y')
     
     maf6 = maf6.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
-        activated_point_count=('activation', 'sum'), # this is wizardry to me... still not sure what is happening
+        activated_point_count=('activation', 'sum'),
         point_count=('service_id', 'count')
     ).reset_index()
     
@@ -291,7 +342,7 @@ def process_files(si, ss):
     # MAF Question 8: Client feedback
     # As ensuring client feedback is used to inform continuous improvement of services is a requirement under the Directive on Service and Digital, what is the percentage of services which have used client feedback to improve services in the last year?
     
-    maf8 = si.loc[:,['fiscal_yr', 'service_id', 'org_id', 'department_en','department_fr', 'last_service_review', 'last_service_improvement']]
+    maf8 = si.loc[:,['fiscal_yr', 'service_id', 'org_id', 'department_en','department_fr', 'last_service_improvement']]
     
     maf8['report_yr'] = pd.to_numeric(maf8['fiscal_yr'].str.split('-').str[1], errors='coerce').astype(int)
     maf8['last_service_improvement_yr'] = pd.to_numeric(maf8['last_service_improvement'].str.split('-').str[1], errors='coerce')
@@ -301,11 +352,11 @@ def process_files(si, ss):
     
     maf8 = maf8.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
         improved_services_count=('last_service_improvement_within_1_yr', 'sum'),
-        service_count=('service_id', 'nunique')
+        service_count_maf8=('service_id', 'nunique')
     ).reset_index()
     
     # Determine score and associated result
-    maf8['maf8_score'] = (maf8['improved_services_count']/maf8['service_count'])*100
+    maf8['maf8_score'] = (maf8['improved_services_count']/maf8['service_count_maf8'])*100
     # maf8['maf8_result'] = pd.cut(maf8['maf8_score'], bins=score_bins, labels=score_results, right=False)
 
     # === SUMMARY MAF TABLE === 
