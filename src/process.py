@@ -219,7 +219,12 @@ def process_files(si, ss):
     ]
     
     # Melt the DataFrame
-    maf5 = pd.melt(si, id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], value_vars=oip_cols, var_name='online_interaction_point', value_name='activation')
+    maf5 = pd.melt(
+        si, 
+        id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], 
+        value_vars=oip_cols, 
+        var_name='online_interaction_point', 
+        value_name='activation')
     
     # Create boolean columns for activation states
     maf5['activation_y'] = (maf5['activation'] == 'Y')

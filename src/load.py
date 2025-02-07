@@ -60,6 +60,6 @@ def load_csv_from_raw(file_name):
     """
     file_path = RAW_DATA_DIR / file_name
     if file_path.exists():
-        return pd.read_csv(file_path)
+        return pd.read_csv(file_path, keep_default_na=False, na_values='')
     else:
         raise FileNotFoundError(f"File not found: {file_path}")
