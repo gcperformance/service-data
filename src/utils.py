@@ -2,12 +2,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import re
+import json
 
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
 from src.clean import standardize_column_names, clean_fiscal_yr
 
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
+RAW_DATA_DIR = Path(__file__).parent.parent / "inputs"
 
 def dept_list():
     """
@@ -191,3 +193,42 @@ def copy_raw_to_utils():
         data_dict=utils_file_dict,
         output_dir=UTILS_DIR
     )
+
+def build_data_dictionary():
+    """Builds a structured data dictionary from a JSON file, processes nested data, 
+    renames columns, standardizes names, and exports to CSV."""
+    
+    file_path = RAW_DATA_DIR / 'service_data_dict.json'
+    
+    # Load JSON file into a dictionary
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    # Flatten the top-level structure
+    dd = pd.json_normalize(data)
+
+    # Extract and explode 'resources'
+    dd_r = dd.explode('resources').reset_index(drop=True)
+    dd_r = pd.json_normalize(dd_r['resources'].dropna())
+
+    # Extract and explode 'fields' within 'resources'
+    dd_r = dd_r.explode('fields').reset_index(drop=True)
+    
+    # Prefix all resource-related columns (except the first one)
+    dd_r = dd_r.rename(columns=lambda col: f"resource_{col}" if col != dd_r.columns[0] else col)
+
+    # Normalize 'resource_fields' and remove 'choices.' prefixed columns
+    dd_rf = pd.json_normalize(dd_r['resource_fields'].dropna())
+    dd_rf = dd_rf.loc[:, ~dd_rf.columns.str.startswith('choices.')]
+
+    # Prefix all field-related columns
+    dd_rf = dd_rf.rename(columns=lambda col: f"field_{col}")
+
+    # Drop the original nested 'resource_fields' column and merge back processed fields
+    dd_r = dd_r.drop(columns=['resource_fields']).merge(dd_rf, left_index=True, right_index=True)
+
+    # Standardize column names
+    dd_r = standardize_column_names(dd_r)
+
+    # Export to CSV
+    export_to_csv(data_dict={'data_dictionary': dd_r}, output_dir=UTILS_DIR)

@@ -3,12 +3,12 @@ import sys
 import time
 from pathlib import Path
 
-from src.load import download_csv_files, CSV_URLS
+from src.load import download_csv_files, CSV_URLS, download_json_files, JSON_URLS
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
 from src.export import csv_to_sqlite
-from src.utils import copy_raw_to_utils
+from src.utils import copy_raw_to_utils, build_data_dictionary
 
 
 def main():
@@ -28,6 +28,7 @@ def main():
         # Download and process raw data
         logging.info("Downloading raw data...")
         download_csv_files()
+        download_json_files()
 
         # Merge historical data
         logging.info("Merging historical data...")
@@ -45,6 +46,7 @@ def main():
         # Copying files from raw to utils
         logging.info("Copying files from input to utils...")
         copy_raw_to_utils()
+        build_data_dictionary()
 
         # Create SQLite database
         logging.info("Creating SQLite database...")

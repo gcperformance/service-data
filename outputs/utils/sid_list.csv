@@ -930,29 +930,22 @@ SRV03399;Criminal Investigations;Enquêtes criminelles;Canada Border Services Ag
 1110;Advanced Canada workers benefit (ACWB);Avance de l’allocation canadienne pour les travailleurs (AACT);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1098;Authorize a Representative;Autoriser un Représentant;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1116;Business Number (BN) Registration;Inscription d'un Numéro d'Entreprise (NE);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-1141;"Business Enquiries 
-(Contact Centre)";Demandes de renseignements des entreprises (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-1143;"Benefit Enquiries 
-(Contact Centre)";Demandes de renseignements sur les prestations (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-3727;"Canada Dental Benefit (CDB)
-To note: The interim Canada Dental Benefit ended on June 30, 2024.";Prestation dentaire canadienne (PDC);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
+1141;Business Enquiries (Contact Centre);Demandes de renseignements des entreprises (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
+1143;Benefit Enquiries (Contact Centre);Demandes de renseignements sur les prestations (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
+3727;Canada Dental Benefit (CDB)To note: The interim Canada Dental Benefit ended on June 30, 2024.;Prestation dentaire canadienne (PDC);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
 1107;Canada child benefit (CCB)  applications;Les demandes d'Allocation canadienne pour enfants (ACE);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1109;Children's Special Allowances (CSA)  applications;Les demandes d'Allocations Spéciales pour Enfants (ASE);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-3728;"Canada Carbon Rebate (previously known as the 
-Climate action incentive payment)";Remise canadienne sur le carbone (auparavant appelée paiement de l’incitatif à agir pour le climat);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
+3728;Canada Carbon Rebate (previously known as the Climate action incentive payment);Remise canadienne sur le carbone (auparavant appelée paiement de l’incitatif à agir pour le climat);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
 3729;Community Volunteer Income Tax Program;Programme communautaire des bénévoles en matière d'impôt;Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
 1146;Disability Tax Credit;Crédit d'impôt pour personnes handicapées;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-1102;Excise Duty, Excise Tax,  Air Travellers Security Charge, and Fuel Charge returns;"Droits d'accise, taxes d'accise, droit pour la sécurité des passagers du transport aérien, et 
-déclaration de la redevance sur les combustibles";Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
+1102;Excise Duty, Excise Tax,  Air Travellers Security Charge, and Fuel Charge returns;Droits d'accise, taxes d'accise, droit pour la sécurité des passagers du transport aérien, et déclaration de la redevance sur les combustibles;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1108;Tax Credit Application;Demande de crédit d'impôt;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1099;GST/HST Returns;Production d'une déclaration de la TPS/TVH;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1097;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
-1139;"Individual Tax Enquiries 
-(Contact Centre)";Demandes de renseignements sur l'impôt des particuliers (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
+1139;Individual Tax Enquiries (Contact Centre);Demandes de renseignements sur l'impôt des particuliers (Centre de contact);Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 3725;Luxury Tax and Information Return Filing;Déclaration de la taxe de luxe et de renseignements;Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
 3723;Luxury Tax Rebate Applications;Demande de remboursement de la taxe de luxe;Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
-3722;"One-time top-up to the Canada Housing Benefit (OTCHB)
-The last day to apply for the one-time top-up to the Canada Housing Benefit was March 31, 2023.";Supplément unique à l’Allocation canadienne pour le logement (SUACL);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
+3722;One-time top-up to the Canada Housing Benefit (OTCHB)The last day to apply for the one-time top-up to the Canada Housing Benefit was March 31, 2023.;Supplément unique à l’Allocation canadienne pour le logement (SUACL);Canada Revenue Agency;Agence du revenu du Canada;46;2022-2023;2023-2024
 1106;Partnership Information Returns;Déclaration de Renseignements des Sociétés de Personnes;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1111;Provincial and territorial tax credit payments;Les versements de crédits d'impôt provinciaux et territoriaux;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
 1112;Provincial and territorial child benefit program payments;Les versements provinciaux et territoriaux pour les programmes de prestations pour enfants;Canada Revenue Agency;Agence du revenu du Canada;46;2018-2019;2023-2024
@@ -1986,6 +1979,8 @@ SRV02856;Media relations;Relations avec les médias;Office of the Auditor Genera
 SRV02857;Technical accounting and audit advisory services;Services-conseils spécialisés en comptabilité et en audit;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;2021-2022;2023-2024
 SRV02852;Environmental petitions correspondence;Correspondance pour les pétitions environnementales;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;2021-2022;2023-2024
 SRV02853;Environmental Petitions;Pétitions environnementales;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;2021-2022;2023-2024
+SRV02818;Financial audits of the Public Accounts of Canada;Audit des états financiers des Comptes publics du Canada;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;2023-2024;2023-2024
+SRV02827;Financial audit of Export Development Canada’s consolidated financial statements;Audit d’états financiers consolidés d’Exportation et développement Canada;Office of the Auditor General of Canada;Bureau du vérificateur général du Canada;238;2023-2024;2023-2024
 3698;Payment of judges' salaries;Paiement des salaires des juges;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;2023-2024;2023-2024
 3699;Payment of judges' allowance claims;Paiement des indemnités de juges;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;2023-2024;2023-2024
 1879;Administration of the federal judicial appointment process;Administration du processus de nomination des juges fédérale;Office of the Commissioner for Federal Judicial Affairs Canada;Commissariat à la magistrature fédérale Canada;240;2018-2019;2023-2024
@@ -2515,4 +2510,4 @@ SRV03062;Veterans Ombud Intervention Services;Services d’intervention de l’o
 2105;Gender-Based Violence Program;Programme de financement de la lutte contre la violence fondée sur le sexe;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;2019-2020;2023-2024
 2106;Equality for Sex, Sexual Orientation, Gender Identity and Expression Program;Programme de promotion de l'égalité des sexes, de l'orientation sexuelle, de l'identité et de l'expression de genre;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;2019-2020;2023-2024
 
-Timestamp:2025-02-07_14:39:29
+Timestamp:2025-02-12_12:45:35

@@ -75,8 +75,8 @@ def to_snake_case(input_string):
     Returns:
         str: The converted string in snake_case.
     """
-    # Replace spaces and hyphens with underscores
-    processed_string = re.sub(r'[\s\-]+', '_', input_string)
+    # Replace spaces, hyphens, commas with underscores
+    processed_string = re.sub(r'[\s\-\.]+', '_', input_string)
     # Convert CamelCase or PascalCase to snake_case
     processed_string = re.sub(r'(?<!^)(?=[A-Z])', '_', processed_string)
     # Lowercase the entire string

@@ -123,14 +123,15 @@ def process_files(si, ss):
     
     # =================================
     # ss_tml_perf_vol: Timeliness service standard performance
-    # Given a service, what is the volume of interactions that met the target vs not, by fiscal year?
+    # Given a service, what is the volume of interactions that met the target vs not, by channel and fiscal year?
     
-    # Filter for 'TML' type and aggregate volume-related columns
+    # Filter for 'TML' type and aggregate volume-related columns by service and channel
     ss_tml_perf_vol = (
         ss.loc[ss['type'] == 'TML']
-        .groupby(['fiscal_yr', 'service_id'])[['volume_meeting_target', 'total_volume']]
-        .sum()
-        .reset_index()
+        .groupby(['fiscal_yr', 'service_id', 'channel']).agg(
+            volume_meeting_target = ('volume_meeting_target', 'sum'),
+            total_volume = ('total_volume', 'sum')
+        ).reset_index()
     )
     
     # Convert volume columns to numeric and fill missing values with 0

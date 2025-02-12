@@ -22,6 +22,10 @@ CSV_URLS = {
     # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   
 }
 
+JSON_URLS = {
+    'service_data_dict': 'https://open.canada.ca/data/en/recombinant-published-schema/service.json'
+}
+
 def download_csv_files(urls=CSV_URLS):
     """
     Download CSV files from the given URLs into the RAW_DATA_DIR directory.
@@ -47,6 +51,34 @@ def download_csv_files(urls=CSV_URLS):
             print(f"Downloaded: {name}.csv")
         except requests.exceptions.RequestException as e:
             print(f"Failed to download {name}.csv from {url}: {e}")
+            
+
+def download_json_files(urls=JSON_URLS):
+    """
+    Download JSON files from the given URLs into the RAW_DATA_DIR directory.
+
+    Args:
+        urls (dict): A dictionary where keys are filenames (without .json extension)
+                     and values are the URLs to the files.
+
+    Returns:
+        None
+    """
+    for name, url in urls.items():
+        file_path = RAW_DATA_DIR / f"{name}.json"
+        try:
+            # Fetch the file from the URL
+            response = requests.get(url)
+            response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
+
+            # Save the content to a file
+            with open(file_path, "wb") as file:
+                file.write(response.content)
+
+            print(f"Downloaded: {name}.json")
+        except requests.exceptions.RequestException as e:
+            print(f"Failed to download {name}.json from {url}: {e}")
+            
 
 def load_csv_from_raw(file_name):
     """
@@ -63,3 +95,7 @@ def load_csv_from_raw(file_name):
         return pd.read_csv(file_path, keep_default_na=False, na_values='')
     else:
         raise FileNotFoundError(f"File not found: {file_path}")
+
+    
+
+
