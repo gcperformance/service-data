@@ -204,31 +204,44 @@ def build_data_dictionary():
     with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    # Flatten the top-level structure
-    dd = pd.json_normalize(data)
-
-    # Extract and explode 'resources'
-    dd_r = dd.explode('resources').reset_index(drop=True)
-    dd_r = pd.json_normalize(dd_r['resources'].dropna())
-
-    # Extract and explode 'fields' within 'resources'
-    dd_r = dd_r.explode('fields').reset_index(drop=True)
+    data_dict = pd.json_normalize(data)
+    data_dict = data_dict.explode('resources').reset_index(drop=True)
+    data_dict = pd.json_normalize(data_dict['resources'])
+    data_dict = data_dict.explode('fields').reset_index(drop=True)
     
-    # Prefix all resource-related columns (except the first one)
-    dd_r = dd_r.rename(columns=lambda col: f"resource_{col}" if col != dd_r.columns[0] else col)
-
-    # Normalize 'resource_fields' and remove 'choices.' prefixed columns
-    dd_rf = pd.json_normalize(dd_r['resource_fields'].dropna())
-    dd_rf = dd_rf.loc[:, ~dd_rf.columns.str.startswith('choices.')]
-
-    # Prefix all field-related columns
-    dd_rf = dd_rf.rename(columns=lambda col: f"field_{col}")
-
-    # Drop the original nested 'resource_fields' column and merge back processed fields
-    dd_r = dd_r.drop(columns=['resource_fields']).merge(dd_rf, left_index=True, right_index=True)
-
+    data_dict_fields = pd.json_normalize(data_dict['fields'])
+    data_dict = data_dict.merge(data_dict_fields, left_index=True, right_index=True)
+    
+    # prep dictionary
+    dd_field_names = data_dict.loc[:, ~data_dict.columns.str.startswith('choices.')].drop(columns=['fields'])
+    
+    # prep choices file
+    dd_choices = data_dict.melt(
+        id_vars = ['resource_name', 'title.en', 'title.fr','id','label.en', 'label.fr'], 
+        value_vars=[col for col in data_dict.columns if col.startswith('choices.')]
+    )
+    
+    dd_choices.dropna(subset=['value'], inplace=True)
+    
+    dd_choices['code'] = dd_choices['variable'].str.split('.').str[1]
+    dd_choices['en_fr'] = dd_choices['variable'].str.split('.').str[2]
+    dd_choices = dd_choices.dropna(subset='en_fr')
+    
+    
+    dd_choices = dd_choices.pivot(index=['resource_name', 'id', 'code'], columns='en_fr', values='value')
+    dd_choices = dd_choices.reset_index()
+    
     # Standardize column names
-    dd_r = standardize_column_names(dd_r)
+    dd_field_names = standardize_column_names(dd_field_names)
+    dd_choices = standardize_column_names(dd_choices)
+
+    data_dictionary_file_dict = {
+        'dd_field_names':dd_field_names,
+        'dd_choices':dd_choices
+    }
 
     # Export to CSV
-    export_to_csv(data_dict={'data_dictionary': dd_r}, output_dir=UTILS_DIR)
+    export_to_csv(
+        data_dict=data_dictionary_file_dict, 
+        output_dir=UTILS_DIR
+    )

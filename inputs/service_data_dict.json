@@ -339,7 +339,7 @@
           "id": "program_id",
           "obligation": {
             "en": "Mandatory",
-            "fr": "Mandatory"
+            "fr": "Obligatoire"
           },
           "label": {
             "en": "Program ID Code",
@@ -4835,7 +4835,7 @@
           "id": "service_fee",
           "obligation": {
             "en": "Mandatory",
-            "fr": "Mandatory"
+            "fr": "Obligatoire"
           },
           "label": {
             "en": "Service Fees",
