@@ -58,6 +58,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 - `si_2024.csv`: [GC Service Inventory - Service Identification Information & Metrics (2024)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/c0cf9766-b85b-48c3-b295-34f72305aaf6)
 - `ss_2018.csv`: [GC Service Inventory - Service Standards & Performance Results (2018-2023)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/272143a7-533e-42a1-b72d-622116474a21)
 - `ss_2024.csv`: [GC Service Inventory - Service Standards & Performance Results (2024)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e)
+- `service_data_dict.json`: [GC Service Inventory - Data dictionary](https://open.canada.ca/data/en/recombinant-published-schema/service.json)
 
 #### `outputs/`: Produced by the Script
 
@@ -91,6 +92,8 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 
 ##### `outputs/utils/`: Supporting Files
 
+- `dd_field_names`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
+- `dd_choices`: Correspondence table between codes that appear in `ss` and `si` and their names.
 - `dept.csv`: A tidy list of departments with their IFOI IDs.
 - `drf.csv`: A flattened Departmental plans and Departmental results report.
 - `ifoi`: Exhaustive list of departmental info in English and French
@@ -165,6 +168,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── org_var.csv
 │   ├── rbpo.csv
 │   ├── serv_prog.csv
+│   ├── service_data_dict.json
 │   ├── si_2018.csv
 │   ├── si_2024.csv
 │   ├── ss_2018.csv
@@ -199,6 +203,8 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── si.csv
 │   ├── ss.csv
 │   └── utils
+│       ├── dd_choices.csv
+│       ├── dd_field_names.csv
 │       ├── dept.csv
 │       ├── drf.csv
 │       ├── ifoi.csv
