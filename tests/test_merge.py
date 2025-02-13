@@ -23,6 +23,8 @@ def test_merge_si_consistency():
     expected_total_rows = row_count_2018 + row_count_2024
 
     assert len(merged_df) == expected_total_rows, "Row count mismatch in merged service inventory dataset!"
+    assert row_count_2018 > 1, "No data in si_2018!"
+    assert row_count_2024 > 1, "No data in si_2024!"
 
 # Test for merge_ss
 def test_merge_ss_consistency():
@@ -37,4 +39,5 @@ def test_merge_ss_consistency():
     expected_total_rows = row_count_2018 + row_count_2024
 
     assert len(merged_df) == expected_total_rows, "Row count mismatch in merged service service standard dataset!"
-
+    assert row_count_2018 > 1, "No data in ss_2018!"
+    assert row_count_2024 > 1, "No data in ss_2024!"
