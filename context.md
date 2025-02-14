@@ -4858,30 +4858,6 @@ High volume regulatory transaction: is defined as the issuance of a regulatory a
 
 Grants and Contributions: A transfer payment is a monetary payment, or a transfer of goods, services or assets [made] to a third party…that does not result in the acquisition by the Government of Canada of any goods, services or assets.”  For more information on this type, please refer to the Policy on Transfer Payments.
 
-# Integrated planning Call Letter primer
-
-Integrated Call Letter Primer
-
-An integrated call letter is sent from TBS-OCIO to all government departments to formally request input to yearly reporting exercises
-
-The following provides additional information about integrated planning and reporting requirements under the TB Policy on Service and Digital: 
-
-The Departmental Plan for Service and Digital (DPSD) is an annual forward-looking three-year departmental plan for the integrated management of service, information, data, IT, and cyber security, which aligns with the CIO of Canada’s enterprise-wide integrated plan and is informed by subject-specific plans or strategies as appropriate. 
-
-The GC Service Inventory is the authoritative list of services, critical or otherwise (including important performance data) offered by federal government departments and agencies subject to the Policy on Service and Digital (PSD). A large part of the task is providing assurance on prior year information, adding any new services / updating services, and ensuring that the inventory includes information on critical services as identified in Business Impact Assessments (BIAs) and Business Continuity Plans (BCPs).  
-
-As a part of the new risk-based performance approach, quarterly reporting is required from departments/agencies on High Impact High Risk (HIHR) services, as well as an annual capacity self-assessment. The new approach focuses on the highest impact services for Canadians, serving as an early warning system in the identification of risks and blockages.  
-
-Critical Services: As defined in Appendix B of the Policy on Government Security, a critical service is a service or activity whose disruption would result in a high or very high degree of injury to the health, safety, security, or economic well-being of Canadians, or the effective functioning of the Government of Canada. The annual validation of critical service data supports the integrity of departmental data in GC EPM. TBS has added fields to collect additional data points to enhance the enterprise view of critical services for the year 2023-24, including the identification of critical services delivery locations and the specific time in the last fiscal year where there has been a disruption in the delivery of critical services.
-
-The IT Investments list of all departmental planned and ongoing IT investments over the following 3 years provides integrated decision-making, planning, and reporting to the Deputy Ministers Committee on Enterprise Planning and Prioritization (DM CEPP). This enterprise program further ensures digital investments are aligned to government priorities, direction from the GC CIO (Digital Ambition), program delivery and business needs. Integrated with Service Demand and the SSC Business Requirements Document (BRD) Online, the information collected is used to: a) prioritize the demand for SSC services, b) identify plans to achieve compliance with the published Directive on Service and Digital - Appendix G: Standard on Information Technology Provisions, c) identify 3-year SSC service line plans, d) identify to departments the availability (capacity) of services over the coming years.  
-
-The annual IT Expenditure Report collects financial data used to identify trends and opportunities for improvement in support of the GC digital government priorities. The reports, available to all departments, are also an opportunity to assess IT expenditure trends and compare future budgets against IT expenditures from departments in the same portfolio. 
-
-The Application Portfolio Management (APM) program aims to improve the maturity of APM practices across the government and provide a holistic view of the GC applications landscape, including related risks due to aging IT. The expected outcomes from the program include government-wide strategies on the renewal and ever-greening of aging applications supporting the continuity of services to Canadians. The data collected supports multi-year investment planning for applications that considers corporate risk tolerances and government priorities while enabling sound investment planning decisions.  
-
-The Annual Digital Talent Survey is a requirement under the Directive on Digital Talent. TBS will leverage the data to provide better services directly to departments, such as development of standardized job descriptions, new recruitment efforts, coordinated training opportunities, and support in addressing systemic barriers. TBS will also be providing departments with a data dashboard of their information, cross-referenced with other data insights, to help departments with their internal talent strategies. The survey will be available for download from the  Digital Talent Data and Reporting community on GCXchange in mid-November. If you have any questions on the survey, please email GCTalentGC@tbs-sct.gc.ca. 
-
 # Glossary for Key Service Terms
 
 | Terms | Definitions | Links |

@@ -204,18 +204,24 @@ def build_data_dictionary():
     with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
+    # Initial normalization of json file
     data_dict = pd.json_normalize(data)
+
+    # Explode and normalize the 'resources' portion
     data_dict = data_dict.explode('resources').reset_index(drop=True)
     data_dict = pd.json_normalize(data_dict['resources'])
+
+    # Explode the 'fields' portion
     data_dict = data_dict.explode('fields').reset_index(drop=True)
-    
+
+    # Tie the resource fields to the 'fields portion'
     data_dict_fields = pd.json_normalize(data_dict['fields'])
     data_dict = data_dict.merge(data_dict_fields, left_index=True, right_index=True)
     
-    # prep dictionary
+    # List of field names and details about their type and requirements
     dd_field_names = data_dict.loc[:, ~data_dict.columns.str.startswith('choices.')].drop(columns=['fields'])
     
-    # prep choices file
+    # List of translated code labels for fields with restricted input choices
     dd_choices = data_dict.melt(
         id_vars = ['resource_name', 'title.en', 'title.fr','id','label.en', 'label.fr'], 
         value_vars=[col for col in data_dict.columns if col.startswith('choices.')]
@@ -245,3 +251,4 @@ def build_data_dictionary():
         data_dict=data_dictionary_file_dict, 
         output_dir=UTILS_DIR
     )
+    
