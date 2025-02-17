@@ -5525,7 +5525,7 @@
           "character_limit": 1500,
           "obligation": {
             "en": "Optional",
-            "fr": "Facultatif"
+            "fr": "Optional"
           },
           "label": {
             "en": "URL to Service (French)",
