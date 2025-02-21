@@ -360,7 +360,7 @@ fiscal_yr;department_en;department_fr;org_id;service_standard_met;service_standa
 2023-2024;Federal Economic Development Agency for Southern Ontario;Agence fédérale de développement économique pour le Sud de l'Ontario;150;2;2;100.0
 2023-2024;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;0;1;0.0
 2023-2024;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;0;0;
-2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;17;25;68.0
+2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;22;31;70.96774193548387
 2023-2024;Health Canada;Santé Canada;127;35;52;67.3076923076923
 2023-2024;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;25;30;83.33333333333334
 2023-2024;Immigration, Refugees and Citizenship Canada;Immigration, Réfugiés et Citoyenneté Canada;123;23;44;52.27272727272727
@@ -395,4 +395,4 @@ fiscal_yr;department_en;department_fr;org_id;service_standard_met;service_standa
 2023-2024;Veterans Review and Appeal Board;Tribunal des anciens combattants (révision et appel);333;0;1;0.0
 2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;4;6;66.66666666666666
 
-Timestamp:2025-02-17_15:24:10
+Timestamp:2025-02-21_14:00:55

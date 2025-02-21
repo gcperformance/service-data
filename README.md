@@ -115,8 +115,15 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 
 #### `tests/`: Script tests
 
+- `README.md`: placeholder readme documentation for tests
 - `conftest.py`: configuration file for pytest
 - `test_merge.py`: testing script for merge.py
+- `test_outputs.py`: testing script for output files
+- `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
+
+##### `tests/ref`: Reference files for use with test scripts
+
+- `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
 
 #### `notebooks/`: Jupyter notebooks for testing and experiments
 
@@ -160,11 +167,12 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 ## Directory structure
 ```
 ├── README.md
+├── context.md
+├── database-normalized.dbml
 ├── database.dbml
 ├── inputs
 │   ├── ifoi_en.csv
 │   ├── ifoi_fr.csv
-│   ├── op_cost.csv
 │   ├── org_var.csv
 │   ├── rbpo.csv
 │   ├── serv_prog.csv
@@ -214,6 +222,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │       └── ss_all.csv
 ├── requirements.txt
 ├── src
+│   ├── __init__.py
 │   ├── clean.py
 │   ├── export.py
 │   ├── load.py
@@ -223,6 +232,11 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── qa_issues_descriptions.csv
 │   └── utils.py
 └── tests
+    ├── README.md
     ├── conftest.py
-    └── test_merge.py
+    ├── generate_reference.py
+    ├── ref
+    │   └── reference_fields.csv
+    ├── test_merge.py
+    └── test_outputs.py
 ```

@@ -414,7 +414,7 @@ fiscal_yr;department_en;department_fr;org_id;service_with_std_count;service_coun
 2023-2024;Financial Consumer Agency of Canada;Agence de la consommation en matière financière du Canada;151;1;2;50.0
 2023-2024;Financial Transactions and Reports Analysis Centre of Canada;Centre d'analyse des opérations et déclarations financières du Canada;152;3;6;50.0
 2023-2024;Fisheries and Oceans Canada;Pêches et Océans Canada;125;0;75;0.0
-2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;38;38;100.0
+2023-2024;Global Affairs Canada;Affaires mondiales Canada;126;45;75;60.0
 2023-2024;Health Canada;Santé Canada;127;45;84;53.57142857142857
 2023-2024;Housing, Infrastructure and Communities Canada;Logement, Infrastructure et Collectivités Canada;237;17;17;100.0
 2023-2024;Immigration and Refugee Board of Canada;Commission de l'immigration et du statut de réfugié du Canada;174;0;1;0.0
@@ -458,4 +458,4 @@ fiscal_yr;department_en;department_fr;org_id;service_with_std_count;service_coun
 2023-2024;Women and Gender Equality Canada;Femmes et Égalité des genres Canada;246;3;3;100.0
 2024-2025;Royal Canadian Mounted Police;Gendarmerie royale du Canada;295;0;1;0.0
 
-Timestamp:2025-02-17_15:24:10
+Timestamp:2025-02-21_14:00:55

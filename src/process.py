@@ -352,7 +352,7 @@ def process_files(si, ss):
     maf8['last_service_improvement_yr'] = pd.to_numeric(maf8['last_service_improvement'].str.split('-').str[1], errors='coerce')
     
     maf8['yrs_since_last_service_improvement'] = maf8['report_yr']-maf8['last_service_improvement_yr']
-    maf8['last_service_improvement_within_1_yr'] = maf8['yrs_since_last_service_improvement'] <= 1
+    maf8['last_service_improvement_within_1_yr'] = (maf8['yrs_since_last_service_improvement'] <= 1) & (maf8['yrs_since_last_service_improvement'] >= 0)
     
     maf8 = maf8.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
         improved_services_count=('last_service_improvement_within_1_yr', 'sum'),

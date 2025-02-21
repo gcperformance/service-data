@@ -4677,7 +4677,7 @@
           "id": "program_name_en",
           "obligation": {
             "en": "Mandatory",
-            "fr": "Obligatoire"
+            "fr": "Mandatory"
           },
           "label": {
             "en": "Program Name (English)",
