@@ -65,7 +65,7 @@ def process_files(si, ss):
     # Unpivot (i.e. melt) application volume columnns
     si_vol = pd.melt(
         si, 
-        id_vars=['fiscal_yr', 'service_id'], 
+        id_vars=['fiscal_yr','org_id', 'service_id'], 
         var_name='channel',
         value_vars=app_cols,
         value_name='volume'
@@ -107,7 +107,7 @@ def process_files(si, ss):
     # Unpivot (i.e. melt) online interaction point columns
     si_oip = pd.melt(
         si, 
-        id_vars=['fiscal_yr', 'service_id'],
+        id_vars=['fiscal_yr', 'org_id', 'service_id'],
         var_name='online_interaction_point', 
         value_vars=oip_cols, 
         value_name='activation')
@@ -128,7 +128,7 @@ def process_files(si, ss):
     # Filter for 'TML' type and aggregate volume-related columns by service and channel
     ss_tml_perf_vol = (
         ss.loc[ss['type'] == 'TML']
-        .groupby(['fiscal_yr', 'service_id', 'channel']).agg(
+        .groupby(['fiscal_yr', 'org_id', 'service_id', 'channel']).agg(
             volume_meeting_target = ('volume_meeting_target', 'sum'),
             total_volume = ('total_volume', 'sum')
         ).reset_index()
@@ -160,7 +160,7 @@ def process_files(si, ss):
     # =================================
     # si_reviews: Service reviews 
     # What fraction of services have met the requirement to be reviewed in the past 5 years?
-    si_reviews = si.loc[:,['fiscal_yr', 'service_id', 'org_id', 'last_service_review', 'last_service_improvement']]
+    si_reviews = si.loc[:,['fiscal_yr','org_id','service_id', 'last_service_review', 'last_service_improvement']]
     
     si_reviews['report_yr'] = pd.to_numeric(si_reviews['fiscal_yr'].str.split('-').str[1], errors='coerce').astype(int)
     
@@ -172,7 +172,7 @@ def process_files(si, ss):
     si_reviews['yrs_since_last_service_improvement'] = si_reviews['report_yr']-si_reviews['last_service_improvement_yr']
     si_reviews['last_service_improvement_within_5_yrs'] = si_reviews['yrs_since_last_service_improvement'] <= 5
     
-    si_reviews = si_reviews.groupby(['fiscal_yr']).agg(
+    si_reviews = si_reviews.groupby(['fiscal_yr', 'org_id']).agg(
         total_services = ('service_id', 'count'),
         services_reviewed_in_past_5_yrs = ('last_service_review_within_5_yrs', 'sum'),
         services_improved_in_past_5_yrs = ('last_service_improvement_within_5_yrs', 'sum')
@@ -404,11 +404,11 @@ def process_files(si, ss):
         "si_fy_service_count": si_fy_service_count,
         "si_reviews": si_reviews,
         "service_fte_spending": service_fte_spending,
-        "maf1": maf1,
-        "maf2": maf2,
-        "maf5": maf5,
-        "maf6": maf6,
-        "maf8": maf8,
+        # "maf1": maf1,
+        # "maf2": maf2,
+        # "maf5": maf5,
+        # "maf6": maf6,
+        # "maf8": maf8,
         "maf_all": maf_all
     }
     

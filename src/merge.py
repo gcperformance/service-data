@@ -159,6 +159,9 @@ def merge_si():
         (si['service_scope'].str.contains('EXTERN', regex=True)) | 
         (si['service_scope'].str.contains('ENTERPRISE', regex=True))
     )
+
+    # Unique row-level identifier (primary key)
+    si['fy_org_id_service_id'] = si[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
     
     export_to_csv(
     data_dict={'si_all': si},
@@ -267,6 +270,9 @@ def merge_ss():
     
     # Service standard channel: single value, uppercase
     ss['channel'] = ss['channel'].str.upper()
+
+    # Unique row-level identifier (primary key) to connect to service inventory
+    ss['fy_org_id_service_id'] = ss[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
 
     export_to_csv(
         data_dict={'ss_all': ss},
