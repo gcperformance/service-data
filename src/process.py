@@ -229,14 +229,14 @@ def process_files(si, ss):
     maf2 = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'department_fr', 'org_id', 'target_met']].dropna()
 
     maf2['service_standard_met'] = maf2['target_met'] == 'Y'
-    maf2['service_standard_total'] = maf2['target_met'].isin(['Y', 'N'])
+    maf2['service_standard_count'] = maf2['target_met'].isin(['Y', 'N'])
     
     maf2 = maf2.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id']).agg(
         service_standard_met=('service_standard_met', 'sum'),
-        service_standard_total=('service_standard_total', 'sum')
+        service_standard_count=('service_standard_count', 'sum')
     ).reset_index()
 
-    maf2['maf2_score'] = (maf2['service_standard_met']/maf2['service_standard_total'])*100
+    maf2['maf2_score'] = (maf2['service_standard_met']/maf2['service_standard_count'])*100
     # maf2['maf2_result'] = pd.cut(maf2['maf2_score'], bins=score_bins, labels=score_results, right=False)
     
     # =================================
