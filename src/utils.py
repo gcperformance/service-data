@@ -236,6 +236,7 @@ def build_data_dictionary():
     
     dd_choices = dd_choices.pivot(index=['resource_name', 'id', 'code'], columns='en_fr', values='value')
     dd_choices = dd_choices.reset_index()
+    dd_choices = dd_choices.loc[dd_choices['id'] != 'program_id']
     
     # Standardize column names
     dd_field_names = standardize_column_names(dd_field_names)
