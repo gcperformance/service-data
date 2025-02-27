@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-from src.clean import clean_percentage, normalize_string, standardize_column_names, clean_fiscal_yr
-from src.load import load_csv_from_raw
 from src.export import export_to_csv
 from src.utils import build_drf
 
@@ -383,7 +381,7 @@ def process_files(si, ss):
     si_drf = si.loc[:, ['service_id', 'fiscal_yr', 'program_id', 'org_id']]
     si_drf['program_id'] = si_drf['program_id'].str.split(',')
     si_drf = si_drf.explode('program_id')
-    si_drf['si_yr'] = si_drf['fiscal_yr'].str.split('-').str[1].astype(int)
+    # si_drf['si_yr'] = si_drf['fiscal_yr'].str.split('-').str[1].astype(int)
     si_drf = si_drf[si_drf['program_id'].notna()]
     si_drf['org_id'] = si_drf['org_id'].astype(int)
     
@@ -391,9 +389,10 @@ def process_files(si, ss):
         si_drf, 
         drf, 
         how='left', 
-        left_on=['si_yr', 'program_id', 'org_id'], 
+        left_on=['fiscal_yr', 'program_id', 'org_id'], 
         right_on=['si_link_yr', 'program_id', 'org_id']
     )
+    service_fte_spending.drop(columns="si_link_yr", inplace=True)
        
     # === EXPORT DATAFRAMES ===
     indicator_exports = {

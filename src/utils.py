@@ -150,7 +150,13 @@ def build_drf():
     # if measure year > latest service fy, = latest service fy, else use measure_yr
     drf.loc[drf['measure_yr']>latest_si_fy, 'si_link_yr'] = latest_si_fy
     drf.loc[drf['measure_yr']<=latest_si_fy, 'si_link_yr'] = drf['measure_yr']
-    drf['si_link_yr'] = drf['si_link_yr'].astype(int) 
+    drf['si_link_yr'] = drf['si_link_yr'].astype(int)
+
+    # Return years to fiscal year YYYY-YYYY format
+    drf['report_yr'] = (drf['report_yr']-1).apply(str) +"-"+ (drf['report_yr']).apply(str)
+    drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
+    drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
+
 
     export_to_csv(
         data_dict={'drf': drf},
