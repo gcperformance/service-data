@@ -69,12 +69,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 ##### `outputs/indicators/`: Summary Files for Visualization and Review
 
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
-- `maf1.csv`: percentage of services that have service standards by department
-- `maf2.csv`: percentage of service standards that met their target by department
-- `maf5.csv`: percentage of applicable services that can be completed online end-to-end by department
-- `maf6.csv`: percentage of client interaction points that are available online for services
-- `maf8.csv`: percentage of services which have used client feedback to improve services in the year prior to reporting
-- `maf_all.csv`: a concatenated table with all the maf columns and scores
+- `maf_all.csv`: a concatenated table with all the maf columns and scores (percentage of services that have service standards, percentage of applicable services that can be completed online end-to-end, percentage of client interaction points that are available online, percentage of services which have used client feedback to improve services in the year prior to reporting)
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
@@ -189,11 +184,6 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   └── qa-uris.ipynb
 ├── outputs
 │   ├── indicators
-│   │   ├── maf1.csv
-│   │   ├── maf2.csv
-│   │   ├── maf5.csv
-│   │   ├── maf6.csv
-│   │   ├── maf8.csv
 │   │   ├── maf_all.csv
 │   │   ├── service_fte_spending.csv
 │   │   ├── si_fy_interaction_sum.csv
