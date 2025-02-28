@@ -14,6 +14,8 @@ on:
 jobs:
   generate-files:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed for creating releases
     steps:
       # Check out the repository
       - name: Checkout repository
@@ -29,12 +31,19 @@ jobs:
 
       - name: Run main py script
         run: python main.py
+        
+      - name: Install pandas for SQLite database creation
+        run: pip install pandas
+
+      - name: Create SQLite database
+        run: python src/create_sqlite.py
 
       - name: Get current date and commit hash
         id: metadata
         run: |
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "time=$(date +'%H:%M')" >> $GITHUB_OUTPUT
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -47,7 +56,7 @@ jobs:
                 - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
             Contains SQLite database with all processed data
           files: |
-            outputs/service_data.db
+            outputs/service_data.sqlite
             outputs/**/*.csv
           make_latest: true
         env:
