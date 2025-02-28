@@ -1,7 +1,5 @@
 import pandas as pd
-import numpy as np
 from pathlib import Path
-import re
 import json
 
 from src.load import load_csv_from_raw
@@ -9,7 +7,7 @@ from src.export import export_to_csv
 from src.clean import standardize_column_names, clean_fiscal_yr
 
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
-RAW_DATA_DIR = Path(__file__).parent.parent / "inputs"
+BASE_INPUT_DIR = Path(__file__).parent.parent / "inputs"
 
 def dept_list():
     """
@@ -204,7 +202,7 @@ def build_data_dictionary():
     """Builds a structured data dictionary from a JSON file, processes nested data, 
     renames columns, standardizes names, and exports to CSV."""
     
-    file_path = RAW_DATA_DIR / 'service_data_dict.json'
+    file_path = BASE_INPUT_DIR / 'service_data_dict.json'
     
     # Load JSON file into a dictionary
     with open(file_path, "r", encoding="utf-8") as file:

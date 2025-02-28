@@ -5,11 +5,15 @@ from pathlib import Path
 from src.export import export_to_csv
 from src.utils import build_drf
 
-OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
-INDICATORS_DIR = Path(__file__).parent.parent / "outputs" / "indicators"
-UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
+def process_files(si, ss, snapshot_date=None):
+    OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
+    
+    if snapshot_date:
+        OUTPUT_DIR = OUTPUT_DIR / "snapshots" / snapshot_date
 
-def process_files(si, ss):
+    INDICATORS_DIR = OUTPUT_DIR / "indicators"
+    UTILS_DIR = OUTPUT_DIR / "utils"
+    
     # === RE-SCOPE SERVICE INVENTORY ===
     # Only include external or enterprise services in all indicators and analysis
     # Filter out NaN and False values from 'service_scope_ext_or_ent'
@@ -37,7 +41,7 @@ def process_files(si, ss):
         "si": si,
         "ss": ss,
     }
-    
+
     export_to_csv(
         data_dict=output_exports,
         output_dir=OUTPUT_DIR

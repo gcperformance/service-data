@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 import pytz
 import sqlite3
@@ -19,7 +18,7 @@ def export_to_csv(data_dict, output_dir):
     current_datetime = pd.Timestamp.now(tz=timezone)
     current_datetime_str = current_datetime.strftime("%Y-%m-%d_%H:%M:%S")
     
-    # Ensure directory exist
+    # Ensure directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for name, df in data_dict.items():

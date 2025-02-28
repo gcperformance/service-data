@@ -5,14 +5,12 @@ from pathlib import Path
 from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
 from src.load import load_csv_from_raw
 from src.export import export_to_csv
-from src.utils import dept_list, sid_list
+from src.utils import dept_list
 
-OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
-
-def merge_si():
-    """Combining historical and live service inventory data"""
+def merge_si(snapshot_date=None):
+    """Combining service inventory data from previous (2018) and current (2024) format"""
     
     # Load org variant list and program-service correspondence table
     org_var = load_csv_from_raw('org_var.csv')
@@ -21,8 +19,8 @@ def merge_si():
     # Load department list from utils
     dept = dept_list()
     
-    si_2018 = load_csv_from_raw('si_2018.csv')
-    si_2024 = load_csv_from_raw('si_2024.csv')
+    si_2018 = load_csv_from_raw('si_2018.csv', snapshot_date)
+    si_2024 = load_csv_from_raw('si_2024.csv', snapshot_date)
     
     # Test breaker - uncomment to break merge_si() and check the row count test
     # si_2024 = si_2024.head()
@@ -163,27 +161,27 @@ def merge_si():
     # Unique row-level identifier (primary key)
     si['fy_org_id_service_id'] = si[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
     
-    export_to_csv(
-    data_dict={'si_all': si},
-    output_dir=UTILS_DIR
-    )
+    if snapshot_date:
+        UTILS_DIR = Path(__file__).parent.parent / "outputs" / "snapshots"/ snapshot_date / "utils"
 
-    sid_list(si)
+    export_to_csv(
+        data_dict={'si_all': si},
+        output_dir=UTILS_DIR
+    )
 
     return si
 
-def merge_ss():
-    """Combining historical and live service standards data"""
+def merge_ss(snapshot_date=None):
+    """Combining service standard data from previous (2018) and current (2024) format"""
 
     # Load org variant list and program-service correspondence table
     org_var = load_csv_from_raw('org_var.csv')
-    serv_prog = load_csv_from_raw('serv_prog.csv')
-    
+
     # Load department list from utils
     dept = dept_list()
     
-    ss_2018 = load_csv_from_raw('ss_2018.csv')
-    ss_2024 = load_csv_from_raw('ss_2024.csv')
+    ss_2018 = load_csv_from_raw('ss_2018.csv', snapshot_date)
+    ss_2024 = load_csv_from_raw('ss_2024.csv', snapshot_date)
 
     # Test breaker - uncomment to break merge_ss() and check the row count test
     # ss_2024 = ss_2024.head()
@@ -273,6 +271,9 @@ def merge_ss():
 
     # Unique row-level identifier (primary key) to connect to service inventory
     ss['fy_org_id_service_id'] = ss[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
+
+    if snapshot_date:
+        UTILS_DIR = Path(__file__).parent.parent / "outputs" / "snapshots"/ snapshot_date / "utils"
 
     export_to_csv(
         data_dict={'ss_all': ss},

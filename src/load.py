@@ -3,10 +3,11 @@ import requests
 from pathlib import Path
 
 # Define the path to the raw data directory
-RAW_DATA_DIR = Path(__file__).parent.parent / "inputs"
+BASE_INPUT_DIR = Path(__file__).parent.parent / "inputs"
+BASE_OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
 
 # Ensure the directory exists
-RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+BASE_INPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # URLs for datasets
 CSV_URLS = {
@@ -28,7 +29,7 @@ JSON_URLS = {
 
 def download_csv_files(urls=CSV_URLS):
     """
-    Download CSV files from the given URLs into the RAW_DATA_DIR directory.
+    Download CSV files from the given URLs into the BASE_INPUT_DIR directory.
 
     Args:
         urls (dict): A dictionary where keys are filenames (without .csv extension)
@@ -38,7 +39,7 @@ def download_csv_files(urls=CSV_URLS):
         None
     """
     for name, url in urls.items():
-        file_path = RAW_DATA_DIR / f"{name}.csv"
+        file_path = BASE_INPUT_DIR / f"{name}.csv"
         try:
             # Fetch the file from the URL
             response = requests.get(url)
@@ -55,7 +56,7 @@ def download_csv_files(urls=CSV_URLS):
 
 def download_json_files(urls=JSON_URLS):
     """
-    Download JSON files from the given URLs into the RAW_DATA_DIR directory.
+    Download JSON files from the given URLs into the BASE_INPUT_DIR directory.
 
     Args:
         urls (dict): A dictionary where keys are filenames (without .json extension)
@@ -65,7 +66,7 @@ def download_json_files(urls=JSON_URLS):
         None
     """
     for name, url in urls.items():
-        file_path = RAW_DATA_DIR / f"{name}.json"
+        file_path = BASE_INPUT_DIR / f"{name}.json"
         try:
             # Fetch the file from the URL
             response = requests.get(url)
@@ -80,22 +81,24 @@ def download_json_files(urls=JSON_URLS):
             print(f"Failed to download {name}.json from {url}: {e}")
             
 
-def load_csv_from_raw(file_name):
+def load_csv_from_raw(file_name, snapshot_date=None):
     """
-    Load a CSV file from the RAW_DATA_DIR directory.
+    Load a CSV file from the BASE_INPUT_DIR directory.
 
     Args:
         file_name (str): The name of the CSV file (e.g., "org_var.csv").
+        snapshot_date (str, YYYY-MM-DD, optional): the date of the snapshot
 
     Returns:
         pd.DataFrame: The loaded DataFrame.
     """
-    file_path = RAW_DATA_DIR / file_name
+    
+    file_path = BASE_INPUT_DIR / file_name
+
+    if snapshot_date:
+        file_path = BASE_INPUT_DIR / "snapshots" / snapshot_date / file_name
+
     if file_path.exists():
         return pd.read_csv(file_path, keep_default_na=False, na_values='')
     else:
         raise FileNotFoundError(f"File not found: {file_path}")
-
-    
-
-
