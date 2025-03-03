@@ -201,7 +201,8 @@ def build_data_dictionary(config):
     """Builds a structured data dictionary from a JSON file, processes nested data, 
     renames columns, standardizes names, and exports to CSV."""
     
-    file_path = config['input_dir'] / 'service_data_dict.json'
+    INPUT_DIR = config['input_dir']
+    file_path =  INPUT_DIR / 'service_data_dict.json'
     
     # Load JSON file into a dictionary
     with open(file_path, "r", encoding="utf-8") as file:

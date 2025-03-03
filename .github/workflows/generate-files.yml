@@ -35,70 +35,45 @@ jobs:
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "time=$(date +'%H:%M')" >> $GITHUB_OUTPUT
 
-      - name: Detect Snapshot Dates
-        id: detect_snapshots
-        run: |
-          # Find all unique snapshot date folders in inputs/snapshots/ and outputs/snapshots/
-          SNAPSHOT_DATES=$(find inputs/snapshots/ -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort -u)
-          
-          echo "Found snapshots:"
-          echo "$SNAPSHOT_DATES"
-
-          # Store in environment variable (space-separated list)
-          echo "snapshot_dates=$SNAPSHOT_DATES" >> $GITHUB_ENV
-
       - name: Run main.py for live data
         run: python main.py
 
-      - name: Run main.py for Each Snapshot Date
+      - name: Prepare live files for release
+        id: prepare_live_files
         run: |
-          python main.py --snapshot 2025-03-01
+          mkdir -p live_data_release
+          echo "Copying live data files..."
+          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
+          
+          echo "live_data_dir=live_data_release" >> $GITHUB_ENV
 
+      - name: Run main.py for 2025-03-01 snapshot date
+        run: python main.py --snapshot 2025-03-01
+
+      - name: Prepare 2025-03-01 files for Release
+        id: prepare_files_2025-03-01
+        run: |
+          mkdir -p snapshots_release/snapshot_2025-03-01
+          echo "Copying snapshot data files for 2025-03-01..."
+          find outputs/snapshots/2025-03-01 inputs/snapshots/2025-03-01 -type f -name "*.csv" -exec cp {} snapshots_release/snapshot_2025-03-01/ \; -exec echo "Copied: {}" \;
+          for file in snapshots_release/snapshot_2025-03-01/*.csv; do
+            mv "$file" "snapshots_release/2025-03-01_$(basename "$file")"
+          done
+          
+          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
 
       - name: Create SQLite database
         run: python src/create_sqlite.py
 
-      - name: Prepare Files for Release
-        id: prepare_files
-        run: |
-          mkdir -p snapshots_release
-          mkdir -p live_data_release
-
-          echo "Copying live data files..."
-          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
-
-          if [ -n "${{ env.snapshot_dates }}" ]; then
-            for SNAPSHOT_DATE in ${{ env.snapshot_dates }}; do
-              SNAPSHOT_DIR="snapshots_${SNAPSHOT_DATE}"
-              mkdir -p "snapshots_release/$SNAPSHOT_DIR"
-              echo "Processing snapshot: $SNAPSHOT_DATE"
-
-              if [ -d "inputs/snapshots/$SNAPSHOT_DATE" ]; then
-                echo "Copying from inputs/snapshots/$SNAPSHOT_DATE"
-                find inputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
-              fi
-
-              if [ -d "outputs/snapshots/$SNAPSHOT_DATE" ]; then
-                echo "Copying from outputs/snapshots/$SNAPSHOT_DATE"
-                find outputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
-              fi
-            done
-          else
-            echo "No snapshots found. Skipping snapshot processing."
-          fi
-
-          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
-          echo "live_data_dir=live_data_release" >> $GITHUB_ENV
-
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
           name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
           body: |
             Automated service data release for ${{ steps.metadata.outputs.date }}
-                - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
-                - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
+              - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
+              - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
             Contains:
               - Live data CSVs in the root directory
               - Snapshots stored in snapshots_YYYY-MM-DD/ directories
@@ -113,3 +88,4 @@ jobs:
       # Cleanup
       - name: Cleanup
         run: rm -rf outputs inputs snapshots_release live_data_release
+
