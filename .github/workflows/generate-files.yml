@@ -52,15 +52,7 @@ jobs:
 
       - name: Run main.py for Each Snapshot Date
         run: |
-          if [ -n "${{ env.snapshot_dates }}" ]; then
-            IFS=' ' read -r -a SNAPSHOT_ARRAY <<< "${{ env.snapshot_dates }}"
-            for SNAPSHOT_DATE in "${SNAPSHOT_ARRAY[@]}"; do
-              echo "Running main.py for snapshot: $SNAPSHOT_DATE"
-              python main.py --snapshot "$SNAPSHOT_DATE"
-            done
-          else
-            echo "No snapshots found. Skipping snapshot processing."
-          fi
+          python main.py --snapshot 2025-03-01
 
 
       - name: Create SQLite database
