@@ -114,7 +114,7 @@ This value must not be negative.
 Ce champ doit être un chiffre, ""NA"", ou ""ND""
 Cette valeur ne doit être négative.
 ";
-service;Service Identification Information & Metrics;Information et paramètres sur l’identification des services;num_applications_online;text;Mandatory;Mandatory;Number of Applications Submitted Online;Nombre de demandes soumises en ligne;"Identifies the number of applications submitted in a fiscal year for the online channel. A value of 0 means no applications were received for this channel; ND means there is no data collected for this channel; and NA means no applications can be submitted through this channel.
+service;Service Identification Information & Metrics;Information et paramètres sur l’identification des services;num_applications_online;text;Mandatory;Obligatoire;Number of Applications Submitted Online;Nombre de demandes soumises en ligne;"Identifies the number of applications submitted in a fiscal year for the online channel. A value of 0 means no applications were received for this channel; ND means there is no data collected for this channel; and NA means no applications can be submitted through this channel.
 ";"Indique le nombre de demandes reçues en ligne au cours d'un exercice. La valeur 0 signifie qu'aucune demande n'a été reçue via ce mode de prestation, aucune donnée (ND) signifie qu'aucune donnée n’est disponible, et sans objet (NA) signifie que le service n’est pas offert au moyen de ce mode de prestation.
 ";"This field must not be empty.
 This field must be either a number, ""NA"", or ""ND""
@@ -252,4 +252,4 @@ service-std;Service Standards & Performance Results;Normes de service et résult
 service-std;Service Standards & Performance Results;Normes de service et résultats du rendement;owner_org;text;Mandatory;Obligatoire;Department ID;ID du ministère;Identifies the applied ID of the department or agency.;Identifie la ID d'usage du ministère ou de l'organisme.;;;
 service-std;Service Standards & Performance Results;Normes de service et résultats du rendement;owner_org_title;text;Mandatory;Obligatoire;Department Name;Nom du ministère;Identifies the applied title of the department or agency.;Identifie le titre d'usage du ministère ou de l'organisme.;;;
 
-Timestamp:2025-03-03_11:55:28
+Timestamp:2025-03-03_15:30:18
