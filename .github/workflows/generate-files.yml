@@ -28,12 +28,6 @@ jobs:
       - name: Install requirements for python
         run: pip install -r requirements.txt
 
-      - name: Run main py script
-        run: python main.py
-        
-      - name: Create SQLite database
-        run: python src/create_sqlite.py
-
       - name: Get current date and commit hash
         id: metadata
         run: |
@@ -53,41 +47,61 @@ jobs:
           # Store in environment variable (space-separated list)
           echo "snapshot_dates=$SNAPSHOT_DATES" >> $GITHUB_ENV
 
+      - name: Run main.py for live data
+        run: python main.py
+
+      - name: Run main.py for Each Snapshot Date
+        run: |
+          if [ -n "${{ env.snapshot_dates }}" ]; then
+            IFS=' ' read -r -a SNAPSHOT_ARRAY <<< "${{ env.snapshot_dates }}"
+            for SNAPSHOT_DATE in "${SNAPSHOT_ARRAY[@]}"; do
+              echo "Running main.py for snapshot: $SNAPSHOT_DATE"
+              python main.py --snapshot "$SNAPSHOT_DATE"
+            done
+          else
+            echo "No snapshots found. Skipping snapshot processing."
+          fi
+
+
+      - name: Create SQLite database
+        run: python src/create_sqlite.py
+
       - name: Prepare Files for Release
         id: prepare_files
         run: |
           mkdir -p snapshots_release
           mkdir -p live_data_release
 
-          # Copy all "live" CSVs excluding snapshots
-          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \;
+          echo "Copying live data files..."
+          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
 
-          # Loop through detected snapshot dates
-          for SNAPSHOT_DATE in ${{ env.snapshot_dates }}; do
-            SNAPSHOT_DIR="snapshots_${SNAPSHOT_DATE}"
-            mkdir -p "snapshots_release/$SNAPSHOT_DIR"
-            echo "Processing snapshot: $SNAPSHOT_DATE"
+          if [ -n "${{ env.snapshot_dates }}" ]; then
+            for SNAPSHOT_DATE in ${{ env.snapshot_dates }}; do
+              SNAPSHOT_DIR="snapshots_${SNAPSHOT_DATE}"
+              mkdir -p "snapshots_release/$SNAPSHOT_DIR"
+              echo "Processing snapshot: $SNAPSHOT_DATE"
 
-            # Only copy CSV files if the directories exist
-            if [ -d "inputs/snapshots/$SNAPSHOT_DATE" ]; then
-              echo "Copying from inputs/snapshots/$SNAPSHOT_DATE"
-              find inputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
-            fi
+              if [ -d "inputs/snapshots/$SNAPSHOT_DATE" ]; then
+                echo "Copying from inputs/snapshots/$SNAPSHOT_DATE"
+                find inputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
+              fi
 
-            if [ -d "outputs/snapshots/$SNAPSHOT_DATE" ]; then
-              echo "Copying from outputs/snapshots/$SNAPSHOT_DATE"
-              find outputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
-            fi
-          done
+              if [ -d "outputs/snapshots/$SNAPSHOT_DATE" ]; then
+                echo "Copying from outputs/snapshots/$SNAPSHOT_DATE"
+                find outputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
+              fi
+            done
+          else
+            echo "No snapshots found. Skipping snapshot processing."
+          fi
 
           echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
           echo "live_data_dir=live_data_release" >> $GITHUB_ENV
 
-
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ github.sha }}
+          tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
           name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
           body: |
             Automated service data release for ${{ steps.metadata.outputs.date }}
