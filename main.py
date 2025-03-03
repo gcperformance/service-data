@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 
-from src.load import download_csv_files, CSV_URLS, download_json_files, JSON_URLS
+from src.load import download_csv_files, download_json_files
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
@@ -15,7 +15,7 @@ from src.utils import copy_raw_to_utils, build_data_dictionary
 
 def get_config(snapshot_date=None):
     """Returns a config dictionary containing input/output directories."""
-    base_dir = Path(__file__).parent.parent
+    base_dir = Path(__file__).parent
     
     input_dir = base_dir / "inputs"
     input_snapshot_dir = input_dir
@@ -23,6 +23,23 @@ def get_config(snapshot_date=None):
     indicators_dir = output_dir / "indicators"
     utils_dir = output_dir / "utils"
     qa_dir = output_dir / "qa"
+
+    csv_urls = {
+        'si_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a/download/service_inventory_2018-2023.csv',
+        'si_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/c0cf9766-b85b-48c3-b295-34f72305aaf6/download/service.csv',
+        'ss_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/272143a7-533e-42a1-b72d-622116474a21/download/service_standards_2018-2023.csv',
+        'ss_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e/download/service-std.csv',
+        'org_var': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-org-variants.csv',
+        'serv_prog': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-service-program.csv',
+        'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv',
+        'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv',
+        'rbpo': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895/download/rbpo_rppo_en.csv',
+        # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   
+    }
+
+    json_urls = {
+        'service_data_dict': 'https://open.canada.ca/data/en/recombinant-published-schema/service.json'
+    }
 
     if snapshot_date:
         input_snapshot_dir = input_dir / "snapshots" / snapshot_date
@@ -38,7 +55,9 @@ def get_config(snapshot_date=None):
         "output_dir": output_dir,
         "indicators_dir": indicators_dir,
         "utils_dir": utils_dir,
-        "qa_dir": qa_dir
+        "qa_dir": qa_dir,
+        "csv_urls": csv_urls,
+        "json_urls": json_urls
     }
 
 
@@ -83,26 +102,26 @@ def main():
 
         # Download and process raw data
         logging.info("Downloading raw data...")
-        download_csv_files()
-        download_json_files()
+        download_csv_files(config)
+        download_json_files(config)
 
         # Merge historical data
         logging.info("Merging historical data...")
-        si = merge_si(snapshot_date)
-        ss = merge_ss(snapshot_date)
+        si = merge_si(config)
+        ss = merge_ss(config)
 
         # Generate processed files
         logging.info("Generating processed files...")
-        process_files(si, ss, snapshot_date)
+        process_files(si, ss, config)
 
         # Run QA checks
         logging.info("Running QA checks...")
-        qa_check(si, ss)
+        qa_check(si, ss, config)
 
         # Copying files from raw to utils
         logging.info("Copying files from input to utils...")
-        copy_raw_to_utils()
-        build_data_dictionary()
+        copy_raw_to_utils(config)
+        build_data_dictionary(config)
 
         # Create SQLite database
         logging.info("Creating SQLite database...")

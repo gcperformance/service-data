@@ -1,19 +1,15 @@
 import pandas as pd
 import numpy as np
-from pathlib import Path
 
 from src.export import export_to_csv
-from src.utils import build_drf
+from src.utils import build_drf, sid_list
 
-def process_files(si, ss, snapshot_date=None):
-    OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
+def process_files(si, ss, config):
+    OUTPUT_DIR = config['output_dir']
+    INDICATORS_DIR = config['indicators_dir']
     
-    if snapshot_date:
-        OUTPUT_DIR = OUTPUT_DIR / "snapshots" / snapshot_date
+    sid_list = sid_list(si, config)
 
-    INDICATORS_DIR = OUTPUT_DIR / "indicators"
-    UTILS_DIR = OUTPUT_DIR / "utils"
-    
     # === RE-SCOPE SERVICE INVENTORY ===
     # Only include external or enterprise services in all indicators and analysis
     # Filter out NaN and False values from 'service_scope_ext_or_ent'
@@ -377,7 +373,7 @@ def process_files(si, ss, snapshot_date=None):
     
     # === SPENDING & FTEs BY PROGRAM ===
     # Load DRF data from utils (i.e. RBPO)
-    drf = build_drf()
+    drf = build_drf(config)
     drf['org_id'] = drf['org_id'].astype(int)
 
     # =================================
@@ -385,7 +381,6 @@ def process_files(si, ss, snapshot_date=None):
     si_drf = si.loc[:, ['service_id', 'fiscal_yr', 'program_id', 'org_id']]
     si_drf['program_id'] = si_drf['program_id'].str.split(',')
     si_drf = si_drf.explode('program_id')
-    # si_drf['si_yr'] = si_drf['fiscal_yr'].str.split('-').str[1].astype(int)
     si_drf = si_drf[si_drf['program_id'].notna()]
     si_drf['org_id'] = si_drf['org_id'].astype(int)
     

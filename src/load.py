@@ -1,45 +1,19 @@
 import pandas as pd
 import requests
-from pathlib import Path
 
-# Define the path to the raw data directory
-BASE_INPUT_DIR = Path(__file__).parent.parent / "inputs"
-BASE_OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
-
-# Ensure the directory exists
-BASE_INPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-# URLs for datasets
-CSV_URLS = {
-    'si_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a/download/service_inventory_2018-2023.csv',
-    'si_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/c0cf9766-b85b-48c3-b295-34f72305aaf6/download/service.csv',
-    'ss_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/272143a7-533e-42a1-b72d-622116474a21/download/service_standards_2018-2023.csv',
-    'ss_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e/download/service-std.csv',
-    'org_var': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-org-variants.csv',
-    'serv_prog': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-service-program.csv',
-    'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv',
-    'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv',
-    'rbpo': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895/download/rbpo_rppo_en.csv',
-    # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   
-}
-
-JSON_URLS = {
-    'service_data_dict': 'https://open.canada.ca/data/en/recombinant-published-schema/service.json'
-}
-
-def download_csv_files(urls=CSV_URLS):
+def download_csv_files(config):
     """
-    Download CSV files from the given URLs into the BASE_INPUT_DIR directory.
+    Download CSV files from the given URLs into the appropriate directory. See config dictionary in main.py
 
     Args:
-        urls (dict): A dictionary where keys are filenames (without .csv extension)
-                     and values are the URLs to the files.
+        config (dict): dictionary containig snapshot_date, directories, urls
 
     Returns:
         None
     """
-    for name, url in urls.items():
-        file_path = BASE_INPUT_DIR / f"{name}.csv"
+    for name, url in config['csv_urls'].items():
+        INPUT_DIR = config['input_dir']
+        file_path =  INPUT_DIR / f"{name}.csv"
         try:
             # Fetch the file from the URL
             response = requests.get(url)
@@ -54,19 +28,19 @@ def download_csv_files(urls=CSV_URLS):
             print(f"Failed to download {name}.csv from {url}: {e}")
             
 
-def download_json_files(urls=JSON_URLS):
+def download_json_files(config):
     """
-    Download JSON files from the given URLs into the BASE_INPUT_DIR directory.
+    Download JSON files from the given URLs into the appropriate directory. See config dictionary in main.py
 
     Args:
-        urls (dict): A dictionary where keys are filenames (without .json extension)
-                     and values are the URLs to the files.
+        config (dict): dictionary containig snapshot_date, directories, urls
 
     Returns:
         None
     """
-    for name, url in urls.items():
-        file_path = BASE_INPUT_DIR / f"{name}.json"
+    for name, url in config['json_urls'].items():
+        INPUT_DIR = config['input_dir']
+        file_path = INPUT_DIR / f"{name}.json"
         try:
             # Fetch the file from the URL
             response = requests.get(url)
@@ -81,24 +55,44 @@ def download_json_files(urls=JSON_URLS):
             print(f"Failed to download {name}.json from {url}: {e}")
             
 
-def load_csv_from_raw(file_name, snapshot_date=None):
+def load_csv(file_name, config, snapshot=False):
     """
-    Load a CSV file from the BASE_INPUT_DIR directory.
+    Load a CSV file from the appropriate input directory as defined in config file
 
     Args:
         file_name (str): The name of the CSV file (e.g., "org_var.csv").
-        snapshot_date (str, YYYY-MM-DD, optional): the date of the snapshot
+        config (dict): dictionary containig snapshot_date, directories, urls
+        snapshot (bool): indicate whether to load from the snapshot. default false
 
     Returns:
         pd.DataFrame: The loaded DataFrame.
     """
-    
-    file_path = BASE_INPUT_DIR / file_name
+    INPUT_DIR = config['input_dir']
+    file_path = INPUT_DIR / file_name
 
-    if snapshot_date:
-        file_path = BASE_INPUT_DIR / "snapshots" / snapshot_date / file_name
+    if snapshot:
+        file_path = config['input_snapshot_dir'] / file_name
 
     if file_path.exists():
         return pd.read_csv(file_path, keep_default_na=False, na_values='')
     else:
         raise FileNotFoundError(f"File not found: {file_path}")
+
+
+# def load_csv_from_raw(file_name, config):
+#     """
+#     Load a CSV file from the appropriate input directory as defined in config file
+
+#     Args:
+#         file_name (str): The name of the CSV file (e.g., "org_var.csv").
+#         config (dict): dictionary containig snapshot_date, directories, urls
+
+#     Returns:
+#         pd.DataFrame: The loaded DataFrame.
+#     """
+#     file_path = config['input_dir'] / file_name
+
+#     if file_path.exists():
+#         return pd.read_csv(file_path, keep_default_na=False, na_values='')
+#     else:
+#         raise FileNotFoundError(f"File not found: {file_path}")

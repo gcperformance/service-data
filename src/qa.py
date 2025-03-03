@@ -1,28 +1,26 @@
 import pandas as pd
-import numpy as np
 import pytz
 from pathlib import Path
 
 from src.export import export_to_csv
-from src.load import load_csv_from_raw
+from src.load import load_csv
 from src.utils import dept_list
 
 
-QA_DIR = Path(__file__).parent.parent / "outputs" / "qa"
 CURRENT_DIR = Path(__file__).parent
 
-def qa_check(si, ss):
+def qa_check(si, ss, config):
     # Setup
     # Load extra files
-    rbpo = load_csv_from_raw('rbpo.csv')
-    org_var = load_csv_from_raw('org_var.csv')
+    rbpo = load_csv('rbpo.csv', config, snapshot=False)
+    org_var = load_csv('org_var.csv', config, snapshot=False)
     
     # Import qa issues descriptions file
     file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
     qa_issues_description = pd.read_csv(file_path)
 
     # Build then import department list from utilities
-    dept = dept_list()
+    dept = dept_list(config)
 
     # Determine the current date
     timezone = pytz.timezone('America/Montreal')
@@ -395,6 +393,7 @@ def qa_check(si, ss):
         "ss_qa_report": ss_qa_report
     }
 
+    QA_DIR = config['qa_dir']
     export_to_csv(
         data_dict=csv_exports,
         output_dir=QA_DIR

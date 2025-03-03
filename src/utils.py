@@ -1,20 +1,16 @@
 import pandas as pd
-from pathlib import Path
 import json
 
-from src.load import load_csv_from_raw
+from src.load import load_csv
 from src.export import export_to_csv
 from src.clean import standardize_column_names, clean_fiscal_yr
 
-UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
-BASE_INPUT_DIR = Path(__file__).parent.parent / "inputs"
-
-def dept_list():
+def dept_list(config):
     """
     Get a list of departments with their English and French names.
     """
-    ifoi_en = load_csv_from_raw('ifoi_en.csv')
-    ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
+    ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
+    ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
     
     # Process English names
     dept_en = ifoi_en.iloc[:,:3]
@@ -38,6 +34,7 @@ def dept_list():
     dept = standardize_column_names(dept)
     dept['org_id'] = dept['org_id'].astype(str)
     
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'dept': dept},
         output_dir=UTILS_DIR
@@ -46,7 +43,7 @@ def dept_list():
     return dept
     
 
-def sid_list(si):
+def sid_list(si, config):
     # Unique list of service IDs as reported in the latest fy
     sid_list = si.loc[:,
         [
@@ -68,6 +65,7 @@ def sid_list(si):
     sid_list = sid_list[sid_list['fiscal_yr'] == sid_list['fiscal_yr_latest']]
     sid_list = sid_list.drop(columns='fiscal_yr')
     
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'sid_list': sid_list},
         output_dir=UTILS_DIR
@@ -76,9 +74,9 @@ def sid_list(si):
     return sid_list
 
 
-def build_drf():
+def build_drf(config):
     # Load and clean DRF data (i.e. RBPO)
-    drf = load_csv_from_raw('rbpo.csv')
+    drf = load_csv('rbpo.csv', config, snapshot=False)
     drf = standardize_column_names(drf)
     drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
     
@@ -155,7 +153,7 @@ def build_drf():
     drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
     drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
 
-
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'drf': drf},
         output_dir=UTILS_DIR
@@ -163,10 +161,10 @@ def build_drf():
 
     return drf
 
-def copy_raw_to_utils():
-    ifoi_en = load_csv_from_raw('ifoi_en.csv')
-    ifoi_fr = load_csv_from_raw('ifoi_fr.csv')
-    org_var = load_csv_from_raw('org_var.csv')
+def copy_raw_to_utils(config):
+    ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
+    ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
+    org_var = load_csv('org_var.csv', config, snapshot=False)
 
     # Set first column (OrgID) as index, drop the column from the actual table, add the en/fr suffix
     ifoi_en = ifoi_en.set_index(ifoi_en.columns[0], drop=True).add_suffix('_en')
@@ -193,16 +191,17 @@ def copy_raw_to_utils():
     for key in utils_file_dict.keys():
         utils_file_dict[key] = standardize_column_names(utils_file_dict[key]) 
     
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict=utils_file_dict,
         output_dir=UTILS_DIR
     )
 
-def build_data_dictionary():
+def build_data_dictionary(config):
     """Builds a structured data dictionary from a JSON file, processes nested data, 
     renames columns, standardizes names, and exports to CSV."""
     
-    file_path = BASE_INPUT_DIR / 'service_data_dict.json'
+    file_path = config['input_dir'] / 'service_data_dict.json'
     
     # Load JSON file into a dictionary
     with open(file_path, "r", encoding="utf-8") as file:
@@ -252,6 +251,8 @@ def build_data_dictionary():
     }
 
     # Export to CSV
+
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict=data_dictionary_file_dict, 
         output_dir=UTILS_DIR

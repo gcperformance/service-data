@@ -3,24 +3,24 @@ import numpy as np
 from pathlib import Path
 
 from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
-from src.load import load_csv_from_raw
+from src.load import load_csv
 from src.export import export_to_csv
 from src.utils import dept_list
 
-UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
+# UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
-def merge_si(snapshot_date=None):
+def merge_si(config):
     """Combining service inventory data from previous (2018) and current (2024) format"""
     
     # Load org variant list and program-service correspondence table
-    org_var = load_csv_from_raw('org_var.csv')
-    serv_prog = load_csv_from_raw('serv_prog.csv')
+    org_var = load_csv('org_var.csv', config, snapshot=False)
+    serv_prog = load_csv('serv_prog.csv', config, snapshot=False)
     
     # Load department list from utils
-    dept = dept_list()
+    dept = dept_list(config)
     
-    si_2018 = load_csv_from_raw('si_2018.csv', snapshot_date)
-    si_2024 = load_csv_from_raw('si_2024.csv', snapshot_date)
+    si_2018 = load_csv('si_2018.csv', config, snapshot=True)
+    si_2024 = load_csv('si_2024.csv', config, snapshot=True)
     
     # Test breaker - uncomment to break merge_si() and check the row count test
     # si_2024 = si_2024.head()
@@ -160,10 +160,8 @@ def merge_si(snapshot_date=None):
 
     # Unique row-level identifier (primary key)
     si['fy_org_id_service_id'] = si[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
-    
-    if snapshot_date:
-        UTILS_DIR = Path(__file__).parent.parent / "outputs" / "snapshots"/ snapshot_date / "utils"
 
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'si_all': si},
         output_dir=UTILS_DIR
@@ -171,17 +169,17 @@ def merge_si(snapshot_date=None):
 
     return si
 
-def merge_ss(snapshot_date=None):
+def merge_ss(config):
     """Combining service standard data from previous (2018) and current (2024) format"""
 
     # Load org variant list and program-service correspondence table
-    org_var = load_csv_from_raw('org_var.csv')
+    org_var = load_csv('org_var.csv', config, snapshot=False)
 
     # Load department list from utils
-    dept = dept_list()
+    dept = dept_list(config)
     
-    ss_2018 = load_csv_from_raw('ss_2018.csv', snapshot_date)
-    ss_2024 = load_csv_from_raw('ss_2024.csv', snapshot_date)
+    ss_2018 = load_csv('ss_2018.csv', config, snapshot=True )
+    ss_2024 = load_csv('ss_2024.csv', config, snapshot=True)
 
     # Test breaker - uncomment to break merge_ss() and check the row count test
     # ss_2024 = ss_2024.head()
@@ -272,9 +270,7 @@ def merge_ss(snapshot_date=None):
     # Unique row-level identifier (primary key) to connect to service inventory
     ss['fy_org_id_service_id'] = ss[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
 
-    if snapshot_date:
-        UTILS_DIR = Path(__file__).parent.parent / "outputs" / "snapshots"/ snapshot_date / "utils"
-
+    UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'ss_all': ss},
         output_dir=UTILS_DIR
