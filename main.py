@@ -87,7 +87,7 @@ def main():
 
     # Define snapshot directory (if snapshot date is provided)
     if snapshot_date:
-        snapshot_dir = Path(__file__).parent.parent / "inputs" / "snapshots" / snapshot_date
+        snapshot_dir = Path(__file__).parent / "inputs" / "snapshots" / snapshot_date
 
         if not snapshot_dir.exists():
             logging.error(f"Snapshot directory {snapshot_dir} does not exist. Exiting.")

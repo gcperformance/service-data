@@ -8,7 +8,7 @@ def process_files(si, ss, config):
     OUTPUT_DIR = config['output_dir']
     INDICATORS_DIR = config['indicators_dir']
     
-    sid_list = sid_list(si, config)
+    sid_list(si, config)
 
     # === RE-SCOPE SERVICE INVENTORY ===
     # Only include external or enterprise services in all indicators and analysis

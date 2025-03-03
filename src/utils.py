@@ -71,7 +71,7 @@ def sid_list(si, config):
         output_dir=UTILS_DIR
     )
 
-    return sid_list
+    # return sid_list
 
 
 def build_drf(config):
