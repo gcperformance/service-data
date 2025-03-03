@@ -8,7 +8,7 @@ on:
     branches:
       - master  # Run on all PRs targeting master
   schedule:
-    - cron: '0 0 * * *'  # Also keep daily runs at midnight
+    - cron: '0 0 * * 2'  # weekly runs on tuesday morning (1) at midnight
   workflow_dispatch:  # Allow manual triggers
 
 jobs:
@@ -17,7 +17,6 @@ jobs:
     permissions:
       contents: write  # Needed for creating releases
     steps:
-      # Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -32,9 +31,6 @@ jobs:
       - name: Run main py script
         run: python main.py
         
-      - name: Install pandas for SQLite database creation
-        run: pip install pandas
-
       - name: Create SQLite database
         run: python src/create_sqlite.py
 
@@ -45,23 +41,69 @@ jobs:
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           echo "time=$(date +'%H:%M')" >> $GITHUB_OUTPUT
 
+      - name: Detect Snapshot Dates
+        id: detect_snapshots
+        run: |
+          # Find all unique snapshot date folders in inputs/snapshots/ and outputs/snapshots/
+          SNAPSHOT_DATES=$(find inputs/snapshots/ -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort -u)
+          
+          echo "Found snapshots:"
+          echo "$SNAPSHOT_DATES"
+
+          # Store in environment variable (space-separated list)
+          echo "snapshot_dates=$SNAPSHOT_DATES" >> $GITHUB_ENV
+
+      - name: Prepare Files for Release
+        id: prepare_files
+        run: |
+          mkdir -p snapshots_release
+          mkdir -p live_data_release
+
+          # Copy all "live" CSVs excluding snapshots
+          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \;
+
+          # Loop through detected snapshot dates
+          for SNAPSHOT_DATE in ${{ env.snapshot_dates }}; do
+            SNAPSHOT_DIR="snapshots_${SNAPSHOT_DATE}"
+            mkdir -p "snapshots_release/$SNAPSHOT_DIR"
+            echo "Processing snapshot: $SNAPSHOT_DATE"
+
+            # Only copy CSV files if the directories exist
+            if [ -d "inputs/snapshots/$SNAPSHOT_DATE" ]; then
+              echo "Copying from inputs/snapshots/$SNAPSHOT_DATE"
+              find inputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
+            fi
+
+            if [ -d "outputs/snapshots/$SNAPSHOT_DATE" ]; then
+              echo "Copying from outputs/snapshots/$SNAPSHOT_DATE"
+              find outputs/snapshots/$SNAPSHOT_DATE -type f -name "*.csv" -exec cp {} "snapshots_release/$SNAPSHOT_DIR/" \;
+            fi
+          done
+
+          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
+          echo "live_data_dir=live_data_release" >> $GITHUB_ENV
+
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
+          tag_name: service_data-${{ github.sha }}
           name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
           body: |
             Automated service data release for ${{ steps.metadata.outputs.date }}
                 - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
                 - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
-            Contains SQLite database with all processed data
+            Contains:
+              - Live data CSVs in the root directory
+              - Snapshots stored in snapshots_YYYY-MM-DD/ directories
           files: |
             outputs/service_data.sqlite
-            outputs/**/*.csv
+            live_data_release/**
+            snapshots_release/**
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Cleanup
       - name: Cleanup
-        run: rm -rf outputs
+        run: rm -rf outputs inputs snapshots_release live_data_release
