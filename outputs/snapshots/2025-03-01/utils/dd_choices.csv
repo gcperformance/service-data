@@ -1,0 +1,73 @@
+resource_name;id;code;en;fr
+service;automated_decision_system;N;No;Non
+service;automated_decision_system;Y;Yes;Oui
+service;client_feedback_channel;EML;Email;Courriel
+service;client_feedback_channel;FAX;Fax;Télécopieur
+service;client_feedback_channel;NON;No feedback collected;Aucune rétroaction possible
+service;client_feedback_channel;ONL;Online;En ligne
+service;client_feedback_channel;OTH;Other channel not listed;Autre option qui n'est pas sur la liste
+service;client_feedback_channel;PERSON;In-Person;En personne
+service;client_feedback_channel;POST;Postal Mail;Courrier postal
+service;client_feedback_channel;TEL;Telephone;Téléphone
+service;client_target_groups;ECONOM;Economic Segments (Businesses);Segments économiques (entreprises)
+service;client_target_groups;FOR;Foreign Entities;Entités étrangères
+service;client_target_groups;INTERN_GOV;Internal to Government;Interne au gouvernement
+service;client_target_groups;NGO;Non Profit Institutions and Organizations;Institutions et organismes sans but lucratif
+service;client_target_groups;PERSON;Persons;Particuliers
+service;client_target_groups;PTC;Provinces, Territories or Communities;Provinces, territoires et collectivités
+service;cra_bn_identifier_usage;N;No;Non
+service;cra_bn_identifier_usage;NA;N/A (not a service to businesses);S.O. (N'est pas un service aux entreprises)
+service;cra_bn_identifier_usage;Y;Yes;Oui
+service;os_account_registration;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_account_registration;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_account_registration;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;os_application;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_application;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_application;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;os_authentication;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_authentication;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_authentication;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;os_decision;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_decision;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_decision;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;os_issuance;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_issuance;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_issuance;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;os_issue_resolution_feedback;N;No (This interaction point is applicable to the service but is not currently online);Non (Ce point d'interaction s'applique au service, mais il n'est pas en ligne présentement)
+service;os_issue_resolution_feedback;NA;N/A (This interaction point is not applicable to the service);S.O. (Ce point d'interaction ne s'applique pas au service)
+service;os_issue_resolution_feedback;Y;Yes (This interaction point is applicable to the service and is online);Oui (Ce point d'interaction s'applique au service et est en ligne)
+service;service_fee;N;No;Non
+service;service_fee;Y;Yes;Oui
+service;service_recipient_type;CLIENT;Targeted, Client-based service;Service ciblé, axé sur les clients
+service;service_recipient_type;SOCIETY;Untargeted, Societal-based service;Service non-ciblé, axé sur la société
+service;service_scope;CLUSTER;Internal Cluster Service;Service cluster interne
+service;service_scope;ENTERPRISE;Internal Enterprise Service;Service interne intégré
+service;service_scope;EXTERN;External Service;Service externe
+service;service_scope;INTERN;Internal Service;Service interne
+service;service_type;APIR;Agreements, Permissions, Inspections, Rulings;Accords, autorisations, inspections, décisions
+service;service_type;CER;Care, Education, Recreation;Soins, éducation, loisirs
+service;service_type;GNC;Grants and Contributions;Subventions et contributions
+service;service_type;INFO;Information;Informations
+service;service_type;LRP;Legislation, Regulation, Policy;Législation, réglementation, politique
+service;service_type;PPI;Penalties, Protection, Intervention;Pénalités, protection, interventions
+service;service_type;REG_VOL;High Volume Regulatory Transactions;Opérations réglementaires à demande élevée
+service;service_type;RES;Resources;Ressources
+service;sin_usage;N;No;Non
+service;sin_usage;NA;N/A (not a service to individuals);S.O. (N'est pas un service aux particuliers)
+service;sin_usage;Y;Yes;Oui
+service-std;channel;EML;Email;Courriel
+service-std;channel;FAX;Fax;Télécopieur
+service-std;channel;ONL;Online;En ligne
+service-std;channel;OTH;Other channel not listed;Autre option qui n’est pas sur la liste
+service-std;channel;PERSON;In-Person;En personne
+service-std;channel;POST;Postal Mail;Courrier postal
+service-std;channel;TEL;Telephone;Téléphone
+service-std;target_met;N;No;Non
+service-std;target_met;NA;N/A;S.O.
+service-std;target_met;Y;Yes;Oui
+service-std;type;ACS;Access;Accès
+service-std;type;ACY;Accuracy;Exactitude
+service-std;type;OTH;Other;Autre
+service-std;type;TML;Timeliness;Délai
+
+Timestamp:2025-03-03_11:55:28

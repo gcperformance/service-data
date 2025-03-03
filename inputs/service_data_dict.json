@@ -5325,7 +5325,7 @@
           "id": "num_applications_online",
           "obligation": {
             "en": "Mandatory",
-            "fr": "Obligatoire"
+            "fr": "Mandatory"
           },
           "label": {
             "en": "Number of Applications Submitted Online",
