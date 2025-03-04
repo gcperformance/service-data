@@ -2,7 +2,6 @@
 generate-files-wf
 outputs/service_data.db
 __pycache__/
-tidy-script
 .vscode
 .pytest_cache
 .venv
