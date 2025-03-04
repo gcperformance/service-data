@@ -45,7 +45,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 
 - `main.py`: Orchestration script that calls other modules
 - `requirements.txt`: Python libraries used in scripts
-- `database.dbml`: DBML format schema for database layout and joins of files produced by script
+- `database.dbml`: **Draft** DBML format schema for database layout and joins of files produced by script.
 
 #### `inputs/`: Downloaded for Processing (Unmodified)
 
@@ -122,6 +122,11 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 
 #### `notebooks/`: Jupyter notebooks for testing and experiments
 
+#### `snapshots/`: Files generated based on data at a point in time, defined by the date in format YYYY-MM-DD
+- Releases indicate which files are generated from the snapshot by prepending the date to the file name, for example `2025-03-01_si.csv` is equivalent to `si.csv`, but based on data from March 1, 2025.
+- The python script expects the snapshot inputs and outputs to be defined by their directory.
+- Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static input snapshot files, but retrieving the latest other data.
+
 ### Data Formats
 All CSV text files produced by the script are **semi-colon separated** (`;`).
 
@@ -132,7 +137,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 ### Release Schedule
 
 - **Automatic**: New release created on every push to master branch
-- **Daily**: Scheduled release at midnight Eastern Time
+- **Weekly**: Scheduled release on Tuesday mornings at midnight EST
 - **Manual**: Can be triggered through GitHub Actions workflow
 
 ### Release Format
@@ -141,7 +146,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 - **Name**: `Service Data Release YYYY-MM-DD (commit_hash)`
 - Each release includes:
   - SQLite database file
-  - All indivisual .csv files produced by script
+  - All individual .csv files produced by script
   - Timestamp of generation (Eastern Time)
   - Git commit hash for traceability
 
@@ -175,7 +180,14 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── si_2018.csv
 │   ├── si_2024.csv
 │   ├── ss_2018.csv
-│   └── ss_2024.csv
+│   ├── ss_2024.csv
+│   └── snapshots
+│       └── 2025-03-01
+│           ├── rbpo.csv
+│           ├── si_2018.csv
+│           ├── si_2024.csv
+│           ├── ss_2018.csv
+│           └── ss_2024.csv
 ├── main.py
 ├── notebooks
 │   ├── experiments-drf.ipynb
@@ -200,20 +212,44 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── service_data.db
 │   ├── si.csv
 │   ├── ss.csv
-│   └── utils
-│       ├── dd_choices.csv
-│       ├── dd_field_names.csv
-│       ├── dept.csv
-│       ├── drf.csv
-│       ├── ifoi.csv
-│       ├── org_var.csv
-│       ├── si_all.csv
-│       ├── sid_list.csv
-│       └── ss_all.csv
+│   ├── utils
+│   │   ├── dd_choices.csv
+│   │   ├── dd_field_names.csv
+│   │   ├── dept.csv
+│   │   ├── drf.csv
+│   │   ├── ifoi.csv
+│   │   ├── org_var.csv
+│   │   ├── si_all.csv
+│   │   ├── sid_list.csv
+│   │   └── ss_all.csv
+│   └── snapshots
+│       └── 2025-03-01
+│           ├── indicators
+│           │   ├── maf_all.csv
+│           │   ├── service_fte_spending.csv
+│           │   ├── si_fy_interaction_sum.csv
+│           │   ├── si_fy_service_count.csv
+│           │   ├── si_oip.csv
+│           │   ├── si_reviews.csv
+│           │   ├── si_vol.csv
+│           │   └── ss_tml_perf_vol.csv
+│           ├── qa
+│           │   ├── si_qa.csv
+│           │   ├── si_qa_report.csv
+│           │   ├── ss_qa.csv
+│           │   └── ss_qa_report.csv
+│           ├── si.csv
+│           ├── ss.csv
+│           └── utils
+│               ├── drf.csv
+│               ├── si_all.csv
+│               ├── sid_list.csv
+│               └── ss_all.csv
 ├── requirements.txt
 ├── src
 │   ├── __init__.py
 │   ├── clean.py
+│   ├── create_sqlite.py
 │   ├── export.py
 │   ├── load.py
 │   ├── merge.py

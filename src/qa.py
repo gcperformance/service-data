@@ -396,5 +396,6 @@ def qa_check(si, ss, config):
     QA_DIR = config['qa_dir']
     export_to_csv(
         data_dict=csv_exports,
-        output_dir=QA_DIR
+        output_dir=QA_DIR,
+        config=config
     )

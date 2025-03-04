@@ -163,7 +163,8 @@ def merge_si(config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'si_all': si},
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
 
     return si
@@ -272,7 +273,8 @@ def merge_ss(config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'ss_all': ss},
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
 
     return ss

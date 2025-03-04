@@ -13,7 +13,7 @@ from src.utils import copy_raw_to_utils, build_data_dictionary
 
 
 def get_config(snapshot_date=None):
-    """Returns a config dictionary containing input/output directories."""
+    """Returns a config dictionary containing input/output directories, urls, snapshot date"""
     base_dir = Path(__file__).parent
     
     input_dir = base_dir / "inputs"

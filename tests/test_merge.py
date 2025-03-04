@@ -2,18 +2,20 @@ import pandas as pd
 import pandas.testing as pdt
 import pytest
 from src.merge import merge_si, merge_ss
-from src.export import export_to_csv
-from src.load import load_csv_from_raw
+from src.load import load_csv
+from main import get_config
 
 # Mock export function to prevent file creation
 @pytest.fixture(autouse=True)
 def mock_export_to_csv(monkeypatch):
-    monkeypatch.setattr("src.export.export_to_csv", lambda data_dict, output_dir: None)
+    config = get_config()
+    monkeypatch.setattr("src.export.export_to_csv", lambda data_dict, output_dir: None, config)
 
 # Test for merge_si
 def test_merge_si_consistency():
-    si_2018 = load_csv_from_raw('si_2018.csv')
-    si_2024 = load_csv_from_raw('si_2024.csv')
+    config = get_config()
+    si_2018 = load_csv('si_2018.csv', config)
+    si_2024 = load_csv('si_2024.csv', config)
     
     merged_df = merge_si()
 
@@ -28,8 +30,9 @@ def test_merge_si_consistency():
 
 # Test for merge_ss
 def test_merge_ss_consistency():
-    ss_2018 = load_csv_from_raw('ss_2018.csv')
-    ss_2024 = load_csv_from_raw('ss_2024.csv')
+    config = get_config()
+    ss_2018 = load_csv('ss_2018.csv', config)
+    ss_2024 = load_csv('ss_2024.csv', config)
     
     merged_df = merge_ss()
 

@@ -61,7 +61,7 @@ def load_csv(file_name, config, snapshot=False):
 
     Args:
         file_name (str): The name of the CSV file (e.g., "org_var.csv").
-        config (dict): dictionary containig snapshot_date, directories, urls
+        config (dict): dictionary containing snapshot_date, directories, urls
         snapshot (bool): indicate whether to load from the snapshot. default false
 
     Returns:

@@ -40,7 +40,8 @@ def process_files(si, ss, config):
 
     export_to_csv(
         data_dict=output_exports,
-        output_dir=OUTPUT_DIR
+        output_dir=OUTPUT_DIR,
+        config=config
     )
     
     # === SPECIFIC INDICATOR TABLES ===   
@@ -412,5 +413,6 @@ def process_files(si, ss, config):
     
     export_to_csv(
         data_dict=indicator_exports,
-        output_dir=INDICATORS_DIR
+        output_dir=INDICATORS_DIR,
+        config=config
     )

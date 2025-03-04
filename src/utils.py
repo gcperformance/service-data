@@ -38,14 +38,17 @@ def dept_list(config):
         UTILS_DIR = config['utils_dir']
         export_to_csv(
             data_dict={'dept': dept},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
+            config=config
         )
     
     return dept
     
 
 def sid_list(si, config):
-    # Unique list of service IDs as reported in the latest fy
+    """
+    Unique list of service IDs as reported in the latest fy
+    """
     sid_list = si.loc[:,
         [
             'service_id', 
@@ -69,15 +72,18 @@ def sid_list(si, config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'sid_list': sid_list},
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
 
     # return sid_list
 
 
 def build_drf(config):
-    # Load and clean DRF data (i.e. RBPO)
-    # Take from snapshot input if the snapshot argument is supplied
+    """
+    Load and clean DRF data (i.e. RBPO)
+    Take from snapshot input if the snapshot argument is supplied
+    """
     snapshot_bool = bool(config['snapshot_date'])
     
     drf = load_csv('rbpo.csv', config, snapshot_bool)
@@ -160,7 +166,8 @@ def build_drf(config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict={'drf': drf},
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
 
     return drf
@@ -198,7 +205,8 @@ def copy_raw_to_utils(config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict=utils_file_dict,
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
 
 def build_data_dictionary(config):
@@ -260,6 +268,7 @@ def build_data_dictionary(config):
     UTILS_DIR = config['utils_dir']
     export_to_csv(
         data_dict=data_dictionary_file_dict, 
-        output_dir=UTILS_DIR
+        output_dir=UTILS_DIR,
+        config=config
     )
     
