@@ -34,11 +34,12 @@ def dept_list(config):
     dept = standardize_column_names(dept)
     dept['org_id'] = dept['org_id'].astype(str)
     
-    UTILS_DIR = config['utils_dir']
-    export_to_csv(
-        data_dict={'dept': dept},
-        output_dir=UTILS_DIR
-    )
+    if not config['snapshot_date']:
+        UTILS_DIR = config['utils_dir']
+        export_to_csv(
+            data_dict={'dept': dept},
+            output_dir=UTILS_DIR
+        )
     
     return dept
     
@@ -76,7 +77,10 @@ def sid_list(si, config):
 
 def build_drf(config):
     # Load and clean DRF data (i.e. RBPO)
-    drf = load_csv('rbpo.csv', config, snapshot=False)
+    # Take from snapshot input if the snapshot argument is supplied
+    snapshot_bool = bool(config['snapshot_date'])
+    
+    drf = load_csv('rbpo.csv', config, snapshot_bool)
     drf = standardize_column_names(drf)
     drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
     

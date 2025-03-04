@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from pathlib import Path
 
 from src.clean import clean_percentage, split_and_uppercase_to_sorted_string
 from src.load import load_csv

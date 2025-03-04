@@ -77,22 +77,3 @@ def load_csv(file_name, config, snapshot=False):
         return pd.read_csv(file_path, keep_default_na=False, na_values='')
     else:
         raise FileNotFoundError(f"File not found: {file_path}")
-
-
-# def load_csv_from_raw(file_name, config):
-#     """
-#     Load a CSV file from the appropriate input directory as defined in config file
-
-#     Args:
-#         file_name (str): The name of the CSV file (e.g., "org_var.csv").
-#         config (dict): dictionary containig snapshot_date, directories, urls
-
-#     Returns:
-#         pd.DataFrame: The loaded DataFrame.
-#     """
-#     file_path = config['input_dir'] / file_name
-
-#     if file_path.exists():
-#         return pd.read_csv(file_path, keep_default_na=False, na_values='')
-#     else:
-#         raise FileNotFoundError(f"File not found: {file_path}")

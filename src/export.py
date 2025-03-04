@@ -1,7 +1,5 @@
 import pandas as pd
 import pytz
-import sqlite3
-from pathlib import Path
 
 def export_to_csv(data_dict, output_dir):
     """

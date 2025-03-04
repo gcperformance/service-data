@@ -117,10 +117,12 @@ def main():
         logging.info("Running QA checks...")
         qa_check(si, ss, config)
 
-        # Copying files from raw to utils
-        logging.info("Copying files from input to utils...")
-        copy_raw_to_utils(config)
-        build_data_dictionary(config)
+        # Copying files from raw to utils when the run is not for a snapshot
+        snapshot_bool = bool(config['snapshot_date'])
+        if not snapshot_bool:
+            logging.info("Copying files from input to utils...")
+            copy_raw_to_utils(config)
+            build_data_dictionary(config)
 
         # Log completion time
         elapsed_time = time.time() - start_time

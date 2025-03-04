@@ -1,5 +1,4 @@
 import re
-import numpy as np
 
 def clean_percentage(value):
     """Normalize percentages to 0-1 scale."""

@@ -75,8 +75,8 @@ jobs:
               - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
               - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
             Contains:
-              - Live data CSVs in the root directory
-              - Snapshots stored in snapshots_YYYY-MM-DD/ directories
+              - Live data CSVs 
+              - Snapshots pre-pended with date of snapshot
           files: |
             outputs/service_data.sqlite
             live_data_release/**
