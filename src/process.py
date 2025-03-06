@@ -372,6 +372,135 @@ def process_files(si, ss, config):
     # Concatenate along columns and reset index
     maf_all = pd.concat(maf_temps, axis=1).reset_index()
     
+
+    # === DRR INDICATORS ===
+
+    # =================================
+    # DRR Indicator ID DR-2467: Fraction of high-volume services that are fully available online
+    
+    # Define high-volume threshold
+    HIGH_VOLUME_THRESHOLD = 45000
+
+    # Define online interaction point (OIP) columns
+    OIP_COLS = [
+        'os_account_registration',
+        'os_authentication',
+        'os_application',
+        'os_decision',
+        'os_issuance',
+        'os_issue_resolution_feedback',
+    ]
+
+    # Filter service inventory for high-volume services
+    si_hv = si[si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD].copy()
+
+    # Melt the DataFrame for activation analysis
+    dr2467 = si_hv.melt(
+        id_vars=['fiscal_yr', 'fy_org_id_service_id'],
+        value_vars=OIP_COLS,
+        var_name='online_interaction_point',
+        value_name='activation'
+    )
+
+    # Create boolean indicators for activation states
+    dr2467['activation_y'] = dr2467['activation'].eq('Y')
+    dr2467['activation_n'] = dr2467['activation'].eq('N')
+    dr2467['activation_na'] = dr2467['activation'].eq('NA')
+
+    # Aggregate activations at service level
+    dr2467 = dr2467.groupby(['fiscal_yr', 'fy_org_id_service_id'], as_index=False).agg(
+        activation_y=('activation_y', 'sum'),
+        activation_n=('activation_n', 'sum'),
+        activation_na=('activation_na', 'sum')
+    )
+
+    # Determine end-to-end online availability (online_e2e)
+    dr2467['online_e2e'] = np.select(
+        [
+            dr2467['activation_na'] == len(OIP_COLS),  # All interaction points are 'NA', len(OIP_COLS)=6
+            dr2467['activation_n'] > 0                # At least one interaction point is 'N'
+        ],
+        [
+            None,  # Fully NA services are excluded
+            False  # Services with any 'N' are not fully online
+        ],
+        default=True  # Services without 'N' are fully online
+    ).astype('bool')
+
+    # Remove services with all NA activation states
+    dr2467 = dr2467[dr2467['activation_na'] < len(OIP_COLS)]
+
+    # Aggregate at the fiscal year level
+    dr2467 = dr2467.groupby('fiscal_yr', as_index=False).agg(
+        hv_online_e2e_count=('online_e2e', 'sum'),
+        hv_service_count=('fy_org_id_service_id', 'nunique')
+    )
+
+    # Compute DR-2467 score
+    dr2467['dr2467_score'] = (dr2467['hv_online_e2e_count'] / dr2467['hv_service_count']) * 100
+
+    # =================================
+    # DRR Indicator ID DR-2468: Fraction of high-volume (applications & telephone enquiries) services that meet one or more service standard
+    
+    # Define high-volume threshold
+    HIGH_VOLUME_THRESHOLD = 45000
+
+    # Select relevant columns and ensure numeric conversion for 'num_phone_enquiries'
+    si_hvte = si[['service_id', 'fiscal_yr', 'org_id', 'fy_org_id_service_id', 'num_applications_total', 'num_phone_enquiries']].copy()
+    si_hvte['num_phone_enquiries'] = pd.to_numeric(si_hvte['num_phone_enquiries'], errors='coerce').fillna(0)
+
+    # Compute total applications including phone enquiries
+    si_hvte['num_applications_total_plus_phone_enquiries'] = si_hvte['num_applications_total'] + si_hvte['num_phone_enquiries']
+
+    # Filter for high-volume (apps+te) services
+    si_hvte = si_hvte[si_hvte['num_applications_total_plus_phone_enquiries'] >= HIGH_VOLUME_THRESHOLD]
+
+    # Filter service standards that met their target
+    ss_met = ss.loc[ss['target_met'] == 'Y', ['fy_org_id_service_id']]
+
+    # Identify services for which their associated standards met at least one target
+    si_hvte['ss_target_met'] = si_hvte['fy_org_id_service_id'].isin(ss_met['fy_org_id_service_id'])
+
+    # Aggregate data at fiscal year level
+    dr2468 = si_hvte.groupby('fiscal_yr').agg(
+        hvte_services_count_meeting_standard=('ss_target_met', 'sum'),
+        hvte_services_count=('fy_org_id_service_id', 'count')
+    ).reset_index()
+
+    # Compute DR-2468 score
+    dr2468['dr2468_score'] = (dr2468['hvte_services_count_meeting_standard'] / dr2468['hvte_services_count']) * 100
+
+    # =================================
+    # DRR Indicator ID DR-2469: Fraction of service applications submitted online for high volume services
+
+    HIGH_VOLUME_THRESHOLD = 45000
+    si_hv = si[si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD].copy() 
+
+    # Select relevant columns and ensure numeric conversion for 'num_applications_online'
+    dr2469 = si_hv[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'num_applications_total', 'num_applications_online']].copy()
+    dr2469['num_applications_online'] = pd.to_numeric(dr2469['num_applications_online'], errors='coerce').fillna(0)
+
+    # Determine fy-level counts for applications
+    dr2469 = dr2469.groupby(['fiscal_yr'], as_index=False).agg(
+        hv_online_applications=('num_applications_online', 'sum'),
+        hv_total_applications=('num_applications_total', 'sum')
+    )
+
+    # Determine score
+    dr2469['dr2469_score'] = (dr2469['hv_online_applications']/dr2469['hv_total_applications'])*100
+
+    # === SUMMARY DRR TABLE === 
+    drr_dfs = [dr2467, dr2468, dr2469]
+    index_cols = ['fiscal_yr']
+    
+    # Set index for each DataFrame in the list
+    drr_temps = [df.set_index(index_cols) for df in drr_dfs]
+    
+    # Concatenate along columns and reset index
+    drr_all = pd.concat(drr_temps, axis=1).reset_index()
+
+
+
     # === SPENDING & FTEs BY PROGRAM ===
     # Load DRF data from utils (i.e. RBPO)
     drf = build_drf(config)
@@ -408,7 +537,11 @@ def process_files(si, ss, config):
         # "maf5": maf5,
         # "maf6": maf6,
         # "maf8": maf8,
-        "maf_all": maf_all
+        "maf_all": maf_all,
+        # "dr2467": dr2467,
+        # "dr2468": dr2468,
+        # "dr2469": dr2469,
+        "drr_all": drr_all
     }
     
     export_to_csv(

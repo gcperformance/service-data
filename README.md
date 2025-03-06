@@ -69,6 +69,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 ##### `outputs/indicators/`: Summary Files for Visualization and Review
 
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
+- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (percentage of high-volume services (>=45k applications) that are delivered online end-to-end, percentage of high-volume services (>=45k applications and telephone enquiries) that met at least one service standard, percentage of applications for high-volume services (>45k applications) that used the online channel)
 - `maf_all.csv`: a concatenated table with all the maf columns and scores (percentage of services that have service standards, percentage of applicable services that can be completed online end-to-end, percentage of client interaction points that are available online, percentage of services which have used client feedback to improve services in the year prior to reporting)
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
@@ -196,6 +197,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   └── qa-uris.ipynb
 ├── outputs
 │   ├── indicators
+│   │   ├── drr_all.csv
 │   │   ├── maf_all.csv
 │   │   ├── service_fte_spending.csv
 │   │   ├── si_fy_interaction_sum.csv
@@ -225,6 +227,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   └── snapshots
 │       └── 2025-03-01
 │           ├── indicators
+│           │   ├── drr_all.csv
 │           │   ├── maf_all.csv
 │           │   ├── service_fte_spending.csv
 │           │   ├── si_fy_interaction_sum.csv
