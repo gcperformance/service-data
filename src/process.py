@@ -391,8 +391,10 @@ def process_files(si, ss, config):
         'os_issue_resolution_feedback',
     ]
 
-    # Filter service inventory for high-volume services
-    si_hv = si[si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD].copy()
+    # Filter service inventory for high-volume and external services
+    si_hv = si[
+        (si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD & 
+        si['service_scope'].str.contains('EXTERN', regex=True))].copy()
 
     # Melt the DataFrame for activation analysis
     dr2467 = si_hv.melt(
@@ -440,21 +442,24 @@ def process_files(si, ss, config):
     dr2467['dr2467_score'] = (dr2467['hv_online_e2e_count'] / dr2467['hv_service_count']) * 100
 
     # =================================
-    # DRR Indicator ID DR-2468: Fraction of high-volume (applications & telephone enquiries) services that meet one or more service standard
+    # DRR Indicator ID DR-2468: Fraction of high-volume (applications & telephone enquiries) 
+    # services that meet one or more service standard
     
     # Define high-volume threshold
     HIGH_VOLUME_THRESHOLD = 45000
 
     # Select relevant columns and ensure numeric conversion for 'num_phone_enquiries'
-    si_hvte = si[['service_id', 'fiscal_yr', 'org_id', 'fy_org_id_service_id', 'num_applications_total', 'num_phone_enquiries']].copy()
+    si_hvte = si[['service_id', 'fiscal_yr', 'org_id', 'fy_org_id_service_id', 'num_applications_total', 'num_phone_enquiries', 'service_scope']].copy()
     si_hvte['num_phone_enquiries'] = pd.to_numeric(si_hvte['num_phone_enquiries'], errors='coerce').fillna(0)
 
     # Compute total applications including phone enquiries
     si_hvte['num_applications_total_plus_phone_enquiries'] = si_hvte['num_applications_total'] + si_hvte['num_phone_enquiries']
 
-    # Filter for high-volume (apps+te) services
-    si_hvte = si_hvte[si_hvte['num_applications_total_plus_phone_enquiries'] >= HIGH_VOLUME_THRESHOLD]
-
+    # Filter for high-volume (apps+te) external services
+    si_hvte = si_hvte[
+        (si_hvte['num_applications_total_plus_phone_enquiries'] >= HIGH_VOLUME_THRESHOLD) &
+        (si_hvte['service_scope'].str.contains('EXTERN', regex=True))]
+    
     # Filter service standards that met their target
     ss_met = ss.loc[ss['target_met'] == 'Y', ['fy_org_id_service_id']]
 
@@ -471,10 +476,13 @@ def process_files(si, ss, config):
     dr2468['dr2468_score'] = (dr2468['hvte_services_count_meeting_standard'] / dr2468['hvte_services_count']) * 100
 
     # =================================
-    # DRR Indicator ID DR-2469: Fraction of service applications submitted online for high volume services
+    # DRR Indicator ID DR-2469: Fraction of service applications submitted online 
+    # for high volume external services
 
     HIGH_VOLUME_THRESHOLD = 45000
-    si_hv = si[si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD].copy() 
+    si_hv = si[
+        (si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD & 
+        si['service_scope'].str.contains('EXTERN', regex=True))].copy()
 
     # Select relevant columns and ensure numeric conversion for 'num_applications_online'
     dr2469 = si_hv[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'num_applications_total', 'num_applications_online']].copy()
