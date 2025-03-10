@@ -252,8 +252,7 @@ def qa_check(si, ss, config):
     # Prepare si_prog DataFrame
     si_prog = si.loc[:,['fiscal_yr', 'service_id', 'program_id', 'org_id']]  # Select relevant columns
     si_prog['org_id'] = si_prog['org_id'].astype(str)
-    
-    
+
     # Split and explode program_id to handle multiple entries per cell
     si_prog['program_id'] = si_prog['program_id'].str.split(',')
     si_prog = si_prog.explode('program_id')
@@ -264,8 +263,8 @@ def qa_check(si, ss, config):
     
     #Join si_prog with rbpo_filtered (program list) on program_id
     si_prog = si_prog.merge(rbpo_filtered, on='program_id', how='left', suffixes=('_si', '_prog'))
-    si_prog['qa_program_from_wrong_org'] = si_prog['org_id_si'] != si_prog['org_id_prog'] # Identify rows where org_id mismatch occurs
-    si_prog = si_prog[si_prog['qa_program_from_wrong_org']]  # Keep only mismatched rows
+    si_prog['qa_program_id'] = si_prog['org_id_si'] != si_prog['org_id_prog'] # Identify rows where org_id mismatch occurs
+    si_prog = si_prog[si_prog['qa_program_id']]  # Keep only mismatched rows
     si_prog = si_prog[si_prog['program_id'] != ''] # Remove rows with empty program_id    
     
     # Merge si_prog with department information
@@ -287,7 +286,7 @@ def qa_check(si, ss, config):
     si['org_id'] = si['org_id'].astype(str)
     
     si=si.merge(collapsed_si_prog, on=['fiscal_yr', 'service_id', 'org_id'], how='left')
-    si['qa_program_from_wrong_org'] = ~(si['program_correct_org'].isna())
+    si['qa_program_id'] = ~(si['program_correct_org'].isna())
     si['program_correct_org'] = si['program_correct_org'].fillna(False)
 
     # =================================
@@ -317,11 +316,12 @@ def qa_report(si_qa, ss_qa, config):
         issue_messages = {
             'qa_duplicate_sid': f"{row['reused_id_from']}",
             'qa_reused_sid': f"{row['reused_id_from']}",
-            'qa_program_from_wrong_org': f"{row['program_correct_org']}",
-            'qa_ss_vol_without_si_vol': f"service applications: {row['num_applications_total']}, standard volumes: {row['total_volume_ss']}"
+            'qa_program_id': f"{row['program_correct_org']}",
+            'qa_ss_vol_without_si_vol': f"service applications: {row['num_applications_total']}, standard volumes: {row['total_volume_ss']}",
+            'qa_si_fiscal_yr_in_future': f"{row['fiscal_yr']}"
             }
 
-        return issue_messages.get(row['qa_field_name'], "Additional context")
+        return issue_messages.get(row['qa_field_name'])
 
     # === CLEAN QA REPORT ===
     # In order to have a clean report of issues to send to departments & agencies, the following 
@@ -340,7 +340,7 @@ def qa_report(si_qa, ss_qa, config):
         'qa_si_fiscal_yr_in_future',
         'qa_ss_vol_without_si_vol',
         'qa_reused_sid',
-        'qa_program_from_wrong_org'
+        'qa_program_id'
     ]
     
     critical_ss_qa_cols = [
@@ -350,7 +350,7 @@ def qa_report(si_qa, ss_qa, config):
         'qa_performance_over_100'
     ]   
     
-    # Preparing SI QA report
+    # === PREPARING SI QA REPORT ===
     si_report_cols = [
         'department_en',
         'org_id',
@@ -397,10 +397,20 @@ def qa_report(si_qa, ss_qa, config):
     si_qa_report['context'] = si_qa_report.apply(generate_context, axis=1)
     
     # Tidy up dataframe
-    si_qa_report = si_qa_report.drop(columns=['issue_present', 'qa_field_name'])
-    si_qa_report = si_qa_report.sort_values(by=['department_en', 'service_id'])
+    si_qa_report = si_qa_report.drop(columns=[
+        'issue_present',
+        'qa_field_name',
+        'num_applications_total', #replaced by context field
+        'total_volume_ss', #replaced by context field
+        'reused_id_from', #replaced by context field
+        'program_correct_org' #replaced by context field
+        ])
+
+    si_qa_report = si_qa_report.sort_values(by=['department_en', 'service_id', 'issue'])
+
+    # ==============================
+    # === PREPARING SS QA REPORT ===
     
-    # Preparing SS QA report
     ss_report_cols = [
         'department_en',
         'org_id',
@@ -438,7 +448,7 @@ def qa_report(si_qa, ss_qa, config):
     
     ss_qa_report = ss_qa_report.sort_values(by=['department_en', 'service_id', 'service_standard_id'])
     
-    # ## Export data to CSV
+    # === EXPORT TO CSV ===
     # Define the DataFrames to export to csv and their corresponding names
     csv_exports = {
         "si_qa_report": si_qa_report,

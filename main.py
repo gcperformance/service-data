@@ -100,9 +100,9 @@ def main():
         logging.info("Starting data processing")
 
         # Download and process raw data
-        # logging.info("Downloading raw data...")
-        # download_csv_files(config)
-        # download_json_files(config)
+        logging.info("Downloading raw data...")
+        download_csv_files(config)
+        download_json_files(config)
 
         # Merge historical data
         logging.info("Merging historical data...")
