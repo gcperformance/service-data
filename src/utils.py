@@ -57,17 +57,30 @@ def sid_list(si, config):
             'fiscal_yr', 
             'department_en', 
             'department_fr', 
-            'org_id'
+            'org_id',
+            'service_scope'
         ]
     ]
 
+    # Determine the first and last fiscal years in which the service was reported
     sid_latest_fy = sid_list.loc[sid_list.groupby('service_id')['fiscal_yr'].idxmax(), ['service_id', 'fiscal_yr']]
     sid_first_fy = sid_list.loc[sid_list.groupby('service_id')['fiscal_yr'].idxmin(), ['service_id', 'fiscal_yr']]
     
+    # Merge these first/last fiscal years back into list
     sid_list = sid_list.merge(sid_first_fy, on='service_id', suffixes=('', '_first'))
     sid_list = sid_list.merge(sid_latest_fy, on='service_id', suffixes=('', '_latest'))
+
+    # Ignore all records that aren't from the latest fiscal year
     sid_list = sid_list[sid_list['fiscal_yr'] == sid_list['fiscal_yr_latest']]
-    sid_list = sid_list.drop(columns='fiscal_yr')
+
+    # Boolean field to identify which services are in scope for typical reporting
+    sid_list['service_scope_ext_or_ent'] = (
+        (sid_list['service_scope'].str.contains('EXTERN', regex=True)) |
+        (sid_list['service_scope'].str.contains('ENTERPRISE', regex=True))
+    )
+
+    # Remove ambiguous or irrelevant fields
+    sid_list = sid_list.drop(columns=['fiscal_yr', 'service_scope'])
     
     UTILS_DIR = config['utils_dir']
     export_to_csv(
