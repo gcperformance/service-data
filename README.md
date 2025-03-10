@@ -69,7 +69,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 ##### `outputs/indicators/`: Summary Files for Visualization and Review
 
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
-- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (percentage of high-volume services (>=45k applications) that are delivered online end-to-end, percentage of high-volume services (>=45k applications and telephone enquiries) that met at least one service standard, percentage of applications for high-volume services (>45k applications) that used the online channel)
+- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, percentage of applications for high-volume external services (>45k applications) that used the online channel)
 - `maf_all.csv`: a concatenated table with all the maf columns and scores (percentage of services that have service standards, percentage of applicable services that can be completed online end-to-end, percentage of client interaction points that are available online, percentage of services which have used client feedback to improve services in the year prior to reporting)
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
@@ -101,7 +101,8 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 #### `src/`: Source Code for Script
 
 - `clean.py`: functions to clean and set up data
-- `export.py`: functions to export data to CSV and SQLite database
+- `create_sqlite`: process to generate the sqlite database
+- `export.py`: functions to export data to CSV (semi-colon delimited)
 - `load.py`: functions to load csv files to dataframes and download / refresh all inputs
 - `merge.py`: process to align 2018 and 2024 service inventory and service standard datasets
 - `process.py`: produces summaries and indicator files (`outputs/indicators/` directory)
@@ -126,7 +127,7 @@ All .csv files produced by the script are **semi-colon separated** (`;`)
 #### `snapshots/`: Files generated based on data at a point in time, defined by the date in format YYYY-MM-DD
 - Releases indicate which files are generated from the snapshot by prepending the date to the file name, for example `2025-03-01_si.csv` is equivalent to `si.csv`, but based on data from March 1, 2025.
 - The python script expects the snapshot inputs and outputs to be defined by their directory.
-- Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static input snapshot files, but retrieving the latest other data.
+- Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static snapshot input files for the service inventory (`si_2018.csv`, `si_2024.csv`), service standards (`ss_2018.csv`, `ss_2024.csv`), and departmental results (`rbpo.csv`) data, but retrieving the latest other data.
 
 ### Data Formats
 All CSV text files produced by the script are **semi-colon separated** (`;`).
