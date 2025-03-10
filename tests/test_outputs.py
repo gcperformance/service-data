@@ -1,8 +1,6 @@
 import pandas as pd
 import pandas.testing as pdt
 from pathlib import Path
-import os
-import pytz
 import pytest
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
@@ -22,7 +20,7 @@ def test_no_columns_dropped():
         col_set_reference = set(col_set_reference)
         col_set_test = set(df.columns)
         
-        assert col_set_test == col_set_reference, "missing column!"
+        assert col_set_test == col_set_reference, f"Missing column in {file_name}"
 
 def test_column_types():    
     ref_file = REF_DIR / "reference_fields.csv"

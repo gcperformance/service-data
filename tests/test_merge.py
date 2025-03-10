@@ -9,7 +9,7 @@ from main import get_config
 @pytest.fixture(autouse=True)
 def mock_export_to_csv(monkeypatch):
     config = get_config()
-    monkeypatch.setattr("src.export.export_to_csv", lambda data_dict, output_dir: None, config)
+    monkeypatch.setattr("src.export.export_to_csv", lambda data_dict, output_dir: None)
 
 # Test for merge_si
 def test_merge_si_consistency():
@@ -17,7 +17,7 @@ def test_merge_si_consistency():
     si_2018 = load_csv('si_2018.csv', config)
     si_2024 = load_csv('si_2024.csv', config)
     
-    merged_df = merge_si()
+    merged_df = merge_si(config)
 
     # Ensure the number of rows is correct (2018 + 2024 datasets should sum up)
     row_count_2018 = si_2018.shape[0]
@@ -34,7 +34,7 @@ def test_merge_ss_consistency():
     ss_2018 = load_csv('ss_2018.csv', config)
     ss_2024 = load_csv('ss_2024.csv', config)
     
-    merged_df = merge_ss()
+    merged_df = merge_ss(config)
 
     # Ensure the number of rows is correct (2018 + 2024 datasets should sum up)
     row_count_2018 = ss_2018.shape[0]
