@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import pytz
 from pathlib import Path
 
@@ -6,19 +7,12 @@ from src.export import export_to_csv
 from src.load import load_csv
 from src.utils import dept_list
 
-
-CURRENT_DIR = Path(__file__).parent
-
 def qa_check(si, ss, config):
-    # Setup
+    # === SETUP ===
     # Load extra files
     rbpo = load_csv('rbpo.csv', config, snapshot=False)
     org_var = load_csv('org_var.csv', config, snapshot=False)
     
-    # Import qa issues descriptions file
-    file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
-    qa_issues_description = pd.read_csv(file_path)
-
     # Build then import department list from utilities
     dept = dept_list(config)
 
@@ -51,7 +45,9 @@ def qa_check(si, ss, config):
     
     ss['service_standard_id_numeric'] = ss['service_standard_id'].str.replace(r'^STAN', '', regex=True)
     ss['service_standard_id_numeric'] = pd.to_numeric(ss['service_standard_id_numeric'], errors = 'coerce')
-        
+
+    # === QUALITY ASSURANCE CHECKS ===
+    # =================================
     # QA Check 1: Duplicate service ID conflict
     # Step 1: Flag rows where 'service_id' is duplicated within each 'fiscal_yr'
     si['qa_duplicate_sid'] = si.duplicated(subset=['fiscal_yr', 'service_id'], keep=False)
@@ -83,6 +79,7 @@ def qa_check(si, ss, config):
     # Verify:
     # si.loc[:, ['fiscal_yr', 'department_en', 'service_id', 'qa_duplicate_sid']][si['qa_duplicate_sid']]
     
+    # =================================
     # QA Check 2: Duplicate Service Standard ID conflict
     # Step 1: Flag rows where 'service_standard_id' is duplicated within each 'fiscal_yr'
     ss['qa_duplicate_stdid'] = ss.duplicated(subset=['fiscal_yr', 'service_standard_id'], keep=False)
@@ -113,7 +110,8 @@ def qa_check(si, ss, config):
     
     # Verify:
     # ss.loc[:, ['fiscal_yr', 'department_en', 'service_id', 'service_standard_id', 'qa_duplicate_stdid']][ss['qa_duplicate_stdid']]    
-    
+       
+    # =================================
     # QA Check 3: Identify service IDs that have already been used by other departments in previous fiscal years
     si_filtered = si[['service_id', 'department_en', 'org_id', 'fiscal_yr']]
     si_filtered = si_filtered.sort_values(by=['service_id', 'fiscal_yr']).reset_index(drop=True)
@@ -158,6 +156,7 @@ def qa_check(si, ss, config):
     # Verify:
     # si[['fiscal_yr', 'service_id', 'department_en', 'qa_reused_sid']][si['qa_reused_sid']]    
     
+    # =================================
     # QA Check 4: Record is reported for a fiscal year that is incomplete or in the future.
     si['fiscal_yr_end_date'] = pd.to_datetime(si['fiscal_yr'].str.split('-').str[1]+'-04-01')
     si['qa_si_fiscal_yr_in_future'] = si['fiscal_yr_end_date'].dt.date >= current_date
@@ -165,6 +164,7 @@ def qa_check(si, ss, config):
     ss['fiscal_yr_end_date'] = pd.to_datetime(ss['fiscal_yr'].str.split('-').str[1]+'-04-01')
     ss['qa_ss_fiscal_yr_in_future'] = ss['fiscal_yr_end_date'].dt.date >= current_date
 
+    # =================================
     # QA Check 5: Record has contradiction between client feedback channels and online interaction points for feedback
     si['qa_client_feedback_contradiction'] = (
     
@@ -186,6 +186,7 @@ def qa_check(si, ss, config):
     # Verify:
     # si[['client_feedback_channel', 'os_issue_resolution_feedback', 'client_feedback_contradiction']].loc[si['client_feedback_contradiction'] == True]
         
+    # =================================
     # QA Check 6: Service reports no volume, but associated Service standards have volume
     ss_vol_by_service = (
         ss.groupby(['fiscal_yr', 'service_id'])['total_volume']
@@ -200,10 +201,11 @@ def qa_check(si, ss, config):
         (si['total_volume_ss'] > 0) & (si['num_applications_total'] == 0)
     )
 
+    # =================================
     # QA Check 7: Service standard reports no volume
     ss['qa_no_ss_volume'] = (ss['total_volume'] == 0)
     
-    
+    # =================================    
     # QA Check 8: Services that target society as a recipient type we would not expect to see specific interaction volume
     # Note that this assumption may be false
     si['num_applications_total'] = pd.to_numeric(si['num_applications_total'], errors = 'coerce').fillna(0).astype(int)
@@ -212,19 +214,22 @@ def qa_check(si, ss, config):
         (si['service_recipient_type'] == 'SOCIETY') &
         (si['num_applications_total'] > 0)
     )
-        
+
+    # =================================        
     # QA Check 9: Services where 'persons' are a client type should not be 'NA' for SIN as ID
     si['qa_use_of_sin_applicable'] = (
         (si['client_target_groups'].str.contains('PERSON')) &
         (si['sin_usage'] == 'NA')
     )   
-    
+
+    # =================================    
     # QA Check 10: Services where 'econom' (business) are a client type should not be 'NA' for CRA BN as ID
     si['qa_use_of_cra_bn_applicable'] = (
         (si['client_target_groups'].str.contains('ECONOM')) &
         (si['cra_bn_identifier_usage'] == 'NA')
     )
 
+    # =================================
     # QA Check 11: Services must be associated to programs from the same department
     # Exception: we have provided instructions to use any of the ISS internal service
     # programs regardless of whether that program is listed for the department in 
@@ -285,13 +290,49 @@ def qa_check(si, ss, config):
     si['qa_program_from_wrong_org'] = ~(si['program_correct_org'].isna())
     si['program_correct_org'] = si['program_correct_org'].fillna(False)
 
-    # QA Check: Service standard performance is greater than 100%
+    # =================================
+    # QA Check 12: Service standard performance is greater than 100%
     ss['qa_performance_over_100'] = ss['volume_meeting_target']>ss['total_volume']
 
-    # Clean QA report
-    # In order to have a clean report of issues to send to departments & agencies, the following bit of script re-organizes the information in the qa columns to a simple report for 2023-2024 data.
-    si_qa_cols = si.columns.str.startswith('qa')
-    ss_qa_cols = ss.columns.str.startswith('qa')
+    # === EXPORT DATA TO CSV ===
+    # Define the DataFrames to export to csv and their corresponding names
+    csv_exports = {
+        "si_qa": si,
+        "ss_qa": ss
+    }
+
+    QA_DIR = config['qa_dir']
+    export_to_csv(
+        data_dict=csv_exports,
+        output_dir=QA_DIR,
+        config=config
+    )
+
+    # === Run/build QA report ===
+    qa_report(si, ss, config)
+
+
+def qa_report(si_qa, ss_qa, config):
+    def generate_context(row):
+        issue_messages = {
+            'qa_duplicate_sid': f"{row['reused_id_from']}",
+            'qa_reused_sid': f"{row['reused_id_from']}",
+            'qa_program_from_wrong_org': f"{row['program_correct_org']}",
+            'qa_ss_vol_without_si_vol': f"service applications: {row['num_applications_total']}, standard volumes: {row['total_volume_ss']}"
+            }
+
+        return issue_messages.get(row['qa_field_name'], "Additional context")
+
+    # === CLEAN QA REPORT ===
+    # In order to have a clean report of issues to send to departments & agencies, the following 
+    # re-organizes the information in the qa columns to a simple report for 2023-2024 data.
+    si_qa_cols = si_qa.columns.str.startswith('qa')
+    ss_qa_cols = ss_qa.columns.str.startswith('qa')
+
+    # Import qa issues descriptions file
+    CURRENT_DIR = Path(__file__).parent
+    file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
+    qa_issues_description = pd.read_csv(file_path)
 
     # We are only including a specific set of checks in the report.
     critical_si_qa_cols = [
@@ -324,9 +365,19 @@ def qa_check(si, ss, config):
         'program_correct_org'
     ]
     
-    si_qa_report = pd.melt(si, id_vars=si_report_cols, value_vars=critical_si_qa_cols, var_name='issue', value_name='issue_present')
+    # Transform data to have all qa issues in a single column
+    si_qa_report = pd.melt(
+        si_qa, 
+        id_vars=si_report_cols, 
+        value_vars=critical_si_qa_cols, 
+        var_name='issue', 
+        value_name='issue_present')
     
-    si_qa_report = si_qa_report[(si_qa_report['issue_present'] & si_qa_report['fiscal_yr'].isin(['2023-2024', '2024-2025']))]
+    # Filter data only for records where there is a qa issue
+    si_qa_report = si_qa_report[
+        (si_qa_report['issue_present']) & 
+        (si_qa_report['fiscal_yr'].isin(['2023-2024', '2024-2025']))
+    ]
     
     si_qa_report = pd.merge(
         si_qa_report, 
@@ -341,9 +392,12 @@ def qa_check(si, ss, config):
         right_on='qa_field_name', 
         how='left'
     )
+
+    # Consolidate additional context to a single field specific to each qa issue
+    si_qa_report['context'] = si_qa_report.apply(generate_context, axis=1)
     
+    # Tidy up dataframe
     si_qa_report = si_qa_report.drop(columns=['issue_present', 'qa_field_name'])
-    
     si_qa_report = si_qa_report.sort_values(by=['department_en', 'service_id'])
     
     # Preparing SS QA report
@@ -362,7 +416,7 @@ def qa_check(si, ss, config):
         'performance'
     ]
     
-    ss_qa_report = pd.melt(ss, id_vars=ss_report_cols, value_vars=critical_ss_qa_cols, var_name='issue', value_name='issue_present')
+    ss_qa_report = pd.melt(ss_qa, id_vars=ss_report_cols, value_vars=critical_ss_qa_cols, var_name='issue', value_name='issue_present')
     
     ss_qa_report = ss_qa_report[(ss_qa_report['issue_present'] & ss_qa_report['fiscal_yr'].isin(['2023-2024', '2024-2025']))]
     
@@ -387,8 +441,6 @@ def qa_check(si, ss, config):
     # ## Export data to CSV
     # Define the DataFrames to export to csv and their corresponding names
     csv_exports = {
-        "si_qa": si,
-        "ss_qa": ss,
         "si_qa_report": si_qa_report,
         "ss_qa_report": ss_qa_report
     }
