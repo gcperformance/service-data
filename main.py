@@ -69,8 +69,9 @@ def main():
         handlers=[logging.StreamHandler()]
     )
 
-    parser = argparse.ArgumentParser(description="Download and process snapshot data.")
+    parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--snapshot", help="Optional snapshot date (YYYY-MM-DD).")
+    parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
     args = parser.parse_args()
 
     # Validate and parse snapshot date
@@ -100,9 +101,10 @@ def main():
         logging.info("Starting data processing")
 
         # Download and process raw data
-        logging.info("Downloading raw data...")
-        download_csv_files(config)
-        download_json_files(config)
+        if not args.local:
+            logging.info("Downloading raw data...")
+            download_csv_files(config)
+            download_json_files(config)
 
         # Merge historical data
         logging.info("Merging historical data...")
