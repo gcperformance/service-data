@@ -38,6 +38,8 @@ When a 4-digit year represents a fiscal year, it refers to the calendar year **e
 
 All .csv files produced by the script are **semi-colon separated** (`;`)
 
+To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
+
 ---
 ## Project Structure
 
