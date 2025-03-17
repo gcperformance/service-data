@@ -3,57 +3,76 @@
 
 ### Introduction
 
-This Python script ingests and processes service-related data into ready-to-use CSV files for visualization or further analysis.
+This Python project processes Government of Canada service-related data, merging historical and current datasets to produce structured CSV and SQLite outputs for visualization and further analysis.
 
-In 2024, data collection processes changed to allow departments to publish their datasets directly to Open Government. This introduced minor differences in format and content between the 2018–2023 historical dataset and the 2024+ dataset. To create a comprehensive dataset spanning all years, this script merges historical and current service inventory and service standard datasets.
+### Key Features
+- **Data ingestion**: Loads and processes service inventory and performance data.
+- **Dataset Merging**: Integrates 2018-2023 historical data with 2024+ Open Government datasets.
+- **Quality Assurance**: Identifies and flags inconsistencies in datasets.
+- **Output Generation**: Produces structured CSVs and an SQLite database for querying.
 
 These data are collected as a requirement under the [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603).
 
-### Datasets Consulted
+---
+## Quick Start
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/gc-performance/service-data.git
+cd service-data
 
-**[GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c):**  
-An inventory of Government of Canada services, their associated service standards, and performance.
-
-**[Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895):**  
-Expenditures and Full-Time Equivalents (FTE) by program and organization.
-
-### [Utilities Built and Shared for This Purpose](https://github.com/gc-performance/utilities)
-
-- **Department Name Variant List**: A list of every organization, department, and agency with their associated names mapped to a single numeric ID.  
-- **Program-Service ID Correspondence**: Mapping long-form program names from the 2018 service inventory to program IDs from Departmental Plans and Results Reports.
-
-### Utilities from External Sources
-
-**Inventory of Federal Organizations and Interests:**  
-A extensive list of federal organization with unique numeric IDs, forming the basis for the variant list ID. Built for GC Infobase.  
-- English: [Inventory of federal organisations and interests](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95)  
-- French: [Répertoire des organisations et intérêts fédéraux](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85)
+# Install dependencies
+pip install -r requirements.txt
+```
+### Running the Script
+```bash
+python main.py  # Runs full processing pipeline
+```
+#### Optional Arguments:
+- `--snapshot YYYY-MM-DD` : Runs the script using a specific snapshot dataset.
+- `--local`: Runs the script without downloading new datasets.
+- `--help`: Provides additional help for the above arguments.
 
 ---
-### Conventions
+## Datasets Consulted
 
-The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) requirement to publish service inventory information only applies to external and internal enterprise services. For this reason, **any service with a `service_scope` that does not include `EXTERN` or `ENTERPRISE` is removed** from indicator table calculations and consolidated datasets (`si.csv` and `ss.csv`). For versions with all published records, use the `si_all.csv` and `ss_all.csv` in the `outputs/utils` directory or `si_qa.csv` and `ss_qa.csv` in the `outputs/qa` directory.
+### **[GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c)**
+- **Files**: `si_2018.csv`, `si_2024.csv`, `ss_2018.csv`, `ss_2024.csv`
+- **Content**: Government of Canada service inventory, associated standards, and performance.
+- **Update Frequency**: Annually
 
-When a 4-digit year represents a fiscal year, it refers to the calendar year **ending** in that fiscal year.
+### **[Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)**
+- **File**: `rbpo.csv`
+- **Content**: Expenditures and Full-Time Equivalents (FTEs) by program and organization.
+- **Update Frequency**: Annually
 
-All .csv files produced by the script are **semi-colon separated** (`;`)
+---
+## Conventions
+### Service Scope Filtering
+The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) applies only to **external and internal enterprise services**. Any service without `service_scope=EXTERN` or `service_scope=ENTERPRISE` is **excluded** from consolidated datasets (`si.csv` and `ss.csv`).
 
-To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
+- ✅ **Included**: Service with `service_scope=EXTERN`
+- ❌ **Removed**: Internal service with `service_scope=INTERNAL`
+
+### Data Format
+- **All CSV files use a semicolon (`;`) as a delimiter.**
+
+### Accessing files remotely
+- To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
 
 ---
 ## Project Structure
-
 ### Files
+- `main.py` - Orchestrates the processing pipeline.
+- `requirements.txt` - Lists dependencies.
+- `context.md` - Context on this dataset for use with LLM.
+- `database.dbml` - **Draft** schema defining database structure.
+- `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
 
-- `main.py`: Orchestration script that calls other modules
-- `requirements.txt`: Python libraries used in scripts
-- `database.dbml`: **Draft** DBML format schema for database layout and joins of files produced by script.
-
-#### `inputs/`: Downloaded for Processing (Unmodified)
-
+### `inputs/`: Downloaded for Processing (Unmodified)
 - `ifoi_en.csv`: [Inventory of federal organisations and interests - in English](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95)
 - `ifoi_fr.csv`: [Répertoire des organisations et intérêts fédéraux - en français](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85)
-- `org_var.csv`: [Department Name Variant List](https://github.com/gc-performance/utilities): A list of every organization, department, and agency with their associated names mapped to a single numeric ID. 
+- `org_var.csv`: [Department Name Variant List](https://github.com/gc-performance/utilities): A list of every organization, department, and agency with their associated names mapped to a single numeric ID. Maintained manually. 
 - `rbpo.csv`: [Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)
 - `serv_prog.csv`: [Program-Service ID Correspondence](https://github.com/gc-performance/utilities): Mapping long-form program names from the 2018 service inventory to program IDs from Departmental Plans and Results Reports
 - `si_2018.csv`: [GC Service Inventory - Service Identification Information & Metrics (2018-2023)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a)
@@ -62,13 +81,13 @@ To access the files in the latest release, point your tool to the following url:
 - `ss_2024.csv`: [GC Service Inventory - Service Standards & Performance Results (2024)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e)
 - `service_data_dict.json`: [GC Service Inventory - Data dictionary](https://open.canada.ca/data/en/recombinant-published-schema/service.json)
 
-#### `outputs/`: Produced by the Script
+### `outputs/`: Files Produced by the Script
 
 *All .csv files are semi-colon (`;`) delimited*
 - `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 - `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 
-##### `outputs/indicators/`: Summary Files for Visualization and Review
+#### `outputs/indicators/`: Summary Files for Visualization and Review
 
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
 - `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, percentage of applications for high-volume external services (>45k applications) that used the online channel)
@@ -81,29 +100,29 @@ To access the files in the latest release, point your tool to the following url:
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
 - `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
 
-##### `outputs/qa/`: Quality Assurance Files
+#### `outputs/qa/`: Quality Assurance Files
 
 - `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns. All `service_scope` included.
 - `ss_qa.csv`: Full service standards dataset with QA issues identified as separate columns. All `service_scope` included.
 - `si_qa_report.csv`: Critical errors for service inventory.
 - `ss_qa_report.csv`: Critical errors for service standards.
 
-##### `outputs/utils/`: Supporting Files
+#### `outputs/utils/`: Utilities and Supporting Files
 
-- `dd_field_names`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
-- `dd_choices`: Correspondence table between codes that appear in `ss` and `si` and their names.
-- `dept.csv`: A tidy list of departments with their IFOI IDs.
+- `dd_field_names.csv`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
+- `dd_choices.csv`: Correspondence table between codes that appear in `ss` and `si` and their names.
+- `dept.csv`: A tidy unique list of departments with their IFOI IDs.
 - `drf.csv`: A flattened Departmental plans and Departmental results report.
-- `ifoi`: Exhaustive list of departmental info in English and French
+- `ifoi.csv`: Exhaustive list of departmental info in English and French
 - `org_var.csv`: List of variant department names and their IFOI ID.
 - `sid_list.csv`: Unique list of service IDs with latest reporting year and department.
 - `si_all.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 - `ss_all.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 
-#### `src/`: Source Code for Script
+### `src/`: Source Code for Script
 
 - `clean.py`: functions to clean and set up data
-- `create_sqlite`: process to generate the sqlite database
+- `create_sqlite.py`: process to generate the sqlite database
 - `export.py`: functions to export data to CSV (semi-colon delimited)
 - `load.py`: functions to load csv files to dataframes and download / refresh all inputs
 - `merge.py`: process to align 2018 and 2024 service inventory and service standard datasets
@@ -112,7 +131,7 @@ To access the files in the latest release, point your tool to the following url:
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
-#### `tests/`: Script tests
+### `tests/`: Script tests
 
 - `README.md`: placeholder readme documentation for tests
 - `conftest.py`: configuration file for pytest
@@ -120,20 +139,18 @@ To access the files in the latest release, point your tool to the following url:
 - `test_outputs.py`: testing script for output files
 - `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
 
-##### `tests/ref`: Reference files for use with test scripts
+#### `tests/ref`: Reference files for use with test scripts
 
 - `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
 
-#### `notebooks/`: Jupyter notebooks for testing and experiments
+### `notebooks/`: Jupyter notebooks for testing and experiments
 
-#### `snapshots/`: Files generated based on data at a point in time, defined by the date in format YYYY-MM-DD
+### `snapshots/`: Files generated based on data at a point in time, defined by the date in format YYYY-MM-DD
 - Releases indicate which files are generated from the snapshot by prepending the date to the file name, for example `2025-03-01_si.csv` is equivalent to `si.csv`, but based on data from March 1, 2025.
 - The python script expects the snapshot inputs and outputs to be defined by their directory.
 - Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static snapshot input files for the service inventory (`si_2018.csv`, `si_2024.csv`), service standards (`ss_2018.csv`, `ss_2024.csv`), and departmental results (`rbpo.csv`) data, but retrieving the latest other data.
 
-### Data Formats
-All CSV text files produced by the script are **semi-colon separated** (`;`).
-
+---
 ## SQLite Database Releases
 
 In addition to CSV files, this repository automatically generates a SQLite database containing all processed data in table format for easier querying and analysis. The database is published as a GitHub release and can be downloaded from the [releases page](https://github.com/gc-performance/service-data/releases).
@@ -170,10 +187,14 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 ---
 ## Directory structure
 ```
+├── .
+├── ..
 ├── README.md
 ├── context.md
-├── database-normalized.dbml
 ├── database.dbml
+├── main.py
+├── requirements.txt
+├── tidy-script
 ├── inputs
 │   ├── ifoi_en.csv
 │   ├── ifoi_fr.csv
@@ -192,7 +213,6 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │           ├── si_2024.csv
 │           ├── ss_2018.csv
 │           └── ss_2024.csv
-├── main.py
 ├── notebooks
 │   ├── experiments-drf.ipynb
 │   ├── experiments-unique-sids.ipynb
@@ -251,7 +271,6 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │               ├── si_all.csv
 │               ├── sid_list.csv
 │               └── ss_all.csv
-├── requirements.txt
 ├── src
 │   ├── __init__.py
 │   ├── clean.py
@@ -264,11 +283,11 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── qa_issues_descriptions.csv
 │   └── utils.py
 └── tests
+    ├── ref
+    │   └── reference_fields.csv
     ├── README.md
     ├── conftest.py
     ├── generate_reference.py
-    ├── ref
-    │   └── reference_fields.csv
     ├── test_merge.py
     └── test_outputs.py
 ```
