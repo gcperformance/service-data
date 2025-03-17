@@ -1,5 +1,6 @@
 #!/bin/bash
 #produces file paths of things safe to delete
 find . -type d -name "__pycache__"
+find . -type d -name ".ipynb_checkpoints"
 find outputs -type f -name "*.csv" 
 find inputs -type f \( -iname "*.csv" -o -iname "*.json" \) ! -path "*/snapshots/*"
