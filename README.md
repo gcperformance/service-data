@@ -14,7 +14,16 @@ This Python project processes Government of Canada service-related data, merging
 These data are collected as a requirement under the [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603).
 
 ---
-## Quick Start
+## Quick Start - Consulting remote datasets with MS Excel
+- Select **From Web** in the **Get & Transform Data** section under the **Data** tab on the main ribbon.
+- Paste the following URL in the dialog box that appears, replacing XXX with the filename of the desired dataset: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`.
+  - *For example, to consult `si.csv`, use the following URL: `https://github.com/gcperformance/service-data/releases/latest/download/si.csv`*
+  - *To consult a snapshot version, add the date of the snapshot in YYYY-MM-DD format to the front of the file name. For example, to consult `si.csv` generated from the snapshot taken March 1, 2025, use the following URL: `https://github.com/gcperformance/service-data/releases/latest/download/2025-03-01_si.csv`*
+- Preview the data in the next dialog box and change the **Data Type Detection** to **Based on entire dataset** then click **Load**.
+  - *Click **Transform Data** To open the dataset in Power Query and perform more advanced calculations*
+- Delete the timestamp row at the bottom of the table.
+
+## Quick Start - Running script locally
 ### Installation
 ```bash
 # Clone the repository
