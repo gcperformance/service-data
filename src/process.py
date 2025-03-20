@@ -527,8 +527,14 @@ def process_files(si, ss, config):
         drf, 
         how='left', 
         left_on=['fiscal_yr', 'program_id', 'org_id'], 
-        right_on=['si_link_yr', 'program_id', 'org_id']
+        right_on=['si_link_yr', 'program_id', 'org_id'],
+        indicator='valid_program'
     )
+
+    # Identify programs from service inventory that do not appear in the drf for that fy, org
+    service_fte_spending['valid_program'] = (service_fte_spending['valid_program'] == 'both')
+
+    # Drop duplicate si_link_yr in favor of just using fy. they should be the same.
     service_fte_spending.drop(columns="si_link_yr", inplace=True)
        
     # === EXPORT DATAFRAMES ===
