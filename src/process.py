@@ -106,7 +106,7 @@ def process_files(si, ss, config):
     # Unpivot (i.e. melt) online interaction point columns
     si_oip = pd.melt(
         si, 
-        id_vars=['fiscal_yr', 'org_id', 'service_id'],
+        id_vars=['fiscal_yr', 'org_id', 'service_id', 'fy_org_id_service_id'],
         var_name='online_interaction_point', 
         value_vars=oip_cols, 
         value_name='activation')
