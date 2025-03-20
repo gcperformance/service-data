@@ -91,7 +91,7 @@ def process_files(si, ss, config):
     
     # =================================
     # si_oip: Online interaction points
-    # Given a service, which online interaction points are activated as of the latest fiscal year those services reported?
+    # Given a service, which online interaction points are activated by fiscal year for those services reported?
 
     # List of columns that represent online interaction point activation
     oip_cols = [
@@ -106,7 +106,7 @@ def process_files(si, ss, config):
     # Unpivot (i.e. melt) online interaction point columns
     si_oip = pd.melt(
         si, 
-        id_vars=['fiscal_yr', 'org_id', 'service_id'],
+        id_vars=['fiscal_yr', 'org_id', 'service_id', 'fy_org_id_service_id'],
         var_name='online_interaction_point', 
         value_vars=oip_cols, 
         value_name='activation')
@@ -116,10 +116,11 @@ def process_files(si, ss, config):
     
     # Remove "os_" from the online interaction point column to get a clean name
     si_oip['online_interaction_point'] = si_oip['online_interaction_point'].str.replace('os_', '')
-    
+
+    # Commenting this out for now. It is more useful to have all the oip statuses for all yrs
     # Dump old years, only take latest year
-    si_oip = si_oip.loc[si_oip.groupby(['service_id', 'online_interaction_point'])['fiscal_yr'].idxmax()].sort_values(by=['service_id', 'online_interaction_point_sort'])
-    
+    # si_oip = si_oip.loc[si_oip.groupby(['service_id', 'online_interaction_point'])['fiscal_yr'].idxmax()].sort_values(by=['service_id', 'online_interaction_point_sort'])
+
     # =================================
     # ss_tml_perf_vol: Timeliness service standard performance
     # Given a service, what is the volume of interactions that met the target vs not, by channel and fiscal year?
