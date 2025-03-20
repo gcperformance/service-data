@@ -265,15 +265,20 @@ def build_data_dictionary(config):
     
     dd_choices = dd_choices.pivot(index=['resource_name', 'id', 'code'], columns='en_fr', values='value')
     dd_choices = dd_choices.reset_index()
+
+    # Keep dd_choices tidy by removing program_id and splitting into its own file (dd_program)
+    dd_program = dd_choices.loc[dd_choices['id'] == 'program_id']
     dd_choices = dd_choices.loc[dd_choices['id'] != 'program_id']
     
     # Standardize column names
     dd_field_names = standardize_column_names(dd_field_names)
+    dd_program = standardize_column_names(dd_program)
     dd_choices = standardize_column_names(dd_choices)
 
     data_dictionary_file_dict = {
-        'dd_field_names':dd_field_names,
-        'dd_choices':dd_choices
+        'dd_field_names': dd_field_names,
+        'dd_program': dd_program,
+        'dd_choices': dd_choices
     }
 
     # Export to CSV
