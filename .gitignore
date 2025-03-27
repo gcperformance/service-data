@@ -1,7 +1,8 @@
 .ipynb_checkpoints/
 outputs/service_data.db
 outputs/**/*.csv
-inputs/**/*.csv
+inputs/*.csv
+inputs/*.json
 __pycache__/
 .vscode
 .pytest_cache

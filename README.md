@@ -6,7 +6,7 @@
 This Python project processes Government of Canada service-related data, merging historical and current datasets to produce structured CSV and SQLite outputs for visualization and further analysis.
 
 ### Key Features
-- **Data ingestion**: Loads and processes service inventory and performance data.
+- **Data ingestion**: Downloads and processes service inventory and performance data.
 - **Dataset Merging**: Integrates 2018-2023 historical data with 2024+ Open Government datasets.
 - **Quality Assurance**: Identifies and flags inconsistencies in datasets.
 - **Output Generation**: Produces structured CSVs and an SQLite database for querying.
@@ -58,27 +58,29 @@ python main.py  # Runs full processing pipeline
 ---
 ## Conventions
 ### Service Scope Filtering
-The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) applies only to **external and internal enterprise services**. Any service without `service_scope=EXTERN` or `service_scope=ENTERPRISE` is **excluded** from consolidated datasets (`si.csv` and `ss.csv`).
-
-- ✅ **Included**: Service with `service_scope=EXTERN`
-- ❌ **Removed**: Internal service with `service_scope=INTERNAL`
+The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) requirement to report services applies only to **external and internal enterprise services**. Any service without `service_scope=EXTERN` or `service_scope=ENTERPRISE` is **excluded** from consolidated datasets (`si.csv` and `ss.csv`).
 
 ### Data Format
-- **All CSV files use a semicolon (`;`) as a delimiter.**
+- All CSV files use a semicolon (`;`) as a delimiter.
+
+### Timestamps
+- All CSV files produced by the script include a timestamp on the last row of the file.
 
 ### Accessing files remotely
 - To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
 
 ---
 ## Project Structure
-### Files
+*Given that files produced by the script are available in releases, all transitory input and output files are no longer tracked with git, or included in the repo. Releases have a flat structure, so the directory structure below is only relevant if you clone the repo and run the script.*
+
+### Root Folder
 - `main.py` - Orchestrates the processing pipeline.
-- `requirements.txt` - Lists dependencies.
+- `requirements.txt` - Lists python dependencies.
 - `context.md` - Context on this dataset for use with LLM.
-- `database.dbml` - **Draft** schema defining database structure.
+- `database.dbml` - **Draft** schema defining a database model.
 - `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
 
-### `inputs/`: Downloaded for Processing (Unmodified)
+### `inputs/`: Files downloaded for Processing (Unmodified)
 - `ifoi_en.csv`: [Inventory of federal organisations and interests - in English](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95)
 - `ifoi_fr.csv`: [Répertoire des organisations et intérêts fédéraux - en français](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85)
 - `org_var.csv`: [Department Name Variant List](https://github.com/gc-performance/utilities): A list of every organization, department, and agency with their associated names mapped to a single numeric ID. Maintained manually. 
@@ -92,15 +94,14 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 
 ### `outputs/`: Files Produced by the Script
 
-*All .csv files are semi-colon (`;`) delimited*
 - `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 - `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 
 #### `outputs/indicators/`: Summary Files for Visualization and Review
 
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
-- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, percentage of applications for high-volume external services (>45k applications) that used the online channel)
-- `maf_all.csv`: a concatenated table with all the maf columns and scores (percentage of services that have service standards, percentage of applicable services that can be completed online end-to-end, percentage of client interaction points that are available online, percentage of services which have used client feedback to improve services in the year prior to reporting)
+- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (dr_2467: percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, dr_2468: percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, dr_2469: percentage of applications for high-volume external services (>45k applications) that used the online channel)
+- `maf_all.csv`: a concatenated table with all the maf columns and scores (maf1: percentage of services that have service standards, maf2: percentage of service standards met, maf5: percentage of applicable services that can be completed online end-to-end, maf6: percentage of client interaction points that are available online, maf8: percentage of services which have used client feedback to improve services in the year prior to reporting)
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
 - `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
 - `si_fy_service_count.csv`: Unique services count by fiscal year.
@@ -109,7 +110,7 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
 - `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
 
-#### `outputs/qa/`: Quality Assurance Files
+#### `outputs/qa/`: Quality Assurance Review Files
 
 - `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns. All `service_scope` included.
 - `ss_qa.csv`: Full service standards dataset with QA issues identified as separate columns. All `service_scope` included.
@@ -120,10 +121,11 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 
 - `dd_field_names.csv`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
 - `dd_choices.csv`: Correspondence table between codes that appear in `ss` and `si` and their names.
+- `dd_program`: List of valid program codes and names.
 - `dept.csv`: A tidy unique list of departments with their IFOI IDs.
 - `drf.csv`: A flattened Departmental plans and Departmental results report.
 - `ifoi.csv`: Exhaustive list of departmental info in English and French
-- `org_var.csv`: List of variant department names and their IFOI ID.
+- `org_var.csv`: Duplicate-permitted list of variant department names and their IFOI ID.
 - `sid_list.csv`: Unique list of service IDs with latest reporting year and department.
 - `si_all.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 - `ss_all.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
@@ -140,7 +142,7 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
-### `tests/`: Script tests
+### `tests/`: Script Tests
 
 - `README.md`: placeholder readme documentation for tests
 - `conftest.py`: configuration file for pytest
@@ -148,7 +150,7 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `test_outputs.py`: testing script for output files
 - `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
 
-#### `tests/ref`: Reference files for use with test scripts
+#### `tests/ref`: Reference Files
 
 - `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
 
@@ -223,8 +225,6 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │           ├── ss_2018.csv
 │           └── ss_2024.csv
 ├── notebooks
-│   ├── experiments-drf.ipynb
-│   ├── experiments-unique-sids.ipynb
 │   ├── experiments.ipynb
 │   └── qa-uris.ipynb
 ├── outputs
@@ -249,6 +249,7 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 │   ├── utils
 │   │   ├── dd_choices.csv
 │   │   ├── dd_field_names.csv
+│   │   ├── dd_program.csv
 │   │   ├── dept.csv
 │   │   ├── drf.csv
 │   │   ├── ifoi.csv
