@@ -44,8 +44,24 @@ def test_column_types():
 
         assert not mismatches, f'Datatype mismatches: {mismatches}'
                   
+def test_gc_infobase_columns_present():
+    ref_file = REF_DIR / "gc_infobase_fields.csv"
+    gc_infobase_fields = pd.read_csv(ref_file)
+
+    file_names = gc_infobase_fields['file'].unique()
+
+    for file_name in file_names:
+        path = OUTPUT_DIR / file_name
+        df = pd.read_csv(path, delimiter=";", skipfooter=1, engine='python')
+
+        col_set_reference = gc_infobase_fields['field_name'][gc_infobase_fields['file'] == file_name]
+        col_set_reference = set(col_set_reference)
+        col_set_test = set(df.columns)
+
+        assert col_set_reference.issubset(col_set_test), f"Missing GC Infobase column in {file_name}"
+
 
 if __name__ == "__main__":
     test_no_columns_dropped()
     test_column_types()
-    
+    test_gc_infobase_columns_present()
