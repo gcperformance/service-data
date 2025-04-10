@@ -16,10 +16,10 @@ def process_files(si, ss, config):
     si = si.loc[si['service_scope_ext_or_ent'] == True]
     
     # Set index for `si`
-    si = si.set_index(['fiscal_yr', 'service_id'])
+    si = si.set_index(['fiscal_yr', 'org_id', 'service_id'])
     
     # Merge `ss` with `si` using left join and keep only matching rows
-    ss = ss.set_index(['fiscal_yr', 'service_id']).merge(
+    ss = ss.set_index(['fiscal_yr', 'org_id', 'service_id']).merge(
         si[['service_scope_ext_or_ent']],  # Ensure only the necessary column is merged
         how='left',
         left_index=True,
@@ -394,8 +394,8 @@ def process_files(si, ss, config):
 
     # Filter service inventory for high-volume and external services
     si_hv = si[
-        (si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD & 
-        si['service_scope'].str.contains('EXTERN', regex=True))].copy()
+        ((si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD) &
+        (si['service_scope'].str.contains('EXTERN', regex=True)))].copy()
 
     # Melt the DataFrame for activation analysis
     dr2467 = si_hv.melt(
@@ -482,8 +482,8 @@ def process_files(si, ss, config):
 
     HIGH_VOLUME_THRESHOLD = 45000
     si_hv = si[
-        (si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD & 
-        si['service_scope'].str.contains('EXTERN', regex=True))].copy()
+        ((si['num_applications_total'] >= HIGH_VOLUME_THRESHOLD) &
+        (si['service_scope'].str.contains('EXTERN', regex=True)))].copy()
 
     # Select relevant columns and ensure numeric conversion for 'num_applications_online'
     dr2469 = si_hv[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'num_applications_total', 'num_applications_online']].copy()

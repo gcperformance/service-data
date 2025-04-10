@@ -185,6 +185,7 @@ def build_drf(config):
 
     return drf
 
+
 def copy_raw_to_utils(config):
     ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
     ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
@@ -221,6 +222,7 @@ def copy_raw_to_utils(config):
         output_dir=UTILS_DIR,
         config=config
     )
+
 
 def build_data_dictionary(config):
     """Builds a structured data dictionary from a JSON file, processes nested data, 

@@ -267,8 +267,11 @@ def merge_ss(config):
     # Service standard channel: single value, uppercase
     ss['channel'] = ss['channel'].str.upper()
 
-    # Unique row-level identifier (primary key) to connect to service inventory
+    # Define identifier to connect to service inventory
     ss['fy_org_id_service_id'] = ss[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
+
+    # Unique row-level identifier (primary key) to use in comparisons
+    ss['fy_org_id_service_id_std_id'] = ss[['fiscal_yr', 'org_id', 'service_id', 'service_standard_id']].agg('_'.join, axis=1)
 
     UTILS_DIR = config['utils_dir']
     export_to_csv(
