@@ -45,15 +45,25 @@ python main.py  # Runs full processing pipeline
 ---
 ## Datasets Consulted
 
-### **[GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c)**
+### [GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c)
 - **Files**: `si_2018.csv`, `si_2024.csv`, `ss_2018.csv`, `ss_2024.csv`
-- **Content**: Government of Canada service inventory, associated standards, and performance.
+- **Content**: Government of Canada service inventory, associated standards, and performance, along with relevant data dictionaries.
 - **Update Frequency**: Annually
 
-### **[Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)**
+### [Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)
 - **File**: `rbpo.csv`
 - **Content**: Expenditures and Full-Time Equivalents (FTEs) by program and organization.
 - **Update Frequency**: Annually
+
+### [Inventory of federal organisations and interests](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95)
+- **Files**: `ifoi_en.csv`, `ifoi_fr.csv`
+- **Content**: Comprehensive list of organizations relevant to the Government of Canada, notably departments and agencies.
+- **Update Frequency**: Ad-hoc
+
+### [Utilities developed for GC Service Inventory data analysis](https://github.com/gc-performance/utilities)
+- **Files**: `org_var.csv`, `serv_prog.csv`
+- **Content**: A manually updated list of every organization, department, and agency with their associated names mapped to a single numeric ID (`org_var.csv`). Long-form program names from the 2018 service inventory mapped to program IDs from Departmental Plans and Results Reports (`serv_prog.csv`).
+- **Update Frequency**: Ad-hoc
 
 ---
 ## Conventions
@@ -69,56 +79,35 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 ### Accessing files remotely
 - To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
 
+### Snapshots
+- A copy of the datasets from a particular date (a snapshot) is maintained separately in order to have a consistent dataset with which to meet reporting requirements.
+- Releases indicate which files are generated from the snapshot by prepending the date to the file name, for example `2025-03-01_si.csv` is equivalent to `si.csv`, but based on data from March 1, 2025.
+- Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static snapshot input files for the service inventory (`si_2018.csv`, `si_2024.csv`), service standards (`ss_2018.csv`, `ss_2024.csv`), and departmental results (`rbpo.csv`) data, but retrieving the latest other data.
+
 ---
-## Project Structure
-*Given that files produced by the script are available in releases, all transitory input and output files are no longer tracked with git, or included in the repo. Releases have a flat structure, so the directory structure below is only relevant if you clone the repo and run the script.*
-
-### Root Folder
-- `main.py` - Orchestrates the processing pipeline.
-- `requirements.txt` - Lists python dependencies.
-- `context.md` - Context on this dataset for use with LLM.
-- `database.dbml` - **Draft** schema defining a database model.
-- `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
-
-### `inputs/`: Files downloaded for Processing (Unmodified)
-- `ifoi_en.csv`: [Inventory of federal organisations and interests - in English](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95)
-- `ifoi_fr.csv`: [Répertoire des organisations et intérêts fédéraux - en français](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85)
-- `org_var.csv`: [Department Name Variant List](https://github.com/gc-performance/utilities): A list of every organization, department, and agency with their associated names mapped to a single numeric ID. Maintained manually. 
-- `rbpo.csv`: [Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)
-- `serv_prog.csv`: [Program-Service ID Correspondence](https://github.com/gc-performance/utilities): Mapping long-form program names from the 2018 service inventory to program IDs from Departmental Plans and Results Reports
-- `si_2018.csv`: [GC Service Inventory - Service Identification Information & Metrics (2018-2023)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a)
-- `si_2024.csv`: [GC Service Inventory - Service Identification Information & Metrics (2024)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/c0cf9766-b85b-48c3-b295-34f72305aaf6)
-- `ss_2018.csv`: [GC Service Inventory - Service Standards & Performance Results (2018-2023)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/272143a7-533e-42a1-b72d-622116474a21)
-- `ss_2024.csv`: [GC Service Inventory - Service Standards & Performance Results (2024)](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e)
-- `service_data_dict.json`: [GC Service Inventory - Data dictionary](https://open.canada.ca/data/en/recombinant-published-schema/service.json)
-
-### `outputs/`: Files Produced by the Script
+## Script outputs (outputs/)
+*The following files are present in the releases and available to consult remotely*
 
 - `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 - `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
 
-#### `outputs/indicators/`: Summary Files for Visualization and Review
-
+### Summary Files for Visualization and Review (outputs/indicators/)
 *All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
 - `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (dr_2467: percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, dr_2468: percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, dr_2469: percentage of applications for high-volume external services (>45k applications) that used the online channel)
 - `maf_all.csv`: a concatenated table with all the maf columns and scores (maf1: percentage of services that have service standards, maf2: percentage of service standards met, maf5: percentage of applicable services that can be completed online end-to-end, maf6: percentage of client interaction points that are available online, maf8: percentage of services which have used client feedback to improve services in the year prior to reporting)
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
-- `si_fy_interaction_sum.csv`: Sum of interactions by service, fiscal year, channel
-- `si_fy_service_count.csv`: Unique services count by fiscal year.
 - `si_oip.csv`: Online interaction points activation status by service for the latest available fiscal year.
-- `si_reviews.csv`: Count of services reviewed or improved.
+- `si_reviews.csv`: Count of services reviewed or improved in the past 5 years.
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
 - `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
 
-#### `outputs/qa/`: Quality Assurance Review Files
-
+### Quality Assurance Review Files (outputs/qa/)
 - `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns. All `service_scope` included.
 - `ss_qa.csv`: Full service standards dataset with QA issues identified as separate columns. All `service_scope` included.
-- `si_qa_report.csv`: Critical errors for service inventory.
-- `ss_qa_report.csv`: Critical errors for service standards.
+- `si_qa_report.csv`: Prioritized issues in service inventory.
+- `ss_qa_report.csv`: Prioritized issues in service standards.
 
-#### `outputs/utils/`: Utilities and Supporting Files
-
+### Utilities and Supporting Files (outputs/utils/)
 - `dd_field_names.csv`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
 - `dd_choices.csv`: Correspondence table between codes that appear in `ss` and `si` and their names.
 - `dd_program`: List of valid program codes and names.
@@ -130,8 +119,17 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `si_all.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 - `ss_all.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
 
-### `src/`: Source Code for Script
+---
+## Other files
+- `comparison.py` - Produces files that describe the differences between 2 files.
+- `main.py` - Orchestrates the processing pipeline.
+- `requirements.txt` - Lists python dependencies.
+- `context.md` - Context on this dataset for use with LLM.
+- `database.dbml` - **Draft** schema defining a database model.
+- `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
 
+
+### Script files (src/)
 - `clean.py`: functions to clean and set up data
 - `create_sqlite.py`: process to generate the sqlite database
 - `export.py`: functions to export data to CSV (semi-colon delimited)
@@ -142,24 +140,14 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `qa_issues_descriptions.csv`: definitions file for qa issues
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
-### `tests/`: Script Tests
+### Tests (tests/)
 
 - `README.md`: placeholder readme documentation for tests
 - `conftest.py`: configuration file for pytest
 - `test_merge.py`: testing script for merge.py
 - `test_outputs.py`: testing script for output files
 - `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
-
-#### `tests/ref`: Reference Files
-
 - `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
-
-### `notebooks/`: Jupyter notebooks for testing and experiments
-
-### `snapshots/`: Files generated based on data at a point in time, defined by the date in format YYYY-MM-DD
-- Releases indicate which files are generated from the snapshot by prepending the date to the file name, for example `2025-03-01_si.csv` is equivalent to `si.csv`, but based on data from March 1, 2025.
-- The python script expects the snapshot inputs and outputs to be defined by their directory.
-- Running the main.py script with the command `--snapshot YYYY-MM-DD` will generate new outputs with the static snapshot input files for the service inventory (`si_2018.csv`, `si_2024.csv`), service standards (`ss_2018.csv`, `ss_2024.csv`), and departmental results (`rbpo.csv`) data, but retrieving the latest other data.
 
 ---
 ## SQLite Database Releases
@@ -197,6 +185,8 @@ In addition to CSV files, this repository automatically generates a SQLite datab
 
 ---
 ## Directory structure
+*Given that files produced by the script are made available in releases, all transitory input and output files are no longer tracked with git, or included in the repo. Releases have a flat structure, so the directory structure below is only relevant if you clone the repo and run the script.*
+
 ```
 ├── .
 ├── ..

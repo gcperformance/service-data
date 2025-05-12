@@ -148,14 +148,14 @@ def process_files(si, ss, config):
 
     # =================================
     # si_fy_service_count: Total number of services by fiscal year
-    # Given a fiscal year, how many services were reported?    
-    si_fy_service_count = si.groupby(['fiscal_yr'])['service_id'].count().reset_index()
-    si_fy_service_count.rename(columns={'service_id': 'total_services'}, inplace=True)
+    # Given a fiscal year, how many services were reported? This is included in other tables now
+    # si_fy_service_count = si.groupby(['fiscal_yr'])['service_id'].count().reset_index()
+    # si_fy_service_count.rename(columns={'service_id': 'total_services'}, inplace=True)
     
     # =================================
     # si_fy_interaction_sum: Total number of service interactions
-    # Given a fiscal year, how many service interactions were reported?
-    si_fy_interaction_sum = si_vol.groupby(['fiscal_yr'])['volume'].sum().reset_index()
+    # Given a fiscal year, how many service interactions were reported? This is included in other tables now
+    # si_fy_interaction_sum = si_vol.groupby(['fiscal_yr'])['volume'].sum().reset_index()
 
     # =================================
     # si_reviews: Service reviews 
@@ -543,8 +543,8 @@ def process_files(si, ss, config):
         "si_vol": si_vol,
         "si_oip": si_oip,
         "ss_tml_perf_vol": ss_tml_perf_vol,
-        "si_fy_interaction_sum": si_fy_interaction_sum,
-        "si_fy_service_count": si_fy_service_count,
+        # "si_fy_interaction_sum": si_fy_interaction_sum,
+        # "si_fy_service_count": si_fy_service_count,
         "si_reviews": si_reviews,
         "service_fte_spending": service_fte_spending,
         # "maf1": maf1,
