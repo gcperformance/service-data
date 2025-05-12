@@ -51,7 +51,7 @@ def process_files(si, ss, config):
 
     # List of columns that contain application / interaction volumes
     # These also represent the channel through which the interaction took place
-    app_cols = [
+    APP_COLS = [
         'num_applications_by_phone', 
         'num_applications_online', 
         'num_applications_in_person', 
@@ -66,7 +66,7 @@ def process_files(si, ss, config):
         si, 
         id_vars=['fiscal_yr','org_id', 'service_id'], 
         var_name='channel',
-        value_vars=app_cols,
+        value_vars=APP_COLS,
         value_name='volume'
     )
     
@@ -538,412 +538,354 @@ def process_files(si, ss, config):
     # Drop duplicate si_link_yr in favor of just using fy. they should be the same.
     service_fte_spending.drop(columns="si_link_yr", inplace=True)
 
-    # s.n : adding in the service data pack analysis
-    # s.n : had lots of trouble using the already existing si dataframe to define si_dp the code below:
-    # def define_si_dp(si):
-        #si_dp = si.copy(deep=True)
-        #return si_dp
 
-    # Load service inventory data (si)
-    #data = '/workspaces/service-data/outputs/snapshots/2025-03-01/si.csv'
-    # si = pd.read_csv(
-    #     data,
-    #     keep_default_na=False, 
-    #     na_values='', 
-    #     delimiter=';',
-    #     engine='python',
-    #     skipfooter=2
-    # )
+    # === DATA PACK ===
+    # Set up dataframes and columns for data pack analysis
 
-    # Set si_dp as a working DataFrame
+    # Define high-volume threshold
+    HIGH_VOLUME_THRESHOLD = 45000
+
+    # Define online interaction point (OIP) columns
+    OIP_COLS = [
+        'os_account_registration',
+        'os_authentication',
+        'os_application',
+        'os_decision',
+        'os_issuance',
+        'os_issue_resolution_feedback',
+    ]
+
+    # Define application volume columns
+    APP_COLS = [
+        'num_applications_by_phone', 
+        'num_applications_online', 
+        'num_applications_in_person', 
+        'num_applications_by_mail', 
+        'num_applications_by_email', 
+        'num_applications_by_fax', 
+        'num_applications_by_other',
+        'num_applications_total',
+        'num_phone_enquiries',
+    ]
+
+    # Set si_dp and ss_dp as working DataFrames
     si_dp = si.copy()
+    ss_dp = ss.copy()
 
-    # Get the current date and time in the specified timezone (for any potential timestamping)
-    # timezone = pytz.timezone("America/Montreal")
-    # current_date = datetime.now(timezone)
-    # current_datestr = current_date.strftime("%Y-%m-%d_%H:%M:%S")
-    # print(f"current date: {current_datestr}")
+    # Create a new column to identify 'omnichannel' services
+    # Omnichannel = phone, online, and in-person applications are applicable
+    # Note that in previous versions calculated in excel sheets the omnichannel boolean
+    # was mistakenly ignoring phone channels. This adjustment ('or' on phones, 'and' with online & in person)
+    # was defined in May 2025.
+    def is_filled(col):
+        return col.notna() & (col.astype(str).str.strip() != '') & (col != 'NA') & (col != 'ND')
 
-    #OMNICHANNEL FORMULA
-    #si_dp['omnichannel'] = si_dp.apply(
-        #lambda row: (
-            #pd.notna(pd.to_numeric(row['num_phone_enquiries'], errors='coerce') + 
-                    #pd.to_numeric(row['num_applications_by_phone'], errors='coerce')) and
-            #pd.notna(row['num_applications_online']) and
-            #pd.notna(row['num_applications_in_person'])
-        #),
-        #axis=1
-    #)
-
-    si_dp['omnichannel'] = si_dp.apply(
-        lambda row: (
-            pd.notna(pd.to_numeric(row['num_phone_enquiries'], errors='coerce')) and
-            pd.notna(pd.to_numeric(row['num_applications_by_phone'], errors='coerce')) and
-            pd.notna(row['num_applications_online']) and
-            pd.notna(row['num_applications_in_person'])
-        ),
-        axis=1
+    si_dp['omnichannel'] = (
+        (is_filled(si_dp['num_phone_enquiries']) | is_filled(si_dp['num_applications_by_phone'])) &
+        is_filled(si_dp['num_applications_online']) &
+        is_filled(si_dp['num_applications_in_person'])
     )
 
+    # Convert all application volume columns to numeric
+    si_dp[APP_COLS] = si_dp[APP_COLS].apply(pd.to_numeric, errors='coerce').fillna(0)
 
-    # Create 'phone_apps_enquiries' column (sum of phone enquiries + phone applications)
+    # Create 'num_phone_apps_enquiries' column (sum of phone enquiries + phone applications)
+    si_dp['num_phone_apps_enquiries'] = si_dp['num_phone_enquiries'] + si_dp['num_applications_by_phone']
 
-    # Convert relevant columns to numeric and handle NaNs in the calculation
-    #si_dp['num_phone_enquiries'] = pd.to_numeric(si_dp['num_phone_enquiries'], errors='coerce').fillna(0)
-    #si_dp['num_applications_online'] = pd.to_numeric(si_dp['num_applications_online'], errors='coerce').fillna(0)
-    #si_dp['num_applications_in_person'] = pd.to_numeric(si_dp['num_applications_in_person'], errors='coerce').fillna(0)
+    # Create 'num_transactions_total' by summing all application channels and phone enquiries
+    si_dp['num_transactions_total'] = si_dp['num_applications_total'] + si_dp['num_phone_enquiries']  
 
-
-    si_dp['phone_apps_enquiries'] = (
-        pd.to_numeric(si_dp['num_phone_enquiries'], errors='coerce').fillna(0) + 
-        pd.to_numeric(si_dp['num_applications_by_phone'], errors='coerce').fillna(0)
-    )
-
-    # Create 'total_transactions' by summing all relevant application methods
-    si_dp['total_transactions'] = (
-        pd.to_numeric(si_dp['num_applications_total'], errors='coerce').fillna(0) +
-        pd.to_numeric(si_dp['num_phone_enquiries'], errors='coerce').fillna(0)
-    )
-
-    # adding a new column for applications done by phone, online and in person only
-    #si_dp['apps_online_and_per'] = (
-        #pd.to_numeric(si['num_applications_in_person'], errors='coerce').fillna(0) + 
-        #pd.to_numeric(si['num_applications_online'], errors='coerce').fillna(0) + 
-        #pd.to_numeric(si['phone_apps_enquiries'], errors='coerce').fillna(0)
-    #)
-
-    # Ensure that relevant columns are numeric
-    #si_dp['phone_apps_enquiries'] = pd.to_numeric(si_dp['phone_apps_enquiries'], errors='coerce').fillna(0)
-    #si_dp['num_applications_online'] = pd.to_numeric(si_dp['num_applications_online'], errors='coerce').fillna(0)
-    #si_dp['num_applications_in_person'] = pd.to_numeric(si_dp['num_applications_in_person'], errors='coerce').fillna(0)
-
-    
-    # adding a new column for external
+    # Create a new column to identify external services
     si_dp['external'] = si_dp['service_scope'].str.contains('EXTERN', na=False)
 
-    # adding a new column for high volume services
-    si_dp['highvolume'] = si_dp['total_transactions'] >= 45000
+    # Create a new column to identify high-volume services
+    si_dp['highvolume'] = si_dp['num_transactions_total'] >= HIGH_VOLUME_THRESHOLD
 
-    # adding a new column for online enabled Y
-    # creating columns to check which lists out the columns from os_account_registration to os_issue_resolution_feedback
-    columns_to_check = [ 'os_account_registration', 'os_authentication', 'os_application', 'os_decision', 'os_issuance', 'os_issue_resolution_feedback']
-    si_dp['online_enabledY'] = si_dp[columns_to_check].apply(lambda row: (row == 'Y').sum(), axis=1)
+    # Count online interaction point statuses
+    si_dp['online_enabled_Y'] = si_dp[OIP_COLS].apply(lambda row: (row == 'Y').sum(), axis=1)
+    si_dp['online_enabled_N'] = si_dp[OIP_COLS].apply(lambda row: (row == 'N').sum(), axis=1)
+    si_dp['online_enabled_NA'] = si_dp[OIP_COLS].apply(lambda row: (row == 'NA').sum(), axis=1)
 
-    # adding column for online enabled N
-    si_dp['online_enabledN'] = si_dp[columns_to_check].apply(lambda row: (row == 'N').sum(), axis=1)
+    # Define total expected interaction points
+    TOTAL_POINTS = len(OIP_COLS)
 
-    # adding column for online enabled NA
-    si_dp['online_enabledNA'] = si_dp[columns_to_check].apply(lambda row: (row == 'NA').sum(), axis =1)
-    #si_dp['online_enabledNA'] = si_dp[columns_to_check].isna().sum(axis=1)
-
-    # adding a new column for online end to end
-    si_dp['onlineE2E'] = si_dp.apply(
-        lambda row: (row['online_enabledNA'] + row['online_enabledY'] == 6) and (row['online_enabledY'] > 0),
-        axis=1
+    # Determine if service is fully online end-to-end
+    si_dp['online_e2e'] = (
+        (si_dp['online_enabled_Y'] + si_dp['online_enabled_NA'] == TOTAL_POINTS) &
+        (si_dp['online_enabled_Y'] > 0)
     )
 
-    # adding a new column for online one or more points
-    si_dp['oip'] = si_dp['online_enabledY'].apply(lambda x: True if x > 0 else False)
+    # Identify services with at least one online-enabled point
+    si_dp['min_one_point_online'] = si_dp['online_enabled_Y'] > 0
 
-    # Importing the service standards data
-    ss_data = '/workspaces/service-data/outputs/snapshots/2025-03-01/ss.csv' 
-    ss = pd.read_csv(ss_data, sep=';')
-    ss_dp = ss
+    # Identify service standards for external services
+    ss_dp = ss_dp.merge(
+        si_dp[['fy_org_id_service_id','external', 'highvolume']],
+        how = 'left',
+        on='fy_org_id_service_id'
+    )
 
-    # METRICs 2-16 - the transactions table will contain all the metrics that apply to external services alone
+    ss_dp['external'] = ss_dp['external'].fillna(False)
+    ss_dp['highvolume'] = ss_dp['highvolume'].fillna(False)
+    ss_dp['target_met'] = ss_dp['target_met'].fillna('NA')
 
-    # Metric 2 - 3c
-    # Total number of transactions in millions
-    # online as a share of tatal transactions
-    # telephone as a share of total transactions
-    # in-person as a share of total transactions
+    # === DATA PACK METRICS 2, 3a, 3b, 3c: external/enterprise services ===
+    # 2: Total number of transactions
+    dp_metrics = si_dp.copy().groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique',
+            'num_transactions_total': 'sum',
+            'num_applications_online': 'sum',
+            'num_phone_apps_enquiries': 'sum',
+            'num_applications_in_person': 'sum',
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'})
 
-    # the metric total number of transactions as well as the channels as shares of total transactions may differ from last years service data pack analysis because of the methodology. 
-    # This year's analysis filters by external services filtered_si data frame filters all services to external
-    # Filter the si DataFrame where 'external' == 1
-    filtered_si = si_dp[si_dp['external'] == 1].copy() #GE: good idea to use copy, remember to use si_dp
+    # 3: Shares by channel
+    dp_metrics['online_percentage'] = dp_metrics['num_applications_online'] / dp_metrics['num_transactions_total']
+    dp_metrics['phone_percentage'] = dp_metrics['num_phone_apps_enquiries'] / dp_metrics['num_transactions_total']
+    dp_metrics['in-person_percentage'] = dp_metrics['num_applications_in_person'] / dp_metrics['num_transactions_total']
 
-    # Ensure relevant columns are numeric
-    cols_to_numeric = [
-        'total_transactions', 
+
+    # === DATA PACK METRICS 4, 5a, 5b, 5c: omnichannel services ===
+    # 4: Share of services that are omnichannel
+    # 5: Shares by channel for omnichannel services
+
+    dp_filtered = si_dp[si_dp['omnichannel']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique',
+            'num_transactions_total': 'sum',
+            'num_applications_online': 'sum',
+            'num_phone_apps_enquiries': 'sum',
+            'num_applications_in_person': 'sum'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_omni')
+    )
+
+    dp_metrics['omni_service_percentage'] = dp_metrics['total_services_omni'] / dp_metrics['total_services']
+
+    dp_metrics['omni_online_percentage'] = dp_metrics['num_applications_online_omni'] / dp_metrics['num_transactions_total_omni']
+    dp_metrics['omni_phone_percentage'] = dp_metrics['num_phone_apps_enquiries_omni'] / dp_metrics['num_transactions_total_omni']
+    dp_metrics['omni_in-person_percentage'] = dp_metrics['num_applications_in_person_omni'] / dp_metrics['num_transactions_total_omni']
+
+
+    # === DATA PACK METRIC 6, 8, 10, 11, 12, 13: external services ===
+    # 6: Number of departments delivering external services
+    # 8: Number of external services
+    # 10: Total online transactions for external services
+    # 11: Total phone transactions for external services
+    # 12: Total in person transactions for external services
+    # 13: Total mail transactions for external services
+    # si_dp_ext = si_dp[si_dp['external']].copy()
+
+    # Services excluded by convention or decision:
+    # 669: Traveller / Highway traveller processing - decision prior to our arrival
+    # 1677: The Canadian Astronomy Data Centre (CADC) - too many online apps
+    EXCLUDED_SERVICES_ID = ['669', '1677']
+
+    dp_filtered = si_dp[si_dp['external']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'org_id': 'nunique',
+            'fy_org_id_service_id': 'nunique',
+            'num_applications_online':'sum', 
+            'num_applications_in_person':'sum',
+            'num_phone_apps_enquiries':'sum',
+            'num_applications_by_mail':'sum'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services', 'org_id': 'total_orgs_ext'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext')
+    )
+
+    dp_filtered = si_dp[si_dp['external'] & ~si_dp['service_id'].isin(EXCLUDED_SERVICES_ID)]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'num_applications_online':'sum', # remove 1677
+            'num_applications_in_person':'sum', # remove 669
+        }).reset_index(),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_excl_services')
+    )
+
+    # === DATA PACK METRIC 7 ===
+    # 7: External programs
+    dp_filtered = si_dp[si_dp['external']].loc[:, ['service_id', 'fiscal_yr', 'program_id', 'org_id']].copy()
+    dp_programs = dp_filtered.copy()
+
+    dp_programs['program_id'] = dp_programs['program_id'].astype(str).str.split(',')
+    dp_programs = dp_programs.explode('program_id')
+    dp_programs = dp_programs[dp_programs['program_id'].notna()]
+    dp_programs['program_id'] = dp_programs['program_id'].str.strip()
+
+    dp_filtered = dp_programs
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'program_id':'nunique'
+        }).reset_index().rename(columns={'program_id':'total_programs_ext'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+
+    # === DATA PACK METRIC 14 ===
+    # 14: Share of external services that are online end-to-end
+    dp_filtered = si_dp[si_dp['external'] & si_dp['online_e2e']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_online')
+    )
+
+    dp_metrics['ext_online_service_percentage'] = dp_metrics['total_services_ext_online']/dp_metrics['total_services_ext']
+
+
+    # === DATA PACK METRIC 15 ===
+    # 15: Share of external services that have at least one online interaction point activated
+    dp_filtered = si_dp[si_dp['external'] & si_dp['min_one_point_online']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_1oip')
+    )
+
+    dp_metrics['ext_1oip_service_percentage'] = dp_metrics['total_services_ext_1oip']/dp_metrics['total_services_ext']
+
+
+    # === DATA PACK METRIC 16 ===
+    # 16: Share of external service standards meeting target
+    dp_filtered = ss_dp[ss_dp['external'] & ((ss_dp['target_met']=='Y') | (ss_dp['target_met']=='N'))]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_ext'}),
+        on='fiscal_yr',
+        how='left',
+    )
+
+    dp_filtered = ss_dp[ss_dp['external'] & (ss_dp['target_met']=='Y')]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_met_ext'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+    dp_metrics['ext_standard_met_percentage'] = dp_metrics['total_standards_met_ext'] / dp_metrics['total_standards_ext']
+
+
+    # === DATA PACK METRIC 17 ===
+    # 17: Share of external, high volume services that are online end-to-end
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv')
+    )
+
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume'] & si_dp['online_e2e']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv_online')
+    )
+
+    dp_metrics['ext_hv_online_service_percentage'] = dp_metrics['total_services_ext_hv_online']/dp_metrics['total_services_ext_hv']
+
+
+    # === DATA PACK METRIC 18 ===
+    # 17: Share of external, high volume services that have at least one online interaction point activated
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume'] & si_dp['min_one_point_online']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv_1oip')
+    )
+
+    dp_metrics['ext_hv_1oip_service_percentage'] = dp_metrics['total_services_ext_hv_1oip']/dp_metrics['total_services_ext_hv']
+
+
+    # === DATA PACK METRIC 19 ===
+    # 19: Share of external high-volume service standards meeting target
+    dp_filtered = ss_dp[ss_dp['external'] & ss_dp['highvolume'] & ((ss_dp['target_met']=='Y') | (ss_dp['target_met']=='N'))]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_ext_hv'}),
+        on='fiscal_yr',
+        how='left',
+    )
+
+    dp_filtered = ss_dp[ss_dp['external'] & ss_dp['highvolume'] & (ss_dp['target_met']=='Y')]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_met_ext_hv'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+    dp_metrics['ext_hv_standard_met_percentage'] = dp_metrics['total_standards_met_ext_hv']/dp_metrics['total_standards_ext_hv']
+    
+    dp_metrics = dp_metrics.T.reset_index()
+    
+    # Ranking services by application volume for top 15
+    RANK_COLS = [
+        'fy_org_id_service_id',
+        'fiscal_yr', 
+        'service_name_en', 
+        'service_name_fr', 
+        'online_enabled_Y', 
+        'online_enabled_N', 
+        'online_enabled_NA',
+        'num_applications_total',
+        'num_applications_by_phone', 
         'num_applications_online', 
-        'phone_apps_enquiries', 
-        'num_applications_by_mail',
-        'num_applications_in_person'
+        'num_applications_in_person', 
+        'num_applications_by_mail', 
+        'num_applications_by_email', 
+        'num_applications_by_fax', 
+        'num_applications_by_other'
     ]
-    filtered_si[cols_to_numeric] = filtered_si[cols_to_numeric].apply(pd.to_numeric, errors='coerce').fillna(0)
 
-    # Group by fiscal_yr and sum the numeric columns
-    grouped = filtered_si.groupby('fiscal_yr')[cols_to_numeric].sum().reset_index()
+    EXCLUDED_SERVICES_ID = ['1111', '1108', '3728', '669', '1677', '1112']
 
-    # Rename columns
-    transactions_table = grouped.rename(columns={
-        'fiscal_yr': 'fiscal_year',
-        'num_applications_online': 'online_applications',
-        'phone_apps_enquiries': 'phone_applications',
-        'num_applications_by_mail': 'mail_applications',
-        'num_applications_in_person': 'in_person_apps'
-    })
+    # Filter and select columns
+    dp_services_rank = si_dp[
+        si_dp['external'] & 
+        (si_dp['num_applications_total'] > 0) & 
+        (~si_dp['service_id'].isin(EXCLUDED_SERVICES_ID))
+    ][RANK_COLS].copy()
 
-    # Add share columns
-    transactions_table['online_share'] = (
-        transactions_table['online_applications'] / transactions_table['total_transactions'] *100
-    ).fillna(0)
-
-    transactions_table['phone_share'] = (
-        transactions_table['phone_applications'] / transactions_table['total_transactions'] * 100
-    ).fillna(0)
-
-    transactions_table['in_person_share'] = (
-        transactions_table['in_person_apps'] / transactions_table['total_transactions'] *100
-    ).fillna(0)
-
-    # METRIC 4-5C OMNICHANNEL OFFERINGS
-
-    # Ensure relevant columns in filtered_si are numeric
-    cols_omni = ['total_transactions', 'num_applications_online', 'phone_apps_enquiries', 'num_applications_in_person']
-    filtered_si[cols_omni] = filtered_si[cols_omni].apply(pd.to_numeric, errors='coerce').fillna(0)
-
-    # Count distinct omnichannel services per fiscal year
-    omni_count_by_year = filtered_si[filtered_si['omnichannel']].groupby('fiscal_yr')['service_id'].nunique()
-
-    # Count total distinct services per fiscal year
-    total_count_by_year = filtered_si.groupby('fiscal_yr')['service_id'].nunique()
-
-    # Calculate omnichannel service share
-    share_omni_by_year = (omni_count_by_year / total_count_by_year) * 100
-
-    # === Metric 5a: Online as a share of omnichannel usage ===
-    total_transactions_by_year_omni = filtered_si[filtered_si['omnichannel']].groupby('fiscal_yr')['total_transactions'].sum()
-    sum_online_apps_by_year = filtered_si[filtered_si['omnichannel']].groupby('fiscal_yr')['num_applications_online'].sum()
-    share_online_by_year = (sum_online_apps_by_year / total_transactions_by_year_omni) * 100
-
-    # === Metric 5b: Phone as a share of omnichannel usage ===
-    sum_phone_by_year = filtered_si[filtered_si['omnichannel']].groupby('fiscal_yr')['phone_apps_enquiries'].sum()
-    share_phone_by_year = (sum_phone_by_year / total_transactions_by_year_omni) * 100
-
-    # === Metric 5c: In-person as a share of omnichannel usage ===
-    sum_in_person_by_year = filtered_si[filtered_si['omnichannel']].groupby('fiscal_yr')['num_applications_in_person'].sum()
-    share_in_person_by_year = (sum_in_person_by_year / total_transactions_by_year_omni) * 100
-
-    # === Reindex for consistent fiscal years ===
-    all_fiscal_years = transactions_table['fiscal_year']
-
-    transactions_table['omnichannel_service_count'] = omni_count_by_year.reindex(all_fiscal_years).values
-    transactions_table['total_service_count'] = total_count_by_year.reindex(all_fiscal_years).values
-    transactions_table['gc_services_with_omnichannel'] = share_omni_by_year.reindex(all_fiscal_years).values
-
-    transactions_table['total_transactions_omnichannel'] = total_transactions_by_year_omni.reindex(all_fiscal_years).values
-    transactions_table['omnichannel_online_apps'] = sum_online_apps_by_year.reindex(all_fiscal_years).values
-    transactions_table['online_share_of_omnichannel_usage'] = share_online_by_year.reindex(all_fiscal_years).values
-
-    transactions_table['omnichannel_phone_apps'] = sum_phone_by_year.reindex(all_fiscal_years).values
-    transactions_table['phone_share_of_omnichannel_usage'] = share_phone_by_year.reindex(all_fiscal_years).values
-
-    transactions_table['omnichannel_inperson_apps'] = sum_in_person_by_year.reindex(all_fiscal_years).values
-    transactions_table['in-person_share_of_omnichannel_usage'] = share_in_person_by_year.reindex(all_fiscal_years).values
-
-    # METRIC 6-9 NUMBER OF External departments, programs, services, and high volume services
-    # METRIC 6: Number of External Departments 
-    no_departments_by_year = filtered_si.groupby('fiscal_yr')['department_en'].nunique()
-    no_departments_by_year = no_departments_by_year.reindex(transactions_table['fiscal_year']).values
-    transactions_table['external_departments'] = no_departments_by_year
-
-    # METRIC 7: Number of Programs 
-
-    # Extract and clean program_id entries
-    no_program = filtered_si.loc[:, ['service_id', 'fiscal_yr', 'program_id', 'org_id']].copy()
-    no_program['program_id'] = no_program['program_id'].astype(str).str.split(',')  # ensure it's a string before split
-    no_program = no_program.explode('program_id')
-    no_program = no_program[no_program['program_id'].notna()]
-    no_program['program_id'] = no_program['program_id'].str.strip()  # remove leading/trailing spaces
-
-    # Count unique program_id per fiscal year
-    no_programs_by_year = no_program.groupby('fiscal_yr')['program_id'].nunique()
-
-    # Add to Transactions_table using reindex to align fiscal years
-    transactions_table['external_programs'] = no_programs_by_year.reindex(transactions_table['fiscal_year']).values
-
-    # METRIC 8: Number of External Services 
-    no_external_service_by_year = filtered_si.groupby('fiscal_yr')['service_id'].nunique()
-    no_external_service_by_year = no_external_service_by_year.reindex(transactions_table['fiscal_year']).values
-    transactions_table['external_services'] = no_external_service_by_year
-
-    # METRIC 9: Number of High Volume Services 
-
-    high_volume_services = filtered_si[filtered_si['highvolume'] == True]
-    high_volume_by_year = high_volume_services.groupby('fiscal_yr')['service_id'].nunique()
-    transactions_table['high_volume_services'] = high_volume_by_year.reindex(transactions_table['fiscal_year']).values
-
-    # METRIC 10-13 - total online, phone, in-person and mail transactions in millions
-    # the columns with this information already exist from metric 2-3c.
-
-    # METRIC 14-15 SHARE of external services online end-to-end and share of external services with at least one point online
-    # Metric 14: share of external services online end-to-end
-    # NUMERATOR:  Count unique service_id per fiscal year where onlineE2E is True
-    services_onlinee2e = (
-        filtered_si.loc[filtered_si['onlineE2E'] == True]
-        .groupby('fiscal_yr')['service_id']
-        .nunique()
+    # Add ranking
+    dp_services_rank['num_applications_rank'] = (
+        dp_services_rank
+        .groupby('fiscal_yr')['num_applications_total']
+        .rank(method='dense', ascending=False)
     )
 
-    # Align with Transactions_table fiscal years
-    services_onlinee2e = services_onlinee2e.reindex(transactions_table['fiscal_year'])
-    # Add the result to Transactions_table
-    transactions_table['services_onlinee2e'] = services_onlinee2e.values
+    # Only bother keeping the top 20
+    dp_services_rank = dp_services_rank[dp_services_rank['num_applications_rank'] <= 20]
 
-    #SHARE OF EXTERNAL SERVICES ONLINE END TO END
-    # the methodology also differs from last years analysis. previously, the DENOMINATOR was external_services == TRUE and online_enabledNA < 6. This years methodology is external_services == TRUE ONLY
-    # Calculate the percentage of services that are online end-to-end
-    transactions_table['share_of_services_online_end_to_end'] = (
-        transactions_table['services_onlinee2e'] / transactions_table['external_services']
-    ) * 100
 
-    # Fill NaN values with 0 to handle division by zero or missing data
-    transactions_table['share_of_services_online_end_to_end'] = transactions_table['share_of_services_online_end_to_end'].fillna(0)
-
-    #Metric 15: Share of external services which have at least one point online
-
-    # NUMERATOR: Services with at least one point online
-    # Filter rows where oip is True and count unique service_id per fiscal year
-    services_with_oip = (
-        filtered_si[filtered_si['oip'] == True]
-        .groupby('fiscal_yr')['service_id']
-        .nunique()
-    )
-    # Align with Transactions_table fiscal years
-    services_with_oip = services_with_oip.reindex(transactions_table['fiscal_year'])
-    transactions_table['services_with_oip'] = services_with_oip.values
-    transactions_table['share_services_with_oip'] = (
-        transactions_table['services_with_oip'] / transactions_table['external_services']
-    ) * 100
-
-    # METRIC 16: External service standards meeting targets
-    # from Process script MAF 2 line 225
-    # What is the percentage of service standards that met their target?
-    # The methodology differs from last year. last years: counts if external service is TRUE and met at least one standard / external service = TRUE
-    # current methodology counts the target met == Y / service standard count
-
-    # Select relevant columns and drop rows with missing values
-    standard_met = ss_dp.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'department_fr', 'org_id', 'target_met']].dropna()
-
-    # Check if the service standard target is met
-    standard_met['service_standard_met'] = standard_met['target_met'] == 'Y'
-
-    # Count service standards that have a target met (Y) or not met (N)
-    standard_met['service_standard_count'] = standard_met['target_met'].isin(['Y', 'N'])
-
-    # Group by fiscal year and aggregate the count of service standards
-    standard_met_by_fiscal = standard_met.groupby(['fiscal_yr']).agg(
-        service_standard_met=('service_standard_met', 'sum'),  # Count services where target was met
-        service_standard_count=('service_standard_count', 'sum')  # Total service standards
-    ).reset_index()
-
-    # Calculate the percentage of standards that met the target for each fiscal year
-    standard_met_by_fiscal['standard_meeting_target'] = (
-        standard_met_by_fiscal['service_standard_met'] / standard_met_by_fiscal['service_standard_count']
-    ) * 100
-
-    # Align with Transactions_table fiscal years
-    standard_met_by_fiscal = standard_met_by_fiscal.set_index('fiscal_yr')
-
-    # Add the result to Transactions_table
-    transactions_table['service_standard_met'] = standard_met_by_fiscal['service_standard_met'].reindex(transactions_table['fiscal_year']).values
-    transactions_table['service_standard_count'] = standard_met_by_fiscal['service_standard_count'].reindex(transactions_table['fiscal_year']).values
-    transactions_table['service_standard_target_met'] = standard_met_by_fiscal['standard_meeting_target'].reindex(transactions_table['fiscal_year']).values
-
-    # METRIC 17 - 19 External and high volume services
-    # External high volume services online end-to-end, that have atleast one point online and that meet their targets
-    # The methodology for this year differs from last year
-    # same methodology for metric 14 and 16 is applied here but in addition highvolume == TRUE
-
-    # Metric 17: external high volume services online end to end
-    # NUMERATOR: Count unique service_id per fiscal year where onlineE2E and highvolume are both True
-    services_onlinee2e_highvolume = (
-        filtered_si.loc[(filtered_si['onlineE2E'] == True) & (filtered_si['highvolume'] == True)]
-        .groupby('fiscal_yr')['service_id']
-        .nunique()
-    )
-    # Align with Transactions_table fiscal years
-    services_onlinee2e_highvolume = services_onlinee2e_highvolume.reindex(transactions_table['fiscal_year'])
-    # Add the result to Transactions_table
-    transactions_table['service_onlinee2e_highvolume'] = services_onlinee2e_highvolume.values
-
-    #SHARE OF EXTERNAL SERVICES ONLINE END TO END
-    # Calculate the percentage of services that are online end-to-end
-    transactions_table['share_of_highvol_ser_online_end_to_end'] = (
-        transactions_table['service_onlinee2e_highvolume'] / transactions_table['high_volume_services']
-    ) * 100
-
-    # Fill NaN values with 0 to handle division by zero or missing data
-    transactions_table['share_of_highvol_ser_online_end_to_end'] = transactions_table['share_of_highvol_ser_online_end_to_end'].fillna(0)
-
-    # Metric 18: High volume services that have at least one point online
-    # NUMERATOR: High-volume services with at least one point online
-    # Filter rows where oip is True and highvolume is True, then count unique service_id per fiscal year
-    highvol_ser_with_oip = (
-        filtered_si[(filtered_si['oip'] == True) & (filtered_si['highvolume'] == True)]
-        .groupby('fiscal_yr')['service_id']
-        .nunique()
-    )
-
-    # Align with Transactions_table fiscal years
-    highvol_ser_with_oip = highvol_ser_with_oip.reindex(transactions_table['fiscal_year'])
-
-    # Add the result to Transactions_table
-    transactions_table['highvol_service_with_at_least_oip'] = highvol_ser_with_oip.values
-
-    # SHARE OF HIGH-VOLUME SERVICES WITH AT LEAST ONE ONLINE INTERACTION POINT
-    transactions_table['share_highvolume_services_with_oip'] = (
-        transactions_table['highvol_service_with_at_least_oip'] / transactions_table['high_volume_services']
-    ) * 100
-
-    # METRIC 19: High volume service standards meeting targets
-
-    # Select relevant columns from ss_dp and drop rows with missing values
-    highvol_standard_met = ss_dp.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'department_fr',
-                                'org_id', 'target_met', 'fy_org_id_service_id']].dropna()
-
-    # Merge with si_dp to get 'highvolume' column
-    highvol_standard_met = highvol_standard_met.merge(
-        si_dp[['fy_org_id_service_id', 'highvolume']],
-        on='fy_org_id_service_id',
-        how='left'  # Use 'left' to preserve all records from ss_dp
-    )
-
-    # Filter only high volume service standards
-    highvol_standard_met = highvol_standard_met[highvol_standard_met['highvolume'] == True]
-
-    # Check if the service standard target is met
-    highvol_standard_met['highvol_service_standard_met'] = highvol_standard_met['target_met'] == 'Y'
-
-    # Count service standards that have a target met (Y) or not met (N)
-    highvol_standard_met['highvol_service_standard_count'] = highvol_standard_met['target_met'].isin(['Y', 'N'])
-
-    # Group by fiscal year and aggregate the count of service standards
-    highvol_standard_met_by_fiscal = highvol_standard_met.groupby(['fiscal_yr']).agg(
-        highvol_service_standard_met=('highvol_service_standard_met', 'sum'),  # Count high volume services where target was met
-        highvol_service_standard_count=('highvol_service_standard_count', 'sum')  # Total high volume service standards
-    ).reset_index()
-
-    # Calculate the percentage of high volume standards that met the target for each fiscal year
-    highvol_standard_met_by_fiscal['highvol_standard_meeting_target'] = (
-        highvol_standard_met_by_fiscal['highvol_service_standard_met'] / highvol_standard_met_by_fiscal['highvol_service_standard_count']
-    ) * 100
-
-    # Align with Transactions_table fiscal years
-    highvol_standard_met_by_fiscal = highvol_standard_met_by_fiscal.set_index('fiscal_yr')
-
-    # Add the result to Transactions_table
-    transactions_table['highvol_service_standard_met'] = highvol_standard_met_by_fiscal['highvol_service_standard_met'].reindex(transactions_table['fiscal_year']).values
-    transactions_table['highvol_service_standard_count'] = highvol_standard_met_by_fiscal['highvol_service_standard_count'].reindex(transactions_table['fiscal_year']).values
-    transactions_table['pc_highvol_service_standard_target_met'] = highvol_standard_met_by_fiscal['highvol_standard_meeting_target'].reindex(transactions_table['fiscal_year']).values
-    # Transpose the Transactions_table such that fiscal_year becomes the columns
-    #transactions_table_transposed = transactions_table.reset_index().transpose()
-    #transactions_table_transposed = transactions_table.set_index('fiscal_year').transpose()
-    #indicator_table_transposed = transactions_table.T
-    transactions_table_transposed = transactions_table.transpose().reset_index()
-  
     # === EXPORT DATAFRAMES ===
     indicator_exports = {
         "si_vol": si_vol,
@@ -963,8 +905,8 @@ def process_files(si, ss, config):
         # "dr2468": dr2468,
         # "dr2469": dr2469,
         "drr_all": drr_all,
-        "transactions_table": transactions_table,
-        "transactions_table_transposed": transactions_table_transposed
+        "dp_metrics": dp_metrics,
+        "dp_services_rank": dp_services_rank
     }
     
     export_to_csv(
