@@ -51,7 +51,7 @@ def process_files(si, ss, config):
 
     # List of columns that contain application / interaction volumes
     # These also represent the channel through which the interaction took place
-    app_cols = [
+    APP_COLS = [
         'num_applications_by_phone', 
         'num_applications_online', 
         'num_applications_in_person', 
@@ -66,7 +66,7 @@ def process_files(si, ss, config):
         si, 
         id_vars=['fiscal_yr','org_id', 'service_id'], 
         var_name='channel',
-        value_vars=app_cols,
+        value_vars=APP_COLS,
         value_name='volume'
     )
     
@@ -537,7 +537,355 @@ def process_files(si, ss, config):
 
     # Drop duplicate si_link_yr in favor of just using fy. they should be the same.
     service_fte_spending.drop(columns="si_link_yr", inplace=True)
-       
+
+
+    # === DATA PACK ===
+    # Set up dataframes and columns for data pack analysis
+
+    # Define high-volume threshold
+    HIGH_VOLUME_THRESHOLD = 45000
+
+    # Define online interaction point (OIP) columns
+    OIP_COLS = [
+        'os_account_registration',
+        'os_authentication',
+        'os_application',
+        'os_decision',
+        'os_issuance',
+        'os_issue_resolution_feedback',
+    ]
+
+    # Define application volume columns
+    APP_COLS = [
+        'num_applications_by_phone', 
+        'num_applications_online', 
+        'num_applications_in_person', 
+        'num_applications_by_mail', 
+        'num_applications_by_email', 
+        'num_applications_by_fax', 
+        'num_applications_by_other',
+        'num_applications_total',
+        'num_phone_enquiries',
+    ]
+
+    # Set si_dp and ss_dp as working DataFrames
+    si_dp = si.copy()
+    ss_dp = ss.copy()
+
+    # Create a new column to identify 'omnichannel' services
+    # Omnichannel = phone, online, and in-person applications are applicable
+    # Note that in previous versions calculated in excel sheets the omnichannel boolean
+    # was mistakenly ignoring phone channels. This adjustment ('or' on phones, 'and' with online & in person)
+    # was defined in May 2025.
+    def is_filled(col):
+        return col.notna() & (col.astype(str).str.strip() != '') & (col != 'NA') & (col != 'ND')
+
+    si_dp['omnichannel'] = (
+        (is_filled(si_dp['num_phone_enquiries']) | is_filled(si_dp['num_applications_by_phone'])) &
+        is_filled(si_dp['num_applications_online']) &
+        is_filled(si_dp['num_applications_in_person'])
+    )
+
+    # Convert all application volume columns to numeric
+    si_dp[APP_COLS] = si_dp[APP_COLS].apply(pd.to_numeric, errors='coerce').fillna(0)
+
+    # Create 'num_phone_apps_enquiries' column (sum of phone enquiries + phone applications)
+    si_dp['num_phone_apps_enquiries'] = si_dp['num_phone_enquiries'] + si_dp['num_applications_by_phone']
+
+    # Create 'num_transactions_total' by summing all application channels and phone enquiries
+    si_dp['num_transactions_total'] = si_dp['num_applications_total'] + si_dp['num_phone_enquiries']  
+
+    # Create a new column to identify external services
+    si_dp['external'] = si_dp['service_scope'].str.contains('EXTERN', na=False)
+
+    # Create a new column to identify high-volume services
+    si_dp['highvolume'] = si_dp['num_transactions_total'] >= HIGH_VOLUME_THRESHOLD
+
+    # Count online interaction point statuses
+    si_dp['online_enabled_Y'] = si_dp[OIP_COLS].apply(lambda row: (row == 'Y').sum(), axis=1)
+    si_dp['online_enabled_N'] = si_dp[OIP_COLS].apply(lambda row: (row == 'N').sum(), axis=1)
+    si_dp['online_enabled_NA'] = si_dp[OIP_COLS].apply(lambda row: (row == 'NA').sum(), axis=1)
+
+    # Define total expected interaction points
+    TOTAL_POINTS = len(OIP_COLS)
+
+    # Determine if service is fully online end-to-end
+    si_dp['online_e2e'] = (
+        (si_dp['online_enabled_Y'] + si_dp['online_enabled_NA'] == TOTAL_POINTS) &
+        (si_dp['online_enabled_Y'] > 0)
+    )
+
+    # Identify services with at least one online-enabled point
+    si_dp['min_one_point_online'] = si_dp['online_enabled_Y'] > 0
+
+    # Identify service standards for external services
+    ss_dp = ss_dp.merge(
+        si_dp[['fy_org_id_service_id','external', 'highvolume']],
+        how = 'left',
+        on='fy_org_id_service_id'
+    )
+
+    ss_dp['external'] = ss_dp['external'].fillna(False)
+    ss_dp['highvolume'] = ss_dp['highvolume'].fillna(False)
+    ss_dp['target_met'] = ss_dp['target_met'].fillna('NA')
+
+    # === DATA PACK METRICS 2, 3a, 3b, 3c: external/enterprise services ===
+    # 2: Total number of transactions
+    dp_metrics = si_dp.copy().groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique',
+            'num_transactions_total': 'sum',
+            'num_applications_online': 'sum',
+            'num_phone_apps_enquiries': 'sum',
+            'num_applications_in_person': 'sum',
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'})
+
+    # 3: Shares by channel
+    dp_metrics['online_percentage'] = dp_metrics['num_applications_online'] / dp_metrics['num_transactions_total']
+    dp_metrics['phone_percentage'] = dp_metrics['num_phone_apps_enquiries'] / dp_metrics['num_transactions_total']
+    dp_metrics['in-person_percentage'] = dp_metrics['num_applications_in_person'] / dp_metrics['num_transactions_total']
+
+
+    # === DATA PACK METRICS 4, 5a, 5b, 5c: omnichannel services ===
+    # 4: Share of services that are omnichannel
+    # 5: Shares by channel for omnichannel services
+
+    dp_filtered = si_dp[si_dp['omnichannel']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique',
+            'num_transactions_total': 'sum',
+            'num_applications_online': 'sum',
+            'num_phone_apps_enquiries': 'sum',
+            'num_applications_in_person': 'sum'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_omni')
+    )
+
+    dp_metrics['omni_service_percentage'] = dp_metrics['total_services_omni'] / dp_metrics['total_services']
+
+    dp_metrics['omni_online_percentage'] = dp_metrics['num_applications_online_omni'] / dp_metrics['num_transactions_total_omni']
+    dp_metrics['omni_phone_percentage'] = dp_metrics['num_phone_apps_enquiries_omni'] / dp_metrics['num_transactions_total_omni']
+    dp_metrics['omni_in-person_percentage'] = dp_metrics['num_applications_in_person_omni'] / dp_metrics['num_transactions_total_omni']
+
+
+    # === DATA PACK METRIC 6, 8, 10, 11, 12, 13: external services ===
+    # 6: Number of departments delivering external services
+    # 8: Number of external services
+    # 10: Total online transactions for external services
+    # 11: Total phone transactions for external services
+    # 12: Total in person transactions for external services
+    # 13: Total mail transactions for external services
+    # si_dp_ext = si_dp[si_dp['external']].copy()
+
+    # Services excluded by convention or decision:
+    # 669: Traveller / Highway traveller processing - decision prior to our arrival
+    # 1677: The Canadian Astronomy Data Centre (CADC) - too many online apps
+    EXCLUDED_SERVICES_ID = ['669', '1677']
+
+    dp_filtered = si_dp[si_dp['external']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'org_id': 'nunique',
+            'fy_org_id_service_id': 'nunique',
+            'num_applications_online':'sum', 
+            'num_applications_in_person':'sum',
+            'num_phone_apps_enquiries':'sum',
+            'num_applications_by_mail':'sum'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services', 'org_id': 'total_orgs_ext'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext')
+    )
+
+    dp_filtered = si_dp[si_dp['external'] & ~si_dp['service_id'].isin(EXCLUDED_SERVICES_ID)]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'num_applications_online':'sum', # remove 1677
+            'num_applications_in_person':'sum', # remove 669
+        }).reset_index(),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_excl_services')
+    )
+
+    # === DATA PACK METRIC 7 ===
+    # 7: External programs
+    dp_filtered = si_dp[si_dp['external']].loc[:, ['service_id', 'fiscal_yr', 'program_id', 'org_id']].copy()
+    dp_programs = dp_filtered.copy()
+
+    dp_programs['program_id'] = dp_programs['program_id'].astype(str).str.split(',')
+    dp_programs = dp_programs.explode('program_id')
+    dp_programs = dp_programs[dp_programs['program_id'].notna()]
+    dp_programs['program_id'] = dp_programs['program_id'].str.strip()
+
+    dp_filtered = dp_programs
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'program_id':'nunique'
+        }).reset_index().rename(columns={'program_id':'total_programs_ext'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+
+    # === DATA PACK METRIC 14 ===
+    # 14: Share of external services that are online end-to-end
+    dp_filtered = si_dp[si_dp['external'] & si_dp['online_e2e']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_online')
+    )
+
+    dp_metrics['ext_online_service_percentage'] = dp_metrics['total_services_ext_online']/dp_metrics['total_services_ext']
+
+
+    # === DATA PACK METRIC 15 ===
+    # 15: Share of external services that have at least one online interaction point activated
+    dp_filtered = si_dp[si_dp['external'] & si_dp['min_one_point_online']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_1oip')
+    )
+
+    dp_metrics['ext_1oip_service_percentage'] = dp_metrics['total_services_ext_1oip']/dp_metrics['total_services_ext']
+
+
+    # === DATA PACK METRIC 16 ===
+    # 16: Share of external service standards meeting target
+    dp_filtered = ss_dp[ss_dp['external'] & ((ss_dp['target_met']=='Y') | (ss_dp['target_met']=='N'))]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_ext'}),
+        on='fiscal_yr',
+        how='left',
+    )
+
+    dp_filtered = ss_dp[ss_dp['external'] & (ss_dp['target_met']=='Y')]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_met_ext'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+    dp_metrics['ext_standard_met_percentage'] = dp_metrics['total_standards_met_ext'] / dp_metrics['total_standards_ext']
+
+
+    # === DATA PACK METRIC 17 ===
+    # 17: Share of external, high volume services that are online end-to-end
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv')
+    )
+
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume'] & si_dp['online_e2e']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv_online')
+    )
+
+    dp_metrics['ext_hv_online_service_percentage'] = dp_metrics['total_services_ext_hv_online']/dp_metrics['total_services_ext_hv']
+
+
+    # === DATA PACK METRIC 18 ===
+    # 17: Share of external, high volume services that have at least one online interaction point activated
+    dp_filtered = si_dp[si_dp['external'] & si_dp['highvolume'] & si_dp['min_one_point_online']]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id':'total_services'}),
+        on='fiscal_yr',
+        how='left',
+        suffixes=('', '_ext_hv_1oip')
+    )
+
+    dp_metrics['ext_hv_1oip_service_percentage'] = dp_metrics['total_services_ext_hv_1oip']/dp_metrics['total_services_ext_hv']
+
+
+    # === DATA PACK METRIC 19 ===
+    # 19: Share of external high-volume service standards meeting target
+    dp_filtered = ss_dp[ss_dp['external'] & ss_dp['highvolume'] & ((ss_dp['target_met']=='Y') | (ss_dp['target_met']=='N'))]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_ext_hv'}),
+        on='fiscal_yr',
+        how='left',
+    )
+
+    dp_filtered = ss_dp[ss_dp['external'] & ss_dp['highvolume'] & (ss_dp['target_met']=='Y')]
+    dp_metrics = dp_metrics.merge(
+        dp_filtered.groupby('fiscal_yr').agg({
+            'fy_org_id_service_id_std_id': 'nunique'
+        }).reset_index().rename(columns={'fy_org_id_service_id_std_id': 'total_standards_met_ext_hv'}),
+        on='fiscal_yr',
+        how='left'
+    )
+
+    dp_metrics['ext_hv_standard_met_percentage'] = dp_metrics['total_standards_met_ext_hv']/dp_metrics['total_standards_ext_hv']
+    
+    dp_metrics = dp_metrics.T.reset_index()
+    
+    # Ranking services by application volume for top 15
+    RANK_COLS = [
+        'fy_org_id_service_id',
+        'fiscal_yr', 
+        'service_name_en', 
+        'service_name_fr', 
+        'online_enabled_Y', 
+        'online_enabled_N', 
+        'online_enabled_NA',
+        'num_applications_total',
+        'num_applications_by_phone', 
+        'num_applications_online', 
+        'num_applications_in_person', 
+        'num_applications_by_mail', 
+        'num_applications_by_email', 
+        'num_applications_by_fax', 
+        'num_applications_by_other'
+    ]
+
+    EXCLUDED_SERVICES_ID = ['1111', '1108', '3728', '669', '1677', '1112']
+
+    # Filter and select columns
+    dp_services_rank = si_dp[
+        si_dp['external'] & 
+        (si_dp['num_applications_total'] > 0) & 
+        (~si_dp['service_id'].isin(EXCLUDED_SERVICES_ID))
+    ][RANK_COLS].copy()
+
+    # Add ranking
+    dp_services_rank['num_applications_rank'] = (
+        dp_services_rank
+        .groupby('fiscal_yr')['num_applications_total']
+        .rank(method='dense', ascending=False)
+    )
+
+    # Only bother keeping the top 20
+    dp_services_rank = dp_services_rank[dp_services_rank['num_applications_rank'] <= 20]
+
+
     # === EXPORT DATAFRAMES ===
     indicator_exports = {
         "si_vol": si_vol,
@@ -556,7 +904,9 @@ def process_files(si, ss, config):
         # "dr2467": dr2467,
         # "dr2468": dr2468,
         # "dr2469": dr2469,
-        "drr_all": drr_all
+        "drr_all": drr_all,
+        "dp_metrics": dp_metrics,
+        "dp_services_rank": dp_services_rank
     }
     
     export_to_csv(
