@@ -19,8 +19,16 @@ def test_no_columns_dropped():
         col_set_reference = reference_fields['fields'][reference_fields['file_name'] == file_name]
         col_set_reference = set(col_set_reference)
         col_set_test = set(df.columns)
+
+        missing_cols = col_set_test-col_set_reference
+
         
-        assert col_set_test == col_set_reference, f"Missing column in {file_name}"
+        #if missing_cols != set():
+        #    print(missing_cols)
+
+        assert col_set_test == col_set_reference, f"Missing column in {file_name}: {missing_cols}"
+
+
 
 def test_column_types():    
     ref_file = REF_DIR / "reference_fields.csv"
