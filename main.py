@@ -40,6 +40,30 @@ def get_config(snapshot_date=None):
         'service_data_dict': 'https://open.canada.ca/data/en/recombinant-published-schema/service.json'
     }
 
+    program_urls_en = [
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1718-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1819-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1920-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2021-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2122-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2223-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2324-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-eng.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-eng.csv'
+    ]
+
+    program_urls_fr = [
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1718-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1819-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1920-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2021-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2122-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2223-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2324-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-fra.csv',
+        'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
+    ]
+
     if snapshot_date:
         input_snapshot_dir = input_dir / "snapshots" / snapshot_date
         output_dir = base_dir / "outputs" / "snapshots" / snapshot_date
@@ -56,7 +80,9 @@ def get_config(snapshot_date=None):
         "utils_dir": utils_dir,
         "qa_dir": qa_dir,
         "csv_urls": csv_urls,
-        "json_urls": json_urls
+        "json_urls": json_urls,
+        "program_urls_en": program_urls_en,
+        "program_urls_fr": program_urls_fr
     }
 
 
