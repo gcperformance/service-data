@@ -223,6 +223,13 @@ def copy_raw_to_utils(config):
         config=config
     )
 
+def program_list(config):
+    """Builds a list of programs for all fiscal years based on the tables
+    by individual fiscal years in open gov. for use with QA"""
+
+    # Download all the program tables into the input folder
+
+
 
 def build_data_dictionary(config):
     """Builds a structured data dictionary from a JSON file, processes nested data, 
