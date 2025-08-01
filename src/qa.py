@@ -5,16 +5,18 @@ from pathlib import Path
 
 from src.export import export_to_csv
 from src.load import load_csv
-from src.utils import dept_list
+from src.utils import dept_list, program_list
 
 def qa_check(si, ss, config):
     # === SETUP ===
     # Load extra files
     rbpo = load_csv('rbpo.csv', config, snapshot=False)
     org_var = load_csv('org_var.csv', config, snapshot=False)
+    sid_registry = load_csv('sid_registry.csv', config, snapshot=False)
     
-    # Build then import department list from utilities
+    # Build then import department, program list from utilities
     dept = dept_list(config)
+    program = program_list(config)
 
     # Determine the current date
     timezone = pytz.timezone('America/Montreal')
@@ -46,126 +48,35 @@ def qa_check(si, ss, config):
     ss['service_standard_id_numeric'] = ss['service_standard_id'].str.replace(r'^STAN', '', regex=True)
     ss['service_standard_id_numeric'] = pd.to_numeric(ss['service_standard_id_numeric'], errors = 'coerce')
 
+    si['org_id'] = pd.to_numeric(si['org_id'], errors = 'coerce').astype(int)
+    si['org_id'] = si['org_id'].astype(str)
+
+    sid_registry['org_id'] = pd.to_numeric(sid_registry['org_id'], errors = 'coerce').astype(int)
+    sid_registry['org_id'] = sid_registry['org_id'].astype(str)
+
+
+
     # === QUALITY ASSURANCE CHECKS ===
     # =================================
-    # QA Check 1: Duplicate service ID conflict
-    # Step 1: Flag rows where 'service_id' is duplicated within each 'fiscal_yr'
-    si['qa_duplicate_sid'] = si.duplicated(subset=['fiscal_yr', 'service_id'], keep=False)
+    # Merge in the org_id from the service id registry
+    si = si.merge(sid_registry[['service_id', 'org_id']], how='left', on='service_id', suffixes=['', '_sid_registry'])
+
+    # QA check: unregistered service ID
+    # This service id is not registered in the service id registry
+    si['qa_unregistered_sid'] = si['org_id_sid_registry'].isna()
     
-    # Step 2: Get unique 'service_id's that are flagged as duplicates
-    duplicate_ids = si.loc[si['qa_duplicate_sid'], 'service_id'].unique()
-    
-    # Step 3: Filter rows with duplicate 'service_id's and group by 'service_id' and 'department_en'
-    duplicate_groups = (
-        si.loc[si['service_id'].isin(duplicate_ids), ['fiscal_yr', 'service_id', 'department_en']]
-        .groupby(['service_id', 'department_en'])['fiscal_yr']  # Count occurrences of 'fiscal_yr'
-        .nunique()  # Count unique fiscal years for each group
-    )
-    
-    # Step 4: Identify groups with only one unique fiscal year (problematic cases)
-    problematic_duplicates = duplicate_groups[duplicate_groups == 1].reset_index()
-    
-    # Step 5: Keep only 'service_id' and 'department_en' columns
-    problematic_duplicates = problematic_duplicates[['service_id', 'department_en']]
-    
-    # Step 6: Create a set of tuples from 'problematic_duplicates' for efficient lookup
-    problematic_set = set(zip(problematic_duplicates['service_id'], problematic_duplicates['department_en']))
-    
-    # Step 7: Update the 'qa_duplicate_sid' column based on whether each row matches a problematic duplicate
-    si['qa_duplicate_sid'] = si.apply(
-        lambda row: (row['service_id'], row['department_en']) in problematic_set, axis=1
-    )    
-    
-    # Verify:
-    # si.loc[:, ['fiscal_yr', 'department_en', 'service_id', 'qa_duplicate_sid']][si['qa_duplicate_sid']]
-    
-    # =================================
-    # QA Check 2: Duplicate Service Standard ID conflict
-    # Step 1: Flag rows where 'service_standard_id' is duplicated within each 'fiscal_yr'
-    ss['qa_duplicate_stdid'] = ss.duplicated(subset=['fiscal_yr', 'service_standard_id'], keep=False)
-    
-    # Step 2: Get unique 'service_standard_id's that are flagged as duplicates
-    duplicate_ids = ss.loc[ss['qa_duplicate_stdid'], 'service_standard_id'].unique()
-    
-    # Step 3: Filter rows with duplicate 'service_standard_id's and group by 'service_standard_id' and 'department_en'
-    duplicate_groups = (
-        ss.loc[ss['service_standard_id'].isin(duplicate_ids), ['fiscal_yr', 'service_standard_id', 'department_en']]
-        .groupby(['service_standard_id', 'department_en'])['fiscal_yr']  # Count occurrences of 'fiscal_yr'
-        .nunique()  # Count unique fiscal years for each group
-    )
-    
-    # Step 4: Identify groups with only one unique fiscal year (problematic cases)
-    problematic_duplicates = duplicate_groups[duplicate_groups == 1].reset_index()
-    
-    # Step 5: Keep only 'service_standard_id' and 'department_en' columns
-    problematic_duplicates = problematic_duplicates[['service_standard_id', 'department_en']]
-    
-    # Step 6: Create a set of tuples from 'problematic_duplicates' for efficient lookup
-    problematic_set = set(zip(problematic_duplicates['service_standard_id'], problematic_duplicates['department_en']))
-    
-    # Step 7: Update the 'qa_duplicate_sid' column based on whether each row matches a problematic duplicate
-    ss['qa_duplicate_stdid'] = ss.apply(
-        lambda row: (row['service_standard_id'], row['department_en']) in problematic_set, axis=1
-    )    
-    
-    # Verify:
-    # ss.loc[:, ['fiscal_yr', 'department_en', 'service_id', 'service_standard_id', 'qa_duplicate_stdid']][ss['qa_duplicate_stdid']]    
-       
-    # =================================
-    # QA Check 3: Identify service IDs that have already been used by other departments in previous fiscal years
-    si_filtered = si[['service_id', 'department_en', 'org_id', 'fiscal_yr']]
-    si_filtered = si_filtered.sort_values(by=['service_id', 'fiscal_yr']).reset_index(drop=True)
-    
-    # Step 1: Self-join to compare records
-    joined_df = si_filtered.merge(si_filtered, on='service_id', suffixes=('', '_prev'))
-    
-    # Step 2: Filter reused records
-    reused_ids = joined_df[
-        (joined_df['fiscal_yr'] > joined_df['fiscal_yr_prev']) & 
-        (joined_df['department_en'] != joined_df['department_en_prev'])
-    ]
-    
-    # Step 3: Select the record with the latest 'fiscal_yr_prev' for each 'service_id' and 'fiscal_yr'
-    reused_ids = reused_ids.loc[reused_ids.groupby(['service_id', 'fiscal_yr'])['fiscal_yr_prev'].idxmax()].reset_index(drop=True)
-    
-    # Step 4: Identify which fiscal year and department previously used the id
-    reused_ids['reused_id_from'] = reused_ids['fiscal_yr_prev']+' '+reused_ids['department_en_prev']
-    
-    # Step 5: Create a unique key for matching
-    reused_ids['key'] = (
-        reused_ids['fiscal_yr'].astype(str)+' '+
-        reused_ids['org_id'].astype(str)+' '+
-        reused_ids['service_id'].astype(str)
-        )
-    
-    si['key'] = (
-        si['fiscal_yr'].astype(str)+' '+
-        si['org_id'].astype(str)+' '+
-        si['service_id'].astype(str)
-        )
-    
-    # Step 6: Map 'reused_id_from' to the original 'si' DataFrame
-    reused_id_from_dict = dict(zip(reused_ids['key'], reused_ids['reused_id_from']))
-    
-    si['reused_id_from'] = si['key'].map(reused_id_from_dict)
-    si['qa_reused_sid'] = si['reused_id_from'].notna()
-    
-    # Step 7: Drop the temporary key column
-    si = si.drop(columns=['key'])
-    
-    # Verify:
-    # si[['fiscal_yr', 'service_id', 'department_en', 'qa_reused_sid']][si['qa_reused_sid']]    
-    
-    # =================================
-    # QA Check 4: Record is reported for a fiscal year that is incomplete or in the future.
+    # QA check: reused service ID
+    # This service id is registered to a different organization
+    si['qa_reused_sid'] = (si['org_id'] != si['org_id_sid_registry']) & ~(si['qa_unregistered_sid'])
+
+    # QA check: Record is reported for a fiscal year that is incomplete or in the future.
     si['fiscal_yr_end_date'] = pd.to_datetime(si['fiscal_yr'].str.split('-').str[1]+'-04-01')
-    si['qa_si_fiscal_yr_in_future'] = si['fiscal_yr_end_date'].dt.date >= current_date
+    si['qa_si_fiscal_yr_out_of_scope'] = si['fiscal_yr_end_date'].dt.date >= current_date
     
     ss['fiscal_yr_end_date'] = pd.to_datetime(ss['fiscal_yr'].str.split('-').str[1]+'-04-01')
-    ss['qa_ss_fiscal_yr_in_future'] = ss['fiscal_yr_end_date'].dt.date >= current_date
+    ss['qa_si_fiscal_yr_out_of_scope'] = ss['fiscal_yr_end_date'].dt.date >= current_date
 
-    # =================================
-    # QA Check 5: Record has contradiction between client feedback channels and online interaction points for feedback
+    # QA check: Record has contradiction between client feedback channels and online interaction points for feedback
     si['qa_client_feedback_contradiction'] = (
     
         # Service accepts client feedback via the online channel (ONL) but online issue resolution or feedback is not applicable or not activated
@@ -183,11 +94,7 @@ def qa_check(si, ss, config):
         )
     )
     
-    # Verify:
-    # si[['client_feedback_channel', 'os_issue_resolution_feedback', 'client_feedback_contradiction']].loc[si['client_feedback_contradiction'] == True]
-        
-    # =================================
-    # QA Check 6: Service reports no volume, but associated Service standards have volume
+    # QA check: Service reports no volume, but associated Service standards have volume
     ss_vol_by_service = (
         ss.groupby(['fiscal_yr', 'service_id'])['total_volume']
         .sum()
@@ -201,96 +108,55 @@ def qa_check(si, ss, config):
         (si['total_volume_ss'] > 0) & (si['num_applications_total'] == 0)
     )
 
-    # =================================
-    # QA Check 7: Service standard reports no volume
+    # QA check: Service standard reports no volume
     ss['qa_no_ss_volume'] = (ss['total_volume'] == 0)
     
-    # =================================    
-    # QA Check 8: Services that target society as a recipient type we would not expect to see specific interaction volume
-    # Note that this assumption may be false
-    si['num_applications_total'] = pd.to_numeric(si['num_applications_total'], errors = 'coerce').fillna(0).astype(int)
-    
-    si['qa_service_recipient_type_society_with_interactions'] = (
-        (si['service_recipient_type'] == 'SOCIETY') &
-        (si['num_applications_total'] > 0)
-    )
-
-    # =================================        
-    # QA Check 9: Services where 'persons' are a client type should not be 'NA' for SIN as ID
-    si['qa_use_of_sin_applicable'] = (
-        (si['client_target_groups'].str.contains('PERSON')) &
-        (si['sin_usage'] == 'NA')
-    )   
-
-    # =================================    
-    # QA Check 10: Services where 'econom' (business) are a client type should not be 'NA' for CRA BN as ID
+    # QA check: Services where 'econom' (business) are a client type should not be 'NA' for CRA BN as ID
     si['qa_use_of_cra_bn_applicable'] = (
         (si['client_target_groups'].str.contains('ECONOM')) &
         (si['cra_bn_identifier_usage'] == 'NA')
     )
 
-    # =================================
-    # QA Check 11: Services must be associated to programs from the same department
-    # Exception: we have provided instructions to use any of the ISS internal service
-    # programs regardless of whether that program is listed for the department in 
-    # the chart of accounts.
+    # QA check for programs
+    # Prepare a dataframe that splits service inventory into one-program-per-row: si_prog
+    si['org_id'] = si['org_id'].astype(str)
+    program['org_id'] = pd.to_numeric(program['org_id'], errors = 'coerce').astype(int)
+    program['org_id'] = program['org_id'].astype(str)
 
-    # Filter and clean rbpo DataFrame to get a clean list of programs and departments
-    rbpo_filtered = (
-        rbpo[['organization', 'program_id']]  # Select relevant columns
-        .merge(org_var, left_on='organization', right_on='org_name_variant', how='left')  # Merge with org_var
-        .drop_duplicates()  # Remove duplicate rows
-    )
-    
-    # Filter out internal programs containing 'ISS'
-    rbpo_filtered['internal_program'] = rbpo_filtered['program_id'].str.contains('ISS')
-    rbpo_filtered = rbpo_filtered[~rbpo_filtered['internal_program']]  # Keep only non-internal programs
-    rbpo_filtered = rbpo_filtered[['program_id', 'org_id']]  # Keep only necessary columns
-    
-    rbpo_filtered['org_id']= rbpo_filtered['org_id'].astype(str)
-    
-    # Prepare si_prog DataFrame
-    si_prog = si.loc[:,['fiscal_yr', 'service_id', 'program_id', 'org_id']]  # Select relevant columns
+    # Exclude empty program ID rows, select relevant columns
+    si_prog = si.loc[
+        ~si['program_id'].isnull(),
+        ['fiscal_yr', 'service_id', 'program_id', 'org_id']]
     si_prog['org_id'] = si_prog['org_id'].astype(str)
 
-    # Split and explode program_id to handle multiple entries per cell
+    # Split and explode program_id to handle multiple program_id entries per cell
     si_prog['program_id'] = si_prog['program_id'].str.split(',')
     si_prog = si_prog.explode('program_id')
-    
-    # Filter out internal programs containing 'ISS'
-    si_prog['internal_program'] = si_prog['program_id'].str.contains('ISS').astype(bool)
-    si_prog = si_prog[~si_prog['internal_program']]  # Keep only non-internal programs
-    
-    #Join si_prog with rbpo_filtered (program list) on program_id
-    si_prog = si_prog.merge(rbpo_filtered, on='program_id', how='left', suffixes=('_si', '_prog'))
-    si_prog['qa_program_id'] = si_prog['org_id_si'] != si_prog['org_id_prog'] # Identify rows where org_id mismatch occurs
-    si_prog = si_prog[si_prog['qa_program_id']]  # Keep only mismatched rows
-    si_prog = si_prog[si_prog['program_id'] != ''] # Remove rows with empty program_id    
-    
-    # Merge si_prog with department information
-    si_prog = si_prog.merge(dept, left_on='org_id_prog', right_on='org_id', how='left')
-    
-    # Create a field describing the correct organization associated to the program id
-    si_prog['program_correct_org'] = (
-        si_prog['program_id'] + ': ' + si_prog['department_en'] + '/' + si_prog['department_fr']
-    )
-    
-    collapsed_si_prog = (
-            si_prog.groupby(['fiscal_yr', 'service_id', 'org_id_si'], as_index=False)
-            .agg({'program_correct_org': lambda x: '<>'.join(sorted(map(str, x.dropna())))})
-        )
-    
-    collapsed_si_prog.rename(columns={'org_id_si': 'org_id'}, inplace=True)
 
-    collapsed_si_prog['org_id'] = collapsed_si_prog['org_id'].astype(str)
-    si['org_id'] = si['org_id'].astype(str)
-    
-    si=si.merge(collapsed_si_prog, on=['fiscal_yr', 'service_id', 'org_id'], how='left')
-    si['qa_program_id'] = ~(si['program_correct_org'].isna())
-    si['program_correct_org'] = si['program_correct_org'].fillna(False)
+    # Join si_prog with program_list on program_id and org_id
+    si_prog = si_prog.merge(program, on=['program_id', 'org_id'], how='left', suffixes=('_si', '_prog'), indicator=True)
 
-    # =================================
-    # QA Check 12: Service standard performance is greater than 100%
+    # qa check: program id belongs to different department
+    si_prog_wrong_org = si_prog[si_prog['_merge'] == 'left_only']  # Keep only mismatched rows
+    si_prog_wrong_org = si_prog_wrong_org.groupby(['fiscal_yr', 'service_id', 'org_id'], as_index=False).agg({'program_id': lambda x: '<>'.join(sorted(map(str, x.dropna())))})
+    si_prog_wrong_org.rename(columns={'program_id':'mismatched_program_ids'}, inplace=True)
+
+    # qa check: program id is old/expired
+    si_prog['latest_valid_fy_ending_in'] = pd.to_numeric(si_prog['latest_valid_fy'].str.split('-').str[1].fillna(0), errors = 'coerce').astype(int)
+    si_prog['reported_fy_ending_in'] = pd.to_numeric(si_prog['fiscal_yr'].str.split('-').str[1].fillna(0), errors = 'coerce').astype(int)
+    si_prog['program_id_latest_valid_fy'] = si_prog['program_id']+': '+si_prog['latest_valid_fy']
+
+    si_prog_old = si_prog[(si_prog['latest_valid_fy_ending_in'] < si_prog['reported_fy_ending_in']) & (si_prog['_merge'] =='both')]
+    si_prog_old = si_prog_old.groupby(['fiscal_yr', 'service_id', 'org_id'], as_index=False).agg({'program_id_latest_valid_fy': lambda x: '<>'.join(sorted(map(str, x.dropna())))})
+
+    # Merge into si
+    si = pd.merge(si, si_prog_old, on=['fiscal_yr', 'service_id', 'org_id'], how='left')
+    si['qa_program_id_old'] = ~(si['program_id_latest_valid_fy'].isnull())
+
+    si = pd.merge(si, si_prog_wrong_org, on=['fiscal_yr', 'service_id', 'org_id'], how='left')
+    si['qa_program_id_wrong_org'] = ~(si['mismatched_program_ids'].isnull())
+
+    # QA check: Service standard performance is greater than 100%
     ss['qa_performance_over_100'] = ss['volume_meeting_target']>ss['total_volume']
 
     # === EXPORT DATA TO CSV ===
@@ -308,7 +174,7 @@ def qa_check(si, ss, config):
     )
 
     # === Run/build QA report ===
-    qa_report(si, ss, config)
+    # qa_report(si, ss, config)
 
 
 def qa_report(si_qa, ss_qa, config):

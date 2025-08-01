@@ -43,7 +43,6 @@ def dept_list(config):
         )
     
     return dept
-    
 
 def sid_list(si, config):
     """
@@ -90,7 +89,6 @@ def sid_list(si, config):
     )
 
     # return sid_list
-
 
 def build_drf(config):
     """
@@ -185,7 +183,6 @@ def build_drf(config):
 
     return drf
 
-
 def copy_raw_to_utils(config):
     ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
     ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
@@ -225,11 +222,113 @@ def copy_raw_to_utils(config):
 
 def program_list(config):
     """Builds a list of programs for all fiscal years based on the tables
-    by individual fiscal years in open gov. for use with QA"""
+    by individual fiscal years in open gov. For use with QA validation"""
+    org_var = load_csv('org_var.csv', config, snapshot=False)
+    
+    frames_en = []
+    frames_fr = []
+    df = pd.DataFrame
 
-    # Download all the program tables into the input folder
+    for fiscal_yr, url in config['program_csv_urls_en'].items():
+        filename = url.split('/')[-1].split('.')[0]
+        
+        df = pd.read_csv(url)
+        df['filename'] = filename
+        df['fiscal_yr'] = fiscal_yr
+        frames_en += [df]
 
+    for fiscal_yr, url in config['program_csv_urls_fr'].items():
+        filename = url.split('/')[-1].split('.')[0]
 
+        df = pd.read_csv(url)
+        df['filename'] = filename
+        df['fiscal_yr'] = fiscal_yr
+        frames_fr += [df]
+
+    # --- Process English Program Data ---
+    program_df_en = pd.concat(frames_en, ignore_index=True)
+
+    # Determine the org_id using the org name variants
+    program_df_en = program_df_en.merge(
+        org_var,
+        how='left',
+        left_on='EntityDept_name_Eng-EntitéMin_nom_ang',
+        right_on='org_name_variant'
+    )
+
+    # Resolve program codes and names, taking the core responsibility if the program is null
+    program_df_en['program_id'] = program_df_en[
+        'ProgramInventory-Répertoiredesprogrammes_code_PROG'
+    ].combine_first(
+        program_df_en['ProgramorCoreResponsibility-ProgrammeouResponsabilitéessentielle_code_PROG']
+    )
+
+    program_df_en['program_en'] = program_df_en[
+        'ProgramInventory_name-Répertoiredesprogrammes_nom_PROG'
+    ].combine_first(
+        program_df_en['ProgramorCoreResponsibility_name-ProgrammeouResponsabilitéessentielle_nom_PROG']
+    )
+
+    # Set index for merging
+    program_df_en.set_index(['fiscal_yr', 'org_id', 'program_id'], inplace=True)
+
+    # --- Process French Program Data ---
+    program_df_fr = pd.concat(frames_fr, ignore_index=True)
+
+    # Determine the org_id using the org name variants
+    program_df_fr = program_df_fr.merge(
+        org_var,
+        how='left',
+        left_on='EntityDept_name_fra-EntitéMin_nom_fra',
+        right_on='org_name_variant'
+    )
+
+    # Resolve program codes and names, taking the core responsibility if the program is null
+    program_df_fr['program_id'] = program_df_fr[
+        'ProgramInventory-Répertoiredesprogrammes_code_PROG'
+    ].combine_first(
+        program_df_fr['ProgramorCoreResponsibility-ProgrammeouResponsabilitéessentielle_code_PROG']
+    )
+
+    program_df_fr['program_fr'] = program_df_fr[
+        'ProgramInventory_name-Répertoiredesprogrammes_nom_PROG'
+    ].combine_first(
+        program_df_fr['ProgramorCoreResponsibility_name-ProgrammeouResponsabilitéessentielle_nom_PROG']
+    )
+
+    program_df_fr.set_index(['fiscal_yr', 'org_id', 'program_id'], inplace=True)
+
+    # --- Merge English and French Data ---
+
+    program_df = pd.merge(
+        program_df_en,
+        program_df_fr,
+        how='outer',
+        left_index=True,
+        right_index=True,
+        suffixes=['_en', '_fr'],
+        indicator=True
+    )
+
+    # Keep only necessary columns, noting that the index has org id, fiscal yr, and code
+    program_df = program_df[['program_en', 'program_fr']].reset_index()
+
+    # --- Select Latest Fiscal Year per org_id–program_id ---
+    program_df = program_df.sort_values('fiscal_yr')
+
+    latest_idx = program_df.groupby(['org_id', 'program_id'])['fiscal_yr'].idxmax()
+    program_df = program_df.loc[latest_idx, ['org_id', 'program_id', 'fiscal_yr', 'program_en', 'program_fr']]
+
+    program_df.rename(columns={'fiscal_yr':'latest_valid_fy'}, inplace=True)
+
+    UTILS_DIR = config['utils_dir']
+    export_to_csv(
+        data_dict={'program_list':program_df},
+        output_dir=UTILS_DIR,
+        config=config
+    )
+
+    return program_df
 
 def build_data_dictionary(config):
     """Builds a structured data dictionary from a JSON file, processes nested data, 
