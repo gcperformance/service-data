@@ -16,7 +16,7 @@ def merge_si(config):
     serv_prog = load_csv('serv_prog.csv', config, snapshot=False)
     
     # Load department list from utils
-    dept = dept_list(config)
+    dept = dept_list(config, export=True)
     
     si_2018 = load_csv('si_2018.csv', config, snapshot=True)
     si_2024 = load_csv('si_2024.csv', config, snapshot=True)

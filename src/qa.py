@@ -10,7 +10,6 @@ from src.utils import dept_list, program_list
 def qa_check(si, ss, config):
     # === SETUP ===
     # Load extra files
-    rbpo = load_csv('rbpo.csv', config, snapshot=False)
     org_var = load_csv('org_var.csv', config, snapshot=False)
     sid_registry = load_csv('sid_registry.csv', config, snapshot=False)
     
@@ -41,6 +40,13 @@ def qa_check(si, ss, config):
     for column, df in int_cols.items():
         int_cols[column][column] = pd.to_numeric(df[column], errors = 'coerce').fillna(0).astype(int)
 
+    # Harmonize all org_id datatypes across all dataframes
+    org_id_df = [si, ss, dept, org_var, program, sid_registry]
+
+    for df in org_id_df:
+        df['org_id'] = pd.to_numeric(df['org_id'], errors = 'coerce').fillna(0).astype('Int64')
+
+
     # Create numeric ids, strip out prefixes
     si['service_id_numeric'] = si['service_id'].str.replace(r'^SRV', '', regex=True)
     si['service_id_numeric'] = pd.to_numeric(si['service_id_numeric'], errors = 'coerce')
@@ -48,19 +54,13 @@ def qa_check(si, ss, config):
     ss['service_standard_id_numeric'] = ss['service_standard_id'].str.replace(r'^STAN', '', regex=True)
     ss['service_standard_id_numeric'] = pd.to_numeric(ss['service_standard_id_numeric'], errors = 'coerce')
 
-    si['org_id'] = pd.to_numeric(si['org_id'], errors = 'coerce').astype(int)
-    si['org_id'] = si['org_id'].astype(str)
-
-    sid_registry['org_id'] = pd.to_numeric(sid_registry['org_id'], errors = 'coerce').astype(int)
-    sid_registry['org_id'] = sid_registry['org_id'].astype(str)
-
-
 
     # === QUALITY ASSURANCE CHECKS ===
     # =================================
     # Merge in the org_id from the service id registry
-    si = si.merge(sid_registry[['service_id', 'org_id']], how='left', on='service_id', suffixes=['', '_sid_registry'])
-
+    si = pd.merge(si, sid_registry[['service_id', 'org_id']], how='left', on='service_id', suffixes=['', '_sid_registry'])
+    si = pd.merge(si, dept.rename(columns={'org_id': 'org_id_sid_registry'}), how='left', on='org_id_sid_registry', suffixes=['', '_sid_registry'])
+    
     # QA check: unregistered service ID
     # This service id is not registered in the service id registry
     si['qa_unregistered_sid'] = si['org_id_sid_registry'].isna()
@@ -68,6 +68,7 @@ def qa_check(si, ss, config):
     # QA check: reused service ID
     # This service id is registered to a different organization
     si['qa_reused_sid'] = (si['org_id'] != si['org_id_sid_registry']) & ~(si['qa_unregistered_sid'])
+    si['reused_sid_correct_org'] = si['org_id'].astype(str) +' : ' + si['department_en_sid_registry'] + ' | ' + si['department_fr_sid_registry']
 
     # QA check: Record is reported for a fiscal year that is incomplete or in the future.
     si['fiscal_yr_end_date'] = pd.to_datetime(si['fiscal_yr'].str.split('-').str[1]+'-04-01')
@@ -108,6 +109,8 @@ def qa_check(si, ss, config):
         (si['total_volume_ss'] > 0) & (si['num_applications_total'] == 0)
     )
 
+    si['qa_no_si_app_volume'] = (si['num_applications_total'] == 0)
+
     # QA check: Service standard reports no volume
     ss['qa_no_ss_volume'] = (ss['total_volume'] == 0)
     
@@ -120,7 +123,6 @@ def qa_check(si, ss, config):
     # QA check for programs
     # Prepare a dataframe that splits service inventory into one-program-per-row: si_prog
     si['org_id'] = si['org_id'].astype(str)
-    program['org_id'] = pd.to_numeric(program['org_id'], errors = 'coerce').astype(int)
     program['org_id'] = program['org_id'].astype(str)
 
     # Exclude empty program ID rows, select relevant columns
@@ -174,48 +176,54 @@ def qa_check(si, ss, config):
     )
 
     # === Run/build QA report ===
-    # qa_report(si, ss, config)
+    qa_report(si, ss, config)
 
 
 def qa_report(si_qa, ss_qa, config):
     def generate_context(row):
         issue_messages = {
-            'qa_duplicate_sid': f"{row['reused_id_from']}",
-            'qa_reused_sid': f"{row['reused_id_from']}",
-            'qa_program_id': f"{row['program_correct_org']}",
+            'qa_reused_sid': f"{row['reused_sid_correct_org']}",
+            'qa_unregistered_sid': f"{row['service_id']}",
+            'qa_program_id_wrong_org': f"{row['mismatched_program_ids']}",
+            'qa_program_id_old': f"{row['program_id_latest_valid_fy']}",
             'qa_ss_vol_without_si_vol': f"service applications: {row['num_applications_total']}, standard volumes: {row['total_volume_ss']}",
-            'qa_si_fiscal_yr_in_future': f"{row['fiscal_yr']}"
+            'qa_si_fiscal_yr_out_of_scope': f"{row['fiscal_yr']}",
+            'qa_ss_fiscal_yr_out_of_scope': f"{row['fiscal_yr']}"
             }
 
         return issue_messages.get(row['qa_field_name'])
 
     # === CLEAN QA REPORT ===
     # In order to have a clean report of issues to send to departments & agencies, the following 
-    # re-organizes the information in the qa columns to a simple report for 2023-2024 data.
-    si_qa_cols = si_qa.columns.str.startswith('qa')
-    ss_qa_cols = ss_qa.columns.str.startswith('qa')
+    # re-organizes the information in the qa columns to a simple report.
+    si_qa_cols = si_qa.columns[si_qa.columns.str.startswith('qa')].to_list()
+    ss_qa_cols = ss_qa.columns[ss_qa.columns.str.startswith('qa')].to_list()
 
     # Import qa issues descriptions file
     CURRENT_DIR = Path(__file__).parent
     file_path = CURRENT_DIR / 'qa_issues_descriptions.csv'
     qa_issues_description = pd.read_csv(file_path)
+    # qa_issues_description = pd.read_csv('/workspaces/service-data/src/qa_issues_descriptions.csv')
 
     # We are only including a specific set of checks in the report.
-    critical_si_qa_cols = [
-        'qa_duplicate_sid',
-        'qa_si_fiscal_yr_in_future',
-        'qa_ss_vol_without_si_vol',
-        'qa_reused_sid',
-        'qa_program_id'
-    ]
-    
-    critical_ss_qa_cols = [
-        'qa_duplicate_stdid',
-        'qa_no_ss_volume',
-        'qa_ss_fiscal_yr_in_future',
-        'qa_performance_over_100'
-    ]   
-    
+    # critical_si_qa_cols = [
+    #     'qa_duplicate_sid',
+    #     'qa_si_fiscal_yr_in_future',
+    #     'qa_ss_vol_without_si_vol',
+    #     'qa_reused_sid',
+    #     'qa_program_id'
+    # ]
+
+    # critical_ss_qa_cols = [
+    #     'qa_duplicate_stdid',
+    #     'qa_no_ss_volume',
+    #     'qa_ss_fiscal_yr_in_future',
+    #     'qa_performance_over_100'
+    # ]   
+
+    critical_si_qa_cols = si_qa_cols
+    critical_ss_qa_cols = ss_qa_cols
+
     # === PREPARING SI QA REPORT ===
     si_report_cols = [
         'department_en',
@@ -226,11 +234,12 @@ def qa_report(si_qa, ss_qa, config):
         'service_name_fr',
         'num_applications_total',
         'total_volume_ss',
-        'reused_id_from',
+        'reused_sid_correct_org',
         'program_id',
-        'program_correct_org'
+        'program_id_latest_valid_fy',
+        'mismatched_program_ids'
     ]
-    
+
     # Transform data to have all qa issues in a single column
     si_qa_report = pd.melt(
         si_qa, 
@@ -238,19 +247,21 @@ def qa_report(si_qa, ss_qa, config):
         value_vars=critical_si_qa_cols, 
         var_name='issue', 
         value_name='issue_present')
-    
+
     # Filter data only for records where there is a qa issue
     si_qa_report = si_qa_report[
         (si_qa_report['issue_present']) & 
         (si_qa_report['fiscal_yr'].isin(['2023-2024', '2024-2025']))
     ]
-    
+
     si_qa_report = pd.merge(
         si_qa_report, 
         qa_issues_description.loc[:, [
-            'qa_field_name', 
+            'qa_field_name',
+            'severity_en', 
             'description_en', 
             'action_en',
+            'severity_fr',
             'description_fr',
             'action_fr'
         ]], 
@@ -261,22 +272,24 @@ def qa_report(si_qa, ss_qa, config):
 
     # Consolidate additional context to a single field specific to each qa issue
     si_qa_report['context'] = si_qa_report.apply(generate_context, axis=1)
-    
+
     # Tidy up dataframe
     si_qa_report = si_qa_report.drop(columns=[
         'issue_present',
         'qa_field_name',
-        'num_applications_total', #replaced by context field
-        'total_volume_ss', #replaced by context field
-        'reused_id_from', #replaced by context field
-        'program_correct_org' #replaced by context field
+        'num_applications_total', # replaced by context field
+        'total_volume_ss',  # replaced by context field
+        'reused_sid_correct_org', # replaced by context field
+        'program_id', # replaced by context field
+        'program_id_latest_valid_fy', # replaced by context field
+        'mismatched_program_ids' # replaced by context field
         ])
 
-    si_qa_report = si_qa_report.sort_values(by=['department_en', 'service_id', 'issue'])
+    si_qa_report = si_qa_report.sort_values(by=['department_en', 'severity_en', 'service_id'])
 
     # ==============================
     # === PREPARING SS QA REPORT ===
-    
+
     ss_report_cols = [
         'department_en',
         'org_id',
@@ -291,29 +304,31 @@ def qa_report(si_qa, ss_qa, config):
         'total_volume',
         'performance'
     ]
-    
+
     ss_qa_report = pd.melt(ss_qa, id_vars=ss_report_cols, value_vars=critical_ss_qa_cols, var_name='issue', value_name='issue_present')
-    
+
     ss_qa_report = ss_qa_report[(ss_qa_report['issue_present'] & ss_qa_report['fiscal_yr'].isin(['2023-2024', '2024-2025']))]
-    
+
     ss_qa_report = pd.merge(
         ss_qa_report, 
         qa_issues_description.loc[:, [
-            'qa_field_name', 
+            'qa_field_name',
+            'severity_en', 
             'description_en', 
             'action_en',
+            'severity_fr',
             'description_fr',
             'action_fr'
-        ]], 
+        ]],
         left_on='issue', 
         right_on='qa_field_name', 
         how='left'
     )
-    
+
     ss_qa_report = ss_qa_report.drop(columns=['issue_present', 'qa_field_name'])
-    
-    ss_qa_report = ss_qa_report.sort_values(by=['department_en', 'service_id', 'service_standard_id'])
-    
+
+    ss_qa_report = ss_qa_report.sort_values(by=['department_en', 'severity_en', 'service_id', 'service_standard_id'])
+
     # === EXPORT TO CSV ===
     # Define the DataFrames to export to csv and their corresponding names
     csv_exports = {

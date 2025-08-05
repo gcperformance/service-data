@@ -5,7 +5,7 @@ from src.load import load_csv
 from src.export import export_to_csv
 from src.clean import standardize_column_names, clean_fiscal_yr
 
-def dept_list(config):
+def dept_list(config, export=False):
     """
     Get a list of departments with their English and French names.
     """
@@ -34,7 +34,7 @@ def dept_list(config):
     dept = standardize_column_names(dept)
     dept['org_id'] = dept['org_id'].astype(str)
     
-    if not config['snapshot_date']:
+    if (not config['snapshot_date']) & export:
         UTILS_DIR = config['utils_dir']
         export_to_csv(
             data_dict={'dept': dept},
