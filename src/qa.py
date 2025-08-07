@@ -227,6 +227,7 @@ def qa_report(si_qa, ss_qa, config):
     # === PREPARING SI QA REPORT ===
     si_report_cols = [
         'department_en',
+        'department_fr',
         'org_id',
         'fiscal_yr', 
         'service_id', 
@@ -285,13 +286,14 @@ def qa_report(si_qa, ss_qa, config):
         'mismatched_program_ids' # replaced by context field
         ])
 
-    si_qa_report = si_qa_report.sort_values(by=['department_en', 'severity_en', 'service_id'])
+    si_qa_report = si_qa_report.sort_values(by=['org_id', 'severity_en', 'service_id'])
 
     # ==============================
     # === PREPARING SS QA REPORT ===
 
     ss_report_cols = [
         'department_en',
+        'department_fr',
         'org_id',
         'fiscal_yr', 
         'service_id', 
@@ -327,7 +329,7 @@ def qa_report(si_qa, ss_qa, config):
 
     ss_qa_report = ss_qa_report.drop(columns=['issue_present', 'qa_field_name'])
 
-    ss_qa_report = ss_qa_report.sort_values(by=['department_en', 'severity_en', 'service_id', 'service_standard_id'])
+    ss_qa_report = ss_qa_report.sort_values(by=['org_id', 'severity_en', 'service_id', 'service_standard_id'])
 
     # === EXPORT TO CSV ===
     # Define the DataFrames to export to csv and their corresponding names
