@@ -318,6 +318,8 @@ def program_list(config):
 
     latest_idx = program_df.groupby(['org_id', 'program_id'])['fiscal_yr'].idxmax()
     program_df = program_df.loc[latest_idx, ['org_id', 'program_id', 'fiscal_yr', 'program_en', 'program_fr']]
+    
+    program_df['org_id'] = pd.to_numeric(program_df['org_id'], errors = 'coerce').fillna(0).astype('Int64')
 
     program_df.rename(columns={'fiscal_yr':'latest_valid_fy'}, inplace=True)
 
