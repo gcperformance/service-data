@@ -62,14 +62,11 @@ jobs:
           
           echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
 
-      - name: Create SQLite database
-        run: python src/create_sqlite.py
-
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
-          name: Service Data - ${{ steps.metadata.outputs.date }} (${{ steps.metadata.outputs.commit_hash }})
+          name: Service Data - ${{ steps.metadata.outputs.date }}
           body: |
             Automated service data release for ${{ steps.metadata.outputs.date }}
               - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
@@ -78,7 +75,6 @@ jobs:
               - Live data CSVs 
               - Snapshots pre-pended with date of snapshot
           files: |
-            outputs/service_data.sqlite
             live_data_release/**
             snapshots_release/**
           make_latest: true
