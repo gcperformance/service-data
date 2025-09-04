@@ -371,6 +371,7 @@ def build_data_dictionary(config):
     dd_choices['code'] = dd_choices['variable'].str.split('.').str[1]
     dd_choices['en_fr'] = dd_choices['variable'].str.split('.').str[2]
     dd_choices = dd_choices.dropna(subset='en_fr')
+    dd_choices = dd_choices.loc[dd_choices['en_fr'].isin(['en', 'fr'])]
     
     
     dd_choices = dd_choices.pivot(index=['resource_name', 'id', 'code'], columns='en_fr', values='value')

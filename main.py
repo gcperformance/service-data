@@ -34,7 +34,7 @@ def get_config(snapshot_date=None):
         'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv',
         'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv',
         'rbpo': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895/download/rbpo_rppo_en.csv',
-        # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   
+        # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   no longer in use
     }
 
     json_urls = {
@@ -64,7 +64,7 @@ def get_config(snapshot_date=None):
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
     }
 
-    if snapshot_date:
+    if snapshot_date: # if a snapshot date has been defined, process as a snapshot
         input_snapshot_dir = input_dir / "snapshots" / snapshot_date
         output_dir = base_dir / "outputs" / "snapshots" / snapshot_date
         indicators_dir = base_dir / "outputs" / "snapshots" / snapshot_date / "indicators"
@@ -127,7 +127,7 @@ def main():
         logging.info("Starting data processing")
 
         # Download and process raw data
-        if not args.local:
+        if not args.local: # If the "local" option was passed, do not download these files
             logging.info("Downloading raw data...")
             download_csv_files(config)
             download_json_files(config)
