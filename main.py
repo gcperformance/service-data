@@ -92,7 +92,7 @@ def main():
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s',
-        handlers=[logging.StreamHandler()]
+        handlers=[logging.StreamHandler()]        
     )
 
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")

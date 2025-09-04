@@ -41,9 +41,9 @@ def qa_check(si, ss, config):
         int_cols[column][column] = pd.to_numeric(df[column], errors = 'coerce').fillna(0).astype(int)
 
     # Harmonize all org_id datatypes across all dataframes
-    org_id_df = [si, ss, dept, org_var, program, sid_registry]
+    org_id_dfs = [si, ss, dept, org_var, program, sid_registry]
 
-    for df in org_id_df:
+    for df in org_id_dfs:
         df['org_id'] = pd.to_numeric(df['org_id'], errors = 'coerce').fillna(0).astype('Int64')
 
 
