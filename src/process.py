@@ -962,19 +962,40 @@ def service_fte_spending(si, drf, config):
 
 
 def process_files(si, ss, config):
+    try:
+        sid_list(si, config)
+    except:
+        print('sid_list() failed')
 
-    sid_list(si, config)
+    try:
+        processed_si_ss = output_si_ss(si, ss, config)
+        si = processed_si_ss['si']
+        ss = processed_si_ss['ss']
+    except:
+        print('si ss prep failed')
 
-    processed_si_ss = output_si_ss(si, ss, config)
+    try:    
+        summary_si_ss(si, ss, config)
+    except:
+        print('summary failed')
 
-    si = processed_si_ss['si']
-    ss = processed_si_ss['ss']
-        
-    summary_si_ss(si, ss, config)
-    maf(si, ss, config)
-    drr(si, ss, config)
-    datapack(si, ss, config)
+    try:
+        maf(si, ss, config)
+    except:
+        print('maf failed')
 
-    drf = build_drf(config)
+    try:
+        drr(si, ss, config)
+    except:
+        print('drr failed')
     
-    service_fte_spending(si, drf, config)
+    try:
+        datapack(si, ss, config)
+    except:
+        print('datapack failed')
+
+    try:
+        drf = build_drf(config)
+        service_fte_spending(si, drf, config)
+    except:
+        print('drf / service fte spending failed')

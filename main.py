@@ -9,7 +9,7 @@ from src.load import download_csv_files, download_json_files
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
-from src.utils import copy_raw_to_utils, build_data_dictionary
+from src.utils import build_ifoi, copy_org_var, build_data_dictionary
 
 
 def get_config(snapshot_date=None):
@@ -29,7 +29,7 @@ def get_config(snapshot_date=None):
         'ss_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/272143a7-533e-42a1-b72d-622116474a21/download/service_standards_2018-2023.csv',
         'ss_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/8736cd7e-9bf9-4a45-9eee-a6cb3c43c07e/download/service-std.csv',
         'org_var': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-org-variants.csv',
-        'sid_registry': 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv',
+        'sid_registry': 'https://raw.githubusercontent.com/gcperformance/utilities/master/goc-service-id-registry.csv',
         'serv_prog': 'https://raw.githubusercontent.com/gc-performance/utilities/master/goc-service-program.csv',
         'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv',
         'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv',
@@ -89,12 +89,15 @@ def get_config(snapshot_date=None):
 def main():
     """Process service data and generate outputs."""
     # Setup basic logging
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s',
-        handlers=[logging.StreamHandler()]        
-    )
+    logger = logging.getLogger(__name__)
+    if not logger.handlers:
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s.%(msecs)03d - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
 
+    # Argument parsing
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--snapshot", help="Optional snapshot date (YYYY-MM-DD).")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
@@ -108,7 +111,7 @@ def main():
             datetime.strptime(args.snapshot, "%Y-%m-%d")
             snapshot_date = args.snapshot  # Assign only if valid
         except ValueError:
-            logging.error("Invalid snapshot date format. Use YYYY-MM-DD.")
+            logger.error("Invalid snapshot date format. Use YYYY-MM-DD.")
             sys.exit(1)
 
     # Define snapshot directory (if snapshot date is provided)
@@ -116,7 +119,7 @@ def main():
         snapshot_dir = Path(__file__).parent / "inputs" / "snapshots" / snapshot_date
 
         if not snapshot_dir.exists():
-            logging.error(f"Snapshot directory {snapshot_dir} does not exist. Exiting.")
+            logger.error(f"Snapshot directory {snapshot_dir} does not exist. Exiting.")
             sys.exit(1)
 
     config = get_config(snapshot_date)
@@ -124,40 +127,62 @@ def main():
     try:
         # Track total time
         start_time = time.time()
-        logging.info("Starting data processing")
+        logger.info("Starting data processing")
 
         # Download and process raw data
         if not args.local: # If the "local" option was passed, do not download these files
-            logging.info("Downloading raw data...")
+            logger.info("Downloading raw data...")
             download_csv_files(config)
             download_json_files(config)
 
         # Merge historical data
-        logging.info("Merging historical data...")
-        si = merge_si(config)
-        ss = merge_ss(config)
+        try:
+            logger.info("Merging historical data...")
+            si = merge_si(config)
+            ss = merge_ss(config)
+        except:
+            logger.error("Merging historical data failed", exc_info=True)
+            sys.exit(1)
 
         # Generate processed files
-        logging.info("Generating processed files...")
-        process_files(si, ss, config)
+        try:
+            logger.info("Generating processed files...")
+            process_files(si, ss, config)
+        except:
+            logger.error("Generating processed files failed")
 
         # Run QA checks
-        logging.info("Running QA checks...")
-        qa_check(si, ss, config)
+        try:
+            logger.info("Running QA checks...")
+            qa_check(si, ss, config)
+        except:
+            logger.error("Running QA checks failed")
 
         # Copying files from raw to utils when the run is not for a snapshot
         snapshot_bool = bool(config['snapshot_date'])
         if not snapshot_bool:
-            logging.info("Copying files from input to utils...")
-            copy_raw_to_utils(config)
-            build_data_dictionary(config)
+            logger.info("Copying files from input to utils...")
+            try:
+                build_ifoi(config)
+            except:
+                logger.error("build_ifoi() failed")
+            
+            try:
+                copy_org_var(config)
+            except:
+                logger.error("copy_org_var() failed")
+            
+            try:
+                build_data_dictionary(config)
+            except:
+                logger.error("build_data_dictionary failed")
 
         # Log completion time
         elapsed_time = time.time() - start_time
-        logging.info(f"Processing completed in {elapsed_time:.2f} seconds")
+        logger.info(f"Processing completed in {elapsed_time:.2f} seconds")
 
     except Exception as e:
-        logging.error("Error:",exc_info=True)
+        logger.error("Error:",exc_info=True)
         sys.exit(1)
 
 

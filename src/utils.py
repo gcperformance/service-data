@@ -183,10 +183,9 @@ def build_drf(config):
 
     return drf
 
-def copy_raw_to_utils(config):
+def build_ifoi(config):
     ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
     ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
-    org_var = load_csv('org_var.csv', config, snapshot=False)
 
     # Set first column (OrgID) as index, drop the column from the actual table, add the en/fr suffix
     ifoi_en = ifoi_en.set_index(ifoi_en.columns[0], drop=True).add_suffix('_en')
@@ -205,17 +204,20 @@ def copy_raw_to_utils(config):
     # Apply new column order, reset the index to make org_id reappear
     ifoi = standardize_column_names(ifoi[merged_cols].reset_index())
 
-    utils_file_dict = {
-        'ifoi':ifoi,
-        'org_var':org_var
-    }
-
-    for key in utils_file_dict.keys():
-        utils_file_dict[key] = standardize_column_names(utils_file_dict[key]) 
-    
     UTILS_DIR = config['utils_dir']
     export_to_csv(
-        data_dict=utils_file_dict,
+        data_dict={'ifoi':ifoi},
+        output_dir=UTILS_DIR,
+        config=config
+    )
+
+def copy_org_var(config):
+    org_var = load_csv('org_var.csv', config, snapshot=False)
+    org_var = standardize_column_names(org_var)
+
+    UTILS_DIR = config['utils_dir']
+    export_to_csv(
+        data_dict={'org_var':org_var},
         output_dir=UTILS_DIR,
         config=config
     )
@@ -371,7 +373,7 @@ def build_data_dictionary(config):
     dd_choices['code'] = dd_choices['variable'].str.split('.').str[1]
     dd_choices['en_fr'] = dd_choices['variable'].str.split('.').str[2]
     dd_choices = dd_choices.dropna(subset='en_fr')
-    dd_choices = dd_choices.loc[dd_choices['en_fr'].isin(['en', 'fr'])]
+#    dd_choices = dd_choices.loc[dd_choices['en_fr'].isin(['en', 'fr'])]
     
     
     dd_choices = dd_choices.pivot(index=['resource_name', 'id', 'code'], columns='en_fr', values='value')
