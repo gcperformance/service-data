@@ -42,8 +42,10 @@ jobs:
         id: prepare_live_files
         run: |
           mkdir -p live_data_release
-          echo "Copying live data files..."
-          find outputs inputs -type f -name "*.csv" ! -path "*/snapshots/*" -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
+          echo "Copying live data files (.csv and .log)..."
+          find outputs inputs -type f \( -name "*.csv" -o -name "*.log" \) \
+            ! -path "*/snapshots/*" -size +0c \
+            -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
           
           echo "live_data_dir=live_data_release" >> $GITHUB_ENV
 
