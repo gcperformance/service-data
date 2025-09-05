@@ -85,23 +85,56 @@ def get_config(snapshot_date=None):
         "program_csv_urls_fr": program_urls_fr
     }
 
+def setup_logging():
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG)
+
+    # one date format used everywhere
+    datefmt = "%Y-%m-%d %H:%M:%S"
+
+    # different message layouts
+    fmt_simple  = "%(asctime)s [%(levelname)s] %(message)s"
+    fmt_verbose   = "%(asctime)s [%(levelname)s] %(name)s:%(funcName)s:%(lineno)d - %(message)s"
+
+    # define each formatter
+    f_simple = logging.Formatter(fmt_simple, datefmt=datefmt)
+    f_verbose  = logging.Formatter(fmt_verbose,  datefmt=datefmt)
+    
+    # console shows INFO and above, simple format
+    h_console = logging.StreamHandler()
+    h_console.setLevel(logging.INFO)
+    h_console.setFormatter(f_simple)
+
+    # debug file gets EVERYTHING with the verbose format
+    h_debug = logging.FileHandler("debug.log")
+    h_debug.setLevel(logging.DEBUG)
+    h_debug.setFormatter(f_verbose)
+
+    # errors file gets ERROR and above with verbose format
+    h_errors = logging.FileHandler("errors.log")
+    h_errors.setLevel(logging.ERROR)
+    h_errors.setFormatter(f_verbose)
+
+    if root.hasHandlers():
+        root.handlers.clear()
+    root.addHandler(h_console)
+    root.addHandler(h_debug)
+    root.addHandler(h_errors)
+
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    logging.getLogger("requests").setLevel(logging.WARNING)
 
 def main():
     """Process service data and generate outputs."""
-    # Setup basic logging
-    logger = logging.getLogger(__name__)
-    if not logger.handlers:
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s.%(msecs)03d - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S'
-        )
-
     # Argument parsing
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--snapshot", help="Optional snapshot date (YYYY-MM-DD).")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
     args = parser.parse_args()
+
+    # Set up logging
+    setup_logging()
+    logger = logging.getLogger(__name__)
 
     # Validate and parse snapshot date
     snapshot_date = None
@@ -126,7 +159,7 @@ def main():
 
     try:
         # Track total time
-        start_time = time.time()
+        start_time = time.perf_counter()
         logger.info("Starting data processing")
 
         # Download and process raw data
@@ -145,45 +178,27 @@ def main():
             sys.exit(1)
 
         # Generate processed files
-        try:
-            logger.info("Generating processed files...")
-            process_files(si, ss, config)
-        except:
-            logger.error("Generating processed files failed")
-
+        logger.info("Generating processed files...")
+        process_files(si, ss, config)
+        
         # Run QA checks
-        try:
-            logger.info("Running QA checks...")
-            qa_check(si, ss, config)
-        except:
-            logger.error("Running QA checks failed")
-
+        logger.info("Running QA checks...")
+        qa_check(si, ss, config)
+        
         # Copying files from raw to utils when the run is not for a snapshot
         snapshot_bool = bool(config['snapshot_date'])
         if not snapshot_bool:
             logger.info("Copying files from input to utils...")
-            try:
-                build_ifoi(config)
-            except:
-                logger.error("build_ifoi() failed")
+            build_ifoi(config)
+            copy_org_var(config)
+            build_data_dictionary(config)
             
-            try:
-                copy_org_var(config)
-            except:
-                logger.error("copy_org_var() failed")
-            
-            try:
-                build_data_dictionary(config)
-            except:
-                logger.error("build_data_dictionary failed")
-
         # Log completion time
-        elapsed_time = time.time() - start_time
+        elapsed_time = time.perf_counter() - start_time
         logger.info(f"Processing completed in {elapsed_time:.2f} seconds")
 
     except Exception as e:
-        logger.error("Error:",exc_info=True)
-        sys.exit(1)
+        logger.error("Error: %s", e, exc_info=True)
 
 
 if __name__ == "__main__":
