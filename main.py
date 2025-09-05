@@ -106,12 +106,12 @@ def setup_logging():
     h_console.setFormatter(f_simple)
 
     # debug file gets EVERYTHING with the verbose format
-    h_debug = logging.FileHandler("debug.log")
+    h_debug = logging.FileHandler(Path("outputs") / "debug.log", encoding="utf-8", delay=True)
     h_debug.setLevel(logging.DEBUG)
     h_debug.setFormatter(f_verbose)
 
     # errors file gets ERROR and above with verbose format
-    h_errors = logging.FileHandler("errors.log")
+    h_errors = logging.FileHandler(Path("outputs") / "errors.log", encoding="utf-8", delay=True)
     h_errors.setLevel(logging.ERROR)
     h_errors.setFormatter(f_verbose)
 

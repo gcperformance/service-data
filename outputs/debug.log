@@ -1,0 +1,146 @@
+2025-09-05 20:41:46 [INFO] __main__:main:163 - Starting data processing
+2025-09-05 20:41:46 [INFO] __main__:main:167 - Downloading raw data...
+2025-09-05 20:41:47 [DEBUG] src.load:download_csv_files:29 - Downloaded: si_2018.csv
+2025-09-05 20:41:47 [DEBUG] src.load:download_csv_files:29 - Downloaded: si_2024.csv
+2025-09-05 20:41:48 [DEBUG] src.load:download_csv_files:29 - Downloaded: ss_2018.csv
+2025-09-05 20:41:48 [DEBUG] src.load:download_csv_files:29 - Downloaded: ss_2024.csv
+2025-09-05 20:41:48 [DEBUG] src.load:download_csv_files:29 - Downloaded: org_var.csv
+2025-09-05 20:41:48 [DEBUG] src.load:download_csv_files:29 - Downloaded: sid_registry.csv
+2025-09-05 20:41:49 [DEBUG] src.load:download_csv_files:29 - Downloaded: serv_prog.csv
+2025-09-05 20:41:49 [DEBUG] src.load:download_csv_files:29 - Downloaded: ifoi_en.csv
+2025-09-05 20:41:49 [DEBUG] src.load:download_csv_files:29 - Downloaded: ifoi_fr.csv
+2025-09-05 20:41:50 [DEBUG] src.load:download_csv_files:29 - Downloaded: rbpo.csv
+2025-09-05 20:41:51 [DEBUG] src.load:download_json_files:61 - Downloaded: service_data_dict.json
+2025-09-05 20:41:51 [INFO] __main__:main:173 - Merging historical data...
+2025-09-05 20:41:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:41:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/serv_prog.csv (10063 rows, 3 columns)
+2025-09-05 20:41:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:41:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:41:51 [DEBUG] src.export:export_to_csv:44 - Exported dept.csv to /workspaces/service-data/outputs/utils/dept.csv (328 rows, 3 columns)
+2025-09-05 20:41:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/si_2018.csv (7254 rows, 46 columns)
+2025-09-05 20:41:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/si_2024.csv (1724 rows, 46 columns)
+2025-09-05 20:41:53 [DEBUG] src.export:export_to_csv:44 - Exported si_all.csv to /workspaces/service-data/outputs/utils/si_all.csv (8978 rows, 54 columns)
+2025-09-05 20:41:53 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:41:53 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:41:53 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:41:53 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ss_2018.csv (10432 rows, 26 columns)
+2025-09-05 20:41:53 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ss_2024.csv (2343 rows, 24 columns)
+2025-09-05 20:41:53 [DEBUG] src.export:export_to_csv:44 - Exported ss_all.csv to /workspaces/service-data/outputs/utils/ss_all.csv (12775 rows, 30 columns)
+2025-09-05 20:41:53 [INFO] __main__:main:181 - Generating processed files...
+2025-09-05 20:41:53 [DEBUG] src.process:process_files:1003 - ...
+2025-09-05 20:41:53 [DEBUG] src.export:export_to_csv:44 - Exported sid_list.csv to /workspaces/service-data/outputs/utils/sid_list.csv (2505 rows, 9 columns)
+2025-09-05 20:41:53 [DEBUG] src.process:output_si_ss:11 - ...
+2025-09-05 20:41:54 [DEBUG] src.export:export_to_csv:44 - Exported si.csv to /workspaces/service-data/outputs/si.csv (8943 rows, 53 columns)
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported ss.csv to /workspaces/service-data/outputs/ss.csv (12718 rows, 30 columns)
+2025-09-05 20:41:55 [DEBUG] src.process:summary_si_ss:55 - ...
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported si_vol.csv to /workspaces/service-data/outputs/indicators/si_vol.csv (7388 rows, 5 columns)
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported si_oip.csv to /workspaces/service-data/outputs/indicators/si_oip.csv (53658 rows, 7 columns)
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported ss_tml_perf_vol.csv to /workspaces/service-data/outputs/indicators/ss_tml_perf_vol.csv (5852 rows, 7 columns)
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported si_reviews.csv to /workspaces/service-data/outputs/indicators/si_reviews.csv (459 rows, 5 columns)
+2025-09-05 20:41:55 [DEBUG] src.process:maf:215 - ...
+2025-09-05 20:41:55 [DEBUG] src.export:export_to_csv:44 - Exported maf_all.csv to /workspaces/service-data/outputs/indicators/maf_all.csv (459 rows, 19 columns)
+2025-09-05 20:41:55 [DEBUG] src.process:drr:433 - ...
+2025-09-05 20:41:56 [DEBUG] src.export:export_to_csv:44 - Exported drr_all.csv to /workspaces/service-data/outputs/indicators/drr_all.csv (6 rows, 10 columns)
+2025-09-05 20:41:56 [DEBUG] src.process:datapack:588 - ...
+2025-09-05 20:41:58 [DEBUG] src.export:export_to_csv:44 - Exported dp_metrics.csv to /workspaces/service-data/outputs/indicators/dp_metrics.csv (42 rows, 8 columns)
+2025-09-05 20:41:58 [DEBUG] src.export:export_to_csv:44 - Exported dp_services_rank.csv to /workspaces/service-data/outputs/indicators/dp_services_rank.csv (121 rows, 16 columns)
+2025-09-05 20:41:58 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/rbpo.csv (8405 rows, 16 columns)
+2025-09-05 20:41:58 [DEBUG] src.export:export_to_csv:44 - Exported drf.csv to /workspaces/service-data/outputs/utils/drf.csv (17235 rows, 8 columns)
+2025-09-05 20:41:58 [DEBUG] src.process:service_fte_spending:955 - ...
+2025-09-05 20:41:58 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/rbpo.csv (8405 rows, 16 columns)
+2025-09-05 20:41:59 [DEBUG] src.export:export_to_csv:44 - Exported drf.csv to /workspaces/service-data/outputs/utils/drf.csv (17235 rows, 8 columns)
+2025-09-05 20:41:59 [DEBUG] src.export:export_to_csv:44 - Exported service_fte_spending.csv to /workspaces/service-data/outputs/indicators/service_fte_spending.csv (47836 rows, 10 columns)
+2025-09-05 20:41:59 [INFO] __main__:main:185 - Running QA checks...
+2025-09-05 20:41:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:41:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/sid_registry.csv (2516 rows, 6 columns)
+2025-09-05 20:41:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:41:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:41:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:42:04 [DEBUG] src.export:export_to_csv:44 - Exported program_list.csv to /workspaces/service-data/outputs/utils/program_list.csv (1946 rows, 5 columns)
+2025-09-05 20:42:05 [DEBUG] src.export:export_to_csv:44 - Exported si_qa.csv to /workspaces/service-data/outputs/qa/si_qa.csv (8978 rows, 72 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported ss_qa.csv to /workspaces/service-data/outputs/qa/ss_qa.csv (12775 rows, 35 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported si_qa_report.csv to /workspaces/service-data/outputs/qa/si_qa_report.csv (1625 rows, 15 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported ss_qa_report.csv to /workspaces/service-data/outputs/qa/ss_qa_report.csv (486 rows, 20 columns)
+2025-09-05 20:42:06 [INFO] __main__:main:191 - Copying files from input to utils...
+2025-09-05 20:42:06 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:42:06 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported ifoi.csv to /workspaces/service-data/outputs/utils/ifoi.csv (328 rows, 39 columns)
+2025-09-05 20:42:06 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported org_var.csv to /workspaces/service-data/outputs/utils/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported dd_field_names.csv to /workspaces/service-data/outputs/utils/dd_field_names.csv (70 rows, 14 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported dd_program.csv to /workspaces/service-data/outputs/utils/dd_program.csv (1166 rows, 5 columns)
+2025-09-05 20:42:06 [DEBUG] src.export:export_to_csv:44 - Exported dd_choices.csv to /workspaces/service-data/outputs/utils/dd_choices.csv (70 rows, 5 columns)
+2025-09-05 20:42:06 [INFO] __main__:main:198 - Processing completed in 20.28 seconds
+2025-09-05 20:57:31 [INFO] __main__:main:163 - Starting data processing
+2025-09-05 20:57:31 [INFO] __main__:main:167 - Downloading raw data...
+2025-09-05 20:57:32 [DEBUG] src.load:download_csv_files:29 - Downloaded: si_2018.csv
+2025-09-05 20:57:32 [DEBUG] src.load:download_csv_files:29 - Downloaded: si_2024.csv
+2025-09-05 20:58:37 [DEBUG] src.load:download_csv_files:29 - Downloaded: ss_2018.csv
+2025-09-05 20:58:37 [DEBUG] src.load:download_csv_files:29 - Downloaded: ss_2024.csv
+2025-09-05 20:58:37 [DEBUG] src.load:download_csv_files:29 - Downloaded: org_var.csv
+2025-09-05 20:58:37 [DEBUG] src.load:download_csv_files:29 - Downloaded: sid_registry.csv
+2025-09-05 20:58:37 [DEBUG] src.load:download_csv_files:29 - Downloaded: serv_prog.csv
+2025-09-05 20:58:38 [DEBUG] src.load:download_csv_files:29 - Downloaded: ifoi_en.csv
+2025-09-05 20:58:38 [DEBUG] src.load:download_csv_files:29 - Downloaded: ifoi_fr.csv
+2025-09-05 20:58:39 [DEBUG] src.load:download_csv_files:29 - Downloaded: rbpo.csv
+2025-09-05 20:59:45 [DEBUG] src.load:download_json_files:61 - Downloaded: service_data_dict.json
+2025-09-05 20:59:45 [INFO] __main__:main:173 - Merging historical data...
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/serv_prog.csv (10063 rows, 3 columns)
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:59:45 [DEBUG] src.export:export_to_csv:44 - Exported dept.csv to /workspaces/service-data/outputs/utils/dept.csv (328 rows, 3 columns)
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/si_2018.csv (7254 rows, 46 columns)
+2025-09-05 20:59:45 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/si_2024.csv (1724 rows, 46 columns)
+2025-09-05 20:59:46 [DEBUG] src.export:export_to_csv:44 - Exported si_all.csv to /workspaces/service-data/outputs/utils/si_all.csv (8978 rows, 54 columns)
+2025-09-05 20:59:46 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:46 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:59:46 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:59:46 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ss_2018.csv (10432 rows, 26 columns)
+2025-09-05 20:59:46 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ss_2024.csv (2343 rows, 24 columns)
+2025-09-05 20:59:47 [DEBUG] src.export:export_to_csv:44 - Exported ss_all.csv to /workspaces/service-data/outputs/utils/ss_all.csv (12775 rows, 30 columns)
+2025-09-05 20:59:47 [INFO] __main__:main:181 - Generating processed files...
+2025-09-05 20:59:47 [DEBUG] src.process:process_files:1003 - ...
+2025-09-05 20:59:47 [DEBUG] src.export:export_to_csv:44 - Exported sid_list.csv to /workspaces/service-data/outputs/utils/sid_list.csv (2505 rows, 9 columns)
+2025-09-05 20:59:47 [DEBUG] src.process:output_si_ss:11 - ...
+2025-09-05 20:59:47 [DEBUG] src.export:export_to_csv:44 - Exported si.csv to /workspaces/service-data/outputs/si.csv (8943 rows, 53 columns)
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported ss.csv to /workspaces/service-data/outputs/ss.csv (12718 rows, 30 columns)
+2025-09-05 20:59:48 [DEBUG] src.process:summary_si_ss:55 - ...
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported si_vol.csv to /workspaces/service-data/outputs/indicators/si_vol.csv (7388 rows, 5 columns)
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported si_oip.csv to /workspaces/service-data/outputs/indicators/si_oip.csv (53658 rows, 7 columns)
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported ss_tml_perf_vol.csv to /workspaces/service-data/outputs/indicators/ss_tml_perf_vol.csv (5852 rows, 7 columns)
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported si_reviews.csv to /workspaces/service-data/outputs/indicators/si_reviews.csv (459 rows, 5 columns)
+2025-09-05 20:59:48 [DEBUG] src.process:maf:215 - ...
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported maf_all.csv to /workspaces/service-data/outputs/indicators/maf_all.csv (459 rows, 19 columns)
+2025-09-05 20:59:48 [DEBUG] src.process:drr:433 - ...
+2025-09-05 20:59:48 [DEBUG] src.export:export_to_csv:44 - Exported drr_all.csv to /workspaces/service-data/outputs/indicators/drr_all.csv (6 rows, 10 columns)
+2025-09-05 20:59:48 [DEBUG] src.process:datapack:588 - ...
+2025-09-05 20:59:51 [DEBUG] src.export:export_to_csv:44 - Exported dp_metrics.csv to /workspaces/service-data/outputs/indicators/dp_metrics.csv (42 rows, 8 columns)
+2025-09-05 20:59:51 [DEBUG] src.export:export_to_csv:44 - Exported dp_services_rank.csv to /workspaces/service-data/outputs/indicators/dp_services_rank.csv (121 rows, 16 columns)
+2025-09-05 20:59:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/rbpo.csv (8405 rows, 16 columns)
+2025-09-05 20:59:51 [DEBUG] src.export:export_to_csv:44 - Exported drf.csv to /workspaces/service-data/outputs/utils/drf.csv (17235 rows, 8 columns)
+2025-09-05 20:59:51 [DEBUG] src.process:service_fte_spending:955 - ...
+2025-09-05 20:59:51 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/rbpo.csv (8405 rows, 16 columns)
+2025-09-05 20:59:52 [DEBUG] src.export:export_to_csv:44 - Exported drf.csv to /workspaces/service-data/outputs/utils/drf.csv (17235 rows, 8 columns)
+2025-09-05 20:59:52 [DEBUG] src.export:export_to_csv:44 - Exported service_fte_spending.csv to /workspaces/service-data/outputs/indicators/service_fte_spending.csv (47836 rows, 10 columns)
+2025-09-05 20:59:52 [INFO] __main__:main:185 - Running QA checks...
+2025-09-05 20:59:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/sid_registry.csv (2516 rows, 6 columns)
+2025-09-05 20:59:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:59:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:59:52 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:57 [DEBUG] src.export:export_to_csv:44 - Exported program_list.csv to /workspaces/service-data/outputs/utils/program_list.csv (1946 rows, 5 columns)
+2025-09-05 20:59:58 [DEBUG] src.export:export_to_csv:44 - Exported si_qa.csv to /workspaces/service-data/outputs/qa/si_qa.csv (8978 rows, 72 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported ss_qa.csv to /workspaces/service-data/outputs/qa/ss_qa.csv (12775 rows, 35 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported si_qa_report.csv to /workspaces/service-data/outputs/qa/si_qa_report.csv (1625 rows, 15 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported ss_qa_report.csv to /workspaces/service-data/outputs/qa/ss_qa_report.csv (486 rows, 20 columns)
+2025-09-05 20:59:59 [INFO] __main__:main:191 - Copying files from input to utils...
+2025-09-05 20:59:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_en.csv (328 rows, 20 columns)
+2025-09-05 20:59:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/ifoi_fr.csv (328 rows, 20 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported ifoi.csv to /workspaces/service-data/outputs/utils/ifoi.csv (328 rows, 39 columns)
+2025-09-05 20:59:59 [DEBUG] src.load:load_csv:95 - Loaded /workspaces/service-data/inputs/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported org_var.csv to /workspaces/service-data/outputs/utils/org_var.csv (1658 rows, 2 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported dd_field_names.csv to /workspaces/service-data/outputs/utils/dd_field_names.csv (70 rows, 14 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported dd_program.csv to /workspaces/service-data/outputs/utils/dd_program.csv (1166 rows, 5 columns)
+2025-09-05 20:59:59 [DEBUG] src.export:export_to_csv:44 - Exported dd_choices.csv to /workspaces/service-data/outputs/utils/dd_choices.csv (70 rows, 5 columns)
+2025-09-05 20:59:59 [INFO] __main__:main:198 - Processing completed in 148.32 seconds
