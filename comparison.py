@@ -4,6 +4,10 @@ from pathlib import Path
 from src.export import export_to_csv
 
 def main():
+    # The following definitions and calls are meant to be very specific.
+    # General comparison procedure to follow in other functions
+
+    # Read in CSV files to be compared
     si = pd.read_csv(
         "./outputs/si.csv", 
         keep_default_na=False, 
@@ -40,6 +44,7 @@ def main():
         skipfooter=2
     )
 
+    # Define dictionaries that contain the information needed to run the comparisons
     compare_si_vs_snap_si = {
         'df_base': si,
         'df_comp': snap_si,
@@ -62,14 +67,15 @@ def main():
 
 def prep_comparison_file(compare_dict):
     """Logistics around generating a csv file with comparison results"""
+    # Run comparison on objects in compare_dict
     df = compare(compare_dict)
     
-    # Prepare file name
+    # Prepare file name using specifics from compare_dict
     base_name = compare_dict['base_name']
     comp_name = compare_dict['comp_name']
 
     filename = f"compare_{base_name}_vs_{comp_name}"
-    output_filepath = Path(__file__).parent / "outputs" / "indicators"
+    output_filepath = Path(__file__).parent / "outputs" / "compare"
 
     data_dict={
         filename: df
@@ -96,12 +102,26 @@ def compare(compare_dict):
         pd.DataFrame: Long-format DataFrame with differing fields and unmatched records.
     """
     
-    df_base = compare_dict['df_base']
-    df_comp = compare_dict['df_comp']
+    df_base = compare_dict['df_base'].copy()
+    df_comp = compare_dict['df_comp'].copy()
     key_name = compare_dict['key_name']
     base_name = compare_dict['base_name']
     comp_name = compare_dict['comp_name']
     
+    # Validation
+    # For loop that works on tuples of *_name and df_*
+    for name, df in ((base_name, df_base), (comp_name, df_comp)):
+        # ensure key_name is a column in the dataframe
+        if key_name not in df.columns:
+            raise KeyError(f"'{key_name}' missing in {name}")
+        
+        # ensure there are no duplicate keys
+        dups = df[key_name][df[key_name].duplicated()]
+        if len(dups):
+            raise ValueError(f"Duplicate keys in {name}: {dups.unique()[:5]}... (total {len(dups)})")
+        
+    # Normalize: trim strings;
+
     df_base = df_base.reset_index(drop=True)
     df_comp = df_comp.reset_index(drop=True)
 
