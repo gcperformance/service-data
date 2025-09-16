@@ -185,7 +185,7 @@ def merge_ss(config):
         # Load department list from utils
         dept = dept_list(config)
         
-        ss_2018 = load_csv('ss_2018.csv', config, snapshot=True )
+        ss_2018 = load_csv('ss_2018.csv', config, snapshot=True)
         ss_2024 = load_csv('ss_2024.csv', config, snapshot=True)
 
         # Test breaker - uncomment to break merge_ss() and check the row count test

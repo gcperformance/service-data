@@ -16,6 +16,7 @@ def get_config(snapshot_date=None):
     """Returns a config dictionary containing input/output directories, urls, snapshot date"""
     base_dir = Path(__file__).parent
     
+    # Default arrangement of directories
     input_dir = base_dir / "inputs"
     input_snapshot_dir = input_dir
     output_dir = base_dir / "outputs"
@@ -64,6 +65,7 @@ def get_config(snapshot_date=None):
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
     }
 
+    # Updated directories for snapshot runs
     if snapshot_date: # if a snapshot date has been defined, process as a snapshot
         input_snapshot_dir = input_dir / "snapshots" / snapshot_date
         output_dir = base_dir / "outputs" / "snapshots" / snapshot_date
@@ -185,6 +187,8 @@ def main():
         logger.info("Running QA checks...")
         qa_check(si, ss, config)
         
+        # Run snapshot comparison
+
         # Copying files from raw to utils when the run is not for a snapshot
         snapshot_bool = bool(config['snapshot_date'])
         if not snapshot_bool:

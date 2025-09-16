@@ -68,7 +68,6 @@ def download_json_files(config):
             logger.error('Error', exc_info=True)
             raise
             
-
 def load_csv(file_name, config, snapshot=False):
     """
     Load a CSV file from the appropriate input directory as defined in config file
@@ -76,7 +75,10 @@ def load_csv(file_name, config, snapshot=False):
     Args:
         file_name (str): The name of the CSV file (e.g., "org_var.csv").
         config (dict): dictionary containing snapshot_date, directories, urls
-        snapshot (bool): indicate whether to load from the snapshot. default false
+        snapshot (bool): indicate whether to load from the snapshot directory from the config dictionary. default false: ignore snapshot arg.
+        
+    Note that the snapshot directory is defined as the same as the typical directory unless a snapshot arg is passed.
+
 
     Returns:
         pd.DataFrame: The loaded DataFrame.
