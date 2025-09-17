@@ -8,7 +8,7 @@ def download_csv_files(config):
     Download CSV files from the given URLs into the appropriate directory. See config dictionary in main.py
 
     Args:
-        config (dict): dictionary containig snapshot_date, directories, urls
+        config (dict): dictionary containing valid snapshot dates, directories, urls
 
     Returns:
         None
@@ -41,7 +41,7 @@ def download_json_files(config):
     Download JSON files from the given URLs into the appropriate directory. See config dictionary in main.py
 
     Args:
-        config (dict): dictionary containig snapshot_date, directories, urls
+        config (dict): dictionary containing valid snapshot dates, directories, urls
 
     Returns:
         None
@@ -68,26 +68,19 @@ def download_json_files(config):
             logger.error('Error', exc_info=True)
             raise
             
-def load_csv(file_name, config, snapshot=False):
+def load_csv(file_name, config):
     """
     Load a CSV file from the appropriate input directory as defined in config file
 
     Args:
         file_name (str): The name of the CSV file (e.g., "org_var.csv").
-        config (dict): dictionary containing snapshot_date, directories, urls
-        snapshot (bool): indicate whether to load from the snapshot directory from the config dictionary. default false: ignore snapshot arg.
-        
-    Note that the snapshot directory is defined as the same as the typical directory unless a snapshot arg is passed.
-
+        config (dict): dictionary containing valid snapshot dates, directories, urls
 
     Returns:
         pd.DataFrame: The loaded DataFrame.
     """
     INPUT_DIR = config['input_dir']
     file_path = INPUT_DIR / file_name
-
-    if snapshot:
-        file_path = config['input_snapshot_dir'] / file_name
 
     try:
         if not file_path.exists():

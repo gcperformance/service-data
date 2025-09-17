@@ -14,14 +14,14 @@ def merge_si(config):
     """Combining service inventory data from previous (2018) and current (2024) format"""
     try:
         # Load org variant list and program-service correspondence table
-        org_var = load_csv('org_var.csv', config, snapshot=False)
-        serv_prog = load_csv('serv_prog.csv', config, snapshot=False)
+        org_var = load_csv('org_var.csv', config)
+        serv_prog = load_csv('serv_prog.csv', config)
         
         # Load department list from utils
         dept = dept_list(config, export=True)
         
-        si_2018 = load_csv('si_2018.csv', config, snapshot=True)
-        si_2024 = load_csv('si_2024.csv', config, snapshot=True)
+        si_2018 = load_csv('si_2018.csv', config)
+        si_2024 = load_csv('si_2024.csv', config)
         
         # Test breaker - uncomment to break merge_si() and check the row count test
         # si_2024 = si_2024.head()
@@ -180,13 +180,13 @@ def merge_ss(config):
 
     try:
         # Load org variant list and program-service correspondence table
-        org_var = load_csv('org_var.csv', config, snapshot=False)
+        org_var = load_csv('org_var.csv', config)
 
         # Load department list from utils
         dept = dept_list(config)
         
-        ss_2018 = load_csv('ss_2018.csv', config, snapshot=True)
-        ss_2024 = load_csv('ss_2024.csv', config, snapshot=True)
+        ss_2018 = load_csv('ss_2018.csv', config)
+        ss_2024 = load_csv('ss_2024.csv', config)
 
         # Test breaker - uncomment to break merge_ss() and check the row count test
         # ss_2024 = ss_2024.head()

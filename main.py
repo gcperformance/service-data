@@ -12,17 +12,21 @@ from src.qa import qa_check
 from src.utils import build_ifoi, copy_org_var, build_data_dictionary
 
 
-def get_config(snapshot_date=None):
-    """Returns a config dictionary containing input/output directories, urls, snapshot date"""
+def get_config():
+    """Returns a config dictionary containing input/output directories, urls, snapshot dates"""
     base_dir = Path(__file__).parent
     
     # Default arrangement of directories
     input_dir = base_dir / "inputs"
-    input_snapshot_dir = input_dir
     output_dir = base_dir / "outputs"
     indicators_dir = output_dir / "indicators"
     utils_dir = output_dir / "utils"
     qa_dir = output_dir / "qa"
+
+    # List of valid snapshots to run
+    snapshots_list = [
+        '2025-03-01'
+    ]
 
     csv_urls = {
         'si_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a/download/service_inventory_2018-2023.csv',
@@ -64,19 +68,12 @@ def get_config(snapshot_date=None):
         '2024-2025':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-fra.csv',
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
     }
+  
 
-    # Updated directories for snapshot runs
-    if snapshot_date: # if a snapshot date has been defined, process as a snapshot
-        input_snapshot_dir = input_dir / "snapshots" / snapshot_date
-        output_dir = base_dir / "outputs" / "snapshots" / snapshot_date
-        indicators_dir = base_dir / "outputs" / "snapshots" / snapshot_date / "indicators"
-        utils_dir = base_dir / "outputs" / "snapshots" / snapshot_date / "utils"
-        qa_dir = base_dir / "outputs" / "snapshots" / snapshot_date / "qa"
 
     return {
-        "snapshot_date": snapshot_date,
+        "snapshot_list":snapshots_list,
         "input_dir": input_dir,
-        "input_snapshot_dir": input_snapshot_dir,
         "output_dir": output_dir,
         "indicators_dir": indicators_dir,
         "utils_dir": utils_dir,
@@ -130,7 +127,6 @@ def main():
     """Process service data and generate outputs."""
     # Argument parsing
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
-    parser.add_argument("--snapshot", help="Optional snapshot date (YYYY-MM-DD).")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
     args = parser.parse_args()
 
@@ -138,26 +134,8 @@ def main():
     setup_logging()
     logger = logging.getLogger(__name__)
 
-    # Validate and parse snapshot date
-    snapshot_date = None
-
-    if args.snapshot:
-        try:
-            datetime.strptime(args.snapshot, "%Y-%m-%d")
-            snapshot_date = args.snapshot  # Assign only if valid
-        except ValueError:
-            logger.error("Invalid snapshot date format. Use YYYY-MM-DD.")
-            sys.exit(1)
-
-    # Define snapshot directory (if snapshot date is provided)
-    if snapshot_date:
-        snapshot_dir = Path(__file__).parent / "inputs" / "snapshots" / snapshot_date
-
-        if not snapshot_dir.exists():
-            logger.error(f"Snapshot directory {snapshot_dir} does not exist. Exiting.")
-            sys.exit(1)
-
-    config = get_config(snapshot_date)
+    # Define config dictionary
+    config = get_config()
 
     try:
         # Track total time
@@ -187,16 +165,12 @@ def main():
         logger.info("Running QA checks...")
         qa_check(si, ss, config)
         
-        # Run snapshot comparison
-
-        # Copying files from raw to utils when the run is not for a snapshot
-        snapshot_bool = bool(config['snapshot_date'])
-        if not snapshot_bool:
-            logger.info("Copying files from input to utils...")
-            build_ifoi(config)
-            copy_org_var(config)
-            build_data_dictionary(config)
-            
+        # Copying files from raw to utils
+        logger.info("Copying files from input to utils...")
+        build_ifoi(config)
+        copy_org_var(config)
+        build_data_dictionary(config)
+        
         # Log completion time
         elapsed_time = time.perf_counter() - start_time
         logger.info(f"Processing completed in {elapsed_time:.2f} seconds")

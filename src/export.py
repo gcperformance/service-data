@@ -10,7 +10,7 @@ def export_to_csv(data_dict, output_dir, config):
     Args:
         data_dict (dict): A dictionary of {file_name: DataFrame}.
         output_dir (Path): Path to the output directory.
-        config (dict): dictionary containig snapshot_date, directories, urls
+        config (dict): dictionary containing valid snapshot dates, directories, urls
     Returns:
         None
     """
@@ -26,10 +26,6 @@ def export_to_csv(data_dict, output_dir, config):
         # Appendix to add to bottom of file
         appendix = f"\nTimestamp:{current_datetime_str}\n"
         
-        snapshot_bool = bool(config['snapshot_date'])
-        if snapshot_bool:
-            appendix =f"\nSNAPSHOT {config['snapshot_date']} Timestamp:{current_datetime_str}\n"
-
         for name, df in data_dict.items():
             # Generate the full file path
             file_path = output_dir / f"{name}.csv"

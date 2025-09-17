@@ -13,8 +13,8 @@ def qa_check(si, ss, config):
     try:
         # === SETUP ===
         # Load extra files
-        org_var = load_csv('org_var.csv', config, snapshot=False)
-        sid_registry = load_csv('sid_registry.csv', config, snapshot=False)
+        org_var = load_csv('org_var.csv', config)
+        sid_registry = load_csv('sid_registry.csv', config)
         
         # Build then import department, program list from utilities
         dept = dept_list(config)

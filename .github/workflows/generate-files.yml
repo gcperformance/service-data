@@ -49,21 +49,6 @@ jobs:
           
           echo "live_data_dir=live_data_release" >> $GITHUB_ENV
 
-      - name: Run main.py for 2025-03-01 snapshot date
-        run: python main.py --snapshot 2025-03-01
-
-      - name: Prepare 2025-03-01 files for Release
-        id: prepare_files_2025-03-01
-        run: |
-          mkdir -p snapshots_release/snapshot_2025-03-01
-          echo "Copying snapshot data files for 2025-03-01..."
-          find outputs/snapshots/2025-03-01 inputs/snapshots/2025-03-01 -type f -name "*.csv" -exec cp {} snapshots_release/snapshot_2025-03-01/ \; -exec echo "Copied: {}" \;
-          for file in snapshots_release/snapshot_2025-03-01/*.csv; do
-            mv "$file" "snapshots_release/2025-03-01_$(basename "$file")"
-          done
-          
-          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
-
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
@@ -75,10 +60,8 @@ jobs:
               - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
             Contains:
               - Live data CSVs 
-              - Snapshots pre-pended with date of snapshot
           files: |
             live_data_release/**
-            snapshots_release/**
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

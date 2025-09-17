@@ -1,5 +1,33 @@
 import pandas as pd
+from pathlib import Path
+from src.export import export_to_csv
 
+def build_compare_file(df_base,df_comp,config):
+    
+    
+    compare_dict = {
+        'df_base': df_base,
+        'df_comp': df_comp,
+        'base_name':,
+        'comp_name':,
+        'key_name':
+    }
+
+    compare_si_vs_si_20250301 = {
+        'df_base': si,
+        'df_comp': si_20250301,
+        'base_name': 'si',
+        'comp_name': 'si_20250301',
+        'key_name': 'fy_org_id_service_id'
+    }
+
+    compare_ss_vs_ss_20250301 = {
+        'df_base': ss,
+        'df_comp': ss_20250301,
+        'base_name': 'ss',
+        'comp_name': 'ss_20250301',
+        'key_name': 'fy_org_id_service_id_std_id'
+    }
 
 
 
@@ -82,7 +110,7 @@ def compare(compare_dict):
     )
 
     # Reshape the comparison output into a tidy format
-    diffs_long = (
+    diffs = (
         compared
         .melt(ignore_index=False)   # wide → long; stack diff values into rows
         .reset_index()              # bring the DataFrame index (keys) back as a column
@@ -99,23 +127,23 @@ def compare(compare_dict):
 
     # Keep only rows where both base and comp values exist
     # (removes rows where one side was NaN and the other wasn’t)
-    diffs_long = diffs_long.loc[
-        diffs_long["base_value"].notna() & diffs_long["comp_value"].notna()
+    diffs = diffs.loc[
+        diffs["base_value"].notna() & diffs["comp_value"].notna()
     ]
 
     # Try numeric conversion
-    num_base = pd.to_numeric(diffs_long["base_value"], errors="coerce")
-    num_comp = pd.to_numeric(diffs_long["comp_value"], errors="coerce")
+    num_base = pd.to_numeric(diffs["base_value"], errors="coerce")
+    num_comp = pd.to_numeric(diffs["comp_value"], errors="coerce")
 
     # Case 1: both values are numeric → compare numerically
     num_diff = (num_base != num_comp) & num_base.notna() & num_comp.notna()
 
     # Case 2: at least one value is non-numeric → fall back to string comparison
     non_numeric_mask = num_base.isna() | num_comp.isna()
-    str_diff = (diffs_long["base_value"] != diffs_long["comp_value"]) & non_numeric_mask
+    str_diff = (diffs["base_value"] != diffs["comp_value"]) & non_numeric_mask
 
     # Combine both cases
-    diffs_long = diffs_long.loc[num_diff | str_diff]
+    diffs = diffs.loc[num_diff | str_diff]
 
 
     # Ignore results in fields for which the differences aren't important - 
@@ -126,10 +154,10 @@ def compare(compare_dict):
         'org_name_variant'
     ]
 
-    diffs_long = diffs_long.loc[~diffs_long['field'].isin(ignored_fields)]
+    diffs = diffs.loc[~diffs['field'].isin(ignored_fields)]
 
-    diffs_long["section"] = "diffs"
-    diffs_long["side"] = None
+    diffs["section"] = "diffs"
+    diffs["side"] = None
 
     # Records only in one side
     records_only_base = pd.DataFrame({
@@ -170,7 +198,7 @@ def compare(compare_dict):
     })
 
     out = pd.concat(
-        [diffs_long, records_only_base, records_only_comp, fields_only_base, fields_only_comp],
+        [diffs, records_only_base, records_only_comp, fields_only_base, fields_only_comp],
         ignore_index=True
     )
 

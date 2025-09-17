@@ -12,8 +12,8 @@ def dept_list(config, export=False):
     Get a list of departments with their English and French names.
     """
     try:
-        ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
-        ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
+        ifoi_en = load_csv('ifoi_en.csv', config)
+        ifoi_fr = load_csv('ifoi_fr.csv', config)
         
         # Process English names
         dept_en = ifoi_en.iloc[:,:3]
@@ -37,7 +37,7 @@ def dept_list(config, export=False):
         dept = standardize_column_names(dept)
         dept['org_id'] = dept['org_id'].astype(str)
         
-        if (not config['snapshot_date']) & export:
+        if export:
             UTILS_DIR = config['utils_dir']
             export_to_csv(
                 data_dict={'dept': dept},
@@ -104,12 +104,9 @@ def sid_list(si, config):
 def build_drf(config):
     """
     Load and clean DRF data (i.e. RBPO)
-    Take from snapshot input if the snapshot argument is supplied
     """
     try:
-        snapshot_bool = bool(config['snapshot_date'])
-        
-        drf = load_csv('rbpo.csv', config, snapshot_bool)
+        drf = load_csv('rbpo.csv', config)
         drf = standardize_column_names(drf)
         drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
         
@@ -200,8 +197,8 @@ def build_drf(config):
 
 def build_ifoi(config):
     try:
-        ifoi_en = load_csv('ifoi_en.csv', config, snapshot=False)
-        ifoi_fr = load_csv('ifoi_fr.csv', config, snapshot=False)
+        ifoi_en = load_csv('ifoi_en.csv', config)
+        ifoi_fr = load_csv('ifoi_fr.csv', config)
 
         # Set first column (OrgID) as index, drop the column from the actual table, add the en/fr suffix
         ifoi_en = ifoi_en.set_index(ifoi_en.columns[0], drop=True).add_suffix('_en')
@@ -232,7 +229,7 @@ def build_ifoi(config):
 
 def copy_org_var(config):
     try:
-        org_var = load_csv('org_var.csv', config, snapshot=False)
+        org_var = load_csv('org_var.csv', config)
         org_var = standardize_column_names(org_var)
 
         UTILS_DIR = config['utils_dir']
@@ -249,7 +246,7 @@ def program_list(config):
     """Builds a list of programs for all fiscal years based on the tables
     by individual fiscal years in open gov. For use with QA validation"""
     try:
-        org_var = load_csv('org_var.csv', config, snapshot=False)
+        org_var = load_csv('org_var.csv', config)
         
         frames_en = []
         frames_fr = []
