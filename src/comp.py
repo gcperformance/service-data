@@ -2,33 +2,16 @@ import pandas as pd
 from pathlib import Path
 from src.export import export_to_csv
 
-def build_compare_file(df_base,df_comp,config):
-    
-    
-    compare_dict = {
-        'df_base': df_base,
-        'df_comp': df_comp,
-        'base_name':,
-        'comp_name':,
-        'key_name':
-    }
+def build_compare_file(compare_dict,config,snapshot):
 
-    compare_si_vs_si_20250301 = {
-        'df_base': si,
-        'df_comp': si_20250301,
-        'base_name': 'si',
-        'comp_name': 'si_20250301',
-        'key_name': 'fy_org_id_service_id'
-    }
+    df_name = f"{compare_dict['base_name']}_comparison"
+    out = compare(compare_dict)
 
-    compare_ss_vs_ss_20250301 = {
-        'df_base': ss,
-        'df_comp': ss_20250301,
-        'base_name': 'ss',
-        'comp_name': 'ss_20250301',
-        'key_name': 'fy_org_id_service_id_std_id'
-    }
-
+    SNAPSHOT_ROOT_DIR= config["output_dir"] / "snapshot" / snapshot
+    export_to_csv(
+        data_dict={df_name: out},
+        output_dir=SNAPSHOT_ROOT_DIR
+    )
 
 
 def compare(compare_dict):

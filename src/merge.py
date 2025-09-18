@@ -10,7 +10,7 @@ from src.utils import dept_list
 
 # UTILS_DIR = Path(__file__).parent.parent / "outputs" / "utils"
 
-def merge_si(config):
+def merge_si(config, snapshot=False):
     """Combining service inventory data from previous (2018) and current (2024) format"""
     try:
         # Load org variant list and program-service correspondence table
@@ -20,8 +20,8 @@ def merge_si(config):
         # Load department list from utils
         dept = dept_list(config, export=True)
         
-        si_2018 = load_csv('si_2018.csv', config)
-        si_2024 = load_csv('si_2024.csv', config)
+        si_2018 = load_csv('si_2018.csv', config, snapshot)
+        si_2024 = load_csv('si_2024.csv', config, snapshot)
         
         # Test breaker - uncomment to break merge_si() and check the row count test
         # si_2024 = si_2024.head()
@@ -162,11 +162,15 @@ def merge_si(config):
         # Unique row-level identifier (primary key)
         si['fy_org_id_service_id'] = si[['fiscal_yr', 'org_id', 'service_id']].agg('_'.join, axis=1)
 
-        UTILS_DIR = config['utils_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            UTILS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['utils_dir']
+        else:
+            UTILS_DIR = config['output_dir'] / config['utils_dir']
+        
         export_to_csv(
             data_dict={'si_all': si},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
         return si
@@ -175,7 +179,7 @@ def merge_si(config):
         logger.error("Error: %s", e, exc_info=True)
         raise
 
-def merge_ss(config):
+def merge_ss(config, snapshot=False):
     """Combining service standard data from previous (2018) and current (2024) format"""
 
     try:
@@ -185,8 +189,8 @@ def merge_ss(config):
         # Load department list from utils
         dept = dept_list(config)
         
-        ss_2018 = load_csv('ss_2018.csv', config)
-        ss_2024 = load_csv('ss_2024.csv', config)
+        ss_2018 = load_csv('ss_2018.csv', config, snapshot)
+        ss_2024 = load_csv('ss_2024.csv', config, snapshot)
 
         # Test breaker - uncomment to break merge_ss() and check the row count test
         # ss_2024 = ss_2024.head()
@@ -280,11 +284,15 @@ def merge_ss(config):
         # Unique row-level identifier (primary key)
         ss['fy_org_id_service_id_std_id'] = ss[['fiscal_yr', 'org_id', 'service_id', 'service_standard_id']].agg('_'.join, axis=1)
 
-        UTILS_DIR = config['utils_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            UTILS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['utils_dir']
+        else:
+            UTILS_DIR = config['output_dir'] / config['utils_dir']
+        
         export_to_csv(
             data_dict={'ss_all': ss},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
         return ss

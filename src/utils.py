@@ -38,11 +38,10 @@ def dept_list(config, export=False):
         dept['org_id'] = dept['org_id'].astype(str)
         
         if export:
-            UTILS_DIR = config['utils_dir']
+            UTILS_DIR = config['output_dir'] / config['utils_dir']
             export_to_csv(
                 data_dict={'dept': dept},
-                output_dir=UTILS_DIR,
-                config=config
+                output_dir=UTILS_DIR
             )
         
         return dept
@@ -50,8 +49,7 @@ def dept_list(config, export=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-
-def sid_list(si, config):
+def sid_list(si, config, snapshot=False):
     """
     Unique list of service IDs as reported in the latest fy
     """
@@ -89,11 +87,10 @@ def sid_list(si, config):
         # Remove ambiguous or irrelevant fields
         sid_list = sid_list.drop(columns=['fiscal_yr', 'service_scope'])
         
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'sid_list': sid_list},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
         # return sid_list
@@ -101,12 +98,12 @@ def sid_list(si, config):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-def build_drf(config):
+def build_drf(config, snapshot=False):
     """
-    Load and clean DRF data (i.e. RBPO)
+    Load and clean DRF data (i.e. RBPO). Refer to snapshot if necessary!
     """
     try:
-        drf = load_csv('rbpo.csv', config)
+        drf = load_csv('rbpo.csv', config, snapshot)
         drf = standardize_column_names(drf)
         drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
         
@@ -183,11 +180,10 @@ def build_drf(config):
         drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
         drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
 
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'drf': drf},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
         return drf
@@ -217,11 +213,10 @@ def build_ifoi(config):
         # Apply new column order, reset the index to make org_id reappear
         ifoi = standardize_column_names(ifoi[merged_cols].reset_index())
 
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'ifoi':ifoi},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
     
     except Exception as e:
@@ -232,11 +227,10 @@ def copy_org_var(config):
         org_var = load_csv('org_var.csv', config)
         org_var = standardize_column_names(org_var)
 
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'org_var':org_var},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
     except Exception as e:
@@ -346,11 +340,10 @@ def program_list(config):
 
         program_df.rename(columns={'fiscal_yr':'latest_valid_fy'}, inplace=True)
 
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'program_list':program_df},
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
         return program_df
@@ -420,11 +413,10 @@ def build_data_dictionary(config):
         }
 
         # Export to CSV
-        UTILS_DIR = config['utils_dir']
+        UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict=data_dictionary_file_dict, 
-            output_dir=UTILS_DIR,
-            config=config
+            output_dir=UTILS_DIR
         )
 
     except Exception as e:

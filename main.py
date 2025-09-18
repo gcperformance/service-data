@@ -10,6 +10,7 @@ from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
 from src.utils import build_ifoi, copy_org_var, build_data_dictionary
+from src.comp import build_compare_file
 
 
 def get_config():
@@ -19,9 +20,11 @@ def get_config():
     # Default arrangement of directories
     input_dir = base_dir / "inputs"
     output_dir = base_dir / "outputs"
-    indicators_dir = output_dir / "indicators"
-    utils_dir = output_dir / "utils"
-    qa_dir = output_dir / "qa"
+    
+    # Sub-directories must be appended
+    indicators_dir = "indicators"
+    utils_dir = "utils"
+    qa_dir = "qa"
 
     # List of valid snapshots to run
     snapshots_list = [
@@ -69,10 +72,8 @@ def get_config():
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
     }
   
-
-
     return {
-        "snapshot_list":snapshots_list,
+        "snapshots_list":snapshots_list,
         "input_dir": input_dir,
         "output_dir": output_dir,
         "indicators_dir": indicators_dir,
@@ -128,6 +129,7 @@ def main():
     # Argument parsing
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
+    parser.add_argument("--live", action="store_true", help="Run process without running update for snapshots.")
     args = parser.parse_args()
 
     # Set up logging
@@ -159,7 +161,7 @@ def main():
 
         # Generate processed files
         logger.info("Generating processed files...")
-        process_files(si, ss, config)
+        si_ss_dict = process_files(si, ss, config)
         
         # Run QA checks
         logger.info("Running QA checks...")
@@ -171,6 +173,46 @@ def main():
         copy_org_var(config)
         build_data_dictionary(config)
         
+        # Run snapshots unless "live" arg was passed
+        if not args.live: # if the "live" option was passed, don't run the snapshots
+            snapshots_list = config['snapshots_list']
+            for snapshot in snapshots_list:
+                # Merge historical snapshot data
+                logger.info("Processing snapshots: %s", snapshot)
+                try:
+                    logger.info("Merging historical data for snapshots...")
+                    si_snap = merge_si(config, snapshot)
+                    ss_snap = merge_ss(config, snapshot)
+                except:
+                    logger.error("Merging historical data for snapshots failed", exc_info=True)
+                    sys.exit(1)
+                
+                # Generate processed files 
+                logger.info("Generating processed snapshot files...")
+                si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
+
+                # Compare snapshots to live data
+                logger.info("Comparing snapshot to live data...")
+
+                si_compare_dict = {
+                    'df_base': si_ss_snap_dict['si'],
+                    'df_comp': si_ss_dict['si'],
+                    'base_name': f"{snapshot}_si",
+                    'comp_name':"si",
+                    'key_name':"fy_org_id_service_id"
+                }
+                build_compare_file(si_compare_dict, config, snapshot)
+
+                ss_compare_dict = {
+                    'df_base': si_ss_snap_dict['ss'],
+                    'df_comp': si_ss_dict['ss'],
+                    'base_name': f"{snapshot}_ss",
+                    'comp_name':"ss",
+                    'key_name':"fy_org_id_service_id_std_id"
+                }
+                build_compare_file(ss_compare_dict, config, snapshot)
+                
+
         # Log completion time
         elapsed_time = time.perf_counter() - start_time
         logger.info(f"Processing completed in {elapsed_time:.2f} seconds")

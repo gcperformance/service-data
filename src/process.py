@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 from src.export import export_to_csv
 from src.utils import build_drf, sid_list
 
-def output_si_ss(si, ss, config):
+def output_si_ss(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
         # === RE-SCOPE SERVICE INVENTORY ===
@@ -37,11 +37,15 @@ def output_si_ss(si, ss, config):
             "ss": ss,
         }
 
-        OUTPUT_DIR = config['output_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            OUTPUT_DIR = config['output_dir'] / 'snapshots' / snapshot
+        else:
+            OUTPUT_DIR = config['output_dir']
+        
         export_to_csv(
             data_dict=output_exports,
-            output_dir=OUTPUT_DIR,
-            config=config
+            output_dir=OUTPUT_DIR
         )
 
         return output_exports
@@ -50,7 +54,7 @@ def output_si_ss(si, ss, config):
         logger.error("Error: %s", e, exc_info=True)
 
 
-def summary_si_ss(si, ss, config):
+def summary_si_ss(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
         # === Summary tables based on si & ss ===   
@@ -198,11 +202,15 @@ def summary_si_ss(si, ss, config):
             "si_reviews": si_reviews
         }
         
-        INDICATORS_DIR = config['indicators_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+        
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR,
-            config=config
+            output_dir=INDICATORS_DIR
         )
 
     except Exception as e:
@@ -210,7 +218,7 @@ def summary_si_ss(si, ss, config):
 
 
 
-def maf(si, ss, config):
+def maf(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
         # === MAF INDICATORS ===
@@ -418,17 +426,21 @@ def maf(si, ss, config):
             "maf_all": maf_all
         }
         
-        INDICATORS_DIR = config['indicators_dir']    
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR,
-            config=config
+            output_dir=INDICATORS_DIR
         )
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
 
-def drr(si, ss, config):
+def drr(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
         # === DRR INDICATORS ===
@@ -571,19 +583,23 @@ def drr(si, ss, config):
             # "dr2469": dr2469,
             "drr_all": drr_all
         }
-
-        INDICATORS_DIR = config['indicators_dir']
+        
+        # If running a snapshot run, change output directory accordingly        
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+        
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR,
-            config=config
+            output_dir=INDICATORS_DIR
         )
 
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
 
-def datapack(si, ss, config):
+def datapack(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
         # === DATA PACK ===
@@ -938,11 +954,15 @@ def datapack(si, ss, config):
             "dp_services_rank": dp_services_rank
         }
         
-        INDICATORS_DIR = config['indicators_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR,
-            config=config
+            output_dir=INDICATORS_DIR
         )
 
     except Exception as e:
@@ -950,12 +970,12 @@ def datapack(si, ss, config):
 
 
 
-def service_fte_spending(si, drf, config):
+def service_fte_spending(si, drf, config, snapshot=False):
     try:
         logger.debug('...')
         # === SPENDING & FTEs BY PROGRAM ===
         # Load DRF data from utils (i.e. RBPO)
-        drf = build_drf(config)
+        drf = build_drf(config, snapshot)
         drf['org_id'] = drf['org_id'].astype(int)
 
         # =================================
@@ -986,11 +1006,15 @@ def service_fte_spending(si, drf, config):
             "service_fte_spending": service_fte_spending_df
         }
 
-        INDICATORS_DIR = config['indicators_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+        
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR,
-            config=config
+            output_dir=INDICATORS_DIR
         )
 
     except Exception as e:
@@ -998,22 +1022,24 @@ def service_fte_spending(si, drf, config):
 
 
 
-def process_files(si, ss, config):
+def process_files(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
-        sid_list(si, config)
+        sid_list(si, config, snapshot)
 
-        processed_si_ss = output_si_ss(si, ss, config)
+        processed_si_ss = output_si_ss(si, ss, config, snapshot)
         si = processed_si_ss['si']
         ss = processed_si_ss['ss']
         
-        summary_si_ss(si, ss, config)
-        maf(si, ss, config)
-        drr(si, ss, config)
-        datapack(si, ss, config)
+        summary_si_ss(si, ss, config, snapshot)
+        maf(si, ss, config, snapshot)
+        drr(si, ss, config, snapshot)
+        datapack(si, ss, config, snapshot)
         
-        drf = build_drf(config)
-        service_fte_spending(si, drf, config)
+        drf = build_drf(config, snapshot)
+        service_fte_spending(si, drf, config, snapshot)
+
+        return processed_si_ss
         
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)

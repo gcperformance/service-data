@@ -9,7 +9,7 @@ from src.export import export_to_csv
 from src.load import load_csv
 from src.utils import dept_list, program_list
 
-def qa_check(si, ss, config):
+def qa_check(si, ss, config, snapshot=False):
     try:
         # === SETUP ===
         # Load extra files
@@ -171,7 +171,12 @@ def qa_check(si, ss, config):
             "ss_qa": ss
         }
 
-        QA_DIR = config['qa_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            QA_DIR = config['output_dir'] / 'snapshots' / snapshot / config['qa_dir']
+        else:
+            QA_DIR = config['output_dir'] / config['qa_dir']
+        
         export_to_csv(
             data_dict=csv_exports,
             output_dir=QA_DIR,
@@ -185,7 +190,7 @@ def qa_check(si, ss, config):
         logger.error("Error: %s", e, exc_info=True)
 
 
-def qa_report(si_qa, ss_qa, config):
+def qa_report(si_qa, ss_qa, config, snapshot=False):
     def generate_context(row):
         issue_messages = {
             'qa_reused_sid': f"{row['reused_sid_correct_org']}",
@@ -345,7 +350,12 @@ def qa_report(si_qa, ss_qa, config):
             "ss_qa_report": ss_qa_report
         }
 
-        QA_DIR = config['qa_dir']
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            QA_DIR = config['output_dir'] / 'snapshots' / snapshot / config['qa_dir']
+        else:
+            QA_DIR = config['output_dir'] / config['qa_dir']
+        
         export_to_csv(
             data_dict=csv_exports,
             output_dir=QA_DIR,
