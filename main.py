@@ -5,7 +5,7 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 
-from src.load import download_csv_files, download_json_files
+from src.load import download_csv_files, download_json_files, download_program_csv_files, clean_out_input_directory
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
@@ -146,9 +146,13 @@ def main():
 
         # Download and process raw data
         if not args.local: # If the "local" option was passed, do not download these files
+            logger.info("Removing existing input files...")
+            clean_out_input_directory(config)
+
             logger.info("Downloading raw data...")
             download_csv_files(config)
             download_json_files(config)
+            download_program_csv_files(config)
 
         # Merge historical data
         try:
@@ -219,7 +223,6 @@ def main():
 
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
-
 
 if __name__ == "__main__":
     main()

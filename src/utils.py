@@ -249,7 +249,7 @@ def program_list(config):
         for fiscal_yr, url in config['program_csv_urls_en'].items():
             filename = url.split('/')[-1].split('.')[0]
             
-            df = pd.read_csv(url)
+            df = load_csv(filename, config)
             df['filename'] = filename
             df['fiscal_yr'] = fiscal_yr
             frames_en += [df]
@@ -257,7 +257,7 @@ def program_list(config):
         for fiscal_yr, url in config['program_csv_urls_fr'].items():
             filename = url.split('/')[-1].split('.')[0]
 
-            df = pd.read_csv(url)
+            df = load_csv(filename, config)
             df['filename'] = filename
             df['fiscal_yr'] = fiscal_yr
             frames_fr += [df]
