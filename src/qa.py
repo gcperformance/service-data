@@ -179,8 +179,7 @@ def qa_check(si, ss, config, snapshot=False):
         
         export_to_csv(
             data_dict=csv_exports,
-            output_dir=QA_DIR,
-            config=config
+            output_dir=QA_DIR
         )
 
         # === Run/build QA report ===
@@ -358,8 +357,7 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
         
         export_to_csv(
             data_dict=csv_exports,
-            output_dir=QA_DIR,
-            config=config
+            output_dir=QA_DIR
         )
 
     except Exception as e:
