@@ -54,8 +54,7 @@ def download_program_csv_files(config):
             logger.debug("Downloaded: %s.csv", filename)
         
         except requests.exceptions.RequestException as e:
-            logger.error("Failed to download %s.csv from %s: %s", filename, url, e)
-            raise
+            logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
 
         except Exception as e:
             logger.error("Error: %s", e, exc_info=True)
@@ -79,8 +78,7 @@ def download_program_csv_files(config):
             logger.debug("Downloaded: %s.csv", filename)
         
         except requests.exceptions.RequestException as e:
-            logger.error("Failed to download %s.csv from %s: %s", name, url, e)
-            raise
+            logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
 
         except Exception as e:
             logger.error("Error: %s", e, exc_info=True)
@@ -180,11 +178,13 @@ def load_csv(file_name, config, snapshot=False):
         logger.info("Missing file: %s, will check for backup file", file_path)    
         try:
             INPUT_DIR = config['input_dir'] / 'backups'
+            file_path = INPUT_DIR / file_name
+
             if not file_path.exists():
                 raise FileNotFoundError(f"File not found in input_dir: {file_path}")
 
             df = pd.read_csv(file_path, keep_default_na=False, na_values='')
-            logger.debug("Loaded %s from input/backups (%d rows, %d columns)", file_path, df.shape[0], df.shape[1])
+            logger.info("Loaded %s from input/backups (%d rows, %d columns)", file_path, df.shape[0], df.shape[1])
             return df
         
         except FileNotFoundError as e:
