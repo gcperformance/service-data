@@ -54,7 +54,9 @@ jobs:
         run: |
           mkdir -p snapshots_release/snapshot_2025-03-01
           echo "Copying snapshot data files for 2025-03-01..."
-          find outputs/snapshots/2025-03-01 inputs/snapshots/2025-03-01 -type f -name "*.csv" -exec cp {} snapshots_release/snapshot_2025-03-01/ \; -exec echo "Copied: {}" \;
+          find outputs/snapshots/2025-03-01 inputs/snapshots/2025-03-01 -type f -name "*.csv" \
+            -exec cp {} snapshots_release/snapshot_2025-03-01/ \; \
+            -exec echo "Copied: {}" \;
           for file in snapshots_release/snapshot_2025-03-01/*.csv; do
             mv "$file" "snapshots_release/2025-03-01_$(basename "$file")"
           done

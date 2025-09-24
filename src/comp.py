@@ -4,7 +4,7 @@ from src.export import export_to_csv
 
 def build_compare_file(compare_dict,config,snapshot):
 
-    df_name = f"{compare_dict['base_name']}_comparison"
+    df_name = compare_dict['file_name']
     out = compare(compare_dict)
 
     SNAPSHOT_ROOT_DIR= config["output_dir"] / "snapshots" / snapshot

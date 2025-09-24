@@ -203,7 +203,8 @@ def main():
                     'df_comp': si_ss_dict['si'],
                     'base_name': f"{snapshot}_si",
                     'comp_name':"si",
-                    'key_name':"fy_org_id_service_id"
+                    'key_name':"fy_org_id_service_id",
+                    'file_name':"si_comparison"
                 }
                 build_compare_file(si_compare_dict, config, snapshot)
 
@@ -212,7 +213,8 @@ def main():
                     'df_comp': si_ss_dict['ss'],
                     'base_name': f"{snapshot}_ss",
                     'comp_name':"ss",
-                    'key_name':"fy_org_id_service_id_std_id"
+                    'key_name':"fy_org_id_service_id_std_id",
+                    'file_name':"ss_comparison"
                 }
                 build_compare_file(ss_compare_dict, config, snapshot)
                 
