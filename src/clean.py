@@ -23,13 +23,23 @@ def clean_fiscal_yr(yr):
         for old, new in fy_cleanup.items():
             yr = yr.replace(old, new)
 
-        # Regex transformation for fiscal years (XXXX-YY → XXXX-YYYY)
-        yr = re.sub(
-            r"(\d{4})-\d{2}", 
-            lambda m: f"{m.group(1)}-{int(m.group(1)) + 1}",
-            yr
-        )
+        # Regex transformation for fiscal years (XXXX-YY → XXXX-(XXXX+1))
+        match = re.fullmatch(r'\d{4}-\d{2}', yr)
+        if match:
+            yr = re.sub(
+                r"(\d{4})-\d{2}",
+                lambda m: f"{m.group(1)}-{int(m.group(1)) + 1}",
+                yr
+            )
 
+        # Regex transformation for fiscal years (XX-YY → 20XX-20YY)
+        match = re.fullmatch(r'\d{2}-\d{2}', yr)
+        if match:
+            yr = re.sub(
+                r"(\d{2})-(\d{2})",
+                lambda m: f"20{m.group(1)}-20{m.group(2)}",
+                yr
+            )
         return yr
 
     except Exception as e:
