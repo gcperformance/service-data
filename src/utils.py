@@ -98,7 +98,7 @@ def sid_list(si, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-def build_drf(config, snapshot=False):
+def build_drf(si, config, snapshot=False):
     """
     Load and clean DRF data (i.e. RBPO). Refer to snapshot if necessary!
     """
@@ -107,6 +107,8 @@ def build_drf(config, snapshot=False):
         drf = load_csv('rbpo.csv', config, False)
         drf = standardize_column_names(drf)
         drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
+
+        si['org_id']=pd.to_numeric(si['org_id'].astype(int), errors='coerce')
 
         # Define columns related to planned and actual measures: spending and FTEs
         # These columns will be unpivoted / melted

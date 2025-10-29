@@ -975,7 +975,7 @@ def service_fte_spending(si, drf, config, snapshot=False):
         logger.debug('...')
         # === SPENDING & FTEs BY PROGRAM ===
         # Load DRF data from utils (i.e. RBPO)
-        drf = build_drf(config, snapshot)
+        drf = build_drf(si, config, snapshot)
         drf['org_id'] = drf['org_id'].astype(int)
 
         # =================================
@@ -1036,7 +1036,7 @@ def process_files(si, ss, config, snapshot=False):
         drr(si, ss, config, snapshot)
         datapack(si, ss, config, snapshot)
         
-        drf = build_drf(config, snapshot)
+        drf = build_drf(si, config, snapshot)
         service_fte_spending(si, drf, config, snapshot)
 
         return processed_si_ss
