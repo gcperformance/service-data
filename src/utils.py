@@ -103,11 +103,13 @@ def build_drf(config, snapshot=False):
     Load and clean DRF data (i.e. RBPO). Refer to snapshot if necessary!
     """
     try:
-        drf = load_csv('rbpo.csv', config, snapshot)
+        # Load and normalize
+        drf = load_csv('rbpo.csv', config, False)
         drf = standardize_column_names(drf)
         drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
-        
-        # Define columns related to planned and actual measures: spending and FTEs 
+
+        # Define columns related to planned and actual measures: spending and FTEs
+        # These columns will be unpivoted / melted
         fte_spend_cols = [
             'planned_spending_1', 
             'actual_spending', 
@@ -118,7 +120,7 @@ def build_drf(config, snapshot=False):
             'planned_ftes_2', 
             'planned_ftes_3'
         ]
-        
+
         # Melt (unpivot) the DataFrame to long format
         drf = pd.melt(
             drf, 
@@ -127,58 +129,81 @@ def build_drf(config, snapshot=False):
             var_name='plan_actual_spendfte_yr', 
             value_name='measure'
         )
-        
-        # Split 'plan_actual_yr' into separate columns for planned/actual, spending/FTEs, and year adjustment
-        drf[['planned_actual', 'spending_fte', 'yr_adjust']] = drf['plan_actual_spendfte_yr'].str.split('_', expand=True)
-        drf['yr_adjust'] = drf['yr_adjust'].fillna('1').astype(int) - 1
-        
-        # Calculate 4-digit 'measure_yr' and 'report_yr' from 'fiscal_yr' and 'yr_adjust'
-        drf['measure_yr'] = drf['fiscal_yr'].str.split('-').str[1].astype(int) + drf['yr_adjust']
-        drf['report_yr'] = drf['fiscal_yr'].str.split('-').str[1].astype(int)
-        
-        # Get the latest fiscal year from the Service inventory (four digit fy, year of end of fy)
-        # latest_si_fy = si['fiscal_yr'].str.split('-').str[1].astype(int).max()
-        latest_si_fy = 2024
-        
-        # Separate actuals and future planned data
-        drf_actuals = drf[
-            (drf['planned_actual'] == 'actual') & 
-            (drf['report_yr'] <= latest_si_fy)
-        ].dropna()
-        
-        drf_planned = drf[
-            (drf['planned_actual'] == 'planned') &
-            (drf['report_yr'] > latest_si_fy) 
-        ].dropna()
-        
-        # Each report year has 3 measure years for planned values.
-        # Only keep records that have the highest report year for that given program, measure type, and measure year
-        idx = drf_planned.groupby(['program_id', 'spending_fte', 'measure_yr'])['report_yr'].idxmax()
-        drf_planned = drf_planned.loc[idx]
-        
-        # Concatenate actuals and planned entries
-        drf = pd.concat([drf_actuals, drf_planned])
-            
-        # Pivot to get a wide format table with spending/FTE columns
-        drf = drf.pivot_table(
-            index=['org_id', 'program_id', 'report_yr', 'measure_yr', 'planned_actual'], 
-            columns=['spending_fte'], 
-            values='measure'
-        ).sort_values(
-            by=['org_id', 'program_id', 'report_yr','measure_yr']
-        ).reset_index()
-        
-        # Set up si_link_yr: a fiscal year column to be able to include years 
-        # beyond the service inventory when joining by service id and fy.
-        # if measure year > latest service fy, = latest service fy, else use measure_yr
-        drf.loc[drf['measure_yr']>latest_si_fy, 'si_link_yr'] = latest_si_fy
-        drf.loc[drf['measure_yr']<=latest_si_fy, 'si_link_yr'] = drf['measure_yr']
-        drf['si_link_yr'] = drf['si_link_yr'].astype(int)
 
-        # Return years to fiscal year YYYY-YYYY format
+        # Split 'plan_actual_yr' into separate columns for planned/actual, spending/FTEs, and year offset (e.g. _1, _2, _3)
+        drf[['planned_actual', 'spending_fte', 'yr_adjust']] = drf['plan_actual_spendfte_yr'].str.split('_', n=2, expand=True)
+        drf['yr_adjust'] = drf['yr_adjust'].fillna('1').astype(int) - 1
+
+        # Parse fiscal year end (YYYY-YYYY -> second part)
+        fy_end = pd.to_numeric(drf['fiscal_yr'].str.split('-').str[-1].astype(int), errors='coerce')
+
+        # Calculate 4-digit 'measure_yr' and 'report_yr' from 'fiscal_yr' and 'yr_adjust'
+        drf['report_yr'] = fy_end.astype('Int64')
+        drf['measure_yr'] = (fy_end+ drf['yr_adjust']).astype('Int64')
+
+        # Latest SI fiscal year per org (end year as int)
+        si_latest = (si.assign(lat_end=pd.to_numeric(si['fiscal_yr'].str.split('-').str[-1], errors='coerce'))
+                    .groupby('org_id', as_index=False)['lat_end'].max()
+                    .rename(columns={'lat_end':'latest_si_yr'}))
+
+        drf = drf.merge(si_latest, on='org_id', how='left')
+
+
+        # Split planned vs actual; only drop blank measures
+        drf_actuals = drf[drf['planned_actual']=='actual'].dropna(subset=['measure']).copy()
+        drf_planned = drf[drf['planned_actual']=='planned'].dropna(subset=['measure']).copy()
+
+        # Determine the highest measure year for actuals
+        latest_actuals = (drf_actuals
+                        .groupby(['org_id', 'program_id', 'spending_fte'], as_index=False)['report_yr']
+                        .max()
+                        .rename(columns={'report_yr':'report_yr_actuals'})
+        )
+
+        # Merge in the highest measure year for actuals in the planned table
+        drf_planned = drf_planned.merge(latest_actuals, 
+                                        on=['org_id', 'program_id', 'spending_fte'],
+                                        how='left') 
+
+        # Only keep planned years that are greater than the latest actual report year
+        # fillna(-np.inf) assures that all planned values are included, even if there are not associated actual report years
+        drf_planned = drf_planned[
+            drf_planned['measure_yr'] > (drf_planned['report_yr_actuals'].fillna(0))
+        ]
+
+        # # # Each report year has 3 measure years for planned values.
+        # # Only keep records that have the highest report year for that given program, measure type, and measure year
+        idx = (drf_planned
+            .groupby(['org_id', 'program_id', 'spending_fte', 'measure_yr'])['report_yr']
+            .idxmax())
+        drf_planned = drf_planned.loc[idx]
+
+        # # # Concatenate actuals and planned entries
+        drf = pd.concat([drf_actuals, drf_planned], ignore_index=True)
+
+        drf = drf[[
+            'org_id', 
+            'latest_si_yr', 
+            'program_id', 
+            'report_yr', 
+            'measure_yr', 
+            'planned_actual', 
+            'spending_fte',
+            'measure']].reset_index(drop=True)
+
+        # # Set up si_link_yr: a fiscal year column to be able to include years 
+        # # beyond the service inventory when joining by service id and fy.
+        # # if measure year > latest service fy, = latest service fy, else use measure_yr
+        drf['latest_si_yr'] = drf['latest_si_yr'].fillna(0).astype(int)
+        drf.loc[drf['measure_yr']>drf['latest_si_yr'], 'si_link_yr'] = drf['latest_si_yr']
+        drf.loc[drf['measure_yr']<=drf['latest_si_yr'], 'si_link_yr'] = drf['measure_yr']
+        drf['si_link_yr'] = drf['si_link_yr'].astype('Int64')
+
+        # # # Return years to fiscal year YYYY-YYYY format
         drf['report_yr'] = (drf['report_yr']-1).apply(str) +"-"+ (drf['report_yr']).apply(str)
         drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
         drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
+        drf['latest_si_yr'] = (drf['latest_si_yr']-1).apply(str) +"-"+ (drf['latest_si_yr']).apply(str)
 
         UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
