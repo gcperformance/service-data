@@ -157,7 +157,7 @@ def build_drf(si, config, snapshot=False):
 
         # Drop any actuals from the fiscal year in progress
         # TODO: Turn this into a function that looks at the current datetime
-        current_yr = 2026
+        current_yr = 2025
         drf_actuals = drf_actuals[drf_actuals['measure_yr']<current_yr]
 
         # Determine the highest measure year for actuals
