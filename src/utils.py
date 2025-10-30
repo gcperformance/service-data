@@ -155,6 +155,11 @@ def build_drf(si, config, snapshot=False):
         drf_actuals = drf[drf['planned_actual']=='actual'].dropna(subset=['measure']).copy()
         drf_planned = drf[drf['planned_actual']=='planned'].dropna(subset=['measure']).copy()
 
+        # Drop any actuals from the fiscal year in progress
+        # TODO: Turn this into a function that looks at the current datetime
+        current_yr = 2026
+        drf_actuals = drf_actuals[drf_actuals['measure_yr']<current_yr]
+
         # Determine the highest measure year for actuals
         latest_actuals = (drf_actuals
                         .groupby(['org_id', 'program_id', 'spending_fte'], as_index=False)['report_yr']
