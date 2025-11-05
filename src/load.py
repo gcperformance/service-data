@@ -43,8 +43,12 @@ def download_program_csv_files(config):
         file_path =  INPUT_DIR / f"{filename}.csv"
         
         try:
+            # Set up a session
+            s = requests.Session()
+
             # Fetch the file from the URL
-            response = requests.get(url)
+            # verify is set to false on advice from PSPC, who acknowledged they will not be fixing the SSL certificate issue
+            response = s.get(url, verify=False)
             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
 
             # Save the content to a file
@@ -67,8 +71,12 @@ def download_program_csv_files(config):
         file_path =  INPUT_DIR / f"{filename}.csv"
         
         try:
+            # Set up a session
+            s = requests.Session()
+
             # Fetch the file from the URL
-            response = requests.get(url)
+            # verify is set to false on advice from PSPC, who acknowledged they will not be fixing the SSL certificate issue
+            response = s.get(url, verify=False)
             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
 
             # Save the content to a file

@@ -566,8 +566,31 @@ def drr(si, ss, config, snapshot=False):
         # Determine score
         dr2469['dr2469_score'] = (dr2469['hv_online_applications']/dr2469['hv_total_applications'])*100
 
+        # =================================
+        # DRR Indicator: Fraction of services that accept client feedback:
+        # Number of entries in the service inventory that are identified as having client
+        # feedback (client_feedback_channel not equal to 'NON') divided by the total number of service inventory entries times 100
+
+        # (# of entries with client feedback / total number of entries) * 100
+        
+        # Select relevant columns from service inventory
+        dr_client_feedback_pc = si[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'client_feedback_channel']].copy()
+
+        # Identify which services indicated something other than 'NON' in the client feedback channel
+        dr_client_feedback_pc['client_feedback_collected'] = (dr_client_feedback_pc['client_feedback_channel'] != 'NON')
+
+        # Determine fy-level counts for services that accept client feedback
+        dr_client_feedback_pc = dr_client_feedback_pc.groupby(['fiscal_yr'], as_index=False).agg(
+            service_with_feedback_count=('client_feedback_collected', 'sum'),
+            service_count=('fy_org_id_service_id', 'nunique')
+        )
+
+        # Determine score
+        dr_client_feedback_pc['service_with_feedback_percentage'] = (dr_client_feedback_pc['service_with_feedback_count']/dr_client_feedback_pc['service_count'])*100
+
+
         # === SUMMARY DRR TABLE === 
-        drr_dfs = [dr2467, dr2468, dr2469]
+        drr_dfs = [dr2467, dr2468, dr2469, dr_client_feedback_pc]
         index_cols = ['fiscal_yr']
         
         # Set index for each DataFrame in the list
@@ -581,6 +604,7 @@ def drr(si, ss, config, snapshot=False):
             # "dr2467": dr2467,
             # "dr2468": dr2468,
             # "dr2469": dr2469,
+            # "dr_client_feedback_pc": dr_client_feedback_pc,
             "drr_all": drr_all
         }
         
