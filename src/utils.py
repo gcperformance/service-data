@@ -16,26 +16,29 @@ def dept_list(config, export=False):
         ifoi_fr = load_csv('ifoi_fr.csv', config)
         
         # Process English names
-        dept_en = ifoi_en.iloc[:,:3]
-        dept_en['department_en'] = dept_en.iloc[:,2].fillna(dept_en.iloc[:,1])
-        dept_en = dept_en[['OrgID', 'department_en']]
+        dept_en = ifoi_en.copy()
+        dept_en['department_en'] = dept_en.iloc[:,5].fillna(dept_en.iloc[:,4])
+        dept_en = dept_en[['org_id', 'department_en']]
         
         # Process French names
-        dept_fr = ifoi_fr.iloc[:,:3]
-        dept_fr['department_fr'] = dept_fr.iloc[:,2].fillna(dept_fr.iloc[:,1])
-        dept_fr = dept_fr[['OrgID', 'department_fr']]
+        dept_fr = ifoi_fr.copy()
+        dept_fr['department_fr'] = dept_fr.iloc[:,5].fillna(dept_fr.iloc[:,4])
+        dept_fr = dept_fr[['org_id', 'department_fr']]
         
         # Merge English and French department names
         dept = pd.merge(
             dept_en,
             dept_fr,
-            on='OrgID',
+            on='org_id',
             how='outer'
         )
         
         # Standardize column names and convert org_id to string
         dept = standardize_column_names(dept)
         dept['org_id'] = dept['org_id'].astype(str)
+
+        # Remove any duplicate entries
+        dept = dept.drop_duplicates()
         
         if export:
             UTILS_DIR = config['output_dir'] / config['utils_dir']
