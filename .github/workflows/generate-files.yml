@@ -8,7 +8,7 @@ on:
     branches:
       - master  # Run on all PRs targeting master
   schedule:
-    - cron: '0 0 * * 1-5'  # daily runs monday to friday
+    - cron: '0 10 * * 1-5'  # daily runs monday to friday at 10:00 UTC
   workflow_dispatch:  # Allow manual triggers
 
 jobs:
