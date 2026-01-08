@@ -28,7 +28,8 @@ def get_config():
 
     # List of valid snapshots to run
     snapshots_list = [
-        '2025-03-01'
+        '2025-03-01',
+        '2026-01-08'
     ]
 
     csv_urls = {
@@ -196,27 +197,29 @@ def main():
                 si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
 
                 # Compare snapshots to live data
-                logger.info("Comparing snapshot to live data...")
+                try:
+                    logger.info("Comparing snapshot to live data...")
+                    si_compare_dict = {
+                        'df_base': si_ss_snap_dict['si'],
+                        'df_comp': si_ss_dict['si'],
+                        'base_name': f"{snapshot}_si",
+                        'comp_name':"si",
+                        'key_name':"fy_org_id_service_id",
+                        'file_name':"si_comparison"
+                    }
+                    build_compare_file(si_compare_dict, config, snapshot)
 
-                si_compare_dict = {
-                    'df_base': si_ss_snap_dict['si'],
-                    'df_comp': si_ss_dict['si'],
-                    'base_name': f"{snapshot}_si",
-                    'comp_name':"si",
-                    'key_name':"fy_org_id_service_id",
-                    'file_name':"si_comparison"
-                }
-                build_compare_file(si_compare_dict, config, snapshot)
-
-                ss_compare_dict = {
-                    'df_base': si_ss_snap_dict['ss'],
-                    'df_comp': si_ss_dict['ss'],
-                    'base_name': f"{snapshot}_ss",
-                    'comp_name':"ss",
-                    'key_name':"fy_org_id_service_id_std_id",
-                    'file_name':"ss_comparison"
-                }
-                build_compare_file(ss_compare_dict, config, snapshot)
+                    ss_compare_dict = {
+                        'df_base': si_ss_snap_dict['ss'],
+                        'df_comp': si_ss_dict['ss'],
+                        'base_name': f"{snapshot}_ss",
+                        'comp_name':"ss",
+                        'key_name':"fy_org_id_service_id_std_id",
+                        'file_name':"ss_comparison"
+                    }
+                    build_compare_file(ss_compare_dict, config, snapshot)
+                except:
+                    logger.error("Comparing snapshot to live data failed", exc_info=True)
                 
 
         # Log completion time
