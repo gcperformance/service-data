@@ -63,6 +63,20 @@ jobs:
           
           echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
 
+      - name: Prepare 2026-01-12 files for Release
+        id: prepare_files_2026-01-12
+        run: |
+          mkdir -p snapshots_release/snapshot_2026-01-12
+          echo "Copying snapshot data files for 2026-01-12..."
+          find outputs/snapshots/2026-01-12 inputs/snapshots/2026-01-12 -type f -name "*.csv" \
+            -exec cp {} snapshots_release/snapshot_2026-01-12/ \; \
+            -exec echo "Copied: {}" \;
+          for file in snapshots_release/snapshot_2026-01-12/*.csv; do
+            mv "$file" "snapshots_release/2026-01-12_$(basename "$file")"
+          done
+          
+          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
