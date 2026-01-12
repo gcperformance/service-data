@@ -90,7 +90,12 @@ def sid_list(si, config, snapshot=False):
         # Remove ambiguous or irrelevant fields
         sid_list = sid_list.drop(columns=['fiscal_yr', 'service_scope'])
         
-        UTILS_DIR = config['output_dir'] / config['utils_dir']
+        if snapshot:
+            OUTPUT_DIR = config['output_dir'] / 'snapshots' / snapshot
+        else:
+            OUTPUT_DIR = config['output_dir']
+
+        UTILS_DIR = OUTPUT_DIR / config['utils_dir']
         export_to_csv(
             data_dict={'sid_list': sid_list},
             output_dir=UTILS_DIR
@@ -214,8 +219,13 @@ def build_drf(si, config, snapshot=False):
         drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
         drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
         drf['latest_si_yr'] = (drf['latest_si_yr']-1).apply(str) +"-"+ (drf['latest_si_yr']).apply(str)
+        
+        if snapshot:
+            OUTPUT_DIR = config['output_dir'] / 'snapshots' / snapshot
+        else:
+            OUTPUT_DIR = config['output_dir']
 
-        UTILS_DIR = config['output_dir'] / config['utils_dir']
+        UTILS_DIR = OUTPUT_DIR / config['utils_dir']
         export_to_csv(
             data_dict={'drf': drf},
             output_dir=UTILS_DIR

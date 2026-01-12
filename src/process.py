@@ -217,7 +217,6 @@ def summary_si_ss(si, ss, config, snapshot=False):
         logger.error("Error: %s", e, exc_info=True)
 
 
-
 def maf(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
@@ -426,6 +425,7 @@ def maf(si, ss, config, snapshot=False):
             "maf_all": maf_all
         }
         
+
         # If running a snapshot run, change output directory accordingly
         if snapshot:
             INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
@@ -993,7 +993,6 @@ def datapack(si, ss, config, snapshot=False):
         logger.error("Error: %s", e, exc_info=True)
 
 
-
 def service_fte_spending(si, drf, config, snapshot=False):
     try:
         logger.debug('...')
@@ -1043,7 +1042,6 @@ def service_fte_spending(si, drf, config, snapshot=False):
 
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
-
 
 
 def process_files(si, ss, config, snapshot=False):
