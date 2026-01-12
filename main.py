@@ -29,7 +29,7 @@ def get_config():
     # List of valid snapshots to run
     snapshots_list = [
         '2025-03-01',
-        '2026-01-08'
+        '2026-01-12'
     ]
 
     csv_urls = {

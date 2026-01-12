@@ -1,13 +1,157 @@
 ﻿service_id,service_en,service_fr,org_id,org_name_en,org_name_fr
-4013,Specialized Digital Systems,Systèmes numériques spécialisés,134,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-4012,National Communications & Public Affairs  (NCPA) - Digital Communications,Communications nationales et Affaires publiques (CNAP) - Communications numériques,135,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-4011,LiquidFiles,FichersLiquides,136,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+4157,Quasi-judicial review of certain ministerial authorizations,Examen quasi judiciaire de certaines autorisations ,244,Office of the Intelligence Commissioner,Bureau du commissaire au renseignement
+4156,Media and Public Inquiries,Médias et demandes de renseignements du public,302,National Security and Intelligence Review Agency Secretariat,Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement
+4155,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,302,National Security and Intelligence Review Agency Secretariat,Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement
+4154, Conduct a Review,Effectuer un examen,345, Secretariat of the National Security and Intelligence Committee of Parliamentarians | Secrétariat du Comité des parlementaires sur la sécurité nationale et le renseignement,Secrétariat du Comité des parlementaires sur la sécurité nationale et le renseignement
+4153,Earthquake Early Warning System,Système d'alerte précoce en cas de tremblement de terre,134,Natural Resources Canada,Ressources naturelles Canada
+4152,Recognition of Canadian Excellence with the Canadian Honors and Awards Programs,Reconnaissance de l'excellence canadienne grâce aux programmes d'honneurs et de distinctions canadiens,249,Office of the Secretary to the Governor General,
+4151,Provisioning of Greetings and Messages from the Governor General,Envoi de messages et de vœux du gouverneur général,249,Office of the Secretary to the Governor General,
+4150,Access to Guided Tours of the Governor General's Official Residences (free),Accès aux visites guidées des résidences officielles du gouverneur général (gratuit),249,Office of the Secretary to the Governor General,
+4149,Intake and Printing - Personal Registration applications,Réception et impression - Demandes d'enregistrement personnel,127,Health Canada,Santé Canada
+4148,CCOHS Business Safety Portal,Portail pour la sécurité en entreprise du CCHST,55,Canadian Centre for Occupational Health and Safety,Centre canadien d’hygiène et de sécurité au travail
+4147,Receive and review notification of Public Interest Disclosures under the Privacy Act.,Recevoir et examiner les notifications de communications dans l'intérêt public par les institutions fédérales en vertu de la Loi sur la protection des renseignements personnels.,256,Offices of the Information and Privacy Commissioners of Canada,Commissariats à l’information et à la protection de la vie privée du Canada
+4146,Development of Official-Language Communities – Post-Secondary Sector and Scientific Knowledge in French Support Fund,Développement des communautés de langue officielle - Fonds d’appui au secteur postsecondaire et aux savoirs scientifiques en français,122,Canadian Heritage,Patrimoine canadien
+4145,Replacement of certificate or endorsement (except for certificate or endorsement lost owing to shipwreck) (marine),"Remplacement d’un brevet, d’un certificat de compétence ou d’un visa, à l’exception d’un brevet, d’un certificat de compétence ou du visa perdu en raison d’un naufrage (marine)",138,Transport Canada,Transports Canada
+4144,Issuance of a record of qualifications and examinations,Délivrance d’un relevé de qualifications et d’examens,138,Transport Canada,Transports Canada
+4143,Issuance of a certificate or endorsement not requiring examination other than medical examination (marine),Délivrance d’un brevet ou d’un visa n’exigeant pas d’examen autre qu’un examen médical (marine),138,Transport Canada,Transports Canada
+4142,Automated Emergency Notification Fan-Out Service (AENFOS),Service automatisé de notification d’urgence en cascade (SANUC),138,Transport Canada,Transports Canada
+4141,Navigation Safety Assessment Process (NSAP),Processus d’évaluation de la sécurité de la navigation (PESN),138,Transport Canada,Transports Canada
+4140,Determination of Closest Possible Compliance (Marine),Détermination de la conformité la plus proche possible (maritime),138,Transport Canada,Transports Canada
+4139,Ship radio equipment technical review,Examen technique de l’équipement radio maritime,138,Transport Canada,Transports Canada
+4138,Request or extend a certificate of bareboat registry,Demander ou prolonger un certificat d’immatriculation d’un bâtiment en affrètement coque nue,138,Transport Canada,Transports Canada
+4137,Pleasure Craft Operator Cards (PCOC) issued,Cartes de conducteur d’embarcation de plaisance (CCEP) délivrée,138,Transport Canada,Transports Canada
+4135,CSC National Victim Services Program: Notify of offender's conditional release,Programme national de services aux victims du SCC : aviser les victimes de la mise en liberté sous condition d'un délinquant,117,Correctional Service Canada,Service correctionnel Canada
+4134,CSC National Victim Services Program: Process Victim Statement,Programme national de services aux victims du SCC : traiter les déclarations de la victime,117,Correctional Service Canada,Service correctionnel Canada
+4133,CSC National Victim Services Program: Process victim registration request,Programme national de services aux victims du SCC : demande d'inscription,117,Correctional Service Canada,Service correctionnel Canada
+4132,Ship Security Alert System (SSAS) Testing,Système d’alerte de sécurité du navire,138,Transport Canada,Transports Canada
+4131,Policy development and regulatory updates,Élaboration de politiques et mises à jour réglementaires,127,Health Canada,Santé Canada
+4130,Compliance monitoring and reporting,Surveillance et rapports de conformité,127,Health Canada,Santé Canada
+4129,"Provide executive leadership, oversight and decision-making","Assurer la direction exécutive, la supervision et la prise de decisions",127,Health Canada,Santé Canada
+4128,Strategic policy and planning for stakeholder relations with various groups on the opioid overdose crisis and chronic pain,Politique stratégique et planification des relations avec les parties prenantes de divers groupes concernant la crise des surdoses d'opioïdes et la douleur chronique,127,Health Canada,Santé Canada
+4127,Stakeholder engagement and communications,Engagement des parties prenantes et communications,127,Health Canada,Santé Canada
+4136,GC Workplace Accessibility Passport (My Accessible Workplace),Passeport pour l’accessibilité en milieu de travail du GC (Mon milieu de travail accessible),326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
+4126,Cannabis Product Recalls management (type I),Gestion des rappels de produits à base de cannabis (type I),127,Health Canada,Santé Canada
+4125,Consular Enquiries,Renseignements consulaires,126,Global Affairs Canada,Affaires mondiales Canada
+4124,Sustainable Fisheries Contribution Program - Shared Ocean Fund (Indo-Pacific Strategy),Programme de contribution aux pêches durables - Fonds commun pour les océans (Stratégie indo-pacifique) ,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4123,Public Enquiries,Demande de renseignements du public,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4122,Pacific Salmon Conservation and Stewardship Partnerships Program,Programme de partenariats pour la conservation et la gestion du saumon du Pacifique,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4121,Pacific Salmon Commercial Transition Program,Programme de transition commerciale pour le saumon du Pacifique,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4120,Offline Licensing Services,Services d'émission de permis hors ligne,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4119,Multi-Partners Oil Spill Response Research Contribution Program,Programme de contribution à la recherche en matière d’intervention à partenaires multiples lors d’un déversement d’hydrocarbures,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4118,Media Relations,Relations médias,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4117,Marine Spatial Planning Atlas,Atlas de planification spatiale marine,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4116,Lost Fishing Gear Reporting Support Service,Service de soutien à la déclaration des engins de pêche perdus,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4115,Global oceanographic in situational data from the Global Telecommunication System,Données océanographiques mondiales in situ provenant du Système mondial de télécommunication,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4114,External Dissemination of Commercial Fisheries Statistics,Dissémination externe des statisques des pêches commerciales,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4113,Contribution Program for The T. Buck Suzuki Environmental Foundation,Programme de contribution avec la T. Buck Suzuki Environmental Foundation,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4112,Contribution Program For Salmon Sub-Committee,Programme de contribution au sous-comité du Saumon,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4111,Contribution Program for Pacific Salmon Foundation,Programme de contribution à la Fondation du saumon du Pacifique,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4110,Certification and Market Access Program for Seals Contribution Agreement (CMAPS),Le Programme de certification et d'accès aux marchés des produits du phoque (PCAMPP) ,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4109,Canadian Coast Guard Marine Operations and Response Transfer Payment Program,Programme de paiements de transfert pour les opérations maritimes et les interventions de la Garde côtière canadienne,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+4108,Regulatory exemption guidance,Orientation sur les exemptions réglementaires,127,Health Canada,Santé Canada
+4107,Licensing and registration recommendation,Recommandation en matière de licences et d’enregistrements,127,Health Canada,Santé Canada
+4106,Approval of retained controlled substances by law enforcement,Autorisation de conservation des substances contrôlées par les forces de l'ordre,127,Health Canada,Santé Canada
+4105,Tobacco Quit Lines,Lignes d'aide pour arrêter de fumer,127,Health Canada,Santé Canada
+4104,Medical Access Support,Assistance en matière d'accès aux soins médicaux,127,Health Canada,Santé Canada
+4103,Emergency Treatment Fund,Fonds d'urgence pour le traitement,127,Health Canada,Santé Canada
+4102,Office of Controlled Substances Licensed Dealer,Bureau des substances contrôlées Distributeur agréé,127,Health Canada,Santé Canada
+4101,Status Confirmation Service,Service de confirmation du statut,127,Health Canada,Santé Canada
+4100,"International, Intergovernmental and Stakeholder Relations","Relations internationales, intergouvernementales et avec les parties prenantes",127,Health Canada,Santé Canada
+4099,Education and Outreach,Éducation et sensibilisation,127,Health Canada,Santé Canada
+4098,Regulatory and legislative advice and guidance,Conseils et orientations en matière de réglementation et de legislation,127,Health Canada,Santé Canada
+4097,Compliance response and enforcement action to a Type I mandatory recall (MO),Réponse en matière de conformité et mesures coercitives à la suite d'un rappel obligatoire (MO) de type I,127,Health Canada,Santé Canada
+4096,Compliance response and enforcement escalation,Réponse en matière de conformité et escalade en matière d'application,127,Health Canada,Santé Canada
+4095,Oral health providers claims' and estimates' processing and payment as part of the Canadian Dental Care Plan ,Traitement des réclamations et des demandes d'autorisations préalables et paiement aux fournisseurs de soins buccodentaires dans le cadre du Régime canadien de soins dentaires,127,Health Canada,Santé Canada
+4094,Oral Health Access Funding (OHAF) applications' review and transfer of funds to eligible recipients,Oral Health Access Funding (OHAF) applications' review and transfer of funds to eligible recipients,127,Health Canada,Santé Canada
+4093,Consumer Information Centre,Centre d'information aux consommateurs,151,Financial Consumer Agency of Canada,Financial Consumer Agency of Canada
+4092,Clean Energy for Rural and Remote Communities - demonstration stream,Énergie propre pour les collectivités rurales et éloignées - volet démonstration,134,Natural Resources Canada,Ressources naturelles Canada
+4091,Oil Spill Response Challenge,Défi d’intervention en cas de déversement d’hydrocarbures ,134,Natural Resources Canada,Ressources naturelles Canada
+4090,Greener Neighbourhoods Pilot Program,Programme pilote pour des quartiers plus verts,134,Natural Resources Canada,Ressources naturelles Canada
+4089,Trade Missions and Events,Missions et activités commerciales,122,Canadian Heritage,Patrimoine canadien
+4088,Commemorating the National Day for Truth and Reconciliation,Commémoration de la Journée nationale de la vérité et de la réconciliation,122,Canadian Heritage,Patrimoine canadien
+4087,Indigenous Business Navigator Service,Service de navigateur pour les entreprises autochtones,348,Department of Indigenous Services,Ministère des Services aux Autochtones
+4086,Multiculturalism and Anti-Racism Initiatives - National Holocaust Remembrance Program,Multiculturalisme et la lutte contre le racisme - Programme national de commémoration de l’Holocauste,122,Canadian Heritage,Patrimoine canadien
+4085,Development of Official-Language Communities – Post-Secondary Sector and Scientific Knowledge in French Support Fund,Développement des communautés de langue officielle - Fonds d’appui au secteur postsecondaire et aux savoirs scientifiques en français,122,Canadian Heritage,Patrimoine canadien
+9223,Climate Change Funding Programs - Implementation Readiness Fund,Programmes de financement pour le changement climatique - Fonds de préparation à la mise en œuvre,137,Environment and Climate Change Canada,Environnement et Changement climatique Canada
+4083,Financial Support for Health Care Programs,Soutien financier pour les programmes de soins de santé,139,Veterans Affairs Canada,Anciens Combattants Canada
+4082, Commemorative Benefits and Services,Avantages et services commémoratifs,139,Veterans Affairs Canada,Anciens Combattants Canada
+4081,Financial Assistance and Income Replacement Programs Benefits Administration,Administration des avantages des programmes d’aide financière et de remplacement du revenu,139,Veterans Affairs Canada,Anciens Combattants Canada
+4080,Disability Benefits Program Benefits Administration ,Administration des avantages du Programme de prestations d’invalidité,139,Veterans Affairs Canada,Anciens Combattants Canada
+4078,Canadian Grain Sampling Program Sample Inspection ,Inspection d’échantillon du Programme canadien d’échantillonnage des grains,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
+4079,Christmas Tree Export Program,Programme d'exportation d'arbres de Noël,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
+4077,Paper Records Management,gestion des documents papier,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
+4076,ATIP Requests Processing,Traitement des demandes d’AIPRP,139,Veterans Affairs Canada,Anciens Combattants Canada
+4075,Online Services,Services en ligne,139,Veterans Affairs Canada,Anciens Combattants Canada
+4074,Research and Innovation Programs Benefits Administration,Administration des avantages des programmes de recherche et d’innovation,139,Veterans Affairs Canada,Anciens Combattants Canada
+4073,International Economic Leadership,Préparation du budget fédéral,124,Department of Finance Canada,Ministère des Finances Canada
+4072,Lead Coordination of Financial Sector,Préparation du budget fédéral,124,Department of Finance Canada,Ministère des Finances Canada
+4071,Preparation of the Federal Budget,Préparation du budget fédéral,124,Department of Finance Canada,Ministère des Finances Canada
+4070,Assault-Style Firearms Compensation Program ,Programme d'indemnisation pour les armes à feu de style arme d'assaut (PIAFSAA),135,Public Safety Canada,Sécurité publique Canada
+4069,Parliamentary District Policing Program ,Programme de services de police du district parlementaire,135,Public Safety Canada,Sécurité publique Canada
+4068,External Network Connectivity,Connectivité au réseau externe,305,Shared Services Canada,Services partagés Canada
+4067,Intra-building Network,Réseau à l’intérieur des immeubles,305,Shared Services Canada,Services partagés Canada
+4066,Wide Area Network (WAN),Réseau étendu (RE),305,Shared Services Canada,Services partagés Canada
+4065,Workstation Software Provisioning,Approvisionnement en logiciels de poste de travail,305,Shared Services Canada,Services partagés Canada
+4064," Horizontal Policies (Greening) - strategic environmental and economic assessments, compliance management, public statements, and reporting mandatory for all departmental proposals to Cabinet (ie. Budget asks, TB subs, MCs, regulations)","Services d'appoint en matière de politiques (recherche, analyse et conseils en matière de politiques). ",136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4063,Reconciliation and Indigenous engagement advice and  policy development,Activités de réconciliation et de mobilisation des Autochtones et élaboration de politiques,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4062,Moodle,Moodle,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
+4061,Rapid Response Mechanism (RRM),Mécanisme de réponse rapide (MRR),126,Global Affairs Canada,Affaires mondiales Canada
+4060,Provision of humanitarian assistance and operational response to natural disasters abroad in developing countries,Prestation d'assistance humanitaire et réponse opérationnelle aux catastrophes naturelles à l'étranger dans les pays en développement,126,Global Affairs Canada,Affaires mondiales Canada
+4059,Provide leadership on Emergency Response and Preparedness for Health International Assistance portfolio.,Assurer la direction en matière de réponse et de préparation aux urgences pour le secteur d'assistance internationale en santé.,126,Global Affairs Canada,Affaires mondiales Canada
+4058,Governance of LES-Missions' Management Consultative Board processes,Gouvernance du processus de Consultations entre les Conseils de direction des missions et les ERP,126,Global Affairs Canada,Affaires mondiales Canada
+4057,Export Permit Services (Softwood Lumber and Logs),Service des licences d'exportation (bois d'œuvre résineux and billes de bois),126,Global Affairs Canada,Affaires mondiales Canada
+4056,Economic modelling,Modélisation économique,126,Global Affairs Canada,Affaires mondiales Canada
+4055,Diplomatic Security Liasion Services,Services de liaison pour la protection des diplomates,126,Global Affairs Canada,Affaires mondiales Canada
+4054,Consular and emergency communications,Communications consulaires et d'urgence,126,Global Affairs Canada,Affaires mondiales Canada
+4053,Canadian Technology Accelerator,Accélérateurs technologiques canadiens,126,Global Affairs Canada,Affaires mondiales Canada
+4052,Advice to the Minister,Conseils au ministre,126,Global Affairs Canada,Affaires mondiales Canada
+4051,Consular Case Management,Gestion de cas consulaire,126,Global Affairs Canada,Affaires mondiales Canada
+4050,Regional Security Operations Division,Direction des opérations de sécurité régionales,126,Global Affairs Canada,Affaires mondiales Canada
+4049,Information Requests,Demande d`informations,126,Global Affairs Canada,Affaires mondiales Canada
+4048,Federal Policing Border Integrity,Intégrité frontalière de la police fédérale,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+4047,Onboarding Services,Services d'intégration,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4046,CanadaBuys Service Desk (Level 1),Bureau D'aide Achats Canada (Niveau 1),136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4045,Electronic Procurement Solution (EPS),Solutions d'achats électroniques (SAE),136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4044,Seasonal Influenza Immunization for Locally Engaged Staff,Vaccination contre la grippe saisonnière pour les employés recrutés sur place,126,Global Affairs Canada,Affaires mondiales Canada
+4043,Request for Particulars,Demande de renseignements,126,Global Affairs Canada,Affaires mondiales Canada
+4042,Parliamentary briefing materials for Deputy Ministers and Ministers,Documents de breffage parlementaire à l'intention des sous-ministres et des ministres,126,Global Affairs Canada,Affaires mondiales Canada
+4041,LES Social Security Participation management,Gestion de la participation des ERP aux régimes locaux de sécurité sociale,126,Global Affairs Canada,Affaires mondiales Canada
+4040,LES Program co-lead for LES HR systems Software as a service contract requirements,Co-direction du programme ERP pour le contrat de service des logiciels des systèmes de RH ERP,126,Global Affairs Canada,Affaires mondiales Canada
+4039,LES Leave Admin system tool (Avilar) Pilot,Projet pilote (Avilar) du système d'administration des congés ERP,126,Global Affairs Canada,Affaires mondiales Canada
+4038,LES HR learning Framework -Management of Program and Policy Design for Learning,Cadre des RH ERP - Gestion de la conception des programmes et des politiques pour l’apprentissage,126,Global Affairs Canada,Affaires mondiales Canada
+4037,LES HR Framework- Salary scale determination & administration,Cadre de RH ERP-Établissement et administration des échelles salariales,126,Global Affairs Canada,Affaires mondiales Canada
+4036,"LES HR Framework -Policy Stewardship - Management of Program and Policy Design for Staffing, Classification, Labour Relations and Terms and Conditions of Employment","Cadre des RH ERP - Gestion des politiques et direction de la conception des programmes et des politiques pour la dotation, la classification, les relations de travail et les conditions d'emploi",126,Global Affairs Canada,Affaires mondiales Canada
+4035,LES HR Framework -Management of Program and Policy Design for Performance management,Cadre des RH ERP - Gestion de la conception des programmes et politiques pour la gestion du rendement,126,Global Affairs Canada,Affaires mondiales Canada
+4034,LES HR Framework - LES Labour Relations and Terms and Conditions of Employment,Cadre des RH ERP - Relations de travail et termes et conditions d'emploi des ERP,126,Global Affairs Canada,Affaires mondiales Canada
+4033,LES Benefits management - Insured Benefit Plans,Gestion des avantages sociaux des ERP - Régimes de prestations assurées,126,Global Affairs Canada,Affaires mondiales Canada
+4032,LES Benefits management - Financial Operations/Management and Oversight - Funds Management,Gestion des prestations ERP - opérations financières/gestion et surveillance - Gestion des fonds,126,Global Affairs Canada,Affaires mondiales Canada
+4031,LES Benefits management - Financial Operations/Management and Oversight - Contract and invoice Management,Gestion des prestations ERP - opérations financières/gestion et surveillance - Gestion des contrats et des factures,126,Global Affairs Canada,Affaires mondiales Canada
+4030,LES Benefits management - End of service entitlements,Gestion des prestations ERP - indemnités de départ,126,Global Affairs Canada,Affaires mondiales Canada
+4029,Labour Relations Centre of Expertise - Corporate Services,Centre d'expertise en relations de travail - Services ministériels,126,Global Affairs Canada,Affaires mondiales Canada
+4028,"Integrated support for international assistance programming (G&Cs, RBM, Risk, APP, specialist support: gender, environment, sexual exploitation and abuse)",Ressources en matière de Gestion axée sur les résultats (GAR),126,Global Affairs Canada,Affaires mondiales Canada
+4027,Government in Council (GIC) and Ministerial Appointments,Nominations par le gouverneur en conseil (GEC) et ministérielles,126,Global Affairs Canada,Affaires mondiales Canada
+4026,Family Support Unit,Unité de soutien aux familles,126,Global Affairs Canada,Affaires mondiales Canada
+4025,Engineering Service,Service d'ingénierie,126,Global Affairs Canada,Affaires mondiales Canada
+4024,Digital Platform for Grants and Contributions Management,Plateforme numérique pour la gestion des subventions et des contributions,126,Global Affairs Canada,Affaires mondiales Canada
+4023,Cyber Attributions,Connaissances des menaces cybernétiques,126,Global Affairs Canada,Affaires mondiales Canada
+4022,Administration of Authorization Regime,Administration du régime d’autorisations,126,Global Affairs Canada,Affaires mondiales Canada
+4021,Access to Canadian Top Secret Network, Accès au Réseau canadien très secret,126,Global Affairs Canada,Affaires mondiales Canada
+4020,Citizenship Services,Services de citoyenneté,126,Global Affairs Canada,Affaires mondiales Canada
+4019,Passport Services,Services de passeports,126,Global Affairs Canada,Affaires mondiales Canada
+4018,Registrations of Canadians Abroad (ROCA),Inscription des Canadiens à l'étranger,126,Global Affairs Canada,Affaires mondiales Canada
+4017,Domestic Physical Security,Sécurité matérielle nationale,126,Global Affairs Canada,Affaires mondiales Canada
+4016,Personnel Security and Contracting,Sécurité du personnel et des marchés,126,Global Affairs Canada,Affaires mondiales Canada
+4015,General Consular Guidance,Assistance consulaire générale,126,Global Affairs Canada,Affaires mondiales Canada
+4014,Specialized Services,Services spécialisés,126,Global Affairs Canada,Affaires mondiales Canada
+4013,Specialized Digital Systems,Systèmes numériques spécialisés,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+4012,National Communications & Public Affairs (NCPA) - Digital Communications,Communications nationales et Affaires publiques (CNAP) - Communications numériques,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+4011,LiquidFiles,FichersLiquides,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 4010,Exhibitions,Expositions,199,Library and Archives Canada,Bibliothèque et Archives Canada
 4009,Tours,Visites guidées,199,Library and Archives Canada,Bibliothèque et Archives Canada
 4008,Events,Événements,199,Library and Archives Canada,Bibliothèque et Archives Canada
 4007,Warehouse Assessment Services,Services d'évaluation d'entrepôt,136,Public Services and Procurement Canada,
 4006,Media Relations,Bureau des relations avec les médias,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
-4005,Enterprise Service Project Management ,Gestion de projets de services d’entreprise,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+4005,Enterprise Service Project Management,Gestion de projets de services d’entreprise,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 4004,Shared Ombuds services,Services d’ombuds partagés,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 4003,Alternative Dispute Resolution,Règlement des différends,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 4002,Review of federal organization’s procurement practices,L’examen des pratiques d’approvisionnement des organisations fédérales,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
@@ -57,7 +201,7 @@
 3716,Actuarial Validation Report Reviews,Les rapports d’évaluation actuarielle,46,Canada Revenue Agency,Agence du revenu du Canada
 3715,id not used,identifiant pas utilisé,46,Canada Revenue Agency,Agence du revenu du Canada
 3714,Applications for Charitable registration or re-registration,Demandes d'enregistrement ou de réenregistrement d'organismes de bienfaisance,46,Canada Revenue Agency,Agence du revenu du Canada
-3713,GST/HST rulings and interpretations -  written enquiries,Décisions et interprétations en matière de TPS/TVH – Demandes écrites,46,Canada Revenue Agency,Agence du revenu du Canada
+3713,GST/HST rulings and interpretations - written enquiries,Décisions et interprétations en matière de TPS/TVH – Demandes écrites,46,Canada Revenue Agency,Agence du revenu du Canada
 3712,id not used,identifiant pas utilisé,46,Canada Revenue Agency,Agence du revenu du Canada
 3711,Applications to register new pension plans and deferred profit sharing plans,Demandes d’agrément des régimes de pension et des régimes de participation différée aux bénéfices,46,Canada Revenue Agency,Agence du revenu du Canada
 3710,Deferred Income and savings plans specimens reviews,Régimes de revenu différé et d’épargne (spécimens),46,Canada Revenue Agency,Agence du revenu du Canada
@@ -83,7 +227,7 @@
 3690,Access to activities at the Plains of Abraham Museum,Accès aux activités du Musée des plaines d'Abraham,218,The National Battlefields Commission,Commission des champs de bataille nationaux
 3689,Small Craft Harbours Grant and Contribution Programs,Programmes de subventions et de contributions pour les ports pour petits bateaux,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 3688,Small Craft Harbours,Ports pour petits bateaux,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-3687,MPA Activity Plan Application Process,Processus de demande d'activités pour la ZPM -  Anguniaqvia niqiqyuam,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+3687,MPA Activity Plan Application Process,Processus de demande d'activités pour la ZPM - Anguniaqvia niqiqyuam,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 3686,Indigenous Program Agreements,Accords sur les programmes autochtones,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 3685,Grants and Contributions Programs,Programmes de subventions et contributions,12,Atlantic Canada Opportunities Agency,Agence de promotion économique du Canada atlantique
 3684,Research Support Process,Processus de soutien à la recherche,552,Polar Knowledge Canada,Savoir polaire Canada
@@ -122,7 +266,7 @@
 3651,"Canadian Anti-Fraud Centre-
 Online Fraud Reporting Systems",Centre Antifraude du Canada - système de signalement en ligne,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 3650,Cyber Flipbook,Le livre d epoche cybernétique,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-3649,Digital Communications – Web Communications,Communications numériques –  Communications Web,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+3649,Digital Communications – Web Communications,Communications numériques – Communications Web,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 3648,Cyber Centre Learning Hub - Custom Course Development,Carrefour de l’apprentissage du Centre pour la cybersécurité – Élaboration de cours sur mesure,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
 3647,Compliance Reviews / Certifications - Common Criteria Recognition Arrangement (CCRA),Certifications/examens de conformité – Arrangement de reconnaissance des Critères communs,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
 3646,Compliance Reviews / Certifications - Cryptographic Module Validation Program,Certifications/examens de conformité – Programme de validation des modules cryptographiques,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
@@ -245,11 +389,11 @@ SRV03524,Seafarer Recruitment and Placement Service (SRPS) provider licensing,Li
 SRV03523,Maritime Labour Convention Certificates,Certificat de travail maritime.,138,Transport Canada,Transports Canada
 SRV03522,Approval for a marine training program or course provided by a marine training institution,Approbation d'un programme ou d'un cours de formation maritime dispensé par un établissement d'enseignement maritime reconnu,138,Transport Canada,Transports Canada
 SRV03521,CANUTEC Registration system,Service à l'inscription de CANUTEC,138,Transport Canada,Transports Canada
-SRV03520,Canadian Transport Emergency Centre (CANUTEC)  - Publication of the Emergency Response Guidebook (ERG),Centre canadien d'urgence transport (CANUTEC) - Publication du Guide des interventions d'urgence (ERG),138,Transport Canada,Transports Canada
+SRV03520,Canadian Transport Emergency Centre (CANUTEC) - Publication of the Emergency Response Guidebook (ERG),Centre canadien d'urgence transport (CANUTEC) - Publication du Guide des interventions d'urgence (ERG),138,Transport Canada,Transports Canada
 SRV03519,Canadian Transport Emergency Centre (CANUTEC),Centre canadien d’urgence transport,138,Transport Canada,Transports Canada
 SRV03518,Approval of Emergency Response Assistance Plans (ERAP),Approbation des plans d’intervention d’urgence (PIU),138,Transport Canada,Transports Canada
 SRV03517,Reservation of an aircraft registration mark,Réservation d'une marque d'immatriculation d'aéronef,138,Transport Canada,Transports Canada
-SRV03516,"General Inquiries related to the TDG Program, including means of containment, regulations and legislation","Demandes de renseignements généraux  concernant le programme du TMD, y compris les contenants, les règlements et les lois.",138,Transport Canada,Transports Canada
+SRV03516,"General Inquiries related to the TDG Program, including means of containment, regulations and legislation","Demandes de renseignements généraux concernant le programme du TMD, y compris les contenants, les règlements et les lois.",138,Transport Canada,Transports Canada
 SRV03515,Equivalency and Temporary Certificates,Certificats d’équivalence et certificats temporaires,138,Transport Canada,Transports Canada
 SRV03514,Education and Awareness,Éducation et sensibilisation,138,Transport Canada,Transports Canada
 SRV03513,Canadian Airline Designations and Airline Capacity Allocation,Désignations des compagnies aériennes canadiennes,138,Transport Canada,Transports Canada
@@ -349,7 +493,7 @@ SRV03417,Commonwealth Blue Charter Champion Contribution Program,Programme de co
 SRV03416,Whale Protection And Recovery Initiative Contribution Program,Programme de contribution de l’Initiative de protection et de rétablissement des baleines,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 SRV03415,Work Point Booking Tool,Outil de réservation pour postes de travail,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 SRV03414,Access to Information and Privacy - Access to Information Act,Accès à l’information et protection des renseignements personnels - Loi sur l'accès à l'information,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
-SRV03413,Access to Information and Privacy - Privacy Act,Accès à l’information et protection des renseignements personnels  - Loi sur la protection des renseignements personnels,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
+SRV03413,Access to Information and Privacy - Privacy Act,Accès à l’information et protection des renseignements personnels - Loi sur la protection des renseignements personnels,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
 SRV03411,Cybersecurity Advice & Guidance - System Security Architecture,Avis et conseils en matière de cybersécurité – Architecture de sécurité du système,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
 SRV03410,Cyber Threat Surface Analysis,Analyse de l’exposition aux cybermenaces,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
 SRV03408,Service Coordination,Coordination des services,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
@@ -378,7 +522,7 @@ SRV03381,Jordan's Principle: Funding,Principe de Jordan: financement,348,Departm
 SRV03380,Aboriginal Entrepreneurship Program - Access to Business Opportunities stream,Programme d'entrepreneuriat autochtone - Accès à des possibilités d'affaires,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 SRV03379,Residential Schools Legacy,Séquelles des pensionnats,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
 SRV03378,Wildland Fire Resilience,Contribution à l'appui de Programme Résilience des feux de forêt,134,Natural Resources Canada,Ressources naturelles Canada
-SRV03377,Training And Exercising Participation Contribution Program,Programme de contribution pour la participation aux activités   de formation et d'exercice,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+SRV03377,Training And Exercising Participation Contribution Program,Programme de contribution pour la participation aux activités de formation et d'exercice,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 SRV03376,Aquatic Invasive Species Prevention Fund,Fonds de prévention des espèces aquatiques envahissantes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 SRV03375,Fighting and Managing Wildfires in a Changing Climate,Combattre et gérer les feux de forêt dans un climat en changement,134,Natural Resources Canada,Ressources naturelles Canada
 SRV03374,Compliance and Enforcement,Conformité et Application de la loi,125,Fisheries and Oceans Canada,Pêches et Océans Canada
@@ -397,7 +541,7 @@ SRV03345,Development of Official-Language Communities – Community Spaces Fund,
 SRV03343,Ghost Gear Fund,Fonds pour les engins fantômes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 SRV03339,Evaluation Publications,Publications d'évaluation,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03336,Enterprise Architecture,Architecture d'Entreprise,126,Global Affairs Canada,Affaires mondiales Canada
-SRV03335,Enabling the coordination of  Matchmaking/B2B,Jumelages/B2B,126,Global Affairs Canada,Affaires mondiales Canada
+SRV03335,Enabling the coordination of Matchmaking/B2B,Jumelages/B2B,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03334,Development of Official-Language Communities - Cooperation with the Non-Governmental Sector,Développement des communautés de langue officielle - Collaboration avec le secteur non gouvernemental,122,Canadian Heritage,Patrimoine canadien
 SRV03333,International Relations and Border Policy,Les relations internationales et la politique frontalière,135,Public Safety Canada,Sécurité publique Canada
 SRV03332,Development of Official-Language Communities - Teacher Recruitment and Retention Strategy in Minority French Language Schools,Développement des communautés de langue officielle - Stratégie de recrutement et de rétention d’enseignants pour les écoles de langue française en situation minoritaire,122,Canadian Heritage,Patrimoine canadien
@@ -416,7 +560,7 @@ SRV03305,Military and Scientific Overflight Clearance request management,Gestion
 SRV03304,Museums Assistance - Collections Management,Aide aux musées - Gestion des collections,122,Canadian Heritage,Patrimoine canadien
 SRV03303,Ministerial Liaison,Liaison ministerielle,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03301,Museums Assistance - Indigenous Heritage,Aide aux musées - Patrimoine autochtone,122,Canadian Heritage,Patrimoine canadien
-SRV03298,Museums Assistance - Exhibition Circulation Fund,Aide aux musées  - Fonds des expositions itinérantes,122,Canadian Heritage,Patrimoine canadien
+SRV03298,Museums Assistance - Exhibition Circulation Fund,Aide aux musées - Fonds des expositions itinérantes,122,Canadian Heritage,Patrimoine canadien
 SRV03297,Networks support for International STI,Appui aux Réseaux en STI international,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03296,Multiculturalism and Anti-Racism Initiatives - Organizational Capacity Building,Multiculturalisme et la lutte contre le racisme - Renforcement des capacités organisationnelles,122,Canadian Heritage,Patrimoine canadien
 SRV03291,Multiculturalism and Anti-Racism Initiatives - Projects,Multiculturalisme et la lutte contre le racisme - Projets,122,Canadian Heritage,Patrimoine canadien
@@ -488,21 +632,21 @@ SRV03191,Canada Periodical Fund- Business Innovation - Magazines,Fonds du Canada
 SRV03190,Canada Periodical Fund - Aid to publishers - Community Newspaper,Fonds du Canada pour les périodiques - Aide aux éditeurs - Journal communautaire,122,Canadian Heritage,Patrimoine canadien
 SRV03189,Canada Periodical Fund - Aid to publishers- Digital Periodical,Fonds du Canada pour les périodiques - Aide aux éditeurs - Périodique numérique,122,Canadian Heritage,Patrimoine canadien
 SRV03188,ATSSC Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,539,Administrative Tribunals Support Service of Canada,Service canadien d'appui aux tribunaux administratifs
-SRV03187,Digital Citizen Contribution Program  - Digital Citizen Initiative,Programme de contributions en matière de citoyenneté numérique - Initiative de citoyenneté,122,Canadian Heritage,Patrimoine canadien
+SRV03187,Digital Citizen Contribution Program - Digital Citizen Initiative,Programme de contributions en matière de citoyenneté numérique - Initiative de citoyenneté,122,Canadian Heritage,Patrimoine canadien
 SRV03186,Federal Cyber Incident Response Plan (FCIRP),Plan fédéral de réponse aux cyberincidents (PFRC),135,Public Safety Canada,Sécurité publique Canada
 SRV03185,Canada Cultural Investment Fund - Limited Support to Endangered Arts Organizations,Fonds du Canada pour l'investissement en culture - Appui limité aux organismes artistiques en situation précaire,122,Canadian Heritage,Patrimoine canadien
 SRV03184,Canada Cultural Investment Fund - Endowment Incentives,Fonds du Canada pour l'investissement en culture - Incitatifs aux fonds de dotation,122,Canadian Heritage,Patrimoine canadien
-SRV03183,Canada Book Fund  - Support for Booksellers,Fonds du livre du Canada - Soutien aux librairies,122,Canadian Heritage,Patrimoine canadien
+SRV03183,Canada Book Fund - Support for Booksellers,Fonds du livre du Canada - Soutien aux librairies,122,Canadian Heritage,Patrimoine canadien
 SRV03182,Certificates under the United Nations Act,Certification en vertu de la Loi sur les Nations Unies,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03181,Cyber Defence Services,Services de cyberdéfense,110,Communications Security Establishment Canada,Centre de la sécurité des télécommunications Canada
-SRV03179,Canada Book Fund  - Support for Organizations,Fonds du livre du Canada - Soutien aux organismes,122,Canadian Heritage,Patrimoine canadien
+SRV03179,Canada Book Fund - Support for Organizations,Fonds du livre du Canada - Soutien aux organismes,122,Canadian Heritage,Patrimoine canadien
 SRV03178,Canadian Police Arrangement and Civilian Deployment Platform,l’Arrangement sur la police civile canadienne (APCC)/la Plateforme de déploiements de ressources civiles,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03177,Development of Emergency Economic Stimulus Packages,Élaboration de plans de relance économique d’urgence,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 SRV03176,Canadian International Innovation Program (CIIP),Le programme canadien de l' innovation à l'internationale (PCII),126,Global Affairs Canada,Affaires mondiales Canada
-SRV03175,Canada Book Fund  - Support for Publishers- Publishing Support,Fonds du livre du Canada - Soutien aux éditeurs - Soutien à l’édition,122,Canadian Heritage,Patrimoine canadien
+SRV03175,Canada Book Fund - Support for Publishers- Publishing Support,Fonds du livre du Canada - Soutien aux éditeurs - Soutien à l’édition,122,Canadian Heritage,Patrimoine canadien
 SRV03173,Bilateral agreements and joint working groups,Ententes bilatérales et groupes de travail,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03172,Canada Arts Presentation Fund - Development,Fonds du Canada pour la présentation des arts - Soutien au développement,122,Canadian Heritage,Patrimoine canadien
-SRV03171,Canada Arts Presentation Fund  - Presenter Support Organizations,Fonds du Canada pour la présentation des arts - Organismes d'appui à la diffusion,122,Canadian Heritage,Patrimoine canadien
+SRV03171,Canada Arts Presentation Fund - Presenter Support Organizations,Fonds du Canada pour la présentation des arts - Organismes d'appui à la diffusion,122,Canadian Heritage,Patrimoine canadien
 SRV03170,Research Security Centre,Centre de la sécurité de la recherche,135,Public Safety Canada,Sécurité publique Canada
 SRV03168,Cancellation and revocation of passports and refusal of passport services,Annulation et révocation de passeports et refus de services de passeport,135,Public Safety Canada,Sécurité publique Canada
 SRV03164,Baseline Threat Assessments (BTAs),L’évaluation de base des menaces(EBM),126,Global Affairs Canada,Affaires mondiales Canada
@@ -512,7 +656,7 @@ SRV03160,Avian Influenza Movement - General Permit,Mouvement de la grippe aviair
 SRV03159,Shipborne Dunnage Program,Programme du bois de calage transporté par les navires,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV03158,Application to no longer be a designated person,Demande de radiation,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03157,Application for Review of Seizure Order,Demande d'examination de décret concernant la saisie de biens situés au Canada,126,Global Affairs Canada,Affaires mondiales Canada
-SRV03156,Application for a certificate - Mistaken identity,Demande d'attestation -  erreur d'identité,126,Global Affairs Canada,Affaires mondiales Canada
+SRV03156,Application for a certificate - Mistaken identity,Demande d'attestation - erreur d'identité,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03155,Anti-Crime and Counter-Terrorism Capacity Building Programs (AC/CTCBP),Programme d’aide au renforcement des capacités en matière de lute contre la criminalité et le terrorism,126,Global Affairs Canada,Affaires mondiales Canada
 SRV03154,License for Removal of Animals or Things Under the authority of The Health of Animals Act,Permis pour l'enlèvement d'animaux ou de choses en vertu de la Loi sur la santé des animaux,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV03153,LDD Forest Products - Receiving Regulated Product,Produits forestiers LDD - Réception de produits réglementés,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
@@ -570,10 +714,10 @@ SRV03014,Cadet Training Services,Services de formation des cadets,295,Royal Cana
 SRV03012,Corporate Staffing - Member,Dotation ministérielle - Membre,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03010,Digital Systems and Solutions Delivery,"Soutien aux forces de l'ordre des systèmes, applications et services critiques",295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03009,Operations and Platform Support,Soutien des opérations et des plateformes,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-SRV03008,National Radio Services  (NRS),Programme de services radio nationaux (SRN),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+SRV03008,National Radio Services (NRS),Programme de services radio nationaux (SRN),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03007,Truth Verification Section (TVS),Section des contrôles de sincérité (SCS),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03006,National Child Exploitation Crime Centre (NCECC),Centre national contre l'exploitation des enfants (CNCEE),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-SRV03005,National Centre for Missing Persons and Unidentified Remains (NCMPUR),Centre national  pour les personnes disparues et les restes non identifiés (CNPDRN),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+SRV03005,National Centre for Missing Persons and Unidentified Remains (NCMPUR),Centre national pour les personnes disparues et les restes non identifiés (CNPDRN),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03004,Behavioural Sciences Investigative Services (BSIS),Services d'enquêtes en sciences du comportement (SESC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03003,"Chemical, Biological, Radiological, Nuclear and Explosives","Chimique, biologique, radiologique, nucléaire et explosifs",295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV03002,Protective Technical Services,Services techniques de protection,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
@@ -598,10 +742,10 @@ SRV02980,RCMP- National Critical Infrastructure Team,(GRC) Équipe nationale des
 SRV02979,National Security,Sécurité nationale,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02978,Federal Policing Criminal Operations (FPCO),Opérations Criminelles de la Police Fédérale (OCPF),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02977,RCMP- National Crime Prevention and Indigenous Policing Services,(GRC) Services nationaux de prévention du crime et de police autochtone,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-SRV02976,Operational Systems Service Centre   (OSSC) :,Centre de service des systèmes de la police opérationnels (CSSPO),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+SRV02976,Operational Systems Service Centre (OSSC) :,Centre de service des systèmes de la police opérationnels (CSSPO),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02975,Strategic Policing Agreements and Service,Accords de services de police stratégiques et Service,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-SRV02974,Operational Communication Centers    (OCC),Stations de transmissions opérationnelles  (STO),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-SRV02973,National Criminal Operations   (NCROPS),Opérations criminelles nationales (SNPC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+SRV02974,Operational Communication Centers (OCC),Stations de transmissions opérationnelles (STO),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+SRV02973,National Criminal Operations (NCROPS),Opérations criminelles nationales (SNPC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02972,Operational Readiness and Response,Préparation et réponse opérationnelles,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02970,Real Property Management,Gestion des biens immobiliers,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 SRV02969,RCMP- Criminal Intelligence Service Canada (CISC),(GRC) Service canadien de renseignements criminels (SCRC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
@@ -731,11 +875,11 @@ SRV02825,Canada Worker Lockdown Benefit (CWLB),Prestation canadienne pour les tr
 SRV02824,Canadian film or video production tax credit (CPTC) and film or video production services tax credit (PSTC) – Claims selected for an audit,Crédit d’impôt pour production cinématographique ou magnétoscopique canadienne (CIPC) et crédit d'impôt pour services de production cinématographique ou magnétoscopique (CISP) – Demandes sélectionnées pour une vérification,46,Canada Revenue Agency,Agence du revenu du Canada
 SRV02823,Event Management Service,Service de gestion d'évenements,126,Global Affairs Canada,Affaires mondiales Canada
 SRV02822,Scientific Research and Experimental Development (SR&ED) Tax Credits – Refundable claims selected for a review,Crédit d’impôt pour la recherche scientifique et le développement expérimentale (RS&DE) – demandes remboursables sélectionnées pour un examen,46,Canada Revenue Agency,Agence du revenu du Canada
-SRV02821,"Scientific Research and Experimental Development (SR&ED) Tax Credits, Canadian film or video production tax credit (CPTC), and film or video production services tax credit (PSTC) – Claims not selected for a review or an audit","Crédit d’impôt  pour la recherche scientifique et le développement expérimental (RS&DE), crédit d’impôt pour production cinématographique ou magnétoscopique canadienne (CIPC) et crédit d’impôt pour services de production cinématographique ou magnétoscopique (CISP) Demandes non sélectionnées pour un examen ou une vérification",46,Canada Revenue Agency,Agence du revenu du Canada
+SRV02821,"Scientific Research and Experimental Development (SR&ED) Tax Credits, Canadian film or video production tax credit (CPTC), and film or video production services tax credit (PSTC) – Claims not selected for a review or an audit","Crédit d’impôt pour la recherche scientifique et le développement expérimental (RS&DE), crédit d’impôt pour production cinématographique ou magnétoscopique canadienne (CIPC) et crédit d’impôt pour services de production cinématographique ou magnétoscopique (CISP) Demandes non sélectionnées pour un examen ou une vérification",46,Canada Revenue Agency,Agence du revenu du Canada
 SRV02820,Internal Audit,Audit Interne,126,Global Affairs Canada,Affaires mondiales Canada
 SRV02818,Financial audits of the Public Accounts of Canada,Audit des états financiers des Comptes publics du Canada,238,Office of the Auditor General of Canada,Bureau du vérificateur général du Canada
 SRV02817,Debt Management Call Centre,Centre d’appels de la gestion des créances,46,Canada Revenue Agency,Agence du revenu du Canada
-SRV02816,Taxation Statistical Analyses and  Data Processing,Analyse statistique et traitement de données de l’impôt,46,Canada Revenue Agency,Agence du revenu du Canada
+SRV02816,Taxation Statistical Analyses and Data Processing,Analyse statistique et traitement de données de l’impôt,46,Canada Revenue Agency,Agence du revenu du Canada
 SRV02815,GCXchange,GCéchange,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 SRV02814,Avalanche Control,Contrôle des avalanches,263,Parks Canada,Parcs Canada
 SRV02813,Nature Smart Climate Solutions Fund,Fonds des solutions climatiques axées sur la nature,137,Environment and Climate Change Canada,Environnement et Changement climatique Canada
@@ -787,13 +931,13 @@ SRV02743,Licenced Seed Crop Inspector,Inspecteur de cultures de semences agréé
 SRV02742,Destination Inspection Service (DIS),Service d'inspection à destination (SID),65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02741,Notice of Import Conformity,Ll'avis de libération,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02740,Non-propagative Potato Program,Programme de pommes de terre non destinées à la multiplication,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
-SRV02739,Plant Health Investigation - Incident Response,Enquête sur la salubrité  des végétaux - intervention en cas d’incident,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
+SRV02739,Plant Health Investigation - Incident Response,Enquête sur la salubrité des végétaux - intervention en cas d’incident,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02738,General Enquiries,Demande de renseignements,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02737,Ask CFIA,Demandez à l'ACIA,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02736,Regulatory Opinion PNT/VRO,Avis réglementaire (VCN/BEV),65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02735,Request for Opinion or Data Review for Livestock Feeds,Demande d'avis ou d'examen de données pour les aliments du bétail,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02734,Re-export Phytosanitary Certificate,certificats phytosanitaires de réexportation,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
-SRV02733,Certificate of Origin (Plant Pests / LDD),"Certificat d'origine  (spongieuse nord-américaine, Lymantria dispar)",65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
+SRV02733,Certificate of Origin (Plant Pests / LDD),"Certificat d'origine (spongieuse nord-américaine, Lymantria dispar)",65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02732,Seed Analysis Certificate for Export Purposes (CFIA 1113),Certificat d'analyse de semences aux fins d'exportation,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02731,Phytosanitary Certificate for Export,Certificat phytosanitaire pour l'exportation,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 SRV02730,Plant Breeders' Rights (PBR Certificate),Protection des obtentions végétales,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
@@ -883,14 +1027,14 @@ SRV02643,Ministerial Exemptions for the Purpose of Alleviating a Shortage in Can
 SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Canadian Food Inspection Agency,Agence canadienne d'inspection des aliments
 2642,NFB.ca-Digital Store,ONF.ca-Boutique numérique,223,National Film Board,Office national du film
 2641,CAMPUS - Individual subscription,CAMPUS - Abonnement individuel,223,National Film Board,Office national du film
-2638,Enforcement of Fisheries Legislation and Contaminated  Shellfish Harvest Areas Closure Regulations,Application des lois sur les pêches et des règlements de fermeture de  secteurs coquilliers contaminés,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2638,Enforcement of Fisheries Legislation and Contaminated Shellfish Harvest Areas Closure Regulations,Application des lois sur les pêches et des règlements de fermeture de secteurs coquilliers contaminés,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2637,Indigenous Fisheries Management,Gestion des pêches autochtones,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2636,Contributions in support of the Salmonid and Salmon Enhancement Programming,Contributions à l'appui du Programme de mise en valeur des salmonidés,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2635,TMX Accommodation Measure Terrestrial Cumulative Effects Initiative (TCEI),Les mesures d'accommodement TMX Initiative sur les effets cumulatifs en milieu terrestre (IECT),125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2634,TMX Accommodation Measure Aquatic Habitat Restoration Program (AHRF),Les mesures d'accommodement TMX Fonds de restauration de l'habitat aquatique (FRHA),125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2633,Aquatic Invasive Species Program - Contribution Agreements,Programme sur les espèces aquatiques envahissantes - Ententes de contribution,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-2632,Fisheries Act   - Aquatic Invasive Species Regulations Fishing Licences,La Loi sur les pêches - permis de pêches du Règlement sur les especes aquatiques envahisantes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-2631,Fisheries Act   - Aquatic Invasive Species Regulations Authorizations,la Loi sur les pêches - Autorisations en vertu du Règlement sur les especes aquatiques envahisantes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2632,Fisheries Act - Aquatic Invasive Species Regulations Fishing Licences,La Loi sur les pêches - permis de pêches du Règlement sur les especes aquatiques envahisantes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2631,Fisheries Act - Aquatic Invasive Species Regulations Authorizations,la Loi sur les pêches - Autorisations en vertu du Règlement sur les especes aquatiques envahisantes,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2630,"Media monitoring and analysis, media relations","Surveillance et analyse médiatiques, relations avec les médias",278,Privy Council Office,Bureau du Conseil privé
 2629,Horizontal Coordination of Government Public opinion research and analysis,Coordination horizontale de la recherche et analyse sur l’opinion publique,278,Privy Council Office,Bureau du Conseil privé
 2628,Horizontal Coordination of Government advertising services,Coordination horizontale des services de publicité du gouvernement,278,Privy Council Office,Bureau du Conseil privé
@@ -1068,7 +1212,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 2265,Travel Health Advice,Conseils de santé aux voyageurs,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 2264,COVID-19 Mental Health Response,COVID-19: Intervention en santé mentale,127,Health Canada,Santé Canada
 2263,Public Service Occupational Health Program COVID Response Division,Programme de santé au travail de la fonction publique - Division de l'intervention liée à la COVID,127,Health Canada,Santé Canada
-2262,Project Risk and Complexity Assessment (Callipers),L’Évaluation de la complexité et des risques des projets  (Calibrage),326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
+2262,Project Risk and Complexity Assessment (Callipers),L’Évaluation de la complexité et des risques des projets (Calibrage),326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 2261,Repository of Federal Public Sector (Core Public Administration) Collective Agreements,Répertoire des conventions collectives du secteur public fédéral (administration publique centrale),326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 2260,"Investment Canada Act (ICA) Net Benefit Review, National Security Review","Loi sur Investissement Canda examen de l'avantage net, examen relatif à la sécurité nationale",130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 2259,Early Retirement Incentive Program- A Unique Program (not associated with Receiver General Functions). Maintain pension services for employees of coal mines.,Programme d’encouragement à la retraite anticipée – Un programme unique (indépendant des fonctions du receveur général). Assurer les services de pensions pour les employés des mines de charbon.,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
@@ -1134,7 +1278,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 2139,Departmental Correspondence Unit,Unité de la correspondance ministérielle,124,Department of Finance Canada,Ministère des Finances Canada
 2138,Criminal Intelligence Service Canada (CISC),Service canadian de renseignements criminels (SCRC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 2137,Sensitive and Specialized Investigative Services (SSIS),Services d'enquêtes spécialisées et de nature délicate (SESND),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-2136,Canadian Criminal Real Time Identification Services (CCRTIS) -  Biometric Business Solutions (BBS) Certification Services.,Les Services canadiens d'identification criminelle en temps réel (SCICTR) - Services de certification- Solutions biométriques d'entreprise (SBE),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+2136,Canadian Criminal Real Time Identification Services (CCRTIS) - Biometric Business Solutions (BBS) Certification Services.,Les Services canadiens d'identification criminelle en temps réel (SCICTR) - Services de certification- Solutions biométriques d'entreprise (SBE),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 2134,Canada Energy Regulator (CER)'s Emergency Response Procedures,Procedures d'intervention d'urgence de la Régie de l'énergie du Canada,221,Canada Energy Regulator,Régie de l'énergie du Canada
 2133,Privacy,Protection des renseignements personnels,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
 2132,Settlement Program Transfer Payments,Paiements de transfert du Programme d'établissement,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
@@ -1174,7 +1318,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 2094,Enhanced Nature Legacy - Canada Target 1 Challenge Top-up,Complément du Défi de l’objectif 1 du Patrimoine naturel bonifié du Canada,137,Environment and Climate Change Canada,Environnement et Changement climatique Canada
 2093,TMX Accommodation Measure Salish Sea Initiative (SSI),Initiative de la mer Salish (IMS),125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2092,Marine Mammal Response Program,Programme d'intervention auprès des mammifères marins,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-2091,BC Salmon Restoration and Innovation Fund (BCSRIF),Fonds de restauration et d'innovation pour le saumon de la Colombie-Britannique  (FRISB),125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2091,BC Salmon Restoration and Innovation Fund (BCSRIF),Fonds de restauration et d'innovation pour le saumon de la Colombie-Britannique (FRISB),125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2087,Indigenous Habitat Participation Program,Programme pour la participation autochtone sur les habitats,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2086,National Collision Database (NCDB),Base nationale de données sur les collisions (BNDC),138,Transport Canada,Transports Canada
 2085,Program to Protect Canada's Coastlines and Waterways: Program to Enhance Maritim,Programme de protection du littoral et des voies navigables du Canada : Programme de sensibilisation accrue aux activités maritimes,138,Transport Canada,Transports Canada
@@ -1182,9 +1326,9 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 2083,Trade Data Online,Données sur le commerce en direct.,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 2082,Canadian Importers Database,Base de données sur les importateurs canadiens,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 2080,Canadian Industry Statistics,Statistiques relatives à l'industrie canadienne,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
-2079,MPA Activity Plan Application Process - Banc-des-Americains MPA,Processus de demande d'activités pour la ZPM -  Banc-des-Americains,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-2078,MPA Activity Plan Application Process - Basin Head MPA,Processus de demande d'activités pour la ZPM -  Basin Head,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-2077,MPA Activity Plan Application Process - Laurentian Channel MPA,Processus de demande d'activités pour la ZPM -  Laurentian Channel,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2079,MPA Activity Plan Application Process - Banc-des-Americains MPA,Processus de demande d'activités pour la ZPM - Banc-des-Americains,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2078,MPA Activity Plan Application Process - Basin Head MPA,Processus de demande d'activités pour la ZPM - Basin Head,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+2077,MPA Activity Plan Application Process - Laurentian Channel MPA,Processus de demande d'activités pour la ZPM - Laurentian Channel,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 2076,Program to Protect Canada's Coastlines and Waterways: Marine Training Program,Programme de protection du littoral et des voies navigables du Canada : Programme de formation dans le domaine maritime,138,Transport Canada,Transports Canada
 2075,Program to Protect Canada's Coastlines and Waterways: Indigenous and Local Commu,Programme de protection du littoral et des voies navigables du Canada : Programme de partenariat et de mobilisation des collectivités autochtones et locales,138,Transport Canada,Transports Canada
 2074,Program to Protect Canada's Coastlines and Waterways: Abandoned Boats Program,Programme de protection du littoral et des voies navigables du Canada : Programme de bateaux abandonnés,138,Transport Canada,Transports Canada
@@ -1217,7 +1361,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 2047,Indian Registry,Registre indien,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 2046,Estates Management,Gestion des successions,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 2045,Individual Trust Account Payout Requests,Demandes de paiement de compte en fiducie individuel,348,Department of Indigenous Services,Ministère des Services aux Autochtones
-2044,Indian Moneys Expenditure Requests,Demandes de versement  des fonds indiens,348,Department of Indigenous Services,Ministère des Services aux Autochtones
+2044,Indian Moneys Expenditure Requests,Demandes de versement des fonds indiens,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 2043,Treaty Payments Events,Événements de paiement de traités,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 2042,Transfers of Band Moneys,Transferts d'argent de bande,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 2041,Treaty Annuity Payments,Paiements de rente conventionnelle,348,Department of Indigenous Services,Ministère des Services aux Autochtones
@@ -1290,9 +1434,9 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1965,Exemptions to conduct research with controlled substances including clinical trials,Exemptions relatives a la recherche incluant les essais cliniques,127,Health Canada,Santé Canada
 1964,Issuance of Authorization Certificates for Preparations or Mixtures of Class A or Class B Precursors under the Controlled Drugs and Substances Act and its Regulations (CSCB),Délivrance de certificats d'autorisation pour les préparations ou mélanges de précurseurs de classe A ou B en vertu de la loi réglementant certaines drogues et autres substances et de son règlement d'application (DGSCC),127,Health Canada,Santé Canada
 1963,Issuance of Registrations for Class B Precursors,Inscriptions de précurseurs chimiques de catégorie B,127,Health Canada,Santé Canada
-1962,Issuance of Import and Export Permits for Controlled  Substances and Chemical Precursors under the Controlled Drugs and Substances Act and its Regulations (CSCB),Délivrance de licences d'importation et d'exportation de substances réglementées et de précurseurs chimiques en vertu de la loi réglementant certaines drogues et autres substances et de son règlement d'application (DGSCC),127,Health Canada,Santé Canada
+1962,Issuance of Import and Export Permits for Controlled Substances and Chemical Precursors under the Controlled Drugs and Substances Act and its Regulations (CSCB),Délivrance de licences d'importation et d'exportation de substances réglementées et de précurseurs chimiques en vertu de la loi réglementant certaines drogues et autres substances et de son règlement d'application (DGSCC),127,Health Canada,Santé Canada
 1961,"Issuance of Licences for controlled substances and precursor chemicals under the Controlled Drugs and Substances Act and its Regulations (New, Renewal, Amendment) (CSCB)","Délivrance de licences pour des substances réglementées et des précurseurs chimiques en vertu de la loi sur les drogues et les substances réglementées et de ses règlements (nouvelles licences, renouvellements, modifications) (DGSCC)",127,Health Canada,Santé Canada
-1960,Cannabis Police Services,Services  à la clientèle - Services policiers relatifs au cannabis,127,Health Canada,Santé Canada
+1960,Cannabis Police Services,Services à la clientèle - Services policiers relatifs au cannabis,127,Health Canada,Santé Canada
 1959,Email: cannabis@canada.ca,Le courriel: cannabis@canada.ca,127,Health Canada,Santé Canada
 1958,"Client Services - Call Centre, Cannabis, Correspondence","Services à la clientèle — Centre d’appels, cannabis, correspondance",127,Health Canada,Santé Canada
 1957,Personal Registration Certificates,Certificats d’inscription personnelle,127,Health Canada,Santé Canada
@@ -1321,7 +1465,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1934,Pharmacy Referrals to Provincial Regulatory Authorities for situations of non-co,Renvois aux autorités réglementaires provinciales pour les pharmacies en situations de non-conformité,127,Health Canada,Santé Canada
 1933,Importation of designated devices,Importation d'instruments désignés,127,Health Canada,Santé Canada
 1932,Status Confirmation Service (controlled substances),Service de confirmation du statut (substances désignées),127,Health Canada,Santé Canada
-1931,Decision Registry: Research Requests,Registre des décisions:  Demandes de recherche,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
+1931,Decision Registry: Research Requests,Registre des décisions: Demandes de recherche,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
 1929,Privacy Requests,Demandes de protection des renseignements personnels,122,Canadian Heritage,Patrimoine canadien
 1928,Access to Information requests,Accès à l'information et protection des renseignements personnels,122,Canadian Heritage,Patrimoine canadien
 1925,Enhancement of Official Languages – Cooperation with the Non-Governmental Sector,Mise en valeur des langues officielles - Collaboration avec le secteur non gouvernemental,122,Canadian Heritage,Patrimoine canadien
@@ -1349,8 +1493,8 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1901,Canada Book Fund - Support for Publishers- Business Development,Fonds du livre du Canada - Soutien aux éditeurs - développement des entreprises,122,Canadian Heritage,Patrimoine canadien
 1900,Application for Expungement,Demande de radiation,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
 1899,Victims Complaints Mechanism,Mécanisme de plainte des victimes,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
-1898,Services for Victims:  Providing Audio Recordings to Registered Victims,Services aux victimes : Accès aux enregistrements sonores par les victimes inscrites,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
-1897,Services for Victims:  Providing information and registration services to victims,Services aux victimes : Prestation de services d’information et d’inscription aux victimes,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
+1898,Services for Victims: Providing Audio Recordings to Registered Victims,Services aux victimes : Accès aux enregistrements sonores par les victimes inscrites,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
+1897,Services for Victims: Providing information and registration services to victims,Services aux victimes : Prestation de services d’information et d’inscription aux victimes,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
 1896,Access to Information Requests,Demande d'accès à l'information,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
 1895,Request to Attend a Hearing,Demande pour assister à une audience,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
 1894,Decision Registry Requests,Demande d'accès au Registre des décisions,227,Parole Board of Canada,Commission des libérations conditionnelles du Canada
@@ -1371,7 +1515,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1875,Canada's National Do Not Call List,Liste nationale de numéros de télécommunication exclus du Canada,93,Canadian Radio-television and Telecommunications Commission,Conseil de la radiodiffusion et des télécommunications canadiennes
 1874,ATIP,AIPRP,93,Canadian Radio-television and Telecommunications Commission,Conseil de la radiodiffusion et des télécommunications canadiennes
 1873,Canadian Firearms Program (CFP) - Firearms Registration,Programme canadien des armes à feu (PCAF) - Enregistrement des armes à feu,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-1872,Canadian Firearms Program (CFP) - Support to Law Enforcement,Programme canadien des armes à feu (PCAF)  - Aide aux forces de l'ordre,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+1872,Canadian Firearms Program (CFP) - Support to Law Enforcement,Programme canadien des armes à feu (PCAF) - Aide aux forces de l'ordre,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 1871,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,151,Financial Consumer Agency of Canada,Agence de la consommation en matière financière du Canada
 1870,Ship Sanitation Inspections,Inspections sanitaires de navire,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 1869,Reference,Référence,199,Library and Archives Canada,Bibliothèque et Archives Canada
@@ -1433,7 +1577,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1798,Primary Health Care: Community Oral Health Services - Direct Service Delivery,Soins de santé primaires : Services communautaires de santé bucco-dentaire – Prestation directe de services,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1797,Home and Long-Term Care: Home and Community Care - Funding,Soins à domicile et de longue durée : Soins à domicile et en milieu communautaire – – Financement,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1796,"Recruitment of Policy Leaders (RPL); Job opportunities for professionals, academics and scientist","Recrutement de leaders en politiques: Opportunités d'emplois pour les professionnels, diplômés universitaires et les scientifiques",282,Public Service Commission of Canada,Commission de la fonction publique du Canada
-1795,Home and Long-Term Care: Home & Community Care -  Direct Service Delivery,Soins à domicile et de longue durée : Soins à domicile et en milieu communautaire – Prestation directe de services,348,Department of Indigenous Services,Ministère des Services aux Autochtones
+1795,Home and Long-Term Care: Home & Community Care - Direct Service Delivery,Soins à domicile et de longue durée : Soins à domicile et en milieu communautaire – Prestation directe de services,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1794,PSR; Job opportunities for college and university graduates,Programme de recrutement postsecondaire: Possibilités d'emploi pour les diplômés des collèges et des universités,282,Public Service Commission of Canada,Commission de la fonction publique du Canada
 1793,Research Affiliate Program (RAP); Job opportunities for post-secondary students,Programme des adjoints de recherche: Offres d'emploi pour les étudiants de niveau postsecondaire,282,Public Service Commission of Canada,Commission de la fonction publique du Canada
 1792,FSWEP; Inventory of student employment opportunities in Public Service,Programme fédéral d'expérience de travail étudiant: Répertoire des possibilités d'emploi pour étudiants dans la fonction publique,282,Public Service Commission of Canada,Commission de la fonction publique du Canada
@@ -1459,7 +1603,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1770,On-Reserve Other Community Infrastructure Funding,Fonds d'autres infrastructures communautaires pour les collectivités dans les réserves,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1769,On-Reserve Housing Capacity Building,Renforcement des capacités en matière de logement dans les réserves,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1768,On-Reserve Housing Policy and Technical Support,Politique de logement dans les réserves et soutien technique,348,Department of Indigenous Services,Ministère des Services aux Autochtones
-1767,"On-Reserve Housing: Funding, Policy and Technical Support, and Capacity Building","Fonds d'infrastructure du logement dans:  le financement, soutien politique et technique, et renforcement des capacités",348,Department of Indigenous Services,Ministère des Services aux Autochtones
+1767,"On-Reserve Housing: Funding, Policy and Technical Support, and Capacity Building","Fonds d'infrastructure du logement dans: le financement, soutien politique et technique, et renforcement des capacités",348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1766,On-Reserve Water and Wastewater Infrastructure Capacity Building,Renforcement des capacités pour les Infrastructure d'approvisionemet en eau et des eaux usées dans les réserves.,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1765,On-Reserve Other Community Infrastructure Policy and Technical Support,Politique et soutien technique en matière d'autres infrastructures communautaires pour les collectivités dans les réserves,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1764,On-Reserve Water and Wastewater,L'eau et les eaux usées dans les réserves,348,Department of Indigenous Services,Ministère des Services aux Autochtones
@@ -1504,7 +1648,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1720,Request for assistance for outbreak or Federal public health surge support(s),Demande d'assistance pour de l'aide en cas d'éclosion ou la poussée fédérale de la santé soutient,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 1719,Access to Information and Privacy,Accès à l'information et protection des renseignements personnels,63,Impact Assessment Agency of Canada,Agence d'évaluation d'impact du Canada
 1718,Environmental Assessment done by Substitution,Évaluation environnementale par substitution,63,Impact Assessment Agency of Canada,Agence d'évaluation d'impact du Canada
-1717,Access to Information and Privacy,Accès à l'information et  la protection des renseignements personnels,348,Department of Indigenous Services,Ministère des Services aux Autochtones
+1717,Access to Information and Privacy,Accès à l'information et la protection des renseignements personnels,348,Department of Indigenous Services,Ministère des Services aux Autochtones
 1716,ecoENERGY for Housing - Enquiries,écoÉNERGIE pour l'habitation – Demandes de renseignements,134,Natural Resources Canada,Ressources naturelles Canada
 1715,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,134,Natural Resources Canada,Ressources naturelles Canada
 1714,Environmental Assessment done by the Agency,Évaluations environnementales réalisées par l'Agence,63,Impact Assessment Agency of Canada,Agence d'évaluation d'impact du Canada
@@ -1515,7 +1659,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1709,National Air Photo Library,Photothèque nationale de l'air,134,Natural Resources Canada,Ressources naturelles Canada
 1708,Geo.ca,Geo.ca,134,Natural Resources Canada,Ressources naturelles Canada
 1707,Access to Information and Privacy,Accès à l'information et protection des renseignements personnels,139,Veterans Affairs Canada,Anciens Combattants Canada
-1706,Access to Information and Privacy (ATIP),Accès à l'information et  la protection des renseignements personnels,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
+1706,Access to Information and Privacy (ATIP),Accès à l'information et la protection des renseignements personnels,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
 1705,Corporate and common service management and delivery for DM and MIN offices,Services corporatif et services communs livré aux bureaux des ministres et des sous-ministres,126,Global Affairs Canada,Affaires mondiales Canada
 1704,"Strategic Governance, Ministerial Correspondence","Gouvernance stratégique, Correspondance ministérielle",126,Global Affairs Canada,Affaires mondiales Canada
 1703,Ministerial non-GIC appointments and GIC non-diplomatic appointments,Nominations ministérielles non effectuées par le gouverneur en conseil et nominations non diplomatiques effectuées par le gouverneur en conseil,126,Global Affairs Canada,Affaires mondiales Canada
@@ -1658,7 +1802,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1562,Operating a federal railway,Exploitation d'un chemin de fer fédéral,138,Transport Canada,Transports Canada
 1561,"Legal Advice, Counsel, and Representation for Veterans","Avis, conseils et représentation juridiques destinés aux vétérans",139,Veterans Affairs Canada,Anciens Combattants Canada
 1560,IRAP Advisory Services through Contributions to Organizations,Services-conseils du PARI - contributions aux organismes,228,National Research Council Canada,Conseil national de recherches Canada
-1558,IRAP Advisory Services to Firms,Services consultatifs du PARI  aux entreprises,228,National Research Council Canada,Conseil national de recherches Canada
+1558,IRAP Advisory Services to Firms,Services consultatifs du PARI aux entreprises,228,National Research Council Canada,Conseil national de recherches Canada
 1557,Certified Reference Materials,Matériaux de référence certifiés,228,National Research Council Canada,Conseil national de recherches Canada
 1556,Calibration laboratory assessment service,Service d'évaluation des laboratoires d'étalonnage,228,National Research Council Canada,Conseil national de recherches Canada
 1555,Instrument Calibration Services,Services d'étalonnage d'instruments,228,National Research Council Canada,Conseil national de recherches Canada
@@ -1762,25 +1906,25 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1453,Immigration Loan,Prêts aux immigrants,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1452,Fire Management,Gestion du Feu,263,Parks Canada,Parcs Canada
 1451,Humanitarian Public Policy - Application for resettlement to Canada,Politique d'intérêt public humanitaire -Demande de réinstallation au Canada,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1450,Resettled Refugees - Permanent Residence,Réfugiés réinstallés  - Résidence Permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1450,Resettled Refugees - Permanent Residence,Réfugiés réinstallés - Résidence Permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1449,Humanitarian & Compassionate - Application for Permanent Residence,Motifs d'ordre humanitaire - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1447,Temporary Resident Permit Holder - Application for Permanent Residence,Titulaire d'un Permis de séjour temporaire  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1447,Temporary Resident Permit Holder - Application for Permanent Residence,Titulaire d'un Permis de séjour temporaire - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1446,Spouse or common-law partner in Canada - Application for Permanent Residence,Époux ou conjoints de fait au Canada - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1445,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,306,Social Sciences and Humanities Research Council of Canada,Conseil de recherches en sciences humaines du Canada
 1444,Other Relatives - Sponsorship for Permanent Residence,Autres membres de la famille - Parrainage pour la résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1443,Parents and Grandparents - Application for Permanent Residence,Parents et grands-parents - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1442,Family Class Priority - Application for Permanent Residence,Demandes prioritaires de la catégorie du regroupement familial - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1441,Provincial Nominees - Application for Permanent Residence,Candidats des provinces  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1440,"Quebec Business (Entrepreneur, Investor, Self-employed) -  Application for Perma","Gens d'affaires au Québec (entrepreneurs, investisseurs, travailleurs autonomes) - Demande de résidence permanente",123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1441,Provincial Nominees - Application for Permanent Residence,Candidats des provinces - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1440,"Quebec Business (Entrepreneur, Investor, Self-employed) - Application for Perma","Gens d'affaires au Québec (entrepreneurs, investisseurs, travailleurs autonomes) - Demande de résidence permanente",123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1439,Quebec Skilled Workers/Trades - Application for Permanent Residence,Travailleurs qualifiés – Québec - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1438,Caring for Children or for People with High Medical Needs - Application for Perm,Garde d'enfants ou soins aux personnes ayant des besoins médicaux élevés  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1437,Live In Caregivers - Application for Permanent Residence,Aides familiaux résidants  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1436,Federal Self employed - Application for Permanent Residence,Travailleurs autonomes (fédéral)  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1438,Caring for Children or for People with High Medical Needs - Application for Perm,Garde d'enfants ou soins aux personnes ayant des besoins médicaux élevés - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1437,Live In Caregivers - Application for Permanent Residence,Aides familiaux résidants - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1436,Federal Self employed - Application for Permanent Residence,Travailleurs autonomes (fédéral) - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1435,Immigrant Investor Venture Capital (IIVC),Capital de risque pour les immigrants investisseurs (CRII),123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1434,Start-up Visa - Application for Permanent Residence,Visa pour démarrage d'entreprise - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
-1433,Canadian Experience Class - Application for Permanent Residence,Catégorie de l'expérience canadienne  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1433,Canadian Experience Class - Application for Permanent Residence,Catégorie de l'expérience canadienne - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1432,Provides a retail subsidy and a Harvesters Support Grant and Community Food Programs Fund to eligible communities,Fournit une subvention au commerce de détail et une subvention de soutien aux récoltants aux communautés éligibles.,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
-1431,Federal Skilled Trades - Application for Permanent Residence,Travailleurs de métiers spécialisés (fédéral)  - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
+1431,Federal Skilled Trades - Application for Permanent Residence,Travailleurs de métiers spécialisés (fédéral) - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1430,Federal Skilled Worker - Application for Permanent Residence,Travailleurs qualifiés (fédéral) - Demande de résidence permanente,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1429,International Experience Canada - Application for Work Permit,Expérience internationale Canada - Demande d'un permis de travail,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
 1428,Study Permit,Permis d'études,123,"Immigration, Refugees and Citizenship Canada","Immigration, Réfugiés et Citoyenneté Canada"
@@ -1835,7 +1979,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1352,Labour Force Survey,Enquête sur la population active,313,Statistics Canada,Statistique Canada
 1351,Release of Statistical Data on Census of Population,Diffusion de données statistiques sur le Recensement de la population,313,Statistics Canada,Statistique Canada
 1350,Classification Program,Programme de classification,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
-1349,Open Government Portal -  Access to data and information,Portail gouvernement ouvert – accès à l’information ouverte et données ouvertes.,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
+1349,Open Government Portal - Access to data and information,Portail gouvernement ouvert – accès à l’information ouverte et données ouvertes.,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 1348,Treasury Board of Canada Secretariat’s Claims Office,Bureau des réclamations du Secrétariat du Conseil du Trésor du Canada,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 1347,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,326,Treasury Board of Canada Secretariat,Secrétariat du Conseil du Trésor du Canada
 1346,Innovation Superclusters Initiative,Initiative des supergrappes d'innovation,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
@@ -1847,7 +1991,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1340,Regional Economic Growth through Innovation (REGI),Croissance économique régionale par l'innovation (CERI),130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 1339,Client Service Centre (CSC),Centre de services à la clientèle,228,National Research Council Canada,Conseil national de recherches Canada
 1338,Northern Ontario Development Program (NODP),Programme de développement du Nord de l'Ontario (PDNO),130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
-1337,Occupational Health and Safety  Compliance and Enforcement (OHSCE),Conformité et application de la Santé et sécurité au travail (CASST),128,Employment and Social Development Canada,Emploi et Développement social Canada
+1337,Occupational Health and Safety Compliance and Enforcement (OHSCE),Conformité et application de la Santé et sécurité au travail (CASST),128,Employment and Social Development Canada,Emploi et Développement social Canada
 1336,Access to Information and Privacy,Accès à l’information et protection des renseignements personnels,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 1335,Business Benefits Finder,Outil de recherche d'aide aux entreprise,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
 1334,Canadian Occupational Projection System,Système sur la projection des professions du Canada,128,Employment and Social Development Canada,Emploi et Développement social Canada
@@ -1857,7 +2001,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1330,Consumer Price Index (CPI),l'Indice des prix à la consommation (IPC),313,Statistics Canada,Statistique Canada
 1329,Actuarial Services,Services actuariels,253,Office of the Superintendent of Financial Institutions Canada,Bureau du surintendant des institutions financières Canada
 1328,Access to Information and Privacy,Accès à l'information et de protection des renseignements personnels,253,Office of the Superintendent of Financial Institutions Canada,Bureau du surintendant des institutions financières Canada
-1327,Release of Statistical Data on Wholesale Trade,Diffusion de données statistiques sur le  commerce de gros,313,Statistics Canada,Statistique Canada
+1327,Release of Statistical Data on Wholesale Trade,Diffusion de données statistiques sur le commerce de gros,313,Statistics Canada,Statistique Canada
 1326,Capital Model Approvals,Approbation des modèles de fonds propres,253,Office of the Superintendent of Financial Institutions Canada,Bureau du surintendant des institutions financières Canada
 1325,Critical Injury Benefit,Indemnité pour blessure grave,139,Veterans Affairs Canada,Anciens Combattants Canada
 1323,CanCode,CodeCan,130,"Innovation, Science and Economic Development Canada","Innovation, Sciences et Développement économique Canada"
@@ -2045,14 +2189,14 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1112,Provincial and territorial child benefit program payments,Les versements provinciaux et territoriaux pour les programmes de prestations pour enfants,46,Canada Revenue Agency,Agence du revenu du Canada
 1111,Provincial and territorial tax credit payments,Les versements de crédits d'impôt provinciaux et territoriaux,46,Canada Revenue Agency,Agence du revenu du Canada
 1110,Advanced Canada workers benefit (ACWB),Avance de l’allocation canadienne pour les travailleurs (AACT),46,Canada Revenue Agency,Agence du revenu du Canada
-1109,Children's Special Allowances (CSA)  applications,Les demandes d'Allocations Spéciales pour Enfants (ASE),46,Canada Revenue Agency,Agence du revenu du Canada
+1109,Children's Special Allowances (CSA) applications,Les demandes d'Allocations Spéciales pour Enfants (ASE),46,Canada Revenue Agency,Agence du revenu du Canada
 1108,Tax Credit Application,Demande de crédit d'impôt,46,Canada Revenue Agency,Agence du revenu du Canada
-1107,Canada child benefit (CCB)  applications,Les demandes d'Allocation canadienne pour enfants (ACE),46,Canada Revenue Agency,Agence du revenu du Canada
+1107,Canada child benefit (CCB) applications,Les demandes d'Allocation canadienne pour enfants (ACE),46,Canada Revenue Agency,Agence du revenu du Canada
 1106,Partnership Information Returns,Déclaration de Renseignements des Sociétés de Personnes,46,Canada Revenue Agency,Agence du revenu du Canada
 1105,Charity Information Return Filing,Déclaration de renseignements des organismes de bienfaisance,46,Canada Revenue Agency,Agence du revenu du Canada
 1104,Income Tax Rulings,Décisions en Impôt,46,Canada Revenue Agency,Agence du revenu du Canada
-1103,IT Interoperability  - GC Interop,Interopérabilité TI - GC Interop,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
-1102,"Excise Duty, Excise Tax,  Air Travellers Security Charge, and Fuel Charge returns","Droits d'accise, taxes d'accise, droit pour la sécurité des passagers du transport aérien, et déclaration de la redevance sur les combustibles",46,Canada Revenue Agency,Agence du revenu du Canada
+1103,IT Interoperability - GC Interop,Interopérabilité TI - GC Interop,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+1102,"Excise Duty, Excise Tax, Air Travellers Security Charge, and Fuel Charge returns","Droits d'accise, taxes d'accise, droit pour la sécurité des passagers du transport aérien, et déclaration de la redevance sur les combustibles",46,Canada Revenue Agency,Agence du revenu du Canada
 1101,T2 Corporation Income Tax Returns,Déclaration de revenus des sociétés T2,46,Canada Revenue Agency,Agence du revenu du Canada
 1100,GST/HST Rulings,Décisions en matière de TPS/TVH,46,Canada Revenue Agency,Agence du revenu du Canada
 1099,GST/HST Returns,Production d'une déclaration de la TPS/TVH,46,Canada Revenue Agency,Agence du revenu du Canada
@@ -2115,7 +2259,7 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 1018,MPA Activity Plan Application Process - Endeavour Hydrothermal Vents,Processus de demande d'activités pour la ZPM - Champ hydrothermal Endeavour,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 1017,MPA Activity Plan Application Process - Eastport MPA,Processus de demande d'activités pour la ZPM - Eastport,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 1016,MPA Activity Plan Application Process - SGaan Kinghlas-Bowie Seamount MPA,Processus de demande d'activités pour la ZPM - Mont sous-marin SGaan Kinghlas-Bowie,125,Fisheries and Oceans Canada,Pêches et Océans Canada
-1015,MPA Activity Plan Application Process - Anguniaqvia niqiqyuam MPA,Processus de demande d'activités pour la ZPM -  Anguniaqvia niqiqyuam,125,Fisheries and Oceans Canada,Pêches et Océans Canada
+1015,MPA Activity Plan Application Process - Anguniaqvia niqiqyuam MPA,Processus de demande d'activités pour la ZPM - Anguniaqvia niqiqyuam,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 1014,National Indigenous Representative Organizations,Organisations autochtones représentatives nationale,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
 1013,Introduction and Transfer Licensing Application Review,Processus d'évaluation de permis d'introduction et de transfert,125,Fisheries and Oceans Canada,Pêches et Océans Canada
 1012,Intergovernmental and International Relations,Relations intergouvernementales et internationales,129,Crown-Indigenous Relations and Northern Affairs Canada,Relations Couronne-Autochtones et Affaires du Nord Canada
@@ -2183,16 +2327,16 @@ SRV02642,Test Market Authorization,Autorisation d'essai de mise en marché,65,Ca
 943,Access to Information and Privacy,Accès à l'information et protection des renseignements personnels,47,Canada School of Public Service,École de la fonction publique du Canada
 942,Business Dispute Management Services,Gestion des conflits d'ordre commercial,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 941,Fairness Monitoring Services,Services de surveillance de l'équité,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
-940,"Controlled Goods (Company Registration, Security Assessments, Exemption Applications for Visitors,  Temporary Workers and International Students)","Marchandises contrôlées (enregistrement des entreprises, évaluations de sécurité, demandes d'exemption pour les visiteurs, les travailleurs temporaires et étudiants étrangers)",136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+940,"Controlled Goods (Company Registration, Security Assessments, Exemption Applications for Visitors, Temporary Workers and International Students)","Marchandises contrôlées (enregistrement des entreprises, évaluations de sécurité, demandes d'exemption pour les visiteurs, les travailleurs temporaires et étudiants étrangers)",136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 939,Integrity Verification Services,Services de vérification d'intégrité,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
-938,"Contract Security (Company Registration, Personal Security Screening, Call Centre)","Sécurité des contrats (enregistrement d'une entreprise, filtrage de la  sécurité du personnel, centre d'appels)",136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
+938,"Contract Security (Company Registration, Personal Security Screening, Call Centre)","Sécurité des contrats (enregistrement d'une entreprise, filtrage de la sécurité du personnel, centre d'appels)",136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 937,Access to Information and Privacy (ATIP),Accès à l’information et de protection des renseignements personnels (AIPRP),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 936,National Law Enforcement Training (NLET),Groupe de la formation policière nationale (GFPN),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 935,Canadian Police College (CPC),Collège canadian de police (CCP),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 934,Canadian Police Information Centre (CPI Centre),Centre d'information de la police canadienne (Centre IPC),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 932,National DNA Data Bank (NDDB) Indices Comparison,Banque nationale de données génétiques - comparaison des indices (BNDG),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 931,Integrated Forensic Identification Services (IFIS)- Disaster Victim Identification (DVI),Service intégré de l'identité judiciaire (SIIJ) - d'identification des victimes de catastrophes (IVC).,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
-930,Canadian Criminal Real Time Identification Services (CCRTIS) -  Accreditation Services,Les Services canadiens d'identification criminelle en temps réel (SCICTR) - Service d'accréditation,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
+930,Canadian Criminal Real Time Identification Services (CCRTIS) - Accreditation Services,Les Services canadiens d'identification criminelle en temps réel (SCICTR) - Service d'accréditation,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 929,Certified Criminal Record Checks,Attestation de vérification de casier judiciaire,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 928,National Forensic Laboratory Services (NFLS),Services nationaux de laboratoire judiciaure (SNLJ),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 927,Canadian Firearms Program (CFP) - Firearms Licensing for businesses,Programme canadien des armes à feu (PCAF) - Permis d'armes à feu pour les entreprises,295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
@@ -2224,7 +2368,7 @@ Services de coordination, services-conseils et de formation",136,Public Services
 900,Pension Administration – Pension Payments and Services,Administration des pensions – Prestations et services de pension,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 899,Public Health Agency of Canada Publications,Publications de l'Agence de la santé publique du Canada,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 898,Public Enquiries,Demandes de renseignement,280,Public Health Agency of Canada,Agence de la santé publique du Canada
-896,Access to Information and Privacy (ATIP),Accès à l'information et  la protection des renseignements personnels (AIPRP),280,Public Health Agency of Canada,Agence de la santé publique du Canada
+896,Access to Information and Privacy (ATIP),Accès à l'information et la protection des renseignements personnels (AIPRP),280,Public Health Agency of Canada,Agence de la santé publique du Canada
 895,Yellow Fever Vaccination Centre Designation,Désignation d'un centre de vaccination contre la fièvre jaune,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 892,Human Pathogens and Toxins Act Security Clearance,Loi sur les agents pathogènes et les toxines (LAPHT) autorisation de sécurité,280,Public Health Agency of Canada,Agence de la santé publique du Canada
 891,Authorization to Conduct Controlled Activities with Pathogens and Toxins,Autorisation d’exercer des activités réglementées avec des agents pathogènes et des toxines,280,Public Health Agency of Canada,Agence de la santé publique du Canada
@@ -2238,7 +2382,7 @@ Services de coordination, services-conseils et de formation",136,Public Services
 877,Medical Device Establishment Licencing (MDEL),Licence d'établissement pour les instruments médicaux (LEIM),127,Health Canada,Santé Canada
 876,Manufacturer's Certificate to Export licenced medical devices from Canada (MCE),Certificat du fabricant relatif à l'exportation d'instruments médicaux homologués au Canada (CFE),127,Health Canada,Santé Canada
 875,Drug Establishment Licensing (DEL),Les licences d'établissement de produits pharmaceutiques (LEPP),127,Health Canada,Santé Canada
-874,Certificate of Pharmaceutical Product (CPP) & Good Manufacturing Practices (GMP),Certificat de produit pharmaceutique  (CPP) de Bonnes Pratiques de Fabrication (BPF),127,Health Canada,Santé Canada
+874,Certificate of Pharmaceutical Product (CPP) & Good Manufacturing Practices (GMP),Certificat de produit pharmaceutique (CPP) de Bonnes Pratiques de Fabrication (BPF),127,Health Canada,Santé Canada
 873,Executive Correspondence,Correspondance de la haute gestion,127,Health Canada,Santé Canada
 872,Terminology Standardization,Normalisation terminologique,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
 871,Interpretation,Interprétation,136,Public Services and Procurement Canada,Services publics et Approvisionnement Canada
@@ -2312,7 +2456,7 @@ Services de coordination, services-conseils et de formation",136,Public Services
 750,Trade Appeals and Litigation,Appels des échanges commerciaux et litige,26,Canada Border Services Agency,Agence des services frontaliers du Canada
 749,Enforcement and Appeals Litigation,Appels des mesures d'exécution et litige,26,Canada Border Services Agency,Agence des services frontaliers du Canada
 748,Feedback Mechanism,Mécanisme de rétroaction,26,Canada Border Services Agency,Agence des services frontaliers du Canada
-747,Access to Information and Privacy,Accès à l'information et  la protection des renseignements personnels,127,Health Canada,Santé Canada
+747,Access to Information and Privacy,Accès à l'information et la protection des renseignements personnels,127,Health Canada,Santé Canada
 746,Drawback Claims,Demandes de drawback,26,Canada Border Services Agency,Agence des services frontaliers du Canada
 745,Advance Rulings and National Customs Rulings,Décisions anticipées et décisions nationales des douanes,26,Canada Border Services Agency,Agence des services frontaliers du Canada
 744,B2 Commercial Adjustments,Rajustements du secteur commercial (B2),26,Canada Border Services Agency,Agence des services frontaliers du Canada
@@ -2340,7 +2484,7 @@ Services de coordination, services-conseils et de formation",136,Public Services
 721,Partners in Protection Program Membership Application Processing,Traitement des demandes d'adhésion au programme Partenaires en protection,26,Canada Border Services Agency,Agence des services frontaliers du Canada
 720,Courier Low Value Shipments (CLVS) Program Application,Demande de programme des messageries d'expéditions de faible valeur (EFV),26,Canada Border Services Agency,Agence des services frontaliers du Canada
 719,Carrier Code Application,Code de transporteur - Demande de participation,26,Canada Border Services Agency,Agence des services frontaliers du Canada
-718,Provision of Information  - Access to Information,Communication de renseignements - Accès à l'information,12,Atlantic Canada Opportunities Agency,Agence de promotion économique du Canada atlantique
+718,Provision of Information - Access to Information,Communication de renseignements - Accès à l'information,12,Atlantic Canada Opportunities Agency,Agence de promotion économique du Canada atlantique
 717,Public Inquiries,Demandes de renseignements du publique,12,Atlantic Canada Opportunities Agency,Agence de promotion économique du Canada atlantique
 716,Business Information Services,Service d'information aux entreprises de l'APECA,12,Atlantic Canada Opportunities Agency,Agence de promotion économique du Canada atlantique
 712,Registry Services,Services de greffe,539,Administrative Tribunals Support Service of Canada,Service canadien d'appui aux tribunaux administratifs
@@ -2430,7 +2574,7 @@ Services de coordination, services-conseils et de formation",136,Public Services
 244,Migratory Game Bird Hunting Permits,Permis de chasse aux oiseaux migrateurs considérés comme gibier,137,Environment and Climate Change Canada,Environnement et Changement climatique Canada
 243,Species at Risk Act Permit System,Système de permis de la Loi sur les espèces en péril,137,Environment and Climate Change Canada,Environnement et Changement climatique Canada
 208,Management and Oversight,Gestion et Surveillance,99,Canadian Transportation Agency,Office des transports du Canada
-204,Money Services Businesses -  Registry Search,Entreprises de services monétaires – Recherche d'entités inscrites,152,Financial Transactions and Reports Analysis Centre of Canada,Centre d'analyse des opérations et déclarations financières du Canada
+204,Money Services Businesses - Registry Search,Entreprises de services monétaires – Recherche d'entités inscrites,152,Financial Transactions and Reports Analysis Centre of Canada,Centre d'analyse des opérations et déclarations financières du Canada
 195,Money Services Businesses (MSBs) Registry - Registration,Registre des entreprises de services monétaires (ESM) – Inscription,152,Financial Transactions and Reports Analysis Centre of Canada,Centre d'analyse des opérations et déclarations financières du Canada
 192,RCMP- Contract & Indigenous Policing (C & IP),(GRC) Services de police contractuels et autochtones (SPCA),295,Royal Canadian Mounted Police,Gendarmerie royale du Canada
 178,Funding Decisions for Grants to Researchers,Décisions sur le financement des subventions de recherche,306,Social Sciences and Humanities Research Council of Canada,Conseil de recherches en sciences humaines du Canada

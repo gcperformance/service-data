@@ -14,10 +14,10 @@ Department of Agriculture and Agri-Food,1
 Ministère de l’Agriculture et de l’Agroalimentaire,1
 /Government of Canada - Gouvernement du Canada/House of Commons – Chambre des communes,2
 Chambre des communes,2
+hoc-cdc,2
 House of Commons,2
 House of Commons – Chambre des communes,2
 House of Commons - Staff,2
-hoc-cdc,2
 Aboriginal Healing Foundation,4
 Fondation autochtone de guérison,4
 Aéroport de Québec Inc.,5
@@ -26,10 +26,11 @@ African Development Bank,7
 Banque africaine de développement,7
 Asian Development Bank,8
 Banque asiatique de développement,8
-Asia-Pacific Foundation of Canada,9
-Fondation Asie-Pacifique du Canada,9
-Fondation Asie Pacifique du Canada,9
 apfc-fapc,9
+Asia Pacific Foundation of Canada,9
+Asia-Pacific Foundation of Canada,9
+Fondation Asie Pacifique du Canada,9
+Fondation Asie-Pacifique du Canada,9
 Agence canadienne de contrôle de la procréation assistée,10
 Assisted Human Reproduction Agency of Canada,10
 Association des Arpenteurs des Terres du Canada,11
@@ -43,13 +44,13 @@ Atlantic Canada Opportunities Agency,12
 Atlantic Canada Opportunities Agency | Agence de promotion économique du Canada atlantique,12
 Administration de pilotage de l’Atlantique,13
 Administration de pilotage de l'Atlantique Canada,13
+apa,13
 Atlantic Pilotage Authority,13
 Atlantic Pilotage Authority Canada,13
-apa,13
+aecl-eacl,14
 Atomic Energy of Canada Limited,14
 Énergie atomique du Canada limitée,14
 "Énergie atomique du Canada, Limitée",14
-aecl-eacl,14
 Bank of Canada,15
 Banque du Canada,15
 bc,15
@@ -62,14 +63,14 @@ Conseils arbitraux de l’assurance-emploi,18
 Employment Insurance Boards of Referees,18
 Buffalo and Fort Erie Public Bridge Authority,19
 Banque de développement du Canada,20
-Business Development Bank of Canada,20
 bdc,20
+Business Development Bank of Canada,20
 Administration aéroportuaire de Calgary,21
 Calgary Airport Authority,21
 WinSport,22
 Canada Agricultural Review Tribunal,24
-Commission de révision agricole du Canada,24
 cart-crac,24
+Commission de révision agricole du Canada,24
 /Government of Canada - Gouvernement du Canada/CA Border Services Agency - Agence des services frontaliers du CA,26
 Agence des services frontaliers du Canada,26
 ASFC,26
@@ -81,16 +82,16 @@ cbsa-asfc,26
 Canada Commonwealth Legacy Fund,28
 Fonds du legs des Jeux du Commonwealth,28
 Canada Council for the Arts,29
-Conseil des Arts du Canada,29
 cca-cac,29
+Conseil des Arts du Canada,29
 Canada Deposit Insurance Corporation,30
+cdic-sadc,30
 Société d’assurance-dépôts du Canada,30
 Société d'assurance-dépôts du Canada,30
-cdic-sadc,30
 Canada Development Investment Corporation,31
+cdev,31
 Corporation de développement des investissements du Canada,31
 La Corporation de développement des investissements du Canada,31
-cdev,31
 /Government of Canada - Gouvernement du Canada/CA Emission Red. Incentives Agcy - Agence CA pour incitation à réd. des émissions,32
 Agence canadienne pour l'incitation à la réduction des émissions,32
 CA Emission Red. Incentives Agcy - Agence CA pour incitation à réd. des émissions,32
@@ -101,46 +102,48 @@ CA Employment Insurance Commission - Commission de l'assurance-emploi du CA,33
 CAEC,33
 Canada Employment Insurance Commission,33
 CEIC,33
-Commission de l'assurance-emploi du Canada,33
 ceic-caec,33
 Commission de l’assurance-emploi du Canada,33
+Commission de l'assurance-emploi du Canada,33
 Canada Employment Insurance Financing Board,34
-Office de financement de l’assurance-emploi du Canada,34
 ceifb-ofaec,34
+Office de financement de l’assurance-emploi du Canada,34
 Office de financement de l'assurance-emploi du Canada,34
 Canada Foundation for Innovation,35
 Fondation canadienne pour l’innovation,35
 innovation,35
 Canada Foundation for Sustainable Development Technology,36
 Fondation du Canada pour l’appui technologique au développement durable,36
+Sustainable Development Technology Canada,36
 Canada Games Council,37
 Conseil des Jeux du Canada,37
 Canada Health Infoway Inc.,38
 Inforoute Santé du Canada Inc.,38
 Canada Industrial Relations Board,39
 CIRB,39
-Conseil canadien des relations industrielles,39
 cirb-ccri,39
+Conseil canadien des relations industrielles,39
+Canada Lands Company CLC Limited (Canada Lands Company Limited),40
 Canada Lands Company Limited,40
-Société immobilière du Canada limitée,40
 clcl-sicl,40
+Société immobilière du Canada limitée,40
 Canada Media Fund,41
 Fonds des médias du Canada,41
 Canada Mortgage and Housing Corporation,42
 Canada Mortgage and Housing Corporation (Crown Corporation),42
+cmhc-schl,42
 Société canadienne d’hypothèques et de logement,42
 Société canadienne d'hypothèques et de logement,42
-cmhc-schl,42
 Canada Pension Plan Investment Board,43
-Office d’investissement du régime de pensions du Canada,43
 cppib-oirpc,43
 L’Office d’investment du Régime de pensions du Canada,43
+Office d’investissement du régime de pensions du Canada,43
 Canada Post,44
 Canada Post Corporation,44
 CPC,44
+cpc-scp,44
 Postes Canada,44
 Société canadienne des postes,44
-cpc-scp,44
 /Government of Canada - Gouvernement du Canada/CA Revenue Agency - Agence du revenu du CA,46
 Agence du revenu du Canada,46
 CA Revenue Agency - Agence du revenu du CA,46
@@ -156,10 +159,11 @@ CSPS,47
 csps-efpc,47
 École de la fonction publique du Canada,47
 Canada-Newfoundland and Labrador Offshore Petroleum Board,48
-Office Canada-Terre-Neuve-et-Labrador des hydrocarbures extracôtiers,48
 cnlopb,48
 Office Canada–Terre-Neuve-et Labrador des hydrocarbures extracôtiers,48
+Office Canada-Terre-Neuve-et-Labrador des hydrocarbures extracôtiers,48
 Canada-Nova Scotia Offshore Petroleum Board,49
+Canada-Nova-Scotia Offshore Petroleum Board,49
 Office Canada-Nouvelle-Écosse des hydrocarbures extracôtiers,49
 Agence canadienne des médicaments et des technologies de la santé (ACMTS),50
 Canadian Agency for Drugs and Technologies in Health (CADTH),50
@@ -168,10 +172,11 @@ Administration canadienne de la sûreté du transport aérien (ACSTA) (Société
 Canadian Air Transport Security Authority,51
 Canadian Air Transport Security Authority - Budgetary,51
 Canadian Air Transport Security Authority (CATSA) (Crown Corporation),51
+CATSA,51
 catsa-acsta,51
 Canadian Artists and Producers Professional Relations Tribunal,52
-Tribunal canadien des relations professionnelles artistes-producteurs,52
 capprt-tcrpap,52
+Tribunal canadien des relations professionnelles artistes-producteurs,52
 Canadian Broadcasting Corporation,53
 Société Radio-Canada,53
 /Government of Canada - Gouvernement du Canada/CA Centre for Occ. Health & Safety - Centre CA d'hygiène & de sécurité au travail,55
@@ -185,18 +190,19 @@ Centre canadien d'hygiène et de sécurité au travail,55
 Canadian Centre on Substance Use and Addictions,56
 Centre canadien sur les dépendances et l’usage de substances,56
 Canadian Coast Guard,57
+CCG,57
 Garde côtière canadienne,57
 Canadian Commercial Corporation,58
-Corporation commerciale canadienne,58
 ccc,58
+Corporation commerciale canadienne,58
 Canadian Conservation Institute,59
 Institut canadien de conservation,59
 Canadian Cultural Property Export Review Board,60
-Commission canadienne d'examen des exportations de biens culturels,60
 ccperb-cceebc,60
+Commission canadienne d'examen des exportations de biens culturels,60
 Canadian Dairy Commission,61
-Commission canadienne du lait,61
 cdc-ccl,61
+Commission canadienne du lait,61
 Canadian Energy Research Institute,62
 /Government of Canada - Gouvernement du Canada/Impact Assessment Agency of Canada - Agence d'évaluation d'impact du Canada,63
 AEIC,63
@@ -253,6 +259,7 @@ CIHR,74
 cihr-irsc,74
 Instituts de recherche en santé du Canada,74
 Canadian Intellectual Property Office,75
+CIPO,75
 Office de la propriété intellectuelle du Canada,75
 /Government of Canada - Gouvernement du Canada/Canadian Intergovt Conf Secretariat - Secrétariat des conf intergovt canadiennes,76
 Canadian Intergovernmental Conference Secretariat,76
@@ -268,24 +275,25 @@ Canadian International Grains Institute,78
 Institut international du Canada pour le grain,78
 Canadian International Trade Tribunal,79
 CITT,79
-Tribunal canadien du commerce extérieur,79
 citt-tcce,79
+Tribunal canadien du commerce extérieur,79
 Canadian Livestock Records Corporation,80
 Société canadienne d’enregistrement des animaux,80
 Canadian Museum for Human Rights,81
+cmhr-mcdp,81
 Musée canadien des droits de la personne,81
 Musée canadien pour les droits de la personne,81
-cmhr-mcdp,81
 Canadian Museum of History,82
-Musée canadien de l'histoire,82
+Canadian Museum of History and the Canadian War Museum,82
 cmc-mcc,82
+Musée canadien de l'histoire,82
 Canadian Museum of Immigration at Pier 21,84
+cmip-mciq,84
 Musée canadien de l’immigration du Quai 21,84
 Musée canadien de l'immigration du Quai 21,84
-cmip-mciq,84
 Canadian Museum of Nature,85
-Musée canadien de la nature,85
 cmn-mcn,85
+Musée canadien de la nature,85
 /Government of Canada - Gouvernement du Canada/Canadian Northern Economic Dev Agcy - Agence canadienne de dév économique du Nord,86
 Agence canadienne de développement économique du Nord,86
 Canadian Northern Economic Dev Agcy - Agence canadienne de dév économique du Nord,86
@@ -309,8 +317,8 @@ Partenariat canadien contre le cancer (PCC),89
 Canadian Patient Safety Institute (CPSI),90
 Institut canadien pour la sécurité des patients (ICSP),90
 Canadian Race Relations Foundation,92
-Fondation canadienne des relations raciales,92
 crrf-fcrr,92
+Fondation canadienne des relations raciales,92
 La Fondation Canadienne des relations raciales,92
 /Government of Canada - Gouvernement du Canada/CA Radio-tv and Telecom. Commiss. - Conseil de la radiodiffusion et des télécom.,93
 CA Radio-tv and Telecom. Commiss. - Conseil de la radiodiffusion et des télécom.,93
@@ -323,10 +331,10 @@ crtc,93
 Canadian Security Intelligence Service,94
 Canadian Security Intelligence Service - Service CA du renseignement de sécurité,94
 CSIS,94
+csis-scrs,94
 SCRS,94
 Service canadien du renseignement de sécurité,94
 SIRC,94
-csis-scrs,94
 /Government of Canada - Gouvernement du Canada/Canadian Space Agency - Agence spatiale canadienne,95
 Agence spatiale canadienne,95
 Canadian Space Agency,95
@@ -338,8 +346,8 @@ Canadian Sport Institute Ontario,96
 Institut canadien du sport Ontario,96
 Canadian Tourism Commission,97
 Commission canadienne du tourisme,97
-Destination Canada,97
 ctc-cct,97
+Destination Canada,97
 /Government of Canada - Gouvernement du Canada/Transportation Safety Board of CA - Bureau de la sécurité des transports du CA,98
 BST,98
 Bureau canadien d'enquête sur les accidents de transport et de la sécurité des transports,98
@@ -373,12 +381,14 @@ Communication Canada,108
 /Government of Canada - Gouvernement du Canada/Communications Security Establishment - Centre de sécurité des télécommunications,110
 Centre de la sécurité des télécommunications,110
 Centre de la sécurité des télécommunications Canada,110
+Communication Security Establishment,110
 Communications Security Establishment,110
 Communications Security Establishment - Centre de sécurité des télécommunications,110
 Communications Security Establishment Canada,110
 Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada,110
 Communiciations Security Establishment Canada,110
 CSE,110
+CSEC,110
 csec-cstc,110
 CST,110
 OCSEC,110
@@ -391,15 +401,15 @@ CDA,114
 Commission du droit d’auteur,114
 Commission du droit d'auteur,114
 Commission du droit d'auteur Canada,114
+Commission du droit d'auteur du Canada,114
 Copyright Board,114
 Copyright Board Canada,114
 Copyright Board Canada - Commission du droit d'auteur Canada,114
 Copyright Board Canada | Commission du droit d'auteur du Canada,114
-Commission du droit d'auteur du Canada,114
 CORCAN,115
+cmmgpi-sarpgm,116
 Corporation for the Mitigation of Mackenzie Gas Project Impacts,116
 Société d’atténuation des répercussions du projet gazier Mackenzie,116
-cmmgpi-sarpgm,116
 Société d'atténuation des répercussions du projet gazier Mackenzie,116
 /Government of Canada - Gouvernement du Canada/Correctional Service Canada - Service correctionnel Canada,117
 Correctional Service Canada,117
@@ -421,12 +431,12 @@ SATJ,118
 Service administratif des tribunaux judiciaires,118
 Construction de Défense (1951) Limitée,119
 Construction de Défense Canada,119
+dcc-cdc,119
 Defence Construction (1951) Limited,119
 Defence Construction Canada,119
-dcc-cdc,119
 Defence Research and Development Canada,120
-Recherche et développement pour la défense Canada,120
 drdc-rddc,120
+Recherche et développement pour la défense Canada,120
 2010 Games Operating Trust Society,121
 Société du legs des Jeux de 2010,121
 /Government of Canada - Gouvernement du Canada/Canadian Heritage - Patrimoine canadien,122
@@ -448,6 +458,7 @@ Citizenship and Immigration (Department of),123
 Citoyenneté et de l'immigration (Ministère de la),123
 Department of Citizenship and Immigration,123
 "Department of Immigration, Refugees and Citizenship",123
+Immigration Refugees and Citizenship Canada,123
 "Immigration, Refugees & Citizenship CA - Immigration, Réfugiés & Citoyenneté CA",123
 "Immigration, Refugees and Citizenship Canada",123
 "Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada",123
@@ -558,6 +569,7 @@ ic,130
 Industrie (Ministère de l'),130
 Industry,130
 Industry (Department of),130
+Innovation Science and Economic Development Canada,130
 "Innovation, Science and Economic Dev - Innovation, Sciences et Dév économique",130
 "Innovation, Science and Economic Development Canada",130
 "Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",130
@@ -678,10 +690,12 @@ Veterans Affairs Canada | Anciens Combattants Canada,139
 Department of Prairies Economic Development,140
 Department of Western Economic Diversification,140
 Développement économique Canada pour les Prairies,140
+Diversification de l'économie de l'Ouest Canada,140
 Diversification de l'économie de l'Ouest canadien (Ministère de la),140
 Ministère de la Diversification de l'économie de l'Ouest canadien,140
 Prairies Economic Dev. Canada - Dév. économique Canada pour les Prairies,140
 Prairies Economic Development Canada,140
+Prairies Economic Development Canada (PrairiesCan),140
 Prairies Economic Development Canada | Développement économique Canada pour les Prairies,140
 PrairiesCan,140
 prairiescan,140
@@ -692,7 +706,6 @@ Western Economic Diversification,140
 Western Economic Diversification (Department of),140
 Western Economic Diversification Canada,140
 Western Economic Diversification Canada | Diversification de l'économie de l'Ouest Canada,140
-Diversification de l'économie de l'Ouest Canada,140
 /Government of Canada - Gouvernement du Canada/CA Economic Dev. for QC Regions - Dév. économique CA pour les régions du QC,141
 Agence de développement économique du Canada pour les régions du Québec,141
 CA Economic Dev. for QC Regions - Dév. économique CA pour les régions du QC,141
@@ -707,33 +720,35 @@ Economic Development Agency of Canada for the Regions of Quebec,141
 Economic Development for Agency for the Regions of Quebec,141
 FRD,141
 Edmonton Regional Airports Authority,142
+ecbc-secb,143
 Enterprise Cape Breton Corporation,143
 Société d’expansion du Cap Breton,143
-ecbc-secb,143
 Société d'expansion du Cap-Breton,143
 Banque européenne pour la reconstruction et le développement,145
 European Bank for Reconstruction and Development,145
+edc,146
 Export Development Canada,146
 Export Development Canada (Canada Account),146
 Export Development Canada (Crown Corporation),146
 Exportation et développement Canada,146
 Exportation et développement Canada (Société d'État),146
-edc,146
 Farm Credit Canada,147
-Financement agricole Canada,147
 fcc-fac,147
+Financement agricole Canada,147
+fbcl-spfl,148
 Federal Bridge Corporation,148
+Federal Bridge Corporation Limited,148
 La Société des ponts fédéraux Limitée,148
 Société des ponts fédéraux,148
 The Federal Bridge Corporation Limited,148
 The Federal Bridge Corporation Limited - Budgetary,148
-fbcl-spfl,148
 /Government of Canada - Gouvernement du Canada/Fed. Econ. Dev. Agcy for Southern ON - Agence féd. de dév. Écon. pour Sud de l'ON,150
 Agence fédérale de développement économique pour le Sud de l’Ontario,150
 Agence fédérale de développement économique pour le Sud de l'Ontario,150
 Agence fédérale de développement économique pour le Sud de l'Ontario.,150
 Fed. Econ. Dev. Agcy for Southern ON - Agence féd. de dév. Écon. pour Sud de l'ON,150
 FEDDEV,150
+FedDev,150
 FedDev Ontario,150
 feddevontario,150
 Federal Economic Development Agency for Southern Ontario,150
@@ -760,36 +775,37 @@ Conseil de gestion financière des premières nations,153
 First Nations Financial Management Board,153
 fnfmb-cgfpn,153
 First Nations Statistical Institute,154
-Institut de la statistique des Premières nations,154
 fnsi-ispn,154
+Institut de la statistique des Premières nations,154
 Commission de la fiscalité des premières nations,155
 First Nations Tax Commission,155
 fntc-cfpn,155
 Fredericton International Airport Authority Inc.,156
+ffmc-ocped,157
 Freshwater Fish Marketing Corporation,157
 Office de commercialisation du poisson d’eau douce,157
 Office de commercialisation du poisson d'eau douce,157
-ffmc-ocped,157
 Gander International Airport Authority Inc.,158
 Grain Appeal Tribunal,162
 Tribunal d'appel pour les grains,162
 Administration de pilotage des Grands Lacs,163
 Administration de pilotage des Grands Lacs Canada,163
+glpa-apgl,163
 Great Lakes Pilotage Authority,163
 Great Lakes Pilotage Authority Canada,163
-glpa-apgl,163
 Greater London International Airport Authority,164
 Greater Moncton International Airport Authority Inc.,165
 Autorité aéroportuaire du Grand Toronto,166
 Greater Toronto Airports Authority,166
 Administration de l'aéroport international d'Halifax,167
 Halifax International Airport Authority,167
+Administration portuaire de Halifax,168
 Administration portuaire d'Halifax,168
 Halifax Port Authority,168
 halpa-aphal,168
-Administration portuaire de Halifax,168
 Administration portuaire de Hamilton,169
 Hamilton Port Authority,169
+Hamilton-Oshawa Port Authority,169
 Conseil de contrôle des renseignements relatifs aux matières dangereuses,170
 Hazardous Materials Information Review Commission,170
 Conseil canadien de la santé,171
@@ -824,19 +840,19 @@ International Centre for Human Rights and Democratic Development,184
 Association internationale de développement,185
 International Development Association,185
 Centre de recherches pour le développement international,186
-International Development Research Centre,186
 idrc-crdi,186
+International Development Research Centre,186
 International Finance Corporation,187
 Société financière internationale,187
 International Fisheries Commissions Pension Society,188
 Société de caisse de retraite de la Commission internationale des pêcheries,188
+Commission mixte internationale,189
 Commission mixte internationale (section canadienne),189
 IJC,189
 ijc-cmi,189
 International Joint Commission,189
 International Joint Commission (Canadian Section),189
 International Joint Commission | Commission mixte internationale,189
-Commission mixte internationale,189
 Commission internationale du lac Memphrémagog,190
 International Lake Memphremagog Levels Board,190
 Conseil international de contrôle du lac des Bois,191
@@ -845,13 +861,13 @@ Fonds monétaire international,192
 International Monetary Fund,192
 Commission d'arbitrage des Inuvialuit,193
 Inuvialuit Arbitration Board,193
+Jacques Cartier and Champlain Bridges Incorporated,194
+jccbi-pjcci,194
 Les Ponts Jacques-Cartier et Champlain Inc.,194
+Les ponts Jacques-Cartier et Champlain Inc.,194
+Ponts Jacques Cartier et Champlain Incorporée,194
 The Jacques Cartier and Champlain Bridge Inc.,194
 The Jacques-Cartier and Champlain Bridges Inc.,194
-Jacques Cartier and Champlain Bridges Incorporated,194
-Ponts Jacques Cartier et Champlain Incorporée,194
-Les ponts Jacques-Cartier et Champlain Inc.,194
-jccbi-pjcci,194
 Commission de contrôle du lac des Bois,195
 Lake of the Woods Control Board,195
 Fonds du Souvenir,196
@@ -884,12 +900,13 @@ Library of Parliament - Bibliothèque du Parlement,200
 Library of Parliament - Staff,200
 lp-bp,200
 Lower Churchill Development Corporation Limited,201
+mai,202
+Marine Atlantic Inc,202
 Marine Atlantic Inc.,202
 Marine Atlantic Inc. - Budgetary,202
 Marine Atlantic Inc. (Crown Corporation),202
 Marine Atlantique S.C.C.,202
 Marine Atlantique S.C.C. (Société d'État),202
-mai,202
 Maritime Forestry Complex Corporation,203
 Société du complexe forestier des Maritimes,203
 Measurement Canada,204
@@ -902,13 +919,13 @@ Milit-Air Inc.,208
 /Government of Canada - Gouvernement du Canada/Military Grievances Ext. Review Cmte - Comité ext. d'examen des griefs militaires,209
 CEEGM,209
 CFGB,209
+Comité externe d’examen des griefs militaires,209
 Comité externe d'examen des griefs militaires,209
 MGERC,209
 mgerc-ceegm,209
 Military Grievances Ext. Review Cmte - Comité ext. d'examen des griefs militaires,209
 Military Grievances External Review Committee,209
 Military Grievances External Review Committee | Comité externe d’examen des griefs militaires,209
-Comité externe d’examen des griefs militaires,209
 /Government of Canada - Gouvernement du Canada/Military Police Compl. Commiss. - Commiss. d'examen des plaintes police militaire,210
 Commission d’examen des plaintes concernant la police militaire,210
 Commission d'examen des plaintes concernant la Police militaire,210
@@ -921,15 +938,16 @@ Military Police Complaints Commission of Canada | Commission d'examen des plaint
 MPCC,210
 mpcc-cppm,210
 Administration portuaire de Montréal,212
-Montréal Port Authority,212
 Montreal Port Authority,212
+Montréal Port Authority,212
 mpa-apm,212
 Agence multilatérale de garantie des investissements,213
 Multilateral Investment Guarantee Agency,213
 Administration portuaire de Nanaimo,214
+Administration portuaire de Nanaïmo,214
 Nanaimo Port Authority,214
 nnpa-apn,214
-Administration portuaire de Nanaïmo,214
+National Arts Centre,217
 National Arts Centre Corporation,217
 Société du Centre national des Arts,217
 /Government of Canada - Gouvernement du Canada/National Battlefields Commission - Commission des champs de bataille nationaux,218
@@ -947,10 +965,12 @@ ncc-ccn,219
 /Government of Canada - Gouvernement du Canada/CA Energy Regulator - Régie de l'énergie du CA,221
 CA Energy Regulator - Régie de l'énergie du CA,221
 Canada Energy Regulator,221
+Canada Energy Regulator (formerly National Energy Board),221
 Canada Energy Regulator | La Régie de l’énergie du Canada,221
 Canadian Energy Regulator,221
 CER,221
 cer-rec,221
+La Régie de l’énergie du Canada,221
 National Energy Board,221
 NEB,221
 Office national de l'énergie,221
@@ -958,7 +978,6 @@ REC,221
 Régie canadienne de l’énergie,221
 Régie canadienne de l'énergie,221
 Régie de l'énergie du Canada,221
-La Régie de l’énergie du Canada,221
 /Government of Canada - Gouvernement du Canada/Farm Products Council of Canada - Conseil des produits agricoles du Canada,222
 Conseil des produits agricoles du Canada,222
 Conseil national des produits agricoles,222
@@ -973,18 +992,21 @@ National Farm Products Council,222
 National Film Board,223
 National Film Board - Office national du film,223
 National Film Board | Office national du film,223
+National Film Board of Canada,223
 NFB,223
 nfb-onf,223
 Office national du film,223
+Office national du film du Canada,223
 Musée des beaux-arts du Canada,224
 National Gallery of Canada,224
 National Gallery of Canada | Musée des beaux-arts du Canada,224
 ngc-mbac,224
 Canada Science and Technology Museum,226
+cstm-mstc,226
+Ingenium  Canada's Museums of Science and Innovation,226
 Musée des sciences et de la technologie du Canada,226
 Musée national des sciences et de la technologie,226
 National Museum of Science and Technology,226
-cstm-mstc,226
 /Government of Canada - Gouvernement du Canada/Parole Board of Canada - Commission des libérations conditionnelles du Canada,227
 CLCC,227
 Commission des libérations conditionnelles du Canada,227
@@ -1006,8 +1028,8 @@ NRC,228
 nrc-cnrc,228
 National Round Table on the Environment and the Economy,229
 NRTEE,229
-Table ronde nationale sur l’environnement et l’économie,229
 nrtee-trnee,229
+Table ronde nationale sur l’environnement et l’économie,229
 Table ronde nationale sur l'environnement et l'économie,229
 /Government of Canada - Gouvernement du Canada/Natural Sci. & Eng. Rsrch Cncl - Conseil de recherches sci. naturelles & génie,230
 Conseil de recherches en sciences naturelles et en génie,230
@@ -1019,6 +1041,7 @@ Natural Sciences and Engineering Research Council of Canada,230
 Natural Sciences and Engineering Research Council of Canada | Conseil de recherches en sciences naturelles et en génie du Canada,230
 NSERC,230
 nserc-crsng,230
+Natural Sciences and Engineering Research Canada,230
 "Nature Trust of British Columbia, The",231
 NAV CANADA,232
 Comité consultatif public mixte (CCPM) de la Commission de coopération environnementale (CCE),233
@@ -1036,17 +1059,19 @@ NPA,235
 npa-apn,235
 /Government of Canada - Gouvernement du Canada/Infrastructure Canada - Infrastructure Canada,237
 Bureau de l'infrastructure du Canada,237
+"Department of Housing, Infrastructure and Communities",237
+HICC,237
 "Housing, Infrastructure and Communities (Department of)",237
-"Housing, Infrastructure and Communities Canada", 237
+"Housing, Infrastructure and Communities Canada",237
 INFC,237
 infc,237
 Infrastructure Canada,237
 Infrastructure Canada - Infrastructure Canada,237
 Infrastructure Canada | Infrastructure Canada,237
 "Logement, de l'Infrastructure et des Collectivités (Ministère du)",237
-Office of Infrastructure of Canada,237
-"Department of Housing, Infrastructure and Communities",237
+"Logement, Infrastructures et Collectivités Canada",237
 "Ministère du Logement, de l’Infrastructure et des Collectivités",237
+Office of Infrastructure of Canada,237
 /Government of Canada - Gouvernement du Canada/Office of Auditor General of Canada - Bureau du vérificateur général du Canada,238
 Auditor General,238
 Bureau du vérificateur général,238
@@ -1062,12 +1087,13 @@ Office of the Auditor General of Canada | Bureau du vérificateur général du C
 Bureau du directeur général des élections,239
 Chief Electoral Officer,239
 elections,239
+Elections,239
 Elections Canada,239
+Élections Canada,239
 Elections Canada | Élections Canada,239
 Office of Chief Electoral Officer - Bureau du directeur général des élections,239
 Office of the Chief Electoral Officer,239
 Office of the Chief Electoral Officer ,239
-Élections Canada,239
 /Government of Canada - Gouvernement du Canada/Office of Commissioner for Fed. Judicial Aff. - Commissariat à magistrature féd.,240
 Bureau du commissaire à la magistrature fédérale,240
 CMF,240
@@ -1106,12 +1132,14 @@ Office of Intelligence Commissioner - Bureau du commissaire au renseignement,244
 Office of the Communications Security Establishment Commissioner,244
 Office of the Intelligence Commissioner,244
 Office of the Intelligence Commissioner | Bureau du commissaire au renseignement,244
+Office of the Intelligence Commissioner of Canada,244
 /Government of Canada - Gouvernement du Canada/Office of Con. of Interest & Ethics Commr - Commiss aux con. d'int et à l'éthique,245
 Commissariat aux conflits d'intérêts et à l'éthique,245
 Office of Con. of Interest & Ethics Commr - Commiss aux con. d'int et à l'éthique,245
 Office of the Conflict of Interest and Ethics Commissioner,245
 /Government of Canada - Gouvernement du Canada/Women and Gender Equality CA - Femmes et Égalité des genres CA,246
 Bureau de la coordonnatrice de la situation de la femme,246
+Condition féminine Canada,246
 Department for Women and Gender Equality,246
 FEGC,246
 Femmes et Égalité des genres Canada,246
@@ -1129,7 +1157,6 @@ Women and Gender Equality,246
 Women and Gender Equality CA - Femmes et Égalité des genres CA,246
 Women and Gender Equality Canada,246
 Women and Gender Equality Canada | Femmes et Égalité des genres Canada,246
-Condition féminine Canada,246
 /Government of Canada - Gouvernement du Canada/The Correctional Investigator Canada - L'Enquêteur correctionnel Canada,247
 BEC,247
 Bureau de l’enquêteur correctionnel du Canada,247
@@ -1183,6 +1210,7 @@ Senate Ethics Officer,251
 Senate Ethics Officer - Conseiller sénatorial en éthique,251
 Bureau du surintendant des faillites,252
 Office of the Superintendent of Bankruptcy,252
+OSB,252
 /Government of Canada - Gouvernement du Canada/Office of Superintendent of Fin. Inst. - Bureau du surintendant des inst. fin.,253
 BSIF,253
 Bureau du surintendant des institutions financières,253
@@ -1196,6 +1224,8 @@ osfi-bsif,253
 Bureau du juge-arbitre,254
 Office of the Umpire,254
 /Government of Canada - Gouvernement du Canada/Office of Privacy Commissioner - Commissariat à la protection de la vie privée,256
+Commissariat à la protection de la vie privée du Canada,256
+Commissariat à l'information du Canada,256
 Commissariats à l’information et à la protection de la vie privée du Canada,256
 Commissariats à l'information et à la protection de la vie privée du Canada,256
 Office of Privacy Commissioner,256
@@ -1208,14 +1238,12 @@ Office of the Privacy Commissioner of Canada | Commissariats à l’information 
 Offices of the Information and Privacy Commissioners of Canada,256
 oic-ci,256
 opc-cpvp,256
-Commissariat à l'information du Canada,256
-Commissariat à la protection de la vie privée du Canada,256
 Old Port of Montreal Corporation Inc.,257
-Société du Vieux-Port de Montréal Inc.,257
 opmc-svpm,257
+Société du Vieux-Port de Montréal Inc.,257
 Administration portuaire d’Oshawa,258
-Oshawa Port Authority,258
 opa-apd,258
+Oshawa Port Authority,258
 Administration de l’aéroport international d’Ottawa,259
 Ottawa International Airport Authority,259
 Consortium Ouranos,260
@@ -1255,27 +1283,28 @@ PMPBR,266
 PMPRB,266
 pmprb-cepmb,266
 Commission d'appel des pensions,267
-Pension Appeals Board,267
 pab-cap,267
+Pension Appeals Board,267
 Direction générale des biens,268
 Physical Resources Bureau,268
 "Fondation Pierre Elliott Trudeau, La",269
+Pierre Eliott Trudeau Foundation,269
 "Pierre Elliott Trudeau Foundation, The",269
 Porcupine Caribou Management Board,270
 Administration portuaire de Port Alberni,271
-Port Alberni Port Authority,271
 papa-appa,271
-PPP Canada Inc.,272
+Port Alberni Port Authority,271
 ppp,272
+PPP Canada Inc.,272
 Administration du rétablissement agricole des Prairies,273
 Prairie Farm Rehabilitation Administration,273
 Prince George 2015 Canada Winter Games Host Society,274
 Société hôtesse des Jeux d'hiver du Canada Prince George 2015,274
 Prince George Airport Authority Inc.,275
 Administration portuaire de Prince Rupert,276
+L’Administration portuaire de Prince Rupert,276
 Prince Rupert Port Authority,276
 prpa-appr,276
-L’Administration portuaire de Prince Rupert,276
 PrioNet Canada,277
 /Government of Canada - Gouvernement du Canada/Privy Council Office - Bureau du Conseil privé,278
 BCP,278
@@ -1286,9 +1315,9 @@ Privy Council,278
 Privy Council Office,278
 Privy Council Office - Bureau du Conseil privé,278
 Privy Council Office | Bureau du Conseil privé,278
+pacs-scnp,279
 Public Appointments Commission Secretariat,279
 Secrétariat de la Commission des nominations publiques,279
-pacs-scnp,279
 /Government of Canada - Gouvernement du Canada/Public Health Agency of Canada - Agence de la santé publique du Canada,280
 Agence de la santé publique du Canada,280
 ASPC,280
@@ -1298,8 +1327,8 @@ Public Health Agency of Canada,280
 Public Health Agency of Canada - Agence de la santé publique du Canada,280
 Public Health Agency of Canada | Agence de la santé publique du Canada,280
 Office d’investissement des régimes de pensions du secteur public,281
-Public Sector Pension Investment Board,281
 pspib-oirpsp,281
+Public Sector Pension Investment Board,281
 /Government of Canada - Gouvernement du Canada/Public Service Commission of CA - Commission de la fonction publique du CA,282
 CFP,282
 Commission de la fonction publique,282
@@ -1312,30 +1341,30 @@ Public Service Commission of Canada,282
 Public Service Commission of Canada | Commission de la fonction publique du Canada,282
 Commission des relations de travail dans la fonction publique,284
 PSLRB,284
-Public Service Labour Relations Board,284
 pslrb-crtfp,284
+Public Service Labour Relations Board,284
 PSST,285
+psst-tdfp,285
 Public Service Staffing Tribunal,285
 Tribunal de la dotation de la fonction publique,285
-psst-tdfp,285
 Administration portuaire de Québec,286
-Québec Port Authority,286
-Quebec Port Authority,286
 qpa-apq,286
+Quebec Port Authority,286
+Québec Port Authority,286
 Regina Airport Authority Inc.,287
 /Government of Canada - Gouvernement du Canada/Registrar of the Supreme Court of CA - Registraire de la Cour suprême du CA,288
 Registraire de la Cour suprême du Canada,288
+Registraire de la Cour suprême du Canada et le secteur de l'administration publique fédérale nommé en vertu du paragraphe 12(2) de la Loi sur la Cour suprême,288
 Registrar of the Supreme Court of CA - Registraire de la Cour suprême du CA,288
 Registrar of the Supreme Court of Canada,288
 Registrar of the Supreme Court of Canada and that portion of the federal public administration appointed under subsection 12(2) of the Supreme Court Act,288
 Registrar of the Supreme Court Of Canada ,288
+scc-csc,288
 Staff of the Supreme Court,288
 Supreme Court of Canada,288
-scc-csc,288
-Registraire de la Cour suprême du Canada et le secteur de l'administration publique fédérale nommé en vertu du paragraphe 12(2) de la Loi sur la Cour suprême,288
 Greffe du Tribunal de la concurrence,289
-Registry of the Competition Tribunal,289
 rct-gtc,289
+Registry of the Competition Tribunal,289
 Greffe du Tribunal de la protection des fonctionnaires divulgateurs d'actes répréhensibles,290
 PSDPTC,290
 Registry of the Public Servants Disclosure Protection Tribunal,290
@@ -1345,10 +1374,11 @@ Ridley Terminals Inc.,292
 rti-tri,292
 Commission du parc international Roosevelt de Campobello,293
 Roosevelt Campobello International Park Commission,293
+mint-monnaie,294
 Monnaie royale canadienne,294
+RCMH-MRCF Inc. (Royal Canadian Mint),294
 Royal Canadian Mint,294
 Royal Canadian Mint - Non-budgetary,294
-mint-monnaie,294
 /Government of Canada - Gouvernement du Canada/Royal Canadian Mounted Police - Gendarmerie royale du CA,295
 Gendarmerie royale du Canada,295
 RCMP,295
@@ -1397,12 +1427,12 @@ National Security Intelligence Review Agency,302
 National Security Intelligence Review Agency Secretariat,302
 NSIRA,302
 nsira-ossnr,302
+Office de surveillance des activités en matière de sécurité nationale et de renseignement,302
 Secrétariat de l’Office de surveillance des activités en matière de sécurité nationale et de renseignement,302
 Secrétariat de l'Office de surveillance des activités en matière de sécurité nationale et de renseignement,302
 Security Intelligence Review Committee,302
 Security Intelligence Review Committee | Comité de surveillance des activités de renseignement de sécurité,302
 sirc-csars,302
-Office de surveillance des activités en matière de sécurité nationale et de renseignement,302
 /Government of Canada - Gouvernement du Canada/Senate of Canada - Sénat du Canada,303
 Sénat,303
 Senate,303
@@ -1438,14 +1468,16 @@ Sport Dispute Resolution Centre of Canada,308
 St. John’s International Airport Authority,309
 Administration portuaire de St. John’s,310
 St. John’s Port Authority,310
+St. John's Port Authority,310
 Corporation de gestion de la Voie maritime du Saint-Laurent,311
 St. Lawrence Seaway Management Corporation,311
 Conseil canadien des normes,312
-Standards Council of Canada,312
 scc-ccn,312
+Standards Council of Canada,312
 /Government of Canada - Gouvernement du Canada/Statistics Canada - Statistique Canada,313
 STATCAN,313
 statcan,313
+StatCan,313
 Statistics Canada,313
 Statistics Canada - Statistique Canada,313
 Statistics Canada | Statistique Canada,313
@@ -1459,8 +1491,8 @@ Société d’accueil des Jeux de 2011 de Halifax,317
 The Halifax 2011 Canada Games Host Society,317
 Thunder Bay International Airports Authority Inc.,318
 Administration portuaire de Thunder Bay,319
-Thunder Bay Port Authority,319
 tbpa-aptb,319
+Thunder Bay Port Authority,319
 Comité d’organisation des Jeux panaméricains et parapanaméricains de Toronto 2015,320
 Toronto Organizing Committee for the 2015 Pan American and Parapan American Games,320
 Administration portuaire de Toronto,321
@@ -1468,16 +1500,18 @@ Toronto Port Authority,321
 tpa-apt,321
 Bureau de la traduction,323
 Translation Bureau,323
+tatc,324
+tatc-tatc,324
 Transportation Appeal Tribunal of Canada,324
 Tribunal d’appel des transports du Canada,324
-tatc-tatc,324
-tatc,324
 Tribunal d'appel des transports du Canada,324
 Tribunal d'appel des transports du Canada,324
 /Government of Canada - Gouvernement du Canada/Treasury Board of CA Secretariat - Secrétariat du Conseil du Trésor du CA,326
+Conseil du Trésor,326
 SCT,326
 Secrétariat du Conseil du Trésor,326
 Secrétariat du Conseil du Trésor du Canada,326
+tb-ct,326
 TBS,326
 tbs-sct,326
 Treasury Board,326
@@ -1485,15 +1519,13 @@ Treasury Board of CA Secretariat - Secrétariat du Conseil du Trésor du CA,326
 Treasury Board of Canada Secretariat,326
 Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,326
 Treasury Board Secretariat,326
-tb-ct,326
-Conseil du Trésor,326
 Administration portuaire de Trois-Rivières,327
 Trois-Rivières Port Authority,327
 TV5 Québec Canada,328
 Administration portuaire de Vancouver Fraser,329
+Administration portuaire Vancouver Fraser,329
 Vancouver Fraser Port Authority,329
 vfpa-apvf,329
-Administration portuaire Vancouver Fraser,329
 Administration de l'Aéroport de Vancouver,330
 Vancouver International Airport Authority,330
 Comité d’organisation des Jeux olympiques et paralympiques d’hiver de 2010 à Vancouver,331
@@ -1508,6 +1540,7 @@ Veterans Review and Appeal Board | Tribunal des anciens combattants (révision e
 VRAB,333
 vrab-tacra,333
 VIA Rail (Société d'État),334
+VIA Rail Canada,334
 VIA Rail Canada Inc.,334
 VIA Rail Canada Inc. - Budgetary,334
 VIA Rail Canada Inc. (Crown Corporation),334
@@ -1521,16 +1554,16 @@ Administration portuaire de Windsor,338
 Windsor Port Authority,338
 wpa-apw,338
 Autorité du pont Windsor-Détroit,339
+wdba-apwd,339
 Windsor-Detroit Bridge,339
 Windsor-Detroit Bridge Authority,339
-wdba-apwd,339
 Winnipeg Airports Authority Inc.,340
 Agence mondiale antidopage,341
 World Anti-Doping Agency,341
 Commissaire aux élections fédérales,342
 Commissioner of Canada Election,342
-ElectionsCanada,342
 Commissioner of Canada Elections,342
+ElectionsCanada,342
 occe-bcef,342
 Banque de l’infrastructure du Canada,344
 Canada Infrastructure Bank,344
@@ -1591,11 +1624,12 @@ SCDATA,539
 Service canadien d'appui aux tribunaux administratifs,539
 Directeur de l’établissement de soldats,541
 Director of Soldier Settlement,541
+SST,541
 Directeur des terres destinées aux anciens combattants,542
 "The Director, The Veterans’ Land Act",542
 Energy Supplies Allocation Board,543
-Office de répartition des approvisionnements d’énergie,543
 esab-orad,543
+Office de répartition des approvisionnements d’énergie,543
 "Personnel des fonds non publics, Forces canadiennes",545
 "Staff of the Non-Public Funds, Canadian Forces",545
 Canadian Foundation for Healthcare Improvement (CFHI),547
@@ -1628,32 +1662,39 @@ Accessibility Standards Canada - Normes d'accessibilité Canada,558
 Accessibility Standards Canada | Normes d’accessibilité Canada,558
 Canadian Accessibility Standards Development Organization,558
 casdo-ocena,558
+CASDO,558
 NAC,558
+Normes d’accessibilité Canada,558
 Normes d'accessibilité Canada,558
 Organisation canadienne d’élaboration de normes d’accessibilité,558
 Organisation canadienne d'élaboration de normes d'accessibilité,558
-Normes d’accessibilité Canada,558
 Excellence en santé Canada (ESC),559
 Agence de développement économique du Pacifique Canada,560
 Department of Pacific Economic Development,560
 Développement économique Canada pour le Pacifique,560
 Pacific Economic Development Agency of Canada,560
 Pacific Economic Development Canada,560
+Pacific Economic Development Canada (PacifiCan),560
 Pacific Economic Development Canada | Développement économique Canada pour le Pacifique,560
 PacifiCAN,560
-PacificCan,560
 pacifican,560
+PacifiCan,560
+PacificCan,560
 Agence fédérale de développement économique pour le Nord de l’Ontario,561
 Agence fédérale de développement économique pour le Nord de l'Ontario,561
 Federal Economic Development Agency for Northern Ontario,561
 Federal Economic Development Agency for Northern Ontario | Agence fédérale de développement économique pour le Nord de l’Ontario,561
 FEDNOR,561
 fednor,561
+FedNor,561
+hgr-tgf,562
+VIA HFR  VIA TGF Inc.,562
 VIA HFR - VIA TGF Inc.,562
 VIA HFR – VIA TGF Inc. (Société d'État),562
 VIA HFR – VIA TGF Inc. (Crown Corporation),562
-hgr-tgf,562
-Canada Water Agency,563
-Agence de l'eau du Canada,563
-cwa-aec,563
 Agence de l’eau du Canada,563
+Agence de l'eau du Canada,563
+Canada Water Agency,563
+cwa-aec,563
+
+
