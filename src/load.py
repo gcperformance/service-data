@@ -24,7 +24,8 @@ def clean_out_input_directory(config):
                 os.remove(file_path)  # Remove the file
                 logger.debug("Deleted file: %s",filename)
 
-    else: logger.debug("Input directory already empty")
+    else: 
+        logger.debug("Input directory already empty")
 
 def download_program_csv_files(config):
     """
