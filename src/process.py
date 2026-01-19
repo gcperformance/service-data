@@ -993,6 +993,92 @@ def datapack(si, ss, config, snapshot=False):
         logger.error("Error: %s", e, exc_info=True)
 
 
+def infobase(si, ss, config, snapshot=False):
+    try:
+        logger.debug('...')
+        # Infobase is updated quarterly, refers to the latest 5 published fiscal years
+
+        # Define online interaction point (OIP) columns
+        OIP_COLS = [
+            'os_account_registration',
+            'os_authentication',
+            'os_application',
+            'os_decision',
+            'os_issuance',
+            'os_issue_resolution_feedback',
+        ]
+
+        # Define application volume columns
+        APP_COLS = [
+            'num_applications_by_phone', 
+            'num_applications_online', 
+            'num_applications_in_person', 
+            'num_applications_by_mail', 
+            'num_applications_by_email', 
+            'num_applications_by_fax', 
+            'num_applications_by_other',
+            'num_applications_total',
+            'num_phone_enquiries',
+        ]
+
+        # === Department-specific infobase verification ===
+        # Set si_ib and ss_ib as working DataFrames        
+        si_ib = si.copy()
+        ss_ib = ss.copy()
+
+        # Online end-to-end by department (same as maf 5)        
+        # Melt the DataFrame
+        ib_online_e2e = pd.melt(
+            si_ib, 
+            id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], 
+            value_vars=OIP_COLS, 
+            var_name='online_interaction_point', 
+            value_name='activation')
+        
+        # Create boolean columns for activation states
+        ib_online_e2e['activation_y'] = (ib_online_e2e['activation'] == 'Y')
+        ib_online_e2e['activation_n'] = (ib_online_e2e['activation'] == 'N')
+        ib_online_e2e['activation_na'] = (ib_online_e2e['activation'] == 'NA')
+        
+        # Group by and sum the activation columns
+        ib_online_e2e = ib_online_e2e.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id', 'service_id']).agg(
+            activation_y=('activation_y', 'sum'),
+            activation_n=('activation_n', 'sum'),
+            activation_na=('activation_na', 'sum')
+        ).reset_index()
+
+        # Determine conditions for online_e2e
+        conditions = [
+            (ib_online_e2e['activation_na'] == 6),  # All interaction points are NaN
+            (ib_online_e2e['activation_n'] > 0)      # Some interaction points are 'N'
+        ]
+        choices = [None, False]
+        
+        ib_online_e2e['online_e2e'] = np.select(conditions, choices, default=True).astype(bool)
+        
+        # Remove all NaN/Nones
+        ib_online_e2e = ib_online_e2e.dropna(subset=['online_e2e'])
+        
+        # Determine department-level counts for online e2e services and all services
+        ib_online_e2e = ib_online_e2e.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
+            online_e2e_count=('online_e2e', 'sum'),
+            service_count=('service_id', 'nunique')
+        ).reset_index()
+        
+        # Determine percentage
+        ib_online_e2e['online_e2e_pc'] = (ib_online_e2e['online_e2e_count']/ib_online_e2e['service_count'])
+        
+        # Application volume by channel
+        ib_app_channels = si_ib.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
+
+
+
+
+    
+    except Exception as e:
+        logger.error("Error: %s", e, exc_info=True)
+
+
 def service_fte_spending(si, drf, config, snapshot=False):
     try:
         logger.debug('...')
