@@ -72,6 +72,24 @@ def get_config():
         '2024-2025':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-fra.csv',
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
     }
+    APP_COLS = [
+        'num_applications_by_phone', 
+        'num_applications_online', 
+        'num_applications_in_person', 
+        'num_applications_by_mail', 
+        'num_applications_by_email', 
+        'num_applications_by_fax', 
+        'num_applications_by_other'
+    ]
+
+    OIP_COLS = [
+        'os_account_registration',
+        'os_authentication',
+        'os_application',
+        'os_decision',
+        'os_issuance',
+        'os_issue_resolution_feedback',
+    ]
   
     return {
         "snapshots_list":snapshots_list,
@@ -83,7 +101,9 @@ def get_config():
         "csv_urls": csv_urls,
         "json_urls": json_urls,
         "program_csv_urls_en": program_urls_en,
-        "program_csv_urls_fr": program_urls_fr
+        "program_csv_urls_fr": program_urls_fr,
+        "app_cols": APP_COLS,
+        "oip_cols": OIP_COLS
     }
 
 def setup_logging():

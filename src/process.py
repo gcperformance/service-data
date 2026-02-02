@@ -107,13 +107,13 @@ def summary_si_ss(si, ss, config, snapshot=False):
         # Given a service, which online interaction points are activated by fiscal year for those services reported?
 
         # List of columns that represent online interaction point activation
-        oip_cols = [
-            'os_account_registration', 
-            'os_authentication', 
-            'os_application', 
-            'os_decision', 
-            'os_issuance', 
-            'os_issue_resolution_feedback', 
+        OIP_COLS = [
+            'os_account_registration',
+            'os_authentication',
+            'os_application',
+            'os_decision',
+            'os_issuance',
+            'os_issue_resolution_feedback',
         ]
         
         # Unpivot (i.e. melt) online interaction point columns
@@ -121,11 +121,11 @@ def summary_si_ss(si, ss, config, snapshot=False):
             si, 
             id_vars=['fiscal_yr', 'org_id', 'service_id', 'fy_org_id_service_id'],
             var_name='online_interaction_point', 
-            value_vars=oip_cols, 
+            value_vars=OIP_COLS, 
             value_name='activation')
         
         # Add a column to indicate the sort position of the online interaction point
-        si_oip['online_interaction_point_sort'] = si_oip['online_interaction_point'].apply(lambda x: oip_cols.index(x)+1)
+        si_oip['online_interaction_point_sort'] = si_oip['online_interaction_point'].apply(lambda x: OIP_COLS.index(x)+1)
         
         # Remove "os_" from the online interaction point column to get a clean name
         si_oip['online_interaction_point'] = si_oip['online_interaction_point'].str.replace('os_', '')
@@ -293,20 +293,20 @@ def maf(si, ss, config, snapshot=False):
         # =================================
         # MAF Question 5: Online end-to-end
         # As online end-to-end availability of services is required under the Policy on Service and Digital, what is the percentage of applicable services that can be completed online end-to-end?
-        oip_cols = [
-            'os_account_registration', 
-            'os_authentication', 
-            'os_application', 
-            'os_decision', 
-            'os_issuance', 
-            'os_issue_resolution_feedback', 
+        OIP_COLS = [
+            'os_account_registration',
+            'os_authentication',
+            'os_application',
+            'os_decision',
+            'os_issuance',
+            'os_issue_resolution_feedback',
         ]
         
         # Melt the DataFrame
         maf5 = pd.melt(
             si, 
             id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], 
-            value_vars=oip_cols, 
+            value_vars=OIP_COLS, 
             var_name='online_interaction_point', 
             value_name='activation')
         
@@ -347,20 +347,20 @@ def maf(si, ss, config, snapshot=False):
         # =================================
         # MAF Question 6: Online client interaction points
         # As online end-to-end availability of services is required under the Policy on Service and Digital, what is the percentage of client interaction points that are available online for services?
-        oip_cols = [
-            'os_account_registration', 
-            'os_authentication', 
-            'os_application', 
-            'os_decision', 
-            'os_issuance', 
-            'os_issue_resolution_feedback', 
+        OIP_COLS = [
+            'os_account_registration',
+            'os_authentication',
+            'os_application',
+            'os_decision',
+            'os_issuance',
+            'os_issue_resolution_feedback',
         ]
         
         # Melt the DataFrame
         maf6 = pd.melt(
             si, 
             id_vars=['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id'], 
-            value_vars=oip_cols, 
+            value_vars=OIP_COLS, 
             var_name='online_interaction_point', 
             value_name='activation')
 
@@ -651,8 +651,7 @@ def datapack(si, ss, config, snapshot=False):
             'num_applications_by_email', 
             'num_applications_by_fax', 
             'num_applications_by_other',
-            'num_applications_total',
-            'num_phone_enquiries',
+            'num_phone_enquiries'
         ]
 
         # Set si_dp and ss_dp as working DataFrames
@@ -1016,9 +1015,7 @@ def infobase(si, ss, config, snapshot=False):
             'num_applications_by_mail', 
             'num_applications_by_email', 
             'num_applications_by_fax', 
-            'num_applications_by_other',
-            'num_applications_total',
-            'num_phone_enquiries',
+            'num_applications_by_other'
         ]
 
         # === Department-specific infobase verification ===
@@ -1026,7 +1023,7 @@ def infobase(si, ss, config, snapshot=False):
         si_ib = si.copy()
         ss_ib = ss.copy()
 
-        # Online end-to-end by department (same as maf 5)        
+        # == Online end-to-end by department (same as maf 5) ==        
         # Melt the DataFrame
         ib_online_e2e = pd.melt(
             si_ib, 
@@ -1068,12 +1065,103 @@ def infobase(si, ss, config, snapshot=False):
         # Determine percentage
         ib_online_e2e['online_e2e_pc'] = (ib_online_e2e['online_e2e_count']/ib_online_e2e['service_count'])
         
-        # Application volume by channel
-        ib_app_channels = si_ib.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
+        # == Application volume by channel ==
+        cols = ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']+APP_COLS
+        ib_app_channels = si_ib.loc[:, cols]
+        
+        # Define broader "other" channel
+        ib_app_channels['num_applications_by_other_fax_and_email'] = (
+            ib_app_channels['num_applications_by_other']+
+            ib_app_channels['num_applications_by_fax']+
+            ib_app_channels['num_applications_by_email']
+        )
 
+        # Determine department-level amounts for app volumes and proportions
+        ib_app_channels = ib_app_channels.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
+            num_applications_online=('num_applications_online', 'sum'),
+            num_applications_by_phone=('num_applications_by_phone', 'sum'),
+            num_applications_by_mail=('num_applications_by_mail', 'sum'),
+            num_applications_in_person=('num_applications_in_person', 'sum'),
+            num_applications_by_other_fax_and_email=('num_applications_by_other_fax_and_email', 'sum')
+        ).reset_index()
 
+        # == Existence of service standards (identical to MAF Question 1)
+        # As service standards are required under the Policy on Service and Digital, what is the percentage of services that have service standards?
 
+        # Select relevant columns from service inventory
+        ib_services_with_standards = si.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
 
+        # Deduplicate service standards to prevent one-to-many expansion
+        ss_unique = ss[['fiscal_yr', 'service_id']].drop_duplicates()
+        
+        # Determine whether each service has a standard by checking for existence in 'service standards'
+        # Merge with 'ss' to check if (fiscal_yr, service_id) exists
+        ib_services_with_standards = ib_services_with_standards.merge(
+            ss_unique,  # Use de-duplicated version to check 
+            on=['fiscal_yr', 'service_id'],  # Merge on fiscal year and service ID
+            how='left',  # Keep all 'ib_services_with_standards' records, add matches from 'ss'
+            indicator=True  # Adds a column "_merge" to show if a match was found
+        )
+        
+        # Create boolean column: True if the service exists in 'ss', otherwise False
+        ib_services_with_standards['service_std_tf'] = ib_services_with_standards['_merge'] == 'both'
+        
+        # Drop the '_merge' column (no longer needed)
+        ib_services_with_standards = ib_services_with_standards.drop(columns=['_merge'])
+        
+        # Group by department and fiscal year, counting services with and without standards
+        ib_services_with_standards = ib_services_with_standards.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id']).agg(
+            service_with_std_count=('service_std_tf', 'sum'),  # Count services that have standards (True = 1)
+            service_count=('service_id', 'count')  # Count all services
+        ).reset_index()
+        
+        ib_services_with_standards['services_with_standards_percentage'] = (ib_services_with_standards['service_with_std_count']/ib_services_with_standards['service_count'])
+        
+        # =================================
+        # Service standard targets (Identical to MAF Question 2)
+        # What is the percentage of service standards that met their target?
+        
+        # Select relevant columns and drop rows with missing values
+        ib_standard_performance = ss.loc[:, ['fiscal_yr', 'service_standard_id', 'department_en', 'department_fr', 'org_id', 'target_met']].dropna()
+
+        ib_standard_performance['service_standard_met'] = ib_standard_performance['target_met'] == 'Y'
+        ib_standard_performance['service_standard_count'] = ib_standard_performance['target_met'].isin(['Y', 'N'])
+        
+        ib_standard_performance = ib_standard_performance.groupby(['fiscal_yr', 'department_en', 'department_fr', 'org_id']).agg(
+            service_standard_met=('service_standard_met', 'sum'),
+            service_standard_count=('service_standard_count', 'sum')
+        ).reset_index()
+
+        ib_standard_performance['standards_met_percentage'] = (ib_standard_performance['service_standard_met']/ib_standard_performance['service_standard_count'])
+
+        # === SUMMARY Infobase TABLE === 
+        ib_dfs = [ib_online_e2e,
+                  ib_app_channels,
+                  ib_services_with_standards,
+                  ib_standard_performance]
+        index_cols = ['fiscal_yr', 'org_id', 'department_en', 'department_fr']
+        
+        # Set index for each DataFrame in the list
+        ib_temps = [df.set_index(index_cols) for df in ib_dfs]
+        
+        # Concatenate along columns and reset index
+        ib_all = pd.concat(ib_temps, axis=1).reset_index()
+
+        # === EXPORT DATAFRAMES ===
+        indicator_exports = {
+            "ib_all": ib_all
+        }        
+
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+
+        export_to_csv(
+            data_dict=indicator_exports,
+            output_dir=INDICATORS_DIR
+        )
     
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
@@ -1143,6 +1231,7 @@ def process_files(si, ss, config, snapshot=False):
         maf(si, ss, config, snapshot)
         drr(si, ss, config, snapshot)
         datapack(si, ss, config, snapshot)
+        infobase(si, ss, config, snapshot)
         
         drf = build_drf(si, config, snapshot)
         service_fte_spending(si, drf, config, snapshot)
