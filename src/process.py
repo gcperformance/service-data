@@ -1166,6 +1166,57 @@ def infobase(si, ss, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
+def oecd_digital_gov_survey(si, config, snapshot=False):
+    try:
+        logger.debug('...')
+        # === What is the percentage of services in the catalogue/register that can be accessed through the following channels? ===
+        # In person, web browser, app, phone
+
+        si_oecd = si.copy()
+        si_oecd = si_oecd.loc[:,[
+                              'fiscal_yr', 
+                              'org_id',
+                              'department_en',
+                              'department_fr',
+                              'fy_org_id_service_id', 
+                              'service_scope',
+                              'service_recipient_type', 
+                              'num_applications_in_person', 
+                              'num_applications_by_phone', 
+                              'num_applications_online'
+                              ]]
+        
+        si_oecd = si_oecd[(si_oecd['service_scope'].str.contains('EXTERN', regex=True) & si_oecd['service_recipient_type'].eq('CLIENT'))]
+
+        si_oecd['applications_in_person'] = ~si_oecd['num_applications_in_person'].isin(['NA','ND', 0])
+        si_oecd['applications_by_phone'] = ~si_oecd['num_applications_by_phone'].isin(['NA','ND', 0])
+        si_oecd['applications_online'] = ~si_oecd['num_applications_online'].isin(['NA','ND', 0])
+
+        si_oecd = si_oecd.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
+            total_services=('fy_org_id_service_id', 'nunique'),
+            applications_in_person=('applications_in_person', 'sum'),
+            applications_by_phone=('applications_by_phone', 'sum'),
+            applications_online=('applications_online', 'sum'),
+        ).reset_index()
+
+        # === EXPORT DATAFRAMES ===
+        indicator_exports = {
+            "oecd_digital_gov_survey": si_oecd
+        }
+
+        # If running a snapshot run, change output directory accordingly
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+        
+        export_to_csv(
+            data_dict=indicator_exports,
+            output_dir=INDICATORS_DIR
+        )
+
+    except Exception as e:
+        logger.error("Error: %s", e, exc_info=True)
 
 def service_fte_spending(si, drf, config, snapshot=False):
     try:
@@ -1217,7 +1268,6 @@ def service_fte_spending(si, drf, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-
 def process_files(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
@@ -1232,6 +1282,7 @@ def process_files(si, ss, config, snapshot=False):
         drr(si, ss, config, snapshot)
         datapack(si, ss, config, snapshot)
         infobase(si, ss, config, snapshot)
+        oecd_digital_gov_survey(si, config, snapshot)
         
         drf = build_drf(si, config, snapshot)
         service_fte_spending(si, drf, config, snapshot)
