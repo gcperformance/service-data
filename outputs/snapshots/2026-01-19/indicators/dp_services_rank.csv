@@ -1,0 +1,145 @@
+fy_org_id_service_id;fiscal_yr;service_name_en;service_name_fr;online_enabled_Y;online_enabled_N;online_enabled_NA;num_applications_total;num_applications_by_phone;num_applications_online;num_applications_in_person;num_applications_by_mail;num_applications_by_email;num_applications_by_fax;num_applications_by_other;num_applications_rank
+2022-2023_26_679;2022-2023;Border Information Service (BIS);Service d'information sur la frontière (SIF);2;0;4;1063548.0;1019022.0;44526.0;0.0;0.0;0.0;0.0;0.0;19.0
+2022-2023_26_728;2022-2023;Commercial Processing (highway, air, rail, marine and postal);Traitement commercial (routier, aérien, ferrovaire,maritime et postaux);3;1;2;22976516.0;0.0;22243692.0;732824.0;0.0;0.0;0.0;0.0;2.0
+2022-2023_46_1097;2022-2023;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;32480128.0;51573.0;29750115.0;0.0;2678440.0;0.0;0.0;0.0;1.0
+2022-2023_46_1098;2022-2023;Authorize a Representative;Autoriser un Représentant;5;0;1;3881812.0;0.0;3553319.0;0.0;328493.0;0.0;0.0;0.0;5.0
+2022-2023_46_1099;2022-2023;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;8064432.0;0.0;7724465.0;0.0;339967.0;0.0;0.0;0.0;4.0
+2022-2023_46_1101;2022-2023;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;2908866.0;0.0;2740220.0;0.0;168646.0;0.0;0.0;0.0;12.0
+2022-2023_128_7;2022-2023;Canada Pension Plan (CPP) Benefits;Prestations du Régime de pensions du Canada;6;0;0;1603085.0;0.0;190515.0;0.0;492480.0;0.0;0.0;920090.0;16.0
+2022-2023_128_1001;2022-2023;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;6;0;0;3286418.0;0.0;276390.0;0.0;792026.0;0.0;0.0;2218002.0;9.0
+2022-2023_128_1003;2022-2023;Employment Insurance (EI) Benefits;Prestations d'assurance-emploi;6;0;0;3047956.0;0.0;2986742.0;0.0;0.0;0.0;0.0;61214.0;11.0
+2022-2023_128_1242;2022-2023;Canadian Passport;Passeport canadien;1;5;0;3429561.0;0.0;0.0;1461713.0;858233.0;0.0;0.0;1109615.0;8.0
+2022-2023_128_1292;2022-2023;Provision of a Social Insurance Number;Émission d'un numéro d'assurance sociale;1;5;0;2601956.0;0.0;819683.0;1443999.0;6813.0;0.0;0.0;331461.0;13.0
+2022-2023_128_1293;2022-2023;Job Bank - Find a Job;Guichet-Emplois – Trouver un emploi;5;0;1;1755138.0;0.0;1711674.0;0.0;0.0;0.0;0.0;43464.0;15.0
+2022-2023_151_1726;2022-2023;Financial Literacy;Littératie financière;4;2;0;10104531.0;0.0;10104531.0;0.0;0.0;0.0;0.0;0.0;3.0
+2022-2023_123_1422;2022-2023;Electronic Travel Authorization;Autorisation de voyage électronique;6;0;0;3064022.0;0.0;3064022.0;0.0;0.0;0.0;0.0;0.0;10.0
+2022-2023_123_1423;2022-2023;Temporary Resident Visa;Visa de résident temporaire;5;1;0;2446190.0;0.0;1491479.0;446.0;24100.0;751.0;0.0;929414.0;14.0
+2022-2023_123_1428;2022-2023;Study Permit;Permis d'études;5;0;1;981490.0;1.0;918893.0;10031.0;3267.0;88.0;0.0;49210.0;20.0
+2022-2023_123_2238;2022-2023;Client Support Centre;Centre de soutien à la clientèle;1;0;5;3464403.0;1020388.0;0.0;0.0;0.0;2444015.0;0.0;0.0;7.0
+2022-2023_123_SRV03049;2022-2023;Passports & Travel Documents;Passeports & Titres de voyage;1;4;1;3706829.0;0.0;886.0;1751964.0;1947090.0;6887.0;0.0;2.0;6.0
+2022-2023_282_1195;2022-2023;Public Service Resourcing System: PSRS Help desk;Système de ressourcement de la fonction publique: Service de dépannage du SRFP;6;0;0;1128947.0;0.0;1128947.0;0.0;0.0;0.0;0.0;0.0;18.0
+2022-2023_326_1349;2022-2023;Open Government Portal -  Access to data and information;Portail gouvernement ouvert – accès à l'information ouverte et données ouvertes.;5;0;1;1238491.0;0.0;1238491.0;0.0;0.0;0.0;0.0;0.0;17.0
+2021-2022_26_728;2021-2022;Commercial Processing (highway, air, rail, marine and postal);Traitement commercial (routier, aérien, ferrovaire,maritime et postaux);3;1;2;21910803.0;0.0;21215799.0;695004.0;0.0;0.0;0.0;0.0;2.0
+2021-2022_46_1097;2021-2022;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;30459006.0;57949.0;27672389.0;0.0;2728668.0;0.0;0.0;0.0;1.0
+2021-2022_46_1098;2021-2022;Authorize a Representative;Autoriser un Représentant;5;0;1;4083678.0;0.0;3657761.0;0.0;425917.0;0.0;0.0;0.0;8.0
+2021-2022_46_1099;2021-2022;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;7867600.0;0.0;7504737.0;0.0;362863.0;0.0;0.0;0.0;6.0
+2021-2022_46_1101;2021-2022;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;2762300.0;0.0;2584321.0;0.0;177979.0;0.0;0.0;0.0;13.0
+2021-2022_46_2457;2021-2022;Canada Recovery Benefit (CRB);Prestation canadienne de la relance économique (PCRE);6;0;0;13541391.0;3820663.0;9720728.0;0.0;0.0;0.0;0.0;0.0;3.0
+2021-2022_46_2458;2021-2022;Canada Recovery Caregiving Benefit (CRCB);Prestation canadienne de la relance économique pour proches aidants (PCREPA);6;0;0;8489395.0;4155915.0;4333480.0;0.0;0.0;0.0;0.0;0.0;5.0
+2021-2022_46_2459;2021-2022;Canada Recovery Sickness Benefit (CRSB);Prestation canadienne de maladie pour la relance économique (PCMRE);6;0;0;2698124.0;883149.0;1814975.0;0.0;0.0;0.0;0.0;0.0;14.0
+2021-2022_46_2462;2021-2022;Canada Emergency Wage Subsidy (CEWS);Subvention salariale d'urgence du Canada (SSUC);6;0;0;3000000.0;0.0;3000000.0;0.0;0.0;0.0;0.0;0.0;12.0
+2021-2022_46_SRV02825;2021-2022;Canada Worker Lockdown Benefit (CWLB);Prestation canadienne pour les travailleurs en cas de confinement (PCTCC);6;0;0;3003246.0;178922.0;2824324.0;0.0;0.0;0.0;0.0;0.0;11.0
+2021-2022_128_7;2021-2022;Canada Pension Plan (CPP) Benefits;Prestations du Régime de pensions du Canada;6;0;0;1630385.0;0.0;1145647.0;0.0;484738.0;0.0;0.0;0.0;17.0
+2021-2022_128_1001;2021-2022;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;6;0;0;3280494.0;0.0;266468.0;0.0;803939.0;0.0;0.0;2210087.0;10.0
+2021-2022_128_1003;2021-2022;Employment Insurance (EI) Benefits;Prestations d'assurance-emploi;6;0;0;3916121.0;0.0;3680484.0;0.0;78545.0;78547.0;78545.0;0.0;9.0
+2021-2022_128_1242;2021-2022;Canadian Passport;Passeport canadien;1;5;0;1406647.0;0.0;0.0;549169.0;615791.0;0.0;0.0;241687.0;19.0
+2021-2022_128_1292;2021-2022;Provision of a Social Insurance Number;Émission d'un numéro d'assurance sociale;1;5;0;2206729.0;0.0;1224607.0;972465.0;9657.0;0.0;0.0;0.0;15.0
+2021-2022_128_1293;2021-2022;Job Bank - Find a Job;Guichet-Emplois– Trouver un emploi;5;0;1;1616577.0;0.0;1576331.0;0.0;0.0;0.0;0.0;40246.0;18.0
+2021-2022_151_1726;2021-2022;Financial Literacy;Littératie financière;4;2;0;9830975.0;0.0;9830975.0;0.0;0.0;0.0;0.0;0.0;4.0
+2021-2022_123_1491;2021-2022;Issuance of a Regular Passport;Délivrance d'un Passeport régulier;1;4;1;1736484.0;0.0;0.0;561134.0;1175350.0;0.0;0.0;0.0;16.0
+2021-2022_123_2238;2021-2022;Client Support Centre;Centre de soutien à la clientèle;1;0;5;5173682.0;4034397.0;0.0;0.0;0.0;1139285.0;0.0;0.0;7.0
+2021-2022_326_1349;2021-2022;Open Government Portal -  Access to data and information;Portail gouvernement ouvert – accès à l'information ouverte et données ouvertes.;5;0;1;1268392.0;0.0;1268392.0;0.0;0.0;0.0;0.0;0.0;20.0
+2020-2021_26_670;2020-2021;Air Traveller Processing;Traitement primaire des voyageurs - mode aérien;0;0;6;2112724.0;47484.0;0.0;2065240.0;0.0;0.0;0.0;0.0;15.0
+2020-2021_26_728;2020-2021;Commercial Processing (highway, air, rail, marine, postal and courier low value;Traitement commercial (routier, aérien, ferrovaire,maritime, postaux et messageries d'expéditions de faible valeur)).;3;1;2;19892542.0;0.0;19236127.0;656415.0;0.0;0.0;0.0;0.0;3.0
+2020-2021_46_1097;2020-2021;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;31129966.0;63887.0;28019566.0;0.0;3046513.0;0.0;0.0;0.0;1.0
+2020-2021_46_1098;2020-2021;Authorize a Representative;Autoriser un Représentant;5;0;1;4110254.0;0.0;3609231.0;0.0;501023.0;0.0;0.0;0.0;10.0
+2020-2021_46_1099;2020-2021;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;7323721.0;0.0;6937855.0;0.0;385866.0;0.0;0.0;0.0;6.0
+2020-2021_46_1101;2020-2021;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;2563106.0;0.0;2415454.0;0.0;147652.0;0.0;0.0;0.0;14.0
+2020-2021_46_2457;2020-2021;Canada Recovery Benefit (CRB);Prestation canadienne de la relance économique (PCRE);6;0;0;14100000.0;0.0;14100000.0;0.0;0.0;0.0;0.0;0.0;4.0
+2020-2021_46_2458;2020-2021;Canada Recovery Caregiving Benefit (CRCB);Prestation canadienne de la relance économique pour proches aidants (PCREPA);6;0;0;3800000.0;0.0;3800000.0;0.0;0.0;0.0;0.0;0.0;11.0
+2020-2021_46_2460;2020-2021;Canada Emergency Response Benefit (CERB);Prestation canadienne d'urgence (PCU);6;0;0;22700000.0;0.0;22700000.0;0.0;0.0;0.0;0.0;0.0;2.0
+2020-2021_46_2461;2020-2021;Canada Emergency Student Benefit (CESB);Prestation canadienne d'urgence pour les étudiants (PCUE);6;0;0;2100000.0;0.0;2100000.0;0.0;0.0;0.0;0.0;0.0;16.0
+2020-2021_46_2462;2020-2021;Canada Emergency Wage Subsidy (CEWS);Subvention salariale d'urgence du Canada (SSUC);6;0;0;3000000.0;0.0;3000000.0;0.0;0.0;0.0;0.0;0.0;13.0
+2020-2021_128_7;2020-2021;Canada Pension Plan (CPP) Benefits;Prestations du Régime de pensions du Canada;6;0;0;1502560.0;0.0;150583.0;0.0;495735.0;0.0;0.0;856242.0;19.0
+2020-2021_128_1001;2020-2021;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;6;0;0;3217790.0;0.0;43052.0;0.0;957503.0;0.0;0.0;2217235.0;12.0
+2020-2021_128_1003;2020-2021;Employment Insurance (EI) Benefits;Prestations d’assurance-emploi;6;0;0;7148831.0;0.0;5702111.0;0.0;160653.0;0.0;0.0;1286067.0;7.0
+2020-2021_128_1252;2020-2021;In-Person Service;Service en personne;0;1;5;4647541.0;0.0;2993482.0;1654059.0;0.0;0.0;0.0;0.0;9.0
+2020-2021_128_1293;2020-2021;Job Bank - Find a Job;Guichet-Emplois– Trouver un emploi;4;0;2;1877765.0;0.0;1844488.0;0.0;0.0;0.0;0.0;33277.0;17.0
+2020-2021_128_2285;2020-2021;One-Time Payment to Persons with Disabilities;Paiement Unique aux Personnes en Situation de Handicap;0;0;6;1691948.0;0.0;0.0;0.0;0.0;0.0;0.0;1691948.0;18.0
+2020-2021_151_1726;2020-2021;Financial Literacy;Littératie financière;4;2;0;10243558.0;0.0;10243558.0;0.0;0.0;0.0;0.0;0.0;5.0
+2020-2021_123_2238;2020-2021;Client Support Centre;Centre de soutien à la clientèle;1;0;5;5777705.0;4255087.0;0.0;0.0;0.0;1522618.0;0.0;0.0;8.0
+2020-2021_282_1195;2020-2021;Public Service Resourcing System (PSRS): PSRS Help desk;Système de ressourcement de la fonction publique (SRFP): Service de dépannage du SRFP;6;0;0;1242967.0;0.0;1242967.0;0.0;0.0;0.0;0.0;0.0;20.0
+2019-2020_26_670;2019-2020;Air Traveller Processing;Traitement primaire des voyageurs - mode aérien;0;0;6;35393511.0;212628.0;0.0;35180883.0;0.0;0.0;0.0;0.0;1.0
+2019-2020_26_672;2019-2020;Marine Traveller Processing;Traitement primaire des voyageurs - mode maritime;0;0;6;3189881.0;107588.0;0.0;3082293.0;0.0;0.0;0.0;0.0;11.0
+2019-2020_26_728;2019-2020;Commercial Processing (highway, air, rail, marine, postal and courier). Release;Traitement commercial (routier, aérien, ferrovaire,maritime, postaux et messageries).  Mainlevée contre documentation minimale (MDM).;3;1;2;20207714.0;0.0;19275819.0;931895.0;0.0;0.0;0.0;0.0;3.0
+2019-2020_46_1097;2019-2020;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;31243958.0;50149.0;27250409.0;0.0;3943400.0;0.0;0.0;0.0;2.0
+2019-2020_46_1098;2019-2020;Authorize a Representative;Autoriser un Représentant;5;0;1;2852844.0;0.0;2393970.0;0.0;458874.0;0.0;0.0;0.0;13.0
+2019-2020_46_1099;2019-2020;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;7842037.0;0.0;7307767.0;0.0;534270.0;0.0;0.0;0.0;6.0
+2019-2020_46_1101;2019-2020;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;2547687.0;0.0;2358433.0;0.0;189254.0;0.0;0.0;0.0;14.0
+2019-2020_128_1001;2019-2020;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;5;1;0;3154536.0;0.0;10287.0;0.0;857286.0;0.0;0.0;2286963.0;12.0
+2019-2020_128_1003;2019-2020;Employment Insurance (EI) Benefits;Prestations d’assurance-emploi;5;1;0;4873710.0;0.0;4832440.0;0.0;41270.0;0.0;0.0;0.0;8.0
+2019-2020_128_1242;2019-2020;Canadian Passport;Passeport canadien;1;5;0;2298340.0;0.0;0.0;1559010.0;739330.0;0.0;0.0;0.0;16.0
+2019-2020_128_1252;2019-2020;In-Person Service;Service en personne;0;1;5;8572800.0;0.0;0.0;8572800.0;0.0;0.0;0.0;0.0;5.0
+2019-2020_128_1292;2019-2020;Provision of a Social Insurance Number;Émission d’un numéro d’assurance sociale;0;6;0;1809084.0;0.0;358124.0;1444947.0;6013.0;0.0;0.0;0.0;19.0
+2019-2020_123_1422;2019-2020;Electronic Travel Authorization;Autorisation de voyage électronique;6;0;0;3738099.0;0.0;3737587.0;0.0;0.0;0.0;0.0;512.0;10.0
+2019-2020_123_1423;2019-2020;Temporary Resident Visa;Visa de résident temporaire;5;1;0;2053103.0;0.0;942090.0;3395.0;1096121.0;0.0;0.0;11497.0;18.0
+2019-2020_123_1471;2019-2020;Interim Federal Health: Reimbursements to Health Care Professionals;Remboursement dans le cadre du programme fédéral de santé intérimaire;2;0;4;3839423.0;0.0;1571068.0;0.0;2268355.0;0.0;0.0;0.0;9.0
+2019-2020_123_1491;2019-2020;Issuance of a Regular Passport;Délivrance d'un Passeport régulier;1;4;1;2447187.0;0.0;0.0;1630116.0;712097.0;0.0;0.0;104974.0;15.0
+2019-2020_130_1237;2019-2020;Nuans - Provide Corporate Name Search Report;Nuans-Générer un rapport de dénomination;6;0;0;5900000.0;0.0;5900000.0;0.0;0.0;0.0;0.0;0.0;7.0
+2019-2020_278_1118;2019-2020;Prime Minister's Email;Courriel du premier ministre;0;0;6;1773944.0;0.0;0.0;0.0;0.0;0.0;0.0;1773944.0;20.0
+2019-2020_278_1200;2019-2020;Prime Minister's Website;Site Web du premier ministre;4;0;2;9824184.0;0.0;0.0;0.0;0.0;0.0;0.0;9824184.0;4.0
+2019-2020_278_1365;2019-2020;Executive correspondence services;Services de la correspondance de la haute direction;0;0;6;2080300.0;14916.0;0.0;0.0;291440.0;0.0;0.0;1773944.0;17.0
+2018-2019_26_670;2018-2019;Air Traveller Processing;Traitement primaire des voyageurs - mode aérien;0;0;6;35520495.0;0.0;0.0;35520495.0;0.0;0.0;0.0;0.0;1.0
+2018-2019_26_672;2018-2019;Marine Traveller Processing;Traitement primaire des voyageurs - mode maritime;0;0;6;2759912.0;0.0;0.0;2759912.0;0.0;0.0;0.0;0.0;17.0
+2018-2019_26_673;2018-2019;Immigration Secondary (Temporary Resident Program)- Visitor;Immigration secondarie (Programme des résidents temporaires) Visiteur;0;5;1;6655913.0;0.0;0.0;6655913.0;0.0;0.0;0.0;0.0;8.0
+2018-2019_26_728;2018-2019;Commercial Processing (highway, air, rail, marine, postal and courier). Release;Traitement commercial (routier, aérien, ferrovaire,maritime, postaux et messageries).  Mainlevée contre documentation minimale (MDM) - Échange de données informatisé (EDI).;3;1;2;21739228.0;0.0;20667814.0;1071414.0;0.0;0.0;0.0;0.0;5.0
+2018-2019_46_1097;2018-2019;T1  Income Tax Return Filing;Déclaration d'impôt sur le revenu T1;5;1;0;31243958.0;0.0;27300558.0;0.0;3943400.0;0.0;0.0;0.0;2.0
+2018-2019_46_1098;2018-2019;Authorize a Representative;Autoriser un Représentant;5;0;1;2983277.0;0.0;2389604.0;0.0;593673.0;0.0;0.0;0.0;12.0
+2018-2019_46_1099;2018-2019;GST/HST Return Filing;Production d'une déclaration de la TPS/TVH;6;0;0;7923761.0;0.0;7236410.0;0.0;687351.0;0.0;0.0;0.0;7.0
+2018-2019_46_1101;2018-2019;T2 Corporation Income Tax Return Filing;Déclaration de revenus des sociétés T2;6;0;0;2425961.0;0.0;2211798.0;0.0;214163.0;0.0;0.0;0.0;19.0
+2018-2019_128_1001;2018-2019;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;4;2;0;2948447.0;0.0;0.0;0.0;716175.0;0.0;0.0;2232272.0;13.0
+2018-2019_128_1003;2018-2019;Employment Insurance (EI) Benefits;Prestations d’assurance-emploi;5;1;0;2830070.0;0.0;2798291.0;0.0;31779.0;0.0;0.0;0.0;16.0
+2018-2019_128_1242;2018-2019;Canadian Passport;Passeport canadien;1;5;0;2894929.0;0.0;0.0;1945393.0;949536.0;0.0;0.0;0.0;15.0
+2018-2019_128_1252;2018-2019;Improving In-Person Access to Service;Améliorer l’accès en personne aux services;0;0;6;8437624.0;0.0;0.0;8437624.0;0.0;0.0;0.0;0.0;6.0
+2018-2019_128_1292;2018-2019;Provision of a Social Insurance Number;Émission d’un numéro d’assurance sociale;0;6;0;1744900.0;0.0;341000.0;1400000.0;3900.0;0.0;0.0;0.0;20.0
+2018-2019_152_170;2018-2019;Receiving Financial Transaction Reports;Réception de déclaration d'opérations financières;0;6;0;28119852.0;0.0;28119852.0;0.0;0.0;0.0;0.0;0.0;3.0
+2018-2019_123_1422;2018-2019;Electronic Travel Authorization (eTA);Autorisation de voyage électronique (AVE);6;0;0;4000218.0;0.0;4000216.0;1.0;1.0;0.0;0.0;0.0;9.0
+2018-2019_123_1423;2018-2019;Temporary Resident Visa (TRV);Visa de résident temporaire (VRT);5;1;0;2431943.0;0.0;909065.0;14944.0;1490098.0;0.0;0.0;17836.0;18.0
+2018-2019_123_1471;2018-2019;Reimbursement Interim Federal Health (IFH);Remboursement dans le cadre du programme fédéral de santé intérimaire (PFSI);2;0;4;2904693.0;0.0;1193126.0;0.0;1711567.0;0.0;0.0;0.0;14.0
+2018-2019_123_1491;2018-2019;Regular Passport;Passeport régulier;1;4;1;3029440.0;0.0;0.0;511443.0;2517997.0;0.0;0.0;0.0;11.0
+2018-2019_348_1778;2018-2019;Non Insured Health Benefits - Direct Service Delivery;Services de santé non assurés – Prestation de services directe;1;5;0;25253875.0;0.0;0.0;0.0;0.0;0.0;0.0;25253875.0;4.0
+2018-2019_130_1237;2018-2019;Nuans - Provide Corporate Name Search Report;Nuans-Générer un rapport de dénomination;5;1;0;3340000.0;0.0;3340000.0;0.0;0.0;0.0;0.0;0.0;10.0
+2023-2024_26_728;2023-2024;Commercial Processing (highway, air, rail, marine, postal and courier);Traitement commercial (routier, aérien, ferroviaire, maritime, postaux et messageries);3;1;2;25317100.0;0.0;24566685.0;750415.0;0.0;0.0;0.0;0.0;2.0
+2024-2025_26_728;2024-2025;Commercial Processing (highway, air, rail, marine, postal and courier);Traitement commercial (routier, aérien, ferroviaire, maritime, postaux et messageries);3;1;2;29903760.0;0.0;29198586.0;705174.0;0.0;0.0;0.0;0.0;2.0
+2023-2024_46_1110;2023-2024;Advanced Canada workers benefit (ACWB);Avance de l’allocation canadienne pour les travailleurs (AACT);5;1;0;6142697.0;0.0;5185411.0;0.0;957286.0;0.0;0.0;0.0;4.0
+2023-2024_46_1098;2023-2024;Authorize a Representative;Autoriser un Représentant;5;0;1;3791630.0;0.0;3487906.0;0.0;303724.0;0.0;0.0;0.0;8.0
+2023-2024_46_1099;2023-2024;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;8232061.0;0.0;7913893.0;0.0;318168.0;0.0;0.0;0.0;3.0
+2023-2024_46_1097;2023-2024;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;32923814.0;48050.0;30370755.0;0.0;2505009.0;0.0;0.0;0.0;1.0
+2023-2024_46_1101;2023-2024;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;3014543.0;0.0;2835983.0;0.0;178560.0;0.0;0.0;0.0;13.0
+2024-2025_46_1098;2024-2025;Authorize a Representative;Autoriser un Représentant;5;0;1;4059325.0;0.0;3742805.0;0.0;316520.0;0.0;0.0;0.0;8.0
+2024-2025_46_1099;2024-2025;GST/HST Returns;Production d'une déclaration de la TPS/TVH;6;0;0;8423182.0;0.0;8219516.0;0.0;203666.0;0.0;0.0;0.0;4.0
+2024-2025_46_1097;2024-2025;Individual Income Tax Returns;Déclaration d'impôt sur le revenus des particuliers;6;0;0;33248395.0;70903.0;30649020.0;0.0;2528472.0;0.0;0.0;0.0;1.0
+2024-2025_46_1101;2024-2025;T2 Corporation Income Tax Returns;Déclaration de revenus des sociétés T2;6;0;0;3153757.0;0.0;2987448.0;0.0;166309.0;0.0;0.0;0.0;14.0
+2024-2025_46_1110;2024-2025;Advanced Canada workers benefit (ACWB);Avance de l’allocation canadienne pour les travailleurs (AACT);5;1;0;6566240.0;0.0;5560330.0;0.0;1005910.0;0.0;0.0;0.0;5.0
+2024-2025_65_3705;2024-2025;Import Admissibility;Admissibilité à l'importation;6;0;0;3414000.0;0.0;3038000.0;0.0;0.0;376000.0;0.0;0.0;11.0
+2023-2024_128_7;2023-2024;Canada Pension Plan (CPP) Benefits;Prestations du Régime de pensions du Canada;6;0;0;1539061.0;0.0;190112.0;0.0;556632.0;0.0;0.0;792317.0;17.0
+2023-2024_128_3602;2023-2024;Canadian Dental Care Plan Eligibility Verification and Information;Vérification et renseignements sur l’admissibilité au Régime canadien de soins dentaires;0;6;0;1679609.0;0.0;0.0;0.0;0.0;0.0;0.0;1679609.0;16.0
+2023-2024_128_1242;2023-2024;Canadian Passport;Passeport canadien;1;5;0;4984089.0;0.0;0.0;3981638.0;1002451.0;0.0;0.0;0.0;6.0
+2023-2024_128_1003;2023-2024;Employment Insurance (EI) Benefits;Prestations d’assurance-emploi;6;0;0;3126473.0;0.0;3071175.0;0.0;0.0;0.0;0.0;55298.0;12.0
+2023-2024_128_1293;2023-2024;Job Bank - Find a Job;Guichet-Emplois– Trouver un emploi;5;0;1;2038032.0;0.0;1995278.0;0.0;0.0;0.0;0.0;42754.0;15.0
+2023-2024_128_1001;2023-2024;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;6;0;0;3294579.0;0.0;88033.0;0.0;823743.0;0.0;0.0;2382803.0;11.0
+2023-2024_128_1292;2023-2024;Provision of a Social Insurance Number;Émission d’un numéro d’assurance sociale;2;4;0;2897218.0;0.0;838339.0;1717806.0;3689.0;0.0;0.0;337384.0;14.0
+2024-2025_128_3602;2024-2025;Canadian Dental Care Plan Eligibility Verification and Information;Vérification et renseignements sur l’admissibilité au Régime canadien de soins dentaires;5;1;0;2324758.0;32250.0;1970415.0;0.0;0.0;0.0;0.0;322093.0;18.0
+2024-2025_128_1242;2024-2025;Canadian Passport;Passeport canadien;1;5;0;5255644.0;0.0;3911.0;2674125.0;967549.0;0.0;0.0;1610059.0;6.0
+2024-2025_128_1003;2024-2025;Employment Insurance (EI) Benefits;Prestations d’assurance-emploi;6;0;0;3211120.0;0.0;2934698.0;223073.0;0.0;0.0;0.0;53349.0;13.0
+2024-2025_128_1293;2024-2025;Job Bank - Find a Job;Guichet-Emplois– Trouver un emploi;5;0;1;1746838.0;0.0;1709067.0;0.0;0.0;0.0;0.0;37771.0;19.0
+2024-2025_128_1001;2024-2025;Old Age Security (OAS) Benefits;Prestations de la Sécurité de la vieillesse;6;0;0;3729896.0;0.0;89599.0;0.0;924746.0;0.0;0.0;2715551.0;9.0
+2024-2025_128_1292;2024-2025;Provision of a Social Insurance Number;Émission d’un numéro d’assurance sociale;2;4;0;2653436.0;0.0;755212.0;1551585.0;2948.0;0.0;0.0;343691.0;16.0
+2023-2024_127_3604;2023-2024;Canadian Dental Care Plan eligibility verification and enrollment;Vérification de l'admissibilité et inscription au Régime canadien de soins dentaires;0;6;0;1679609.0;0.0;0.0;0.0;0.0;0.0;0.0;1679609.0;16.0
+2024-2025_127_4095;2024-2025;Oral health providers claims' and estimates' processing and payment as part of the Canadian Dental Care Plan;Traitement des réclamations et des demandes d'autorisations préalables et paiement aux fournisseurs de soins buccodentaires dans le cadre du Régime canadien de soins dentaires;5;1;0;11391911.0;0.0;10799161.0;0.0;592750.0;0.0;0.0;0.0;3.0
+2024-2025_127_3604;2024-2025;Canadian Dental Care Plan eligibility verification and enrollment;Vérification de l'admissibilité et inscription au Régime canadien de soins dentaires;6;0;0;2324758.0;32250.0;1970415.0;0.0;0.0;0.0;0.0;322093.0;18.0
+2023-2024_123_1422;2023-2024;Electronic Travel Authorization;Autorisation de voyage électronique;6;0;0;3688195.0;0.0;3687971.0;0.0;0.0;0.0;0.0;224.0;10.0
+2023-2024_123_1423;2023-2024;Temporary Resident Visa;Visa de résident temporaire;5;1;0;3774667.0;0.0;3753588.0;177.0;19390.0;0.0;0.0;1512.0;9.0
+2023-2024_123_1428;2023-2024;Study Permit;Permis d'études;5;0;1;1056098.0;0.0;1042829.0;6286.0;4172.0;0.0;0.0;2811.0;20.0
+2023-2024_123_2238;2023-2024;Client Support Centre;Centre de soutien à la clientèle;1;0;5;4125157.0;2659147.0;0.0;0.0;0.0;1466010.0;0.0;0.0;7.0
+2023-2024_123_SRV03049;2023-2024;Passports & Travel Documents;Délivrance de passeports et de titres de voyage;1;4;1;5001781.0;0.0;0.0;3966065.0;1035716.0;0.0;0.0;0.0;5.0
+2023-2024_123_SRV03051;2023-2024;Work Permit;Permis de travail;6;0;0;1507933.0;0.0;1222800.0;250569.0;26252.0;0.0;0.0;8312.0;18.0
+2024-2025_123_1422;2024-2025;Electronic Travel Authorization;Autorisation de voyage électronique;6;0;0;3336701.0;0.0;3336701.0;0.0;0.0;0.0;0.0;0.0;12.0
+2024-2025_123_1423;2024-2025;Temporary Resident Visa;Visa de résident temporaire;5;1;0;2981805.0;0.0;2961712.0;409.0;18865.0;648.0;0.0;171.0;15.0
+2024-2025_123_2238;2024-2025;Client Support Centre;Centre de soutien à la clientèle;1;0;5;3652765.0;1808216.0;0.0;0.0;0.0;1844549.0;0.0;0.0;10.0
+2024-2025_123_SRV03049;2024-2025;Passports & Travel Documents;Délivrance de passeports et de titres de voyage;5;0;1;5236770.0;0.0;3905.0;4236145.0;995949.0;0.0;0.0;771.0;7.0
+2024-2025_134_1522;2024-2025;Canadian Spatial Reference System;Système canadien de référence spatiale;5;1;0;2608161.0;0.0;2607677.0;0.0;0.0;484.0;0.0;0.0;17.0
+2024-2025_136_900;2024-2025;Pension Administration – Pension Payments and Services;Administration des pensions – Prestations et services de pension;6;0;0;1606865.0;0.0;1160911.0;0.0;326921.0;44666.0;74367.0;0.0;20.0
+2023-2024_326_1349;2023-2024;Open Government Portal -  Access to data and information;Portail gouvernement ouvert – accès à l’information ouverte et données ouvertes.;5;0;1;1270076.0;0.0;1270076.0;0.0;0.0;0.0;0.0;0.0;19.0
+
+Timestamp:2026-02-05_15:51:31
