@@ -2,6 +2,7 @@ import logging
 import sys
 import time
 import argparse
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -126,13 +127,25 @@ def setup_logging():
     h_console.setLevel(logging.INFO)
     h_console.setFormatter(f_simple)
 
+    # Source - https://stackoverflow.com/a/55248611
+    # Posted by lotrgollum87, modified by community. See post 'Timeline' for change history
+    # Retrieved 2026-02-10, License - CC BY-SA 4.0
+
+    # Create debug log file
+    debug_log_filename = "outputs/debug.log"
+    os.makedirs(os.path.dirname(debug_log_filename), exist_ok=True)
+    
     # debug file gets EVERYTHING with the verbose format
-    h_debug = logging.FileHandler(Path("outputs") / "debug.log", encoding="utf-8", delay=True)
+    h_debug = logging.FileHandler(debug_log_filename, mode="w", encoding="utf-8", delay=True)
     h_debug.setLevel(logging.DEBUG)
     h_debug.setFormatter(f_verbose)
 
+    # Create error log file
+    error_log_filename = "outputs/errors.log"
+    os.makedirs(os.path.dirname(error_log_filename), exist_ok=True)
+
     # errors file gets ERROR and above with verbose format
-    h_errors = logging.FileHandler(Path("outputs") / "errors.log", encoding="utf-8", delay=True)
+    h_errors = logging.FileHandler(error_log_filename, mode="w", encoding="utf-8", delay=True)
     h_errors.setLevel(logging.ERROR)
     h_errors.setFormatter(f_verbose)
 

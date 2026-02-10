@@ -445,7 +445,8 @@ def drr(si, ss, config, snapshot=False):
         logger.debug('...')
         # === DRR INDICATORS ===
         # =================================
-        # DRR Indicator ID DR-2467: Fraction of high-volume services that are fully available online
+        # DRR Indicator ID DR-2467: Fraction of high-volume external services that are fully available online
+        # Also functions as PIP Indicator 9: "% of GoC high volume services fully available online"
         
         # Define high-volume threshold
         HIGH_VOLUME_THRESHOLD = 45000
@@ -508,11 +509,12 @@ def drr(si, ss, config, snapshot=False):
         )
 
         # Compute DR-2467 score
-        dr2467['dr2467_score'] = (dr2467['hv_online_e2e_count'] / dr2467['hv_service_count']) * 100
+        dr2467['dr2467_pip9_score'] = (dr2467['hv_online_e2e_count'] / dr2467['hv_service_count']) * 100
 
         # =================================
         # DRR Indicator ID DR-2468: Fraction of high-volume (applications & telephone enquiries) 
         # services that meet one or more service standard
+        # Also functions as PIP indicator 10 "% of GoC high volume services that meet service standards"
         
         # Define high-volume threshold
         HIGH_VOLUME_THRESHOLD = 45000
@@ -542,11 +544,13 @@ def drr(si, ss, config, snapshot=False):
         ).reset_index()
 
         # Compute DR-2468 score
-        dr2468['dr2468_score'] = (dr2468['hvte_services_count_meeting_standard'] / dr2468['hvte_services_count']) * 100
+        dr2468['dr2468_pip10_score'] = (dr2468['hvte_services_count_meeting_standard'] / dr2468['hvte_services_count']) * 100
 
         # =================================
         # DRR Indicator ID DR-2469: Fraction of service applications submitted online 
         # for high volume external services
+        # Also functions as PIP Indicator 12: "Usage of the Government of Canada’s high-volume online 
+        # services measured as a percentage of all service delivery channels, including in-person and telephone"
 
         HIGH_VOLUME_THRESHOLD = 45000
         si_hv = si[
@@ -564,33 +568,39 @@ def drr(si, ss, config, snapshot=False):
         )
 
         # Determine score
-        dr2469['dr2469_score'] = (dr2469['hv_online_applications']/dr2469['hv_total_applications'])*100
+        dr2469['dr2469_pip12_score'] = (dr2469['hv_online_applications']/dr2469['hv_total_applications'])*100
+        
+        # =================================
+        # PIP Indicator 11: Degree to which clients are satisfied with the 
+        # delivery of Government of Canada services, expressed as a score from 1 to 100
+        # Comes from Citizens First, not defined by service inventory.
 
         # =================================
-        # DRR Indicator: Fraction of services that accept client feedback:
+        # PIP Indicator 18: Fraction of services that accept client feedback:
+        # "% of entries from the service inventory being identified as has having client feedback"
         # Number of entries in the service inventory that are identified as having client
         # feedback (client_feedback_channel not equal to 'NON') divided by the total number of service inventory entries times 100
 
         # (# of entries with client feedback / total number of entries) * 100
         
         # Select relevant columns from service inventory
-        dr_client_feedback_pc = si[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'client_feedback_channel']].copy()
+        pip18 = si[['service_id', 'fiscal_yr', 'fy_org_id_service_id', 'client_feedback_channel']].copy()
 
         # Identify which services indicated something other than 'NON' in the client feedback channel
-        dr_client_feedback_pc['client_feedback_collected'] = (dr_client_feedback_pc['client_feedback_channel'] != 'NON')
+        pip18['client_feedback_collected'] = (pip18['client_feedback_channel'] != 'NON')
 
         # Determine fy-level counts for services that accept client feedback
-        dr_client_feedback_pc = dr_client_feedback_pc.groupby(['fiscal_yr'], as_index=False).agg(
+        pip18 = pip18.groupby(['fiscal_yr'], as_index=False).agg(
             service_with_feedback_count=('client_feedback_collected', 'sum'),
             service_count=('fy_org_id_service_id', 'nunique')
         )
 
         # Determine score
-        dr_client_feedback_pc['service_with_feedback_percentage'] = (dr_client_feedback_pc['service_with_feedback_count']/dr_client_feedback_pc['service_count'])*100
+        pip18['pip18_score'] = (pip18['service_with_feedback_count']/pip18['service_count'])*100
 
 
         # === SUMMARY DRR TABLE === 
-        drr_dfs = [dr2467, dr2468, dr2469, dr_client_feedback_pc]
+        drr_dfs = [dr2467, dr2468, dr2469, pip18]
         index_cols = ['fiscal_yr']
         
         # Set index for each DataFrame in the list
@@ -604,7 +614,7 @@ def drr(si, ss, config, snapshot=False):
             # "dr2467": dr2467,
             # "dr2468": dr2468,
             # "dr2469": dr2469,
-            # "dr_client_feedback_pc": dr_client_feedback_pc,
+            # "pip18_client_feedback_pc": pip18_client_feedback_pc,
             "drr_all": drr_all
         }
         
