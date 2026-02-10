@@ -72,7 +72,7 @@ def compare(compare_dict):
     only_comp_keys = comp_keys.difference(base_keys)
 
     # Columns (preserving base order)
-    base_cols = pd.Index(df_base.columns)
+    base_cols = pd.Index(df_base.columns) 
     comp_cols = pd.Index(df_comp.columns)
     common_cols = base_cols.intersection(comp_cols)
     only_base_cols = base_cols.difference(comp_cols)
@@ -82,65 +82,75 @@ def compare(compare_dict):
     base_common = df_base.loc[common_keys, common_cols]
     comp_common = df_comp.loc[common_keys, common_cols]
 
-    # Main comparison function between aligned (common) dataframes
-    # Compare the two aligned DataFrames field-by-field
-    compared = base_common.compare(
-        comp_common, 
-        align_axis=1, 
-        keep_shape=False,   # drop columns with no differences at all
-        keep_equal=False,   # drop cells that are the same, even in diff columns
-        result_names=('base_value', 'comp_value')  # label the two sides
-    )
+    def _generate_diffs(base_common, comp_common):
+        if base_common.equals(comp_common):
+            diffs = pd.DataFrame()
+            return diffs
+        
+        else:
+            # Main comparison function between aligned (common) dataframes
+            # Compare the two aligned DataFrames field-by-field
+            compared = base_common.compare(
+                comp_common, 
+                align_axis=1, 
+                keep_shape=False,   # drop columns with no differences at all
+                keep_equal=False,   # drop cells that are the same, even in diff columns
+                result_names=('base_value', 'comp_value')  # label the two sides
+            )
 
-    # Reshape the comparison output into a tidy format
-    diffs = (
-        compared
-        .melt(ignore_index=False)   # wide → long; stack diff values into rows
-        .reset_index()              # bring the DataFrame index (keys) back as a column
-        .rename(                    # give clearer names to auto-generated columns
-            columns={key_name: "key", "variable_0": "field"}
-        )
-        .pivot(                     # pivot so base/comp values are side-by-side
-            index=["key", "field"], 
-            columns="variable_1",   # this holds 'base_value' or 'comp_value'
-            values="value"
-        )
-        .reset_index()              # flatten back to normal columns
-    )
+            # Reshape the comparison output into a tidy format
+            diffs = (
+                compared
+                .melt(ignore_index=False)   # wide → long; stack diff values into rows
+                .reset_index()              # bring the DataFrame index (keys) back as a column
+                .rename(                    # give clearer names to auto-generated columns
+                    columns={key_name: "key", "variable_0": "field"}
+                )
+                .pivot(                     # pivot so base/comp values are side-by-side
+                    index=["key", "field"], 
+                    columns="variable_1",   # this holds 'base_value' or 'comp_value'
+                    values="value"
+                )
+                .reset_index()              # flatten back to normal columns
+            )
 
-    # Keep only rows where both base and comp values exist
-    # (removes rows where one side was NaN and the other wasn’t)
-    diffs = diffs.loc[
-        diffs["base_value"].notna() & diffs["comp_value"].notna()
-    ]
+            # Keep only rows where both base and comp values exist
+            # (removes rows where one side was NaN and the other wasn’t)
+            diffs = diffs.loc[
+                diffs["base_value"].notna() & diffs["comp_value"].notna()
+            ]
 
-    # Try numeric conversion
-    num_base = pd.to_numeric(diffs["base_value"], errors="coerce")
-    num_comp = pd.to_numeric(diffs["comp_value"], errors="coerce")
+            # Try numeric conversion
+            num_base = pd.to_numeric(diffs["base_value"], errors="coerce")
+            num_comp = pd.to_numeric(diffs["comp_value"], errors="coerce")
 
-    # Case 1: both values are numeric → compare numerically
-    num_diff = (num_base != num_comp) & num_base.notna() & num_comp.notna()
+            # Case 1: both values are numeric → compare numerically
+            num_diff = (num_base != num_comp) & num_base.notna() & num_comp.notna()
 
-    # Case 2: at least one value is non-numeric → fall back to string comparison
-    non_numeric_mask = num_base.isna() | num_comp.isna()
-    str_diff = (diffs["base_value"] != diffs["comp_value"]) & non_numeric_mask
+            # Case 2: at least one value is non-numeric → fall back to string comparison
+            non_numeric_mask = num_base.isna() | num_comp.isna()
+            str_diff = (diffs["base_value"] != diffs["comp_value"]) & non_numeric_mask
 
-    # Combine both cases
-    diffs = diffs.loc[num_diff | str_diff]
+            # Combine both cases
+            diffs = diffs.loc[num_diff | str_diff]
 
 
-    # Ignore results in fields for which the differences aren't important - 
-    # the content is usually in the associated code
-    ignored_fields = [
-        'program_name_en', 
-        'program_name_fr', 
-        'org_name_variant'
-    ]
+            # Ignore results in fields for which the differences aren't important - 
+            # the content is usually in the associated code
+            ignored_fields = [
+                'program_name_en', 
+                'program_name_fr', 
+                'org_name_variant'
+            ]
 
-    diffs = diffs.loc[~diffs['field'].isin(ignored_fields)]
+            diffs = diffs.loc[~diffs['field'].isin(ignored_fields)]
 
-    diffs["section"] = "diffs"
-    diffs["side"] = None
+            diffs["section"] = "diffs"
+            diffs["side"] = None
+
+            return diffs
+
+    diffs = _generate_diffs(base_common, comp_common)    
 
     # Records only in one side
     records_only_base = pd.DataFrame({
