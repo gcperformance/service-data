@@ -1200,9 +1200,9 @@ def oecd_digital_gov_survey(si, config, snapshot=False):
         
         si_oecd = si_oecd[(si_oecd['service_scope'].str.contains('EXTERN', regex=True) & si_oecd['service_recipient_type'].eq('CLIENT'))]
 
-        si_oecd['applications_in_person'] = ~si_oecd['num_applications_in_person'].isin(['NA','ND', 0])
-        si_oecd['applications_by_phone'] = ~si_oecd['num_applications_by_phone'].isin(['NA','ND', 0])
-        si_oecd['applications_online'] = ~si_oecd['num_applications_online'].isin(['NA','ND', 0])
+        si_oecd['applications_in_person'] = ~si_oecd['num_applications_in_person'].isin(['NA','ND', '0', ''])
+        si_oecd['applications_by_phone'] = ~si_oecd['num_applications_by_phone'].isin(['NA','ND', '0', ''])
+        si_oecd['applications_online'] = ~si_oecd['num_applications_online'].isin(['NA','ND', '0', ''])
 
         si_oecd = si_oecd.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
             total_services=('fy_org_id_service_id', 'nunique'),
