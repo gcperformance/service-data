@@ -788,11 +788,11 @@ def datapack(si, ss, config, snapshot=False):
                 'num_applications_online':'sum', 
                 'num_applications_in_person':'sum',
                 'num_phone_apps_enquiries':'sum',
-                'num_applications_by_mail':'sum'
-            }).reset_index().rename(columns={'fy_org_id_service_id':'total_services', 'org_id': 'total_orgs_ext'}),
+                'num_applications_by_mail':'sum',
+                'num_applications_total':'sum'
+            }).rename(columns={'fy_org_id_service_id':'total_services', 'org_id': 'total_orgs'}).add_suffix('_ext').reset_index(),
             on='fiscal_yr',
-            how='left',
-            suffixes=('', '_ext')
+            how='left'
         )
 
         dp_filtered = si_dp[si_dp['external'] & ~si_dp['service_id'].isin(EXCLUDED_SERVICES_ID)]
@@ -800,11 +800,13 @@ def datapack(si, ss, config, snapshot=False):
             dp_filtered.groupby('fiscal_yr').agg({
                 'num_applications_online':'sum', # remove 1677
                 'num_applications_in_person':'sum', # remove 669
-            }).reset_index(),
+                'num_applications_total':'sum' # removed both
+            }).add_suffix('_ext_excl_services').reset_index(),
             on='fiscal_yr',
-            how='left',
-            suffixes=('', '_ext_excl_services')
+            how='left'
         )
+
+
 
         # === DATA PACK METRIC 7 ===
         # 7: External programs
