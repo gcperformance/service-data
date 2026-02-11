@@ -127,10 +127,6 @@ def setup_logging():
     h_console.setLevel(logging.INFO)
     h_console.setFormatter(f_simple)
 
-    # Source - https://stackoverflow.com/a/55248611
-    # Posted by lotrgollum87, modified by community. See post 'Timeline' for change history
-    # Retrieved 2026-02-10, License - CC BY-SA 4.0
-
     # Create debug log file
     debug_log_filename = "outputs/debug.log"
     os.makedirs(os.path.dirname(debug_log_filename), exist_ok=True)
