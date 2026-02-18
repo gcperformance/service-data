@@ -222,7 +222,7 @@ def maf(si, ss, config, snapshot=False):
         logger.debug('...')
         # === MAF INDICATORS ===
         # References to methodology can be found here
-        # https://www.canada.ca/en/treasury-board-secretariat/services/management-accountability-framework/maf-methodologies/2022-2023-im-it.html#toc-1
+        # link is dead (https://www.canada.ca/en/treasury-board-secretariat/services/management-accountability-framework/maf-methodologies/2022-2023-im-it.html#toc-1)
         
         # Setting up the score bins and corresponding results for use with pd.cut
         score_bins = [0, 50, 80, 101]
@@ -236,13 +236,13 @@ def maf(si, ss, config, snapshot=False):
         maf1 = si.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
 
         # Deduplicate service standards to prevent one-to-many expansion
-        ss_unique = ss[['fiscal_yr', 'service_id']].drop_duplicates()
+        ss_unique = ss[['fiscal_yr', 'service_id', 'org_id']].drop_duplicates()
         
         # Determine whether each service has a standard by checking for existence in 'service standards'
         # Merge with 'ss' to check if (fiscal_yr, service_id) exists
         maf1 = maf1.merge(
             ss_unique,  # Use de-duplicated version to check 
-            on=['fiscal_yr', 'service_id'],  # Merge on fiscal year and service ID
+            on=['fiscal_yr', 'service_id', 'org_id'],  # Merge on fiscal year and service ID
             how='left',  # Keep all 'maf1' records, add matches from 'ss'
             indicator=True  # Adds a column "_merge" to show if a match was found
         )
@@ -728,7 +728,7 @@ def datapack(si, ss, config, snapshot=False):
         # === DATA PACK METRICS 2, 3a, 3b, 3c: external/enterprise services ===
         # 2: Total number of transactions
         dp_metrics = si_dp.copy().groupby('fiscal_yr').agg({
-                'fy_org_id_service_id': 'nunique',
+                'fy_org_id_service_id': 'nunique', 
                 'num_transactions_total': 'sum',
                 'num_applications_online': 'sum',
                 'num_phone_apps_enquiries': 'sum',
@@ -1104,13 +1104,13 @@ def infobase(si, ss, config, snapshot=False):
         ib_services_with_standards = si.loc[:, ['fiscal_yr', 'service_id', 'department_en','department_fr', 'org_id']]
 
         # Deduplicate service standards to prevent one-to-many expansion
-        ss_unique = ss[['fiscal_yr', 'service_id']].drop_duplicates()
+        ss_unique = ss[['fiscal_yr', 'service_id', 'org_id']].drop_duplicates()
         
         # Determine whether each service has a standard by checking for existence in 'service standards'
         # Merge with 'ss' to check if (fiscal_yr, service_id) exists
         ib_services_with_standards = ib_services_with_standards.merge(
             ss_unique,  # Use de-duplicated version to check 
-            on=['fiscal_yr', 'service_id'],  # Merge on fiscal year and service ID
+            on=['fiscal_yr', 'service_id', 'org_id'],  # Merge on fiscal year and service ID
             how='left',  # Keep all 'ib_services_with_standards' records, add matches from 'ss'
             indicator=True  # Adds a column "_merge" to show if a match was found
         )
@@ -1204,7 +1204,7 @@ def oecd_digital_gov_survey(si, config, snapshot=False):
         si_oecd['applications_by_phone'] = ~si_oecd['num_applications_by_phone'].isin(['NA','ND', '0', ''])
         si_oecd['applications_online'] = ~si_oecd['num_applications_online'].isin(['NA','ND', '0', ''])
 
-        si_oecd = si_oecd.groupby(['fiscal_yr', 'department_en','department_fr', 'org_id']).agg(
+        si_oecd = si_oecd.groupby(['fiscal_yr', 'org_id', 'department_en','department_fr']).agg(
             total_services=('fy_org_id_service_id', 'nunique'),
             applications_in_person=('applications_in_person', 'sum'),
             applications_by_phone=('applications_by_phone', 'sum'),

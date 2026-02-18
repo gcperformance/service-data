@@ -98,18 +98,19 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - `error.log`: Log file of all errors encountered by script while being run.
 
 ### Summary Files for Visualization and Review (outputs/indicators/)
-*All tables were built with `service_scope` containing `EXTERN` or `ENTERPRISE`*
-- `dp_metrics.csv`:
-- `dp_services_rank.csv`:
-- `drr_all.csv`: a concatenated table with all the drr indicator columns and scores (dr_2467: percentage of high-volume external services (>=45k applications) that are delivered online end-to-end, dr_2468: percentage of high-volume external services (>=45k applications and telephone enquiries) that met at least one service standard, dr_2469: percentage of applications for high-volume external services (>45k applications) that used the online channel), service_with_feedback_percentage: percentage of all services that have indicated something other than 'NON' in the client feedback channel field.
-- `ib_all.csv`:
-- `maf_all.csv`: a concatenated table with all the maf columns and scores (maf1: percentage of services that have service standards, maf2: percentage of service standards met, maf5: percentage of applicable services that can be completed online end-to-end, maf6: percentage of client interaction points that are available online, maf8: percentage of services which have used client feedback to improve services in the year prior to reporting)
-- `oecd_digital_gov_survey.csv`:
+For a more detailed description of each file and field, please consult [README_indicators](https://github.com/gcperformance/service-data/blob/master/README_indicators.md)
+
+- `dp_metrics.csv`: Miscellaneous metrics used in preparation of the "Data pack" by fiscal year.
+- `dp_services_rank.csv`: Top 20 services according to requirements for "Data pack" by fiscal year.
+- `drr_all.csv`: DRR and PIP indicator scores by fiscal year.
+- `ib_all.csv`: Table to review and confirm GC Infobase figures by organization and fiscal year.
+- `maf_all.csv`: Results of MAF questions by organization and fiscal year.
+- `oecd_digital_gov_survey.csv`: Results for OECD Digital Government Survey by fiscal year.
 - `service_fte_spending.csv`: FTEs and spending for programs delivering services.
-- `si_oip.csv`: Online interaction points activation status by service for the latest available fiscal year.
-- `si_reviews.csv`: Count of services reviewed or improved in the past 5 years.
+- `si_oip.csv`: Online interaction points activation status by service and fiscal year.
+- `si_reviews.csv`: Count of services reviewed or improved in the past 5 years by organization and fiscal year.
 - `si_vol.csv`: Service interaction volume by service, fiscal year, and channel.
-- `ss_tml_perf_vol.csv`: Timeliness performance standards by service and fiscal year.
+- `ss_tml_perf_vol.csv`: Timeliness performance standards by service, fiscal year, and channel.
 
 ### Quality Assurance Review Files (outputs/qa/)
 - `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns. All `service_scope` included.
