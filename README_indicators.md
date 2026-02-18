@@ -1,10 +1,114 @@
 # Government of Canada Service Inventory
 ## Detailed description of script outputs
-
-- `si.csv`: Full service inventory merging 2018–2023 datasets with the 2024+ dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
-- `ss.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024+ dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
-
 Consult the data dictionaries on the Open Government Portal or "dd_field_names.csv" and "dd_choices.csv" for more detail on the fields contained in the service inventory and service standard datasets. This readme assumes basic familiarity with these datasets.
+
+### `si.csv`
+Full service inventory merging 2018–2023 datasets with the 2024+ dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
+- `fiscal_yr`: Federal government fiscal year, April 1, XXXX, to March 31, YYYY, in format XXXX-YYYY. Indicates the time period for which the data was reported.
+- `service_id`: Identification number for a service in the service inventory
+- `service_name_en`: Service name in English
+- `service_name_fr`: Service name in French
+- `service_description_en`: Short description of service in English
+- `service_description_fr`: Short description of service in French
+- `service_type`: Identifies the service type as outlined in the Guideline on Service and Digital. Multiple values are separated by a comma (,). Controlled values described in `dd_choices.csv`.
+- `service_recipient_type`: Identifies whether the service serves specific clients or groups or benefit society at large, rather than specific clients.
+- `service_scope`: Indicates whether the service is external or internal to government. Multiple values must be separated by a comma (,). Controlled values described in `dd_choices.csv`.
+- `client_target_groups`: Identifies the clients or target groups of the service. Multiple values must be separated by a comma (,). Controlled values described in `dd_choices.csv`.
+- `program_name_en`: English name of the program(s) responsible for delivering the service, as per the Chart of Accounts. Multiple values must be separated by a comma (,).
+- `program_name_fr`: French name of the program(s) responsible for delivering the service, as per the Chart of Accounts. Multiple values must be separated by a comma (,).
+- `client_feedback_channel`: Identifies which channels, if any, provide users of a service an opportunity to provide feedback on their level of satisfaction with the service. Multiple values must be separated by a comma (,). Controlled values described in `dd_choices.csv`.
+- `service_fee`: Identifies whether a service fee is collected for the provision of the service
+- `last_GBA`: *No longer collected as of 2023-24* Last year a GBA+ analysis was performed for the service. 
+- `ident_platform`: *No longer collected as of 2023-24* Which sign-in platform is used for online service delivery.
+- `ident_platform_comments`: *No longer collected as of 2023-24* Free-text comments regarding online sign-in platform.
+- `os_account_registration`: Identifies whether a client can register or enroll for a personal account where they can make use of other interaction points.
+- `os_authentication`: Identifies whether a client can authenticate their identity online.
+- `os_application`: Identifies whether a client can apply for a service online.
+- `os_decision`: Identifies whether a client can be notified online of the outcome of their request for this service.
+- `os_issuance`: Identifies whether a client can receive the service output online, perhaps in the form of permits, certificates, money or information.
+- `os_issue_resolution_feedback`: Identifies whether a client can seek resolution to their issues or provide feedback online.
+- `os_comments_client_interaction_en`: English comments related to online services - client Interaction points. For any interaction points reported as "Not Applicable", comments have to be provided.
+- `os_comments_client_interaction_fr`: French comments related to online services - client Interaction points. For any interaction points reported as "Not Applicable", comments have to be provided.
+- `how_has_the_service_been_assessed_for_accessibility`: *No longer collected as of 2023-24* How the online component of the service has been assessed for ICT accessibility
+- `last_service_review`: Identifies the fiscal year when the most recent service review was completed.
+- `last_service_improvement`: Identifies the most recent year in which this service was improved based on client feedback.
+- `sin_usage`: Identifies whether the Social Insurance Number (SIN) is used in the delivery of the service.
+- `cra_bn_identifier_usage`: Identifies whether the Canada Revenue Agency's Business Number is used in the delivery of the service as the standard identifier in accordance with the Data reference standard on the business number.
+- `num_phone_enquiries`: Identifies the number of enquiries about the service received in this fiscal year. Note: This field represents only requests for information about the service. Report service requests or applications submitted by telephone in the "telephone applications" field. Note: This field is not included in 'Total Applications'.
+- `num_applications_by_phone`: Identifies the number of applications submitted in a fiscal year for the telephone channel.
+- `num_website_visits`: Identifies the number of visits to the service's website in a fiscal year. Note: This field is not included in 'Total Applications'.
+- `num_applications_online`: Identifies the number of applications submitted in a fiscal year for the online channel. Examples include applications received via a website/online portal, via web forms (e.g., MyPayEnquiry) and digitally administered audits and evaluations.
+- `num_applications_in_person`: Identifies number of applications received in-person in a fiscal year for the service. Examples include in-person applications, volume of inspections, audits, evaluations, etc.
+- `num_applications_by_mail`: Identifies the number of applications received through postal mail in a fiscal year.
+- `num_applications_by_email`: Identifies the number of applications received through email in a fiscal year for the service.
+- `num_applications_by_fax`: Identifies the number of applications received through fax in a fiscal year for the service. 
+- `num_applications_by_other`: Identifies the number of applications received through other channels not listed in a fiscal year for the service. If service volumes are not tracked by channel, they are included in this field.
+- `special_remarks_en`: Provides additional space for English comments related to volumetrics information.
+- `special_remarks_fr`: Provides additional space for French comments related to volumetrics information.
+- `service_uri_en`: Identifies the departmental webpage where the service is described and/or accessed in English.
+- `service_uri_fr`: Identifies the departmental webpage where the service is described and/or accessed in French.
+- `num_applications_total`: Identifies the total number of applications submitted in a fiscal year for all application channels.
+- `org_name_variant`: The name or reference code for the organization submitting the information. There are different values for the 2018-2023 dataset and the 2024+ dataset.
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `program_id`: Alpha-numeric code that is uniquely tied to a program in the Chart of Accounts, and is used in DRR and DP reporting.
+- `automated_decision_system_description_en`: Description of automated decision system in English.
+- `automated_decision_system_description_fr`: Description of automated decision system in French.
+- `automated_decision_system`: Identifies whether an automated decision system is used to make or assist officers in making administrative decisions.
+- `service_scope_ext_or_ent`: Calculated field that indicates whether the service is external or internal enterprise to assist in quick filtering of relevant services.
+- `fy_org_id_service_id`: Constructed unique key. `fiscal_yr` (underscore) `org_id` (underscore) `service_id`.
+
+### `ss.csv`
+Full service standard dataset merging 2018–2023 datasets with the 2024+ dataset. *`service_scope` must contain `EXTERN` or `ENTERPRISE`*
+- `fiscal_yr`: Federal government fiscal year, April 1, XXXX, to March 31, YYYY, in format XXXX-YYYY. Indicates the time period for which the data was reported.
+- `service_id`: Identification number for a service in the service inventory
+- `service_name_en`: Service name in English
+- `service_name_fr`: Service name in French
+- `service_standard_id`: Identification number for a service standard in the service inventory
+- `service_standard_en`: Service standard name in English
+- `service_standard_fr`: Service standard name in French
+- `type`: Identifies the type of service standard as defined in the Guideline on Service and Digital. Controlled values described in `dd_choices.csv`.
+- `gcss_tool_fiscal_yr`: *No longer collected as of 2023-24* Identifies the fiscal year in which the service standard was last reviewed using the GC Service Standard Assessment Tool available in the Guideline on Service and Digital.
+- `channel`: Identifies the service channel to which the service standard applies. Controlled values described in `dd_choices.csv`.
+- `channel_comments_en`: Comments in English related to the service standard channel and provides explanation of "Other" channel selection.
+- `channel_comments_fr`: Comments in French related to the service standard channel and provides explanation of "Other" channel selection.
+- `target_type`: *No longer collected as of 2023-24* Indicates whether the results of the service standard are expressed as a percentage or reported directly without supporting volumes.
+- `target`: The frequency that the organization expects to meet service standard (reported as a percentage).
+- `volume_meeting_target`: Identifies the number of final outputs issued appropriate to the service (eg. payments issued, requests completed, etc) during the fiscal year that met a particular service standard target for a service. Blank indicates no information available, while 0 indicates that no final outputs issued met service standard targets.
+- `total_volume`: Identifies the total number of final outputs issued appropriate to the service (eg. payments issued, requests completed, etc) during the fiscal year. Blank indicates no information available, while 0 indicates no final outputs issued.
+- `performance`: Identifies the result achieved for this service standard. This is the "Business Volume That Met Service Standard Target" divided by the "Total Volume" and is automatically calculated for the 2024+ dataset.
+- `comments_en`: Comments on the service standard in general (English)
+- `comments_fr`: Comments on the service standard in general (French)
+- `target_met`: Indicates whether the target was met. Automatically generated in the 2024+ dataset, see below for examples of how the calculation works.
+- `standards_targets_uri_en`: Identifies the departmental webpage (Canada.ca) where the service standards and targets are published in English.
+- `standards_targets_uri_fr`: Identifies the departmental webpage (Canada.ca) where the service standards and targets are published in French.
+- `performance_results_uri_en`: Identifies the departmental webpage where the real-time performance results for a service are published in English.
+- `performance_results_uri_fr`: Identifies the departmental webpage where the real-time performance results for a service are published in French.
+- `org_name_variant`: The name or reference code for the organization submitting the information. There are different values for the 2018-2023 dataset and the 2024+ dataset.
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `fy_org_id_service_id`: Constructed unique key. `fiscal_yr` (underscore) `org_id` (underscore) `service_id`.
+- `fy_org_id_service_id_std_id`: Constructed unique key. `fiscal_yr` (underscore) `org_id` (underscore) `service_id` (underscore) `service_standard_id`.
+
+#### Examples for how `target_met` is calculated in the 2024+ dataset.
+|target|volume_meeting_target|total_volume|performance|performance note|target_met|target_met note|
+|---|---|---|---|---|---|---|
+|0.2|0|50|0|Performance is calculated because both volumes are non-blank and total_volume is greater than 0.|N|	|
+|0.2|5|50|0.1|Performance is calculated because both volumes are non-blank and total_volume is greater than 0.|N|Target met is calculated because there is a target and performance|
+|0.2|10|50|0.2|Performance is calculated because both volumes are non-blank and total_volume is greater than 0. |Y|Target met is calculated because there is a target and performance|
+|0.2|30|50|0.6|Performance is calculated because both volumes are non-blank and total_volume is greater than 0.|Y|Target met is calculated because there is a target and performance|
+|0|10|50|0.2|Performance is calculated because both volumes are non-blank and total_volume is greater than 0.|NA|Target met is NA because there is no target.|
+|blank|10|50|0.2|Performance is calculated because both volumes are non-blank and total_volume is greater than 0.|NA|Target met is NA because there is no target.|
+|0.2|blank|50|blank|Performance is blank because one volume is blank.|NA|Target met is NA because performance is blank|
+|blank|blank|50|blank|Performance is blank because one volume is blank.|NA|Target met is NA because performance is blank|
+|blank|blank|blank|blank|Performance is blank because one volume is blank.|NA|Target met is NA because performance is blank|
+|0.2|10|blank|blank|Performance is blank because one volume is blank.|NA|Target met is NA because performance is blank|
+|0.2|blank|blank|blank|Performance is blank because one volume is blank.|NA|Target met is NA because performance is blank|
+|0.2|10|0|blank|Performance is blank because total volume is 0.|NA|Target met is NA because performance is blank|
+|0.2|0|0|blank|Performance is blank because total volume is 0.|NA|Target met is NA because performance is blank|
+
 
 ### Summary Files for Visualization and Review (outputs/indicators/)
 #### `dp_metrics.csv`
@@ -163,7 +267,6 @@ Table that shows actual and planned full-time equivalent positions (FTEs) and ex
 
 - `service_id`: Identification number for a service in the service inventory.
 - `fiscal_yr`: Federal government fiscal year, April 1, XXXX, to March 31, YYYY, in format XXXX-YYYY. In this case represents the fiscal year of the association between service and program.
-FTEs and spending for programs delivering services.
 - `program_id`: Alpha-numeric code that is uniquely tied to a program in the Chart of Accounts, and is used in DRR and DP reporting.
 - `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
 - `latest_si_yr`: Latest fiscal year for which the organization has reported a service inventory.
@@ -212,20 +315,166 @@ Table describing the performance of timeliness service standards by service and 
 - `volume_not_meeting_target`: Total volume of interactions that did not meet the service standard target for all timeliness service standards by service and channel. Calculated as the difference between the `total_volume` and the `volume_meeting_target`.
 
 ### Quality Assurance Review Files (outputs/qa/)
-- `si_qa.csv`: Full service inventory dataset with QA issues identified as separate columns. All `service_scope` included.
-- `ss_qa.csv`: Full service standards dataset with QA issues identified as separate columns. All `service_scope` included.
-- `si_qa_report.csv`: Prioritized issues in service inventory.
-- `ss_qa_report.csv`: Prioritized issues in service standards.
+- All `service_scope` included, not just `EXTERN` or `ENTERPRISE`.
+- Fields beginning with `qa` are boolean values (True or False) indicating whether there is an issue. 
+- See the file [src/qa_issues_descriptions.csv](https://github.com/gcperformance/service-data/blob/master/src/qa_issues_descriptions.csv) for more details on the QA issues being identified
+
+#### `si_qa.csv`
+Full service inventory dataset with QA issues identified as separate columns. Generated by `src/qa.py/qa_check`. All the fields from the service inventory dataset are identical to `si.csv` and are described earlier in this file.
+
+- `service_id_numeric`: The numeric portion of the service ID number. This is no longer in use for any QA checks.
+- `org_id_sid_registry`: Returns the org_id associated to the service according to the [service ID registry](https://github.com/gcperformance/utilities/blob/master/goc-service-id-registry.csv). Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_en_sid_registry`: Name of department or agency in English from the [service ID registry](https://github.com/gcperformance/utilities/blob/master/goc-service-id-registry.csv). Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr_sid_registry`: Name of department or agency in French from the [service ID registry](https://github.com/gcperformance/utilities/blob/master/goc-service-id-registry.csv). Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `qa_unregistered_sid`: Boolean value (True or False) indicating whether `service_id` is absent from the [service ID registry](https://github.com/gcperformance/utilities/blob/master/goc-service-id-registry.csv)
+- `qa_reused_sid`: Boolean value (True or False) indicating whether the organization reporting the service is the different from the one registered to the service in the [service ID registry](https://github.com/gcperformance/utilities/blob/master/goc-service-id-registry.csv). Compares `org_id` reported for the service to `org_id_sid_registry` from the registry.
+- `reused_sid_correct_org`: If `qa_reused_sid` is true, then lists the organization that registered the service id in the registry. Concatenated field `org_id_sid_registry` (colon) `department_en_sid_registry` (pipe) `department_fr_sid_registry`
+- `fiscal_yr_end_date`: The first day of the fiscal year (April 1) following the fiscal year being reported.
+- `qa_si_fiscal_yr_out_of_scope`: Boolean value (True or False) indicating whether the current date is before `fiscal_yr_end_date`. If so, the fiscal year being reported is in the future or incomplete.
+- `qa_client_feedback_contradiction`: Boolean value (True or False) indicating whether there is a contradiction between the `client_feedback_channel` and the `os_issue_resolution_feedback` fields.
+- `total_volume_ss`: Total volume for all associated service standards.
+- `qa_ss_vol_without_si_vol`: Boolean value (True or False) indicating whether there are service interactions being reported in the service standard and performance dataset (`ss.csv`), but are missing from the service inventory dataset.
+- `qa_no_si_app_volume`: Boolean value (True or False) indicating whether application volumes are missing from the service inventory.
+- `qa_use_of_cra_bn_applicable`: Boolean value (True or False) indicating whether there is a contradiction between the `cra_bn_identifier_usage` and `client_target_groups` fields.
+- `program_id_latest_valid_fy`: Latest valid fiscal year for the program.
+- `qa_program_id_old`: Boolean value (True or False) indicating whether the program being reported is no longer valid.
+- `mismatched_program_ids`: Concatenated result of all the program IDs that do not belong to the reporting organization.
+- `qa_program_id_wrong_org`: Boolean value (True or False) indicating whether the program being reported belongs to a different organization.
+
+#### `ss_qa.csv`
+Full service inventory dataset with QA issues identified as separate columns. Generated by `src/qa.py/qa_check`. All the fields from the service inventory dataset are identical to `ss.csv` and are described earlier in this file.
+
+- `service_standard_id_numeric`: The numeric portion of the service standard ID number. This is no longer in use for any QA checks.
+- `fiscal_yr_end_date`: The first day of the fiscal year (April 1) following the fiscal year being reported.
+- `qa_ss_fiscal_yr_out_of_scope`: Boolean value (True or False) indicating whether the current date is before `fiscal_yr_end_date`. If so, the fiscal year being reported is in the future or incomplete.
+- `qa_no_ss_volume`: Boolean value (True or False) indicating whether interaction volumes are missing from the service standard record.
+- `qa_performance_over_100`: Boolean value (True or False) indicating whether there is more `volume_meeting_target` than `total_volume`
+
+
+#### `si_qa_report.csv`
+Table of QA issues identified in the service inventory. Generated by `src/qa.py/qa_report`. Each record (row) represents one QA issue.
+
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `fiscal_yr`: Federal government fiscal year, April 1, XXXX, to March 31, YYYY, in format XXXX-YYYY. Indicates the time period for which the data was reported.
+- `service_id`: Identification number for a service in the service inventory
+- `service_name_en`: Service name in English
+- `service_name_fr`: Service name in French
+- `issue`: Short code to identify the issue, identical to the columns in `si_qa.csv` that begin with `qa`
+- `severity_en`: Severity of the issue, in English
+- `description_en`: Description of the issue, in English
+- `action_en`: Proposed action that would resolve the issue, in English
+- `severity_fr`: Severity of the issue, in French
+- `description_fr`: Description of the issue, in French
+- `action_fr`: Proposed action that would resolve the issue, in French
+- `context`: Additional information to help resolve the issue
+
+#### `ss_qa_report.csv`
+Table of QA issues identified in the service standards dataset. Generated by `src/qa.py/qa_report`. Each record (row) represents one QA issue.
+
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `fiscal_yr`: Federal government fiscal year, April 1, XXXX, to March 31, YYYY, in format XXXX-YYYY. Indicates the time period for which the data was reported.
+- `service_id`: Identification number for a service in the service inventory
+- `service_name_en`: Service name in English
+- `service_name_fr`: Service name in French
+- `service_standard_id`: Identification number for a service standard in the service inventory
+- `service_standard_en`: Service standard name in English
+- `service_standard_fr`: Service standard name in French
+- `volume_meeting_target`: Identifies the number of final outputs issued appropriate to the service (eg. payments issued, requests completed, etc) during the fiscal year that met a particular service standard target for a service. Blank indicates no information available, while 0 indicates that no final outputs issued met service standard targets.
+- `total_volume`: Identifies the total number of final outputs issued appropriate to the service (eg. payments issued, requests completed, etc) during the fiscal year. Blank indicates no information available, while 0 indicates no final outputs issued.
+- `performance`: Identifies the result achieved for this service standard. This is the "Business Volume That Met Service Standard Target" divided by the "Total Volume" and is automatically calculated for the 2024+ dataset.
+- `issue`: Short code to identify the issue, identical to the columns in `ss_qa.csv` that begin with `qa`
+- `severity_en`: Severity of the issue, in English
+- `description_en`: Description of the issue, in English
+- `action_en`: Proposed action that would resolve the issue, in English
+- `severity_fr`: Severity of the issue, in French
+- `description_fr`: Description of the issue, in French
+- `action_fr`: Proposed action that would resolve the issue, in French
 
 ### Utilities and Supporting Files (outputs/utils/)
-- `dd_choices.csv`: Correspondence table between codes that appear in `ss` and `si` and their names, "dd" referring to data dictionary.
-- `dd_field_names.csv`: A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`).
-- `dd_program`: List of valid program codes and names as described in the data dictionary.
-- `dept.csv`: A tidy unique list of departments with their IFOI IDs.
-- `drf.csv`: A flattened Departmental plans and Departmental results report.
-- `ifoi.csv`: Exhaustive list of departmental info in English and French
-- `org_var.csv`: Duplicate-permitted list of variant department names and their IFOI ID.
-- `program_list.csv`: 
-- `sid_list.csv`: Unique list of service IDs with latest reporting year and department.
-- `si_all.csv`: Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
-- `ss_all.csv`: Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included.
+#### `dd_choices.csv`
+Correspondence table between codes that appear in `ss` and `si` and their English and French names, "dd" referring to data dictionary. Generated by `src/utils.py/build_data_dictionary`. Defined based on the .json version of the 2024+ service inventory datasets.
+
+- `resource_name`: The table in which the field is found
+- `id`: The column / field name
+- `code`: The code as listed in the resource
+- `en`: The longer English description of the code
+- `fr`: The longer French description of the code
+
+#### `dd_field_names.csv`
+A list of translated field names and metadata for `si` (`resource_name`=`service`) and `ss` (`resource_name`=`service_std`). Generated by `src/utils.py/build_data_dictionary`. Defined based on the .json version of the 2024+ service inventory datasets. Each record (row) represents a field.
+
+- `resource_name`: The table in which the field is found.
+- `title_en`: The full English name of the table in which the field is found.
+- `title_fr`: The full French name of the table in which the field is found.
+- `id`: The column / field name.
+- `datastore_type`: The data type for the allowed values in the field.
+- `obligation_en`: Whether the field is mandatory or optional, in English.
+- `obligation_fr`: Whether the field is mandatory or optional, in French.
+- `label_en`: The full English name of the column / field.
+- `label_fr`: The full French name of the column / field.
+- `description_en`: A description of the field in English.
+- `description_fr`: A description of the field in French.
+- `validation_en`: Basic requirements for the field in English.
+- `validation_fr`: Basic requirements for the field in French.
+- `character_limit`: Maximum number of characters for text-based fields.
+
+#### `dd_program`
+List of valid program codes and names as described in the data dictionary. Follows the same structure as `dd_choices.csv`. Generated by `src/utils.py/build_data_dictionary`. For more detailed information on valid programs, refer to `program_list.csv`
+
+#### `dept.csv`
+A tidy unique list of departments with their IFOI IDs. Generated by `src/utils.py/dept_list`.
+
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+
+#### `drf.csv`
+A flattened Departmental plans and Departmental results report. Generated by `src/utils.py/build_drf`. This table is directly referenced by `service_fte_spending.csv`
+
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `latest_si_yr`: Latest fiscal year for which the organization has reported a service inventory.
+- `program_id`: Alpha-numeric code that is uniquely tied to a program in the Chart of Accounts, and is used in DRR and DP reporting.
+- `report_yr`: Report year (fiscal year) for the DRR or DP from which the spending and FTE figures are displayed.
+- `measure_yr`: Fiscal year of the measure in question - ensures only actuals are reported for previous years and planned amounts are reported for the current and future years.
+- `planned_actual`: Describes whether the spending on FTE value is actual or is planned.
+- `spending_fte`: Indicates whether the measure described is spending (i.e. expenditures, not costs incurred) or number of FTEs
+- `measure`: The amount or value in question.
+- `si_link_yr`: Fiscal year used for the association between service and program. Either `measure_yr` or `latest_si_yr` depending on which is earlier, defaulting to `measure_yr` if they are the same.
+
+#### `ifoi.csv`
+Exhaustive list of departmental info from the Inventory of Federal Organizations and Interests in English and French. For more detail, see [GC InfoBase - Open Datasets - Inventory of Federal Organizations and Interests - English](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95) and [Répertoire des organisations et intérêts fédéraux - Français](https://ouvert.canada.ca/data/fr/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85). Generated by `src/utils.py/build_ifoi`.
+
+#### `org_var.csv` 
+Duplicate-permitted list of variant department names and their IFOI ID. Retrieved from [gc-org-variants](https://github.com/gcperformance/utilities/blob/master/goc-org-variants.csv). Built to associate and assign a common standard ID number to all variations of federal organizations that might be found in other datasets.
+
+#### `program_list.csv`
+List of unique programs and their ID codes, defined by organization, along with the latest valid fiscal year. This is a combination of all the tables from the [Program codes list as per the Government-wide Chart of Accounts](https://open.canada.ca/data/en/dataset/3c371e57-d487-49fa-bb0d-352ae8dd6e4e). Generated by `src/utils.py/program_list`.
+
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `program_id`: Alpha-numeric code that is uniquely tied to a program in the Chart of Accounts, and is used in DRR and DP reporting.
+- `latest_valid_fy`: Latest fiscal year for which the combination of program ID and organization is valid 
+- `program_name_en`: English name of the program as per the Chart of Accounts.
+- `program_name_fr`: French name of the program as per the Chart of Accounts.
+
+#### `sid_list.csv`
+Unique list of service IDs with latest reporting year and department. Generated by `src/utils.py/sid_list`.
+
+- `service_id`: Identification number for a service in the service inventory
+- `service_name_en`: Service name in English
+- `service_name_fr`: Service name in French
+- `department_en`: Name of department or agency in English. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `department_fr`: Name of department or agency in French. Defaults to the "Applied title" when it is available, and "Legal title" when it is not. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `org_id`: Unique numeric identifier for departments, agencies, and any other federal organization. Based on the "Inventory of Federal Organizations and Interests" which supports GC Infobase.
+- `fiscal_yr_first`: First fiscal year the service was reported
+- `fiscal_yr_latest`: Latest fiscal year the service was reported
+- `service_scope_ext_or_ent`: Calculated field that indicates whether the service is external or internal enterprise to assist in quick filtering of relevant services. Refers to reported value from latest fiscal year
+
+#### `si_all.csv`
+Full service inventory merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included. See list of fields for `si.csv`. Generated by `src/merge.py/merge_si`.
+
+#### `ss_all.csv`
+Full service standard dataset merging 2018–2023 datasets with the 2024 dataset. All `service_scope` included. See list of fields for `ss.csv`. Generated by `src/merge.py/merge_ss`.

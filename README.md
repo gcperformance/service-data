@@ -47,7 +47,7 @@ python main.py  # Runs full processing pipeline
 ### [GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c)
 - **Files**: `si_2018.csv`, `si_2024.csv`, `ss_2018.csv`, `ss_2024.csv`
 - **Content**: Government of Canada service inventory, associated standards, and performance, along with relevant data dictionaries.
-- **Update Frequency**: Annually
+- **Update Frequency**: Annually, typically in January
 
 ### [Departmental Plans and Departmental Results Reports](https://open.canada.ca/data/en/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895)
 - **File**: `rbpo.csv`
@@ -75,7 +75,7 @@ python main.py  # Runs full processing pipeline
 The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603) requirement to report services applies only to **external and internal enterprise services**. Any service without `service_scope=EXTERN` or `service_scope=ENTERPRISE` is **excluded** from consolidated datasets (`si.csv` and `ss.csv`).
 
 ### Data Format
-- All CSV files use a semicolon (`;`) as a delimiter.
+- All CSV files use a semicolon (`;`) as a delimiter between columns.
 
 ### Timestamps
 - All CSV files produced by the script include a timestamp on the last row of the file.

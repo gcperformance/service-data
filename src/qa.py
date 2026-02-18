@@ -78,7 +78,7 @@ def qa_check(si, ss, config, snapshot=False):
         si['qa_si_fiscal_yr_out_of_scope'] = si['fiscal_yr_end_date'].dt.date >= current_date
         
         ss['fiscal_yr_end_date'] = pd.to_datetime(ss['fiscal_yr'].str.split('-').str[1]+'-04-01')
-        ss['qa_si_fiscal_yr_out_of_scope'] = ss['fiscal_yr_end_date'].dt.date >= current_date
+        ss['qa_ss_fiscal_yr_out_of_scope'] = ss['fiscal_yr_end_date'].dt.date >= current_date
 
         # QA check: Record has contradiction between client feedback channels and online interaction points for feedback
         si['qa_client_feedback_contradiction'] = (
