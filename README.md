@@ -7,9 +7,9 @@ This Python project processes Government of Canada service-related data, merging
 
 ### Key Features
 - **Data ingestion**: Downloads and processes service inventory and service standard performance data.
-- **Dataset Merging**: Combines service inventory data from 2018-2023 historical datasets and 2024+ datasets from the Open Government Portal.
-- **Quality Assurance**: Identifies and flags inconsistencies in datasets.
-- **Output Generation**: Produces structured CSVs that reflect the latest information on the Open Government Portal.
+- **Dataset merging**: Combines service inventory data from 2018-2023 historical datasets and 2024+ datasets from the Open Government Portal.
+- **Quality assurance**: Identifies and flags inconsistencies in datasets.
+- **Output generation**: Produces structured CSVs that reflect the latest information on the Open Government Portal.
 
 Service inventory and service standard performance data are collected as a requirement under the [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.aspx?id=32603).
 
@@ -39,6 +39,8 @@ python main.py  # Runs full processing pipeline
 ```
 #### Optional Arguments:
 - `--local`: Runs the script without downloading new datasets.
+- `--live`: Runs the script without any snapshot-related calculations.
+- `--download`: Downloads the input data without running the process.
 - `--help`: Provides additional help.
 
 ---
@@ -65,7 +67,7 @@ python main.py  # Runs full processing pipeline
 - **Update Frequency**: Ad-hoc
 
 ### [Utilities developed for GC Service Inventory data analysis](https://github.com/gc-performance/utilities)
-- **Files**: `org_var.csv`, `serv_prog.csv`
+- **Files**: `org_var.csv`, `serv_prog.csv`, `sid_registry.csv`
 - **Content**: A manually updated list of every organization, department, and agency with their associated names mapped to a single numeric ID (`org_var.csv`). Long-form program names from the 2018-2023 service inventory mapped to program IDs from Departmental Plans and Results Reports (`serv_prog.csv`).
 - **Update Frequency**: Ad-hoc
 
@@ -138,6 +140,7 @@ For a more detailed description of each file and field, please consult [README_i
 - `context.md` - Context on this dataset for use with LLM.
 - `database.dbml` - **Draft** schema defining a database model.
 - `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
+- `README_indicators.md` - Detailed information about datasets produced by script
 
 
 ### Python script files (src/)
@@ -160,6 +163,10 @@ For a more detailed description of each file and field, please consult [README_i
 - `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
 - `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
 
+### Github workflows (.github/workflows)
+
+- `generate-files.yml`: Github actions script that produces releases on a given schedule or on an ad-hoc basis.
+
 ---
 
 ### Release Schedule
@@ -179,7 +186,7 @@ For a more detailed description of each file and field, please consult [README_i
 
 ---
 ## Directory structure for project
-*Given that files produced by the script are made available in releases, all transitory input and output files are no longer tracked with git, or included in the repo. Releases have a flat structure, so the directory structure below is only relevant if you clone the repo and run the script.*
+*Given that files produced by the script are made available in releases, all transitory input and output files are no longer tracked with git, or included in the repo. The exception is the input snapshots, which are a part of the repo. Releases have a flat structure, so the directory structure below is only relevant if you clone the repo and run the script.*
 
 ```
 .

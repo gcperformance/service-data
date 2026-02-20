@@ -62,7 +62,6 @@ def get_config():
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-eng.csv',
         '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627-eng.csv'
     }
-        
 
     program_urls_fr = {
         '2018-2019':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-1819-fra.csv',
@@ -75,6 +74,7 @@ def get_config():
         '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv',
         '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627-fra.csv'
     }
+
     APP_COLS = [
         'num_applications_by_phone', 
         'num_applications_online', 
@@ -162,6 +162,7 @@ def main():
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
     parser.add_argument("--live", action="store_true", help="Run process without running update for snapshots.")
+    parser.add_argument("--download", action="store_true", help="Download the input data without running the processing script.")
     args = parser.parse_args()
 
     # Set up logging
@@ -187,71 +188,72 @@ def main():
             download_program_csv_files(config)
 
         # Merge historical data
-        try:
-            logger.info("Merging historical data...")
-            si = merge_si(config)
-            ss = merge_ss(config)
-        except:
-            logger.error("Merging historical data failed", exc_info=True)
-            sys.exit(1)
+        if not args.download: # If the "download" option was passed, do not run the process
+            try:
+                logger.info("Merging historical data...")
+                si = merge_si(config)
+                ss = merge_ss(config)
+            except:
+                logger.error("Merging historical data failed", exc_info=True)
+                sys.exit(1)
 
-        # Generate processed files
-        logger.info("Generating processed files...")
-        si_ss_dict = process_files(si, ss, config)
-        
-        # Run QA checks
-        logger.info("Running QA checks...")
-        qa_check(si, ss, config)
-        
-        # Copying files from raw to utils
-        logger.info("Copying files from input to utils...")
-        build_ifoi(config)
-        copy_org_var(config)
-        build_data_dictionary(config)
-        
-        # Run snapshots unless "live" arg was passed
-        if not args.live: # if the "live" option was passed, don't run the snapshots
-            snapshots_list = config['snapshots_list']
-            for snapshot in snapshots_list:
-                # Merge historical snapshot data
-                logger.info("Processing snapshots: %s", snapshot)
-                try:
-                    logger.info("Merging historical data for snapshots...")
-                    si_snap = merge_si(config, snapshot)
-                    ss_snap = merge_ss(config, snapshot)
-                except:
-                    logger.error("Merging historical data for snapshots failed", exc_info=True)
-                    sys.exit(1)
-                
-                # Generate processed files 
-                logger.info("Generating processed snapshot files...")
-                si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
+            # Generate processed files
+            logger.info("Generating processed files...")
+            si_ss_dict = process_files(si, ss, config)
+            
+            # Run QA checks
+            logger.info("Running QA checks...")
+            qa_check(si, ss, config)
+            
+            # Copying files from raw to utils
+            logger.info("Copying files from input to utils...")
+            build_ifoi(config)
+            copy_org_var(config)
+            build_data_dictionary(config)
+            
+            # Run snapshots unless "live" arg was passed
+            if not args.live: # if the "live" option was passed, don't run the snapshots
+                snapshots_list = config['snapshots_list']
+                for snapshot in snapshots_list:
+                    # Merge historical snapshot data
+                    logger.info("Processing snapshots: %s", snapshot)
+                    try:
+                        logger.info("Merging historical data for snapshots...")
+                        si_snap = merge_si(config, snapshot)
+                        ss_snap = merge_ss(config, snapshot)
+                    except:
+                        logger.error("Merging historical data for snapshots failed", exc_info=True)
+                        sys.exit(1)
+                    
+                    # Generate processed files 
+                    logger.info("Generating processed snapshot files...")
+                    si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
 
-                # Compare snapshots to live data
-                try:
-                    logger.info("Comparing snapshot to live data...")
-                    si_compare_dict = {
-                        'df_base': si_ss_snap_dict['si'],
-                        'df_comp': si_ss_dict['si'],
-                        'base_name': f"{snapshot}_si",
-                        'comp_name':"si",
-                        'key_name':"fy_org_id_service_id",
-                        'file_name':"si_comparison"
-                    }
-                    build_compare_file(si_compare_dict, config, snapshot)
+                    # Compare snapshots to live data
+                    try:
+                        logger.info("Comparing snapshot to live data...")
+                        si_compare_dict = {
+                            'df_base': si_ss_snap_dict['si'],
+                            'df_comp': si_ss_dict['si'],
+                            'base_name': f"{snapshot}_si",
+                            'comp_name':"si",
+                            'key_name':"fy_org_id_service_id",
+                            'file_name':"si_comparison"
+                        }
+                        build_compare_file(si_compare_dict, config, snapshot)
 
-                    ss_compare_dict = {
-                        'df_base': si_ss_snap_dict['ss'],
-                        'df_comp': si_ss_dict['ss'],
-                        'base_name': f"{snapshot}_ss",
-                        'comp_name':"ss",
-                        'key_name':"fy_org_id_service_id_std_id",
-                        'file_name':"ss_comparison"
-                    }
-                    build_compare_file(ss_compare_dict, config, snapshot)
-                except:
-                    logger.error("Comparing snapshot to live data failed", exc_info=True)
-                
+                        ss_compare_dict = {
+                            'df_base': si_ss_snap_dict['ss'],
+                            'df_comp': si_ss_dict['ss'],
+                            'base_name': f"{snapshot}_ss",
+                            'comp_name':"ss",
+                            'key_name':"fy_org_id_service_id_std_id",
+                            'file_name':"ss_comparison"
+                        }
+                        build_compare_file(ss_compare_dict, config, snapshot)
+                    except:
+                        logger.error("Comparing snapshot to live data failed", exc_info=True)
+                    
 
         # Log completion time
         elapsed_time = time.perf_counter() - start_time
