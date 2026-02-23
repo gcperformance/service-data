@@ -10,7 +10,8 @@ def build_compare_file(compare_dict,config,snapshot):
     SNAPSHOT_ROOT_DIR= config["output_dir"] / "snapshots" / snapshot
     export_to_csv(
         data_dict={df_name: out},
-        output_dir=SNAPSHOT_ROOT_DIR
+        output_dir=SNAPSHOT_ROOT_DIR,
+        snapshot=snapshot
     )
 
 

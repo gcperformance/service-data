@@ -44,7 +44,7 @@ def dept_list(config, export=False):
             UTILS_DIR = config['output_dir'] / config['utils_dir']
             export_to_csv(
                 data_dict={'dept': dept},
-                output_dir=UTILS_DIR
+                output_dir=UTILS_DIR,
             )
         
         return dept
@@ -98,7 +98,8 @@ def sid_list(si, config, snapshot=False):
         UTILS_DIR = OUTPUT_DIR / config['utils_dir']
         export_to_csv(
             data_dict={'sid_list': sid_list},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
+            snapshot=snapshot
         )
 
         # return sid_list
@@ -228,7 +229,8 @@ def build_drf(si, config, snapshot=False):
         UTILS_DIR = OUTPUT_DIR / config['utils_dir']
         export_to_csv(
             data_dict={'drf': drf},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
+            snapshot=snapshot
         )
 
         return drf
@@ -261,7 +263,7 @@ def build_ifoi(config):
         UTILS_DIR = config['output_dir'] / config['utils_dir']
         export_to_csv(
             data_dict={'ifoi':ifoi},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
         )
     
     except Exception as e:
@@ -389,7 +391,7 @@ def program_list(config):
         export_to_csv(
             data_dict={'program_list':program_df},
             output_dir=UTILS_DIR
-        )
+            )
 
         return program_df
     

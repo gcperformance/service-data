@@ -170,7 +170,8 @@ def merge_si(config, snapshot=False):
         
         export_to_csv(
             data_dict={'si_all': si},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
+            snapshot=snapshot
         )
 
         return si
@@ -292,7 +293,8 @@ def merge_ss(config, snapshot=False):
         
         export_to_csv(
             data_dict={'ss_all': ss},
-            output_dir=UTILS_DIR
+            output_dir=UTILS_DIR,
+            snapshot=snapshot
         )
 
         return ss

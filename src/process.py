@@ -45,7 +45,8 @@ def output_si_ss(si, ss, config, snapshot=False):
         
         export_to_csv(
             data_dict=output_exports,
-            output_dir=OUTPUT_DIR
+            output_dir=OUTPUT_DIR,
+            snapshot=snapshot
         )
 
         return output_exports
@@ -210,7 +211,8 @@ def summary_si_ss(si, ss, config, snapshot=False):
         
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
 
     except Exception as e:
@@ -434,7 +436,8 @@ def maf(si, ss, config, snapshot=False):
 
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
@@ -626,7 +629,8 @@ def drr(si, ss, config, snapshot=False):
         
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
 
     except Exception as e:
@@ -997,7 +1001,8 @@ def datapack(si, ss, config, snapshot=False):
 
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
 
     except Exception as e:
@@ -1172,7 +1177,8 @@ def infobase(si, ss, config, snapshot=False):
 
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
     
     except Exception as e:
@@ -1224,7 +1230,8 @@ def oecd_digital_gov_survey(si, config, snapshot=False):
         
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
 
     except Exception as e:
@@ -1274,7 +1281,8 @@ def service_fte_spending(si, drf, config, snapshot=False):
         
         export_to_csv(
             data_dict=indicator_exports,
-            output_dir=INDICATORS_DIR
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
         )
 
     except Exception as e:

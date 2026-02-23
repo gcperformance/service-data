@@ -4,13 +4,14 @@ from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
 
-def export_to_csv(data_dict, output_dir):
+def export_to_csv(data_dict, output_dir, snapshot=False):
     """
     Export DataFrames to CSV files in specified directories.
 
     Args:
         data_dict (dict): A dictionary of {file_name: DataFrame}.
         output_dir (Path): Path to the output directory.
+        snapshot (str): Date for snapshot being processed
     Returns:
         None
     """
@@ -25,8 +26,11 @@ def export_to_csv(data_dict, output_dir):
         # Ensure directory exists
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Appendix to add to bottom of file
-        appendix = f"\nTimestamp:{current_datetime_str}\n"
+        # Appendix to add to bottom of file, include snapshot if relevant
+        if snapshot:
+            appendix = f"\nTimestamp:{current_datetime_str} / SNAPSHOT {snapshot}\n"
+        else:
+            appendix = f"\nTimestamp:{current_datetime_str}\n"
         
         for name, df in data_dict.items():
             # Generate the full file path
