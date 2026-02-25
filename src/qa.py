@@ -164,6 +164,99 @@ def qa_check(si, ss, config, snapshot=False):
         # QA check: Service standard performance is greater than 100%
         ss['qa_performance_over_100'] = ss['volume_meeting_target']>ss['total_volume']
 
+        # QA check: Service volumes vary by a higher than expected amount
+        def fy_to_num(fiscal_yr): # Returns the year in which the fiscal year ends, as a number.
+            return pd.to_numeric(fiscal_yr.split('-')[-1])
+
+        # Select fields used for analysis
+        si_variance_qa = si[['fiscal_yr', 'org_id', 'service_id', 'num_applications_total']].copy()
+        si_variance_qa['fy_num'] = si_variance_qa['fiscal_yr'].apply(lambda x: fy_to_num(x))
+
+        # Determine the latest fiscal year
+        si_variance_qa = pd.merge(
+            si_variance_qa, 
+            si_variance_qa.groupby(['org_id', 'service_id'], as_index=False)['fy_num'].max(), 
+            on=['org_id', 'service_id'], 
+            suffixes = ['', '_max']
+        )
+
+        # Only consider records with at least 4 years of reported non-zero values (latest + 3)
+        # Remove records without any application volume
+        si_variance_qa = si_variance_qa.loc[si_variance_qa['num_applications_total']>0]
+
+        # Determine how many years of reporting per service
+        si_variance_qa = pd.merge(
+            si_variance_qa, 
+            si_variance_qa.groupby(['org_id', 'service_id'], as_index=False).agg(
+                years_reported = ("fiscal_yr", "nunique")
+            ),
+            on = ['org_id', 'service_id']
+        )
+
+        # Then only keep records with 4 or more years
+        si_variance_qa = si_variance_qa.loc[si_variance_qa['years_reported']>=4]
+
+
+        # Identify the rows belonging to the latest fiscal year
+        si_variance_qa['latest_fy_bool'] = si_variance_qa['fy_num'] == si_variance_qa['fy_num_max']
+
+        # Determine the average number of applications and their standard deviation
+        # by service and fiscal year, excluding the latest fiscal year
+        si_variance_qa = pd.merge(
+            si_variance_qa,
+            si_variance_qa.loc[~si_variance_qa['latest_fy_bool']]
+                .groupby(['org_id', 'service_id'], as_index=False).agg(
+                    std_dev = ('num_applications_total', 'std'),
+                    mean = ('num_applications_total', 'mean')
+                ),
+            on=['org_id', 'service_id']
+        )
+
+        # Assuming the applications reported over the years follow a normal distribution, 
+        # then distance from the mean in terms of number of standard deviations will reveal how far out
+        # each number of applications is.
+        si_variance_qa['apps_stdevs_away_from_mean'] = np.abs(si_variance_qa['num_applications_total']-si_variance_qa['mean'])/si_variance_qa['std_dev']
+
+        # Issues to identify:
+        # 1. Standard deviation is 0 (std_dev = 0)
+        # this is when for all years (except the latest) the num_applications_total is the same
+        si_variance_qa['qa_no_volume_variation'] = (si_variance_qa['std_dev'] == 0)
+
+        # 2. The difference between the number of applications and the mean, in units of standard deviation, is greater than some threshold
+        # this is for big swings that would need to be investigated.
+        stdevs_away_from_mean_threshold = 20
+        si_variance_qa['qa_extreme_volume_variation'] = ((si_variance_qa['apps_stdevs_away_from_mean'] > stdevs_away_from_mean_threshold) & ~si_variance_qa['qa_no_volume_variation'])
+
+        # Add these checks into the si dataframe
+        si = pd.merge(
+            si,
+            si_variance_qa.loc[
+                (si_variance_qa['latest_fy_bool'] & 
+                si_variance_qa['qa_no_volume_variation']),
+                ['fiscal_yr', 'service_id', 'org_id']
+            ],
+            on=['fiscal_yr', 'service_id', 'org_id'], 
+            how='left',
+            indicator='qa_no_volume_variation'
+        )
+
+        si['qa_no_volume_variation'] = (si['qa_no_volume_variation'] == 'both')
+
+        si = pd.merge(
+            si,
+            si_variance_qa.loc[
+                (si_variance_qa['latest_fy_bool'] & 
+                si_variance_qa['qa_no_volume_variation']),
+                ['fiscal_yr', 'service_id', 'org_id']
+            ],
+            on=['fiscal_yr', 'service_id', 'org_id'], 
+            how='left',
+            indicator='qa_extreme_volume_variation'
+        )
+
+        si['qa_extreme_volume_variation'] = (si['qa_extreme_volume_variation'] == 'both')
+
+
         # === EXPORT DATA TO CSV ===
         # Define the DataFrames to export to csv and their corresponding names
         csv_exports = {
