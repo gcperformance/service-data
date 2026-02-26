@@ -180,6 +180,9 @@ def qa_check(si, ss, config, snapshot=False):
             suffixes = ['', '_max']
         )
 
+        # Identify the rows belonging to the latest fiscal year
+        si_variance_qa['latest_fy_bool'] = si_variance_qa['fy_num'] == si_variance_qa['fy_num_max']
+
         # Only consider records with at least 4 years of reported non-zero values (latest + 3)
         # Remove records without any application volume
         si_variance_qa = si_variance_qa.loc[si_variance_qa['num_applications_total']>0]
@@ -195,10 +198,6 @@ def qa_check(si, ss, config, snapshot=False):
 
         # Then only keep records with 4 or more years
         si_variance_qa = si_variance_qa.loc[si_variance_qa['years_reported']>=4]
-
-
-        # Identify the rows belonging to the latest fiscal year
-        si_variance_qa['latest_fy_bool'] = si_variance_qa['fy_num'] == si_variance_qa['fy_num_max']
 
         # Determine the average number of applications and their standard deviation
         # by service and fiscal year, excluding the latest fiscal year
@@ -218,16 +217,19 @@ def qa_check(si, ss, config, snapshot=False):
         si_variance_qa['apps_stdevs_away_from_mean'] = np.abs(si_variance_qa['num_applications_total']-si_variance_qa['mean'])/si_variance_qa['std_dev']
 
         # Issues to identify:
-        # 1. Standard deviation is 0 (std_dev = 0)
-        # this is when for all years (except the latest) the num_applications_total is the same
-        si_variance_qa['qa_no_volume_variation'] = (si_variance_qa['std_dev'] == 0)
-
-        # 2. The difference between the number of applications and the mean, in units of standard deviation, is greater than some threshold
+        # 1. The difference between the number of applications and the mean, in units of standard deviation, is greater than some threshold
         # this is for big swings that would need to be investigated.
         stdevs_away_from_mean_threshold = 20
-        si_variance_qa['qa_extreme_volume_variation'] = ((si_variance_qa['apps_stdevs_away_from_mean'] > stdevs_away_from_mean_threshold) & ~si_variance_qa['qa_no_volume_variation'])
+        si_variance_qa['qa_extreme_volume_variation'] = (si_variance_qa['apps_stdevs_away_from_mean'] > stdevs_away_from_mean_threshold)
+
+        # 2. Standard deviation is 0 (std_dev = 0)
+        # this is when for all years (except the latest) the num_applications_total is the same
+        si_variance_qa['qa_no_volume_variation'] = ((si_variance_qa['std_dev'] == 0) & ~si_variance_qa['qa_extreme_volume_variation'])
 
         # Add these checks into the si dataframe
+        # The merge is there to generate an indicator (true/false) that describes
+        # whether the service in the si is part of the si_variance_qa dataframe, filtered for the
+        # check in question
         si = pd.merge(
             si,
             si_variance_qa.loc[
@@ -246,7 +248,7 @@ def qa_check(si, ss, config, snapshot=False):
             si,
             si_variance_qa.loc[
                 (si_variance_qa['latest_fy_bool'] & 
-                si_variance_qa['qa_no_volume_variation']),
+                si_variance_qa['qa_extreme_volume_variation']),
                 ['fiscal_yr', 'service_id', 'org_id']
             ],
             on=['fiscal_yr', 'service_id', 'org_id'], 
@@ -255,6 +257,22 @@ def qa_check(si, ss, config, snapshot=False):
         )
 
         si['qa_extreme_volume_variation'] = (si['qa_extreme_volume_variation'] == 'both')
+
+        # Generate context for qa_report:
+        # Display a field with all the reported application volumes and their fiscal years
+        
+        # Create the field in the si
+        si['fy_num_applications_total'] = "("+si['fiscal_yr']+": "+si['num_applications_total'].astype('str')+")"
+        
+        # Create a grouped version with the contents of each field concatenated (joined)
+        si_apps_by_fy = si.groupby(['org_id', 'service_id'], as_index=False).agg({'fy_num_applications_total': lambda x: ', '.join(sorted(x))})
+
+        # Merge the concatenated vales back into si, while dropping the original column.
+        si = pd.merge(
+            si.drop(columns=['fy_num_applications_total']),
+            si_apps_by_fy,
+            on=['org_id', 'service_id']
+        )
 
 
         # === EXPORT DATA TO CSV ===
@@ -292,7 +310,9 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
             'qa_program_id_old': f"{row['program_id_latest_valid_fy']}",
             'qa_ss_vol_without_si_vol': f"service applications: {row['num_applications_total']}, standard volumes: {row['total_volume_ss']}",
             'qa_si_fiscal_yr_out_of_scope': f"{row['fiscal_yr']}",
-            'qa_ss_fiscal_yr_out_of_scope': f"{row['fiscal_yr']}"
+            'qa_ss_fiscal_yr_out_of_scope': f"{row['fiscal_yr']}",
+            'qa_extreme_volume_variation': f"{row['fy_num_applications_total']}",
+            'qa_no_volume_variation': f"{row['fy_num_applications_total']}"
             }
 
         return issue_messages.get(row['qa_field_name'])
@@ -343,7 +363,8 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
             'reused_sid_correct_org',
             'program_id',
             'program_id_latest_valid_fy',
-            'mismatched_program_ids'
+            'mismatched_program_ids',
+            'fy_num_applications_total'
         ]
 
         # Transform data to have all qa issues in a single column
@@ -388,7 +409,8 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
             'reused_sid_correct_org', # replaced by context field
             'program_id', # replaced by context field
             'program_id_latest_valid_fy', # replaced by context field
-            'mismatched_program_ids' # replaced by context field
+            'mismatched_program_ids', # replaced by context field
+            'fy_num_applications_total' # replaced by context field
             ])
 
         si_qa_report = si_qa_report.sort_values(by=['org_id', 'severity_en', 'service_id'])
