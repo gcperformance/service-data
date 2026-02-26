@@ -47,7 +47,7 @@ python main.py  # Runs full processing pipeline
 ## Datasets Consulted
 
 ### [GC Service Inventory and Service Performance](https://open.canada.ca/data/en/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c)
-- **Files**: `si_2018.csv`, `si_2024.csv`, `ss_2018.csv`, `ss_2024.csv`
+- **Files**: `si_2018.csv`, `si_2024.csv`, `ss_2018.csv`, `ss_2024.csv`, `service_data_dict.json`
 - **Content**: Government of Canada service inventory, associated standards, and performance, along with relevant data dictionaries.
 - **Update Frequency**: Annually, typically in January
 
@@ -68,7 +68,7 @@ python main.py  # Runs full processing pipeline
 
 ### [Utilities developed for GC Service Inventory data analysis](https://github.com/gc-performance/utilities)
 - **Files**: `org_var.csv`, `serv_prog.csv`, `sid_registry.csv`
-- **Content**: A manually updated list of every organization, department, and agency with their associated names mapped to a single numeric ID (`org_var.csv`). Long-form program names from the 2018-2023 service inventory mapped to program IDs from Departmental Plans and Results Reports (`serv_prog.csv`).
+- **Content**: A manually updated list of every organization, department, and agency with their associated names mapped to a single numeric ID (`org_var.csv`). Long-form program names from the 2018-2023 service inventory mapped to program IDs from Departmental Plans and Results Reports (`serv_prog.csv`), and the service ID number registry which links the service ID number to its assigned department or agency (`sid_registry.csv`).
 - **Update Frequency**: Ad-hoc
 
 ---
@@ -80,7 +80,7 @@ The [Policy on Service and Digital](https://www.tbs-sct.canada.ca/pol/doc-eng.as
 - All CSV files use a semicolon (`;`) as a delimiter between columns.
 
 ### Timestamps
-- All CSV files produced by the script include a timestamp on the last row of the file.
+- All CSV files produced by the script include a timestamp on the last row of the file. This timestamp also flags if the underlying data comes from a snapshot.
 
 ### Accessing files remotely
 - To access the files in the latest release, point your tool to the following url: `https://github.com/gcperformance/service-data/releases/latest/download/XXX.csv`, replacing xxx.csv with the file you want to access, for example `si.csv` 
@@ -135,13 +135,9 @@ For a more detailed description of each file and field, please consult [README_i
 
 ---
 ## Other files
-- `main.py` - Orchestrates the processing pipeline.
+- `main.py` - Python file that orchestrates the processing pipeline.
 - `requirements.txt` - Lists python dependencies.
-- `context.md` - Context on this dataset for use with LLM.
-- `database.dbml` - **Draft** schema defining a database model.
-- `tidy-script` - Bash script producing file paths for deleting inputs, outputs, caches, etc.
 - `README_indicators.md` - Detailed information about datasets produced by script
-
 
 ### Python script files (src/)
 - `clean.py`: functions to clean and set up data
@@ -155,7 +151,6 @@ For a more detailed description of each file and field, please consult [README_i
 - `utils.py`: misc utility functions, produces some files for `outputs/utils/` directory
 
 ### Tests (tests/)
-
 - `README.md`: placeholder readme documentation for tests
 - `conftest.py`: configuration file for pytest
 - `test_merge.py`: testing script for merge.py
@@ -163,9 +158,12 @@ For a more detailed description of each file and field, please consult [README_i
 - `generate_reference.py`: script for generating field names and types for all output files, see ref/ directory
 - `reference_fields.csv`: Table of all tables, fields, and datatypes for use with test script
 
-### Github workflows (.github/workflows)
+### Jupyter Notebooks (notebooks/)
+- These notebooks are for testing and developing new features
 
+### Github workflows (.github/workflows)
 - `generate-files.yml`: Github actions script that produces releases on a given schedule or on an ad-hoc basis.
+
 
 ---
 
