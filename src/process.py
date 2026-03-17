@@ -968,7 +968,7 @@ def datapack(si, ss, config, snapshot=False):
             'num_applications_by_other'
         ]
 
-        EXCLUDED_SERVICES_ID = ['1111', '1108', '3728', '669', '1677', '1112']
+        EXCLUDED_SERVICES_ID = ['1111', '1108', '3728', '669', '1677', '1112', '1242', '3602']
 
         # Filter and select columns
         dp_services_rank = si_dp[
