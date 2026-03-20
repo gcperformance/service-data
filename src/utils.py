@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import json
 import logging
 logger = logging.getLogger(__name__)
@@ -111,8 +112,15 @@ def build_drf(si, config, snapshot=False):
     """
     Load and clean DRF data (i.e. RBPO). Refer to snapshot if necessary!
     """
+    def fy_to_num(fiscal_yr): # Returns the year in which the fiscal year ends, as a number.
+        return pd.to_numeric(fiscal_yr.split('-')[-1], errors='coerce')# Load and normalize
+
+    def num_to_fy(number): # Returns the fiscal year in YYYY-YYYY format
+        if (number > 999): 
+            return f'{number-1}-{number}'
+        else:
+            return np.nan
     try:
-        # Load and normalize
         drf = load_csv('rbpo.csv', config, False)
         drf = standardize_column_names(drf)
         drf['fiscal_yr'] = drf['fiscal_yr'].apply(clean_fiscal_yr)
@@ -145,12 +153,9 @@ def build_drf(si, config, snapshot=False):
         drf[['planned_actual', 'spending_fte', 'yr_adjust']] = drf['plan_actual_spendfte_yr'].str.split('_', n=2, expand=True)
         drf['yr_adjust'] = drf['yr_adjust'].fillna('1').astype(int) - 1
 
-        # Parse fiscal year end (YYYY-YYYY -> second part)
-        fy_end = pd.to_numeric(drf['fiscal_yr'].str.split('-').str[-1].astype(int), errors='coerce')
-
         # Calculate 4-digit 'measure_yr' and 'report_yr' from 'fiscal_yr' and 'yr_adjust'
-        drf['report_yr'] = fy_end.astype('Int64')
-        drf['measure_yr'] = (fy_end+ drf['yr_adjust']).astype('Int64')
+        drf['report_yr'] = drf['fiscal_yr'].apply(fy_to_num)
+        drf['measure_yr'] = (drf['fiscal_yr'].apply(fy_to_num)+drf['yr_adjust'])
 
         # Latest SI fiscal year per org (end year as int)
         si_latest = (si.assign(lat_end=pd.to_numeric(si['fiscal_yr'].str.split('-').str[-1], errors='coerce'))
@@ -159,23 +164,11 @@ def build_drf(si, config, snapshot=False):
 
         drf = drf.merge(si_latest, on='org_id', how='left')
 
-
         # Split planned vs actual; only drop blank measures
         drf_actuals = drf[drf['planned_actual']=='actual'].dropna(subset=['measure']).copy()
         drf_planned = drf[drf['planned_actual']=='planned'].dropna(subset=['measure']).copy()
 
         # Drop any actuals from the fiscal year in progress
-        # # TODO: Turn this into a function that doesn't need manual intevention
-        # current_yr = 2026
-        # drf_actuals = drf_actuals[drf_actuals['measure_yr']<current_yr]
-
-        # # Determine the highest measure year for actuals
-        # latest_actuals = (drf_actuals
-        #                 .groupby(['org_id', 'program_id', 'spending_fte'], as_index=False)['report_yr']
-        #                 .max()
-        #                 .rename(columns={'report_yr':'report_yr_actuals'})
-        # )
-
         # The fiscal year in progress will be indicated with a "." in the ftes field
         # Determine the highest measure/report year for actuals, i.e. max without a "." in the ftes field
         latest_actuals = drf_actuals[(drf_actuals['spending_fte'] == 'ftes') & (drf_actuals['measure'] != '.')] \
@@ -192,6 +185,8 @@ def build_drf(si, config, snapshot=False):
         drf_actuals = drf_actuals[
             drf_actuals['measure_yr'] <= (drf_actuals['latest_report_yr_actuals'].fillna(0))
         ]
+        drf_actuals['measure'] = drf_actuals['measure'].replace('.', 0)
+
 
         # Merge in the highest measure year for actuals in the planned table
         drf_planned = drf_planned.merge(latest_actuals, 
@@ -199,7 +194,7 @@ def build_drf(si, config, snapshot=False):
                                         how='left') 
 
         # Only keep planned years that are greater than the latest actual report year
-        # fillna(-np.inf) assures that all planned values are included, even if there are not associated actual report years
+        # fillna(0) assures that all planned values are included, even if there are not associated actual report years
         drf_planned = drf_planned[
             drf_planned['measure_yr'] > (drf_planned['latest_report_yr_actuals'].fillna(0))
         ]
@@ -233,10 +228,11 @@ def build_drf(si, config, snapshot=False):
         drf['si_link_yr'] = drf['si_link_yr'].astype('Int64')
 
         # # # Return years to fiscal year YYYY-YYYY format
-        drf['report_yr'] = (drf['report_yr']-1).apply(str) +"-"+ (drf['report_yr']).apply(str)
-        drf['measure_yr'] = (drf['measure_yr']-1).apply(str) +"-"+ (drf['measure_yr']).apply(str)
-        drf['si_link_yr'] = (drf['si_link_yr']-1).apply(str) +"-"+ (drf['si_link_yr']).apply(str)
-        drf['latest_si_yr'] = (drf['latest_si_yr']-1).apply(str) +"-"+ (drf['latest_si_yr']).apply(str)
+        drf['report_yr'] = drf['report_yr'].apply(num_to_fy)
+        drf['measure_yr'] = drf['measure_yr'].apply(num_to_fy)
+        drf['si_link_yr'] = drf['si_link_yr'].apply(num_to_fy)
+        drf['latest_si_yr'] = drf['latest_si_yr'].apply(num_to_fy)
+
         
         if snapshot:
             OUTPUT_DIR = config['output_dir'] / 'snapshots' / snapshot
@@ -251,9 +247,8 @@ def build_drf(si, config, snapshot=False):
         )
 
         return drf
-    
-    except Exception as e:
-        logger.error("Error: %s", e, exc_info=True)
+
+    except Exception as e: logger.error("Error: %s", e, exc_info=True)
 
 def build_ifoi(config):
     try:
