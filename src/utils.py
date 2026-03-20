@@ -165,26 +165,43 @@ def build_drf(si, config, snapshot=False):
         drf_planned = drf[drf['planned_actual']=='planned'].dropna(subset=['measure']).copy()
 
         # Drop any actuals from the fiscal year in progress
-        # TODO: Turn this into a function that looks at the current datetime
-        current_yr = 2026
-        drf_actuals = drf_actuals[drf_actuals['measure_yr']<current_yr]
+        # # TODO: Turn this into a function that doesn't need manual intevention
+        # current_yr = 2026
+        # drf_actuals = drf_actuals[drf_actuals['measure_yr']<current_yr]
 
-        # Determine the highest measure year for actuals
-        latest_actuals = (drf_actuals
-                        .groupby(['org_id', 'program_id', 'spending_fte'], as_index=False)['report_yr']
-                        .max()
-                        .rename(columns={'report_yr':'report_yr_actuals'})
-        )
+        # # Determine the highest measure year for actuals
+        # latest_actuals = (drf_actuals
+        #                 .groupby(['org_id', 'program_id', 'spending_fte'], as_index=False)['report_yr']
+        #                 .max()
+        #                 .rename(columns={'report_yr':'report_yr_actuals'})
+        # )
+
+        # The fiscal year in progress will be indicated with a "." in the ftes field
+        # Determine the highest measure/report year for actuals, i.e. max without a "." in the ftes field
+        latest_actuals = drf_actuals[(drf_actuals['spending_fte'] == 'ftes') & (drf_actuals['measure'] != '.')] \
+                            .groupby(['org_id', 'program_id'], as_index=False) \
+                            .agg(latest_report_yr_actuals=('report_yr', 'max'))
+
+        # Merge in the highest measure year for actuals in the actuals table
+        drf_actuals = drf_actuals.merge(latest_actuals, 
+                                        on=['org_id', 'program_id'],
+                                        how='left') 
+
+        # Only keep actual years that are less than or equal to the latest actual report year
+        # fillna(0) assures that all actual values are included, even if there are not associated actual report years
+        drf_actuals = drf_actuals[
+            drf_actuals['measure_yr'] <= (drf_actuals['latest_report_yr_actuals'].fillna(0))
+        ]
 
         # Merge in the highest measure year for actuals in the planned table
         drf_planned = drf_planned.merge(latest_actuals, 
-                                        on=['org_id', 'program_id', 'spending_fte'],
+                                        on=['org_id', 'program_id'],
                                         how='left') 
 
         # Only keep planned years that are greater than the latest actual report year
         # fillna(-np.inf) assures that all planned values are included, even if there are not associated actual report years
         drf_planned = drf_planned[
-            drf_planned['measure_yr'] > (drf_planned['report_yr_actuals'].fillna(0))
+            drf_planned['measure_yr'] > (drf_planned['latest_report_yr_actuals'].fillna(0))
         ]
 
         # # # Each report year has 3 measure years for planned values.
