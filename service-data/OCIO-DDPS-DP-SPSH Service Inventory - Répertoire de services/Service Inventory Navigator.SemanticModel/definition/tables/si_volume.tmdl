@@ -1,0 +1,81 @@
+table si_volume
+	lineageTag: c838ee89-f43a-4ad1-aa28-6bb325800751
+
+	measure total_applications = calculate(sum(si_volume[volume]))
+		formatString: #,0
+		lineageTag: 8587f344-3fcf-4b46-8b46-727ad4429c7b
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure total_applications_all_orgs = calculate(sum(si_volume[volume]), ALL(si))
+		lineageTag: 76536d50-dadf-42f9-815d-c040381c73b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure total_applications_pc_all_orgs = calculate(sum(si_volume[volume]))/calculate(sum(si_volume[volume]), ALL(si))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 54f21b41-f796-4e4c-85fc-05466181f104
+
+	column fiscal_yr
+		dataType: string
+		lineageTag: 6ceb06fb-395f-47f3-8fb6-b53749043168
+		summarizeBy: none
+		sourceColumn: fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: efccaec0-b69c-49ef-a542-c7186c93f96d
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_id
+		dataType: string
+		lineageTag: 9eb864c5-75cc-440f-89c3-231fb10ea6f0
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: f9c204b9-a73e-4607-a330-8e416d9d538d
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column volume
+		dataType: double
+		lineageTag: 6540889a-cad6-4451-becd-30e43ecf87b4
+		summarizeBy: sum
+		sourceColumn: volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fy_org_service_id = [fiscal_yr]&"_"&[org_id]&"_"&[service_id]
+		lineageTag: fe70e5e3-22a7-4ccc-b16c-563bb0526074
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition si_volume = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/si_vol.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"volume", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,44 @@
+table RLS_test
+	lineageTag: c6355153-8f68-454a-a83d-9fea9feaa3fa
+
+	measure total_services_count_pc = CALCULATE(sum(maf_all[service_count_maf1]))/CALCULATE(sum(maf_all[service_count_maf1]), all(si))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7f204448-01ed-418d-a2c2-f8f730de1394
+
+	column org_id
+		dataType: string
+		lineageTag: 1206d9df-84ef-429c-9976-3d1a44fc5c79
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: ed0b16ba-03ea-4bb9-9583-f651014419d4
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPN
+		dataType: string
+		lineageTag: 4b46a4ab-f4d7-4feb-b88d-e6bd63fbbe3d
+		summarizeBy: none
+		sourceColumn: UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_test = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\GERICKSO\OneDrive - Treasury Board of Canada Secretariat Secrétariat du Conseil du Trésor du Canada\Desktop\RLS_test_data.xlsx"), null, true),
+				    RLS_test_Table = Source{[Item="RLS_test",Kind="Table"]}[Data]
+				in
+				    RLS_test_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

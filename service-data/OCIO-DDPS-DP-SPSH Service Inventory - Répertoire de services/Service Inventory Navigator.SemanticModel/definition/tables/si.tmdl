@@ -1,0 +1,453 @@
+table si
+	lineageTag: 634f8f83-c5e2-468d-9bc5-eda1ef80f6b2
+
+	column fiscal_yr
+		dataType: string
+		lineageTag: cda41c66-15b5-4cd6-9be5-6b82af19564a
+		summarizeBy: none
+		sourceColumn: fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: 83c4d8c1-8031-483e-8946-27407f3c7049
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_id
+		dataType: string
+		lineageTag: 74981a3f-5c5e-420b-9b0e-a2a325b30cd0
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_en
+		dataType: string
+		lineageTag: 9bd57382-4edd-439d-b65d-bb0b2f51d318
+		summarizeBy: none
+		sourceColumn: service_name_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_fr
+		dataType: string
+		lineageTag: 1e465a18-c190-4fde-a9d7-b90c552cd2c1
+		summarizeBy: none
+		sourceColumn: service_name_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_description_en
+		dataType: string
+		lineageTag: 9b997d3f-664d-4dc0-b406-5c4ca3889a15
+		summarizeBy: none
+		sourceColumn: service_description_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_description_fr
+		dataType: string
+		lineageTag: c732e0b3-e1ca-4596-be65-e15249be8fe0
+		summarizeBy: none
+		sourceColumn: service_description_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_type
+		dataType: string
+		lineageTag: 4a7b7283-098b-4d0c-b14a-942a068ca824
+		summarizeBy: none
+		sourceColumn: service_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_recipient_type
+		dataType: string
+		lineageTag: 926c6a39-cb06-43d1-8650-132b82899f73
+		summarizeBy: none
+		sourceColumn: service_recipient_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_scope
+		dataType: string
+		lineageTag: d6ee475e-bf7c-4588-afa4-8ffcea624bdb
+		summarizeBy: none
+		sourceColumn: service_scope
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_target_groups
+		dataType: string
+		lineageTag: 5fc361ce-3edc-4e09-920a-aa5f0c69033d
+		summarizeBy: none
+		sourceColumn: client_target_groups
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_name_en
+		dataType: string
+		lineageTag: 1e2bec5a-aa07-4b79-a895-f00742f5431e
+		summarizeBy: none
+		sourceColumn: program_name_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_name_fr
+		dataType: string
+		lineageTag: 159d2f97-b2e4-47cc-a99a-4be4d7522e47
+		summarizeBy: none
+		sourceColumn: program_name_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_feedback_channel
+		dataType: string
+		lineageTag: 48fadc83-52b3-4658-9992-17f2a2dcd65d
+		summarizeBy: none
+		sourceColumn: client_feedback_channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_fee
+		dataType: string
+		lineageTag: 3b2e1f01-ca14-4c2b-b863-6b79a8df4cc5
+		summarizeBy: none
+		sourceColumn: service_fee
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_GBA
+		dataType: string
+		lineageTag: fad512c1-956c-462c-8563-462ace1ca75a
+		summarizeBy: none
+		sourceColumn: last_GBA
+
+		annotation SummarizationSetBy = Automatic
+
+	column ident_platform
+		dataType: string
+		lineageTag: ada56f63-d458-4f9b-ba82-57fe90b20980
+		summarizeBy: none
+		sourceColumn: ident_platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column ident_platform_comments
+		dataType: string
+		lineageTag: 22119d0a-6d74-4c24-b418-eaeb1db02e2f
+		summarizeBy: none
+		sourceColumn: ident_platform_comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_account_registration
+		dataType: string
+		lineageTag: 4c469c58-df6d-483e-9440-673804943aaf
+		summarizeBy: none
+		sourceColumn: os_account_registration
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_authentication
+		dataType: string
+		lineageTag: fbfe052c-c471-4073-a83f-332850055b68
+		summarizeBy: none
+		sourceColumn: os_authentication
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_application
+		dataType: string
+		lineageTag: bd1a4129-d6b3-4ef8-b235-3b63b9401077
+		summarizeBy: none
+		sourceColumn: os_application
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_decision
+		dataType: string
+		lineageTag: 6480aae4-c8f0-4e6d-a9e7-ae4917542c18
+		summarizeBy: none
+		sourceColumn: os_decision
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_issuance
+		dataType: string
+		lineageTag: cac118a3-9505-4ebd-8d49-e2d8ceac392d
+		summarizeBy: none
+		sourceColumn: os_issuance
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_issue_resolution_feedback
+		dataType: string
+		lineageTag: 5c57a466-62c6-464f-ada2-44c5e49d7b14
+		summarizeBy: none
+		sourceColumn: os_issue_resolution_feedback
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_comments_client_interaction_en
+		dataType: string
+		lineageTag: d206675c-2f63-4889-992a-03f10ec8b05a
+		summarizeBy: none
+		sourceColumn: os_comments_client_interaction_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column os_comments_client_interaction_fr
+		dataType: string
+		lineageTag: 9599fbf4-4631-4299-8e88-744628e93442
+		summarizeBy: none
+		sourceColumn: os_comments_client_interaction_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column how_has_the_service_been_assessed_for_accessibility
+		dataType: string
+		lineageTag: 684c2cac-bd14-4b33-8d45-38d07a329ced
+		summarizeBy: none
+		sourceColumn: how_has_the_service_been_assessed_for_accessibility
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_service_review
+		dataType: string
+		lineageTag: 66c52f82-428c-42db-80a3-9ff1fc78b60f
+		summarizeBy: none
+		sourceColumn: last_service_review
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_service_improvement
+		dataType: string
+		lineageTag: 96852457-2648-4a7e-a8a5-3fd0eb0cd58f
+		summarizeBy: none
+		sourceColumn: last_service_improvement
+
+		annotation SummarizationSetBy = Automatic
+
+	column sin_usage
+		dataType: string
+		lineageTag: 24f96ec2-823d-471a-a461-c1d703132ced
+		summarizeBy: none
+		sourceColumn: sin_usage
+
+		annotation SummarizationSetBy = Automatic
+
+	column cra_bn_identifier_usage
+		dataType: string
+		lineageTag: c3dea3d1-c10d-43ae-916b-9fabad772561
+		summarizeBy: none
+		sourceColumn: cra_bn_identifier_usage
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_phone_enquiries
+		dataType: string
+		lineageTag: 0e52c6da-da41-49a4-8682-a98d8f074918
+		summarizeBy: none
+		sourceColumn: num_phone_enquiries
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_by_phone
+		dataType: string
+		lineageTag: d5ebd386-19ad-4834-ba59-8799535fb6e2
+		summarizeBy: none
+		sourceColumn: num_applications_by_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_website_visits
+		dataType: string
+		lineageTag: cb0d72c4-6657-4917-b119-fd3c798ee8bb
+		summarizeBy: none
+		sourceColumn: num_website_visits
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_online
+		dataType: string
+		lineageTag: edaa6285-323e-4a17-af2e-2c870c96647b
+		summarizeBy: none
+		sourceColumn: num_applications_online
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_in_person
+		dataType: string
+		lineageTag: b1c9cc5f-1669-4aa7-bf9f-39e763b52f32
+		summarizeBy: none
+		sourceColumn: num_applications_in_person
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_by_mail
+		dataType: string
+		lineageTag: cce64dd5-4ecd-4c11-8800-5ee4f9e28167
+		summarizeBy: none
+		sourceColumn: num_applications_by_mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_by_email
+		dataType: string
+		lineageTag: c2efa25f-ee6b-421d-b322-99751da11b57
+		summarizeBy: none
+		sourceColumn: num_applications_by_email
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_by_fax
+		dataType: string
+		lineageTag: f78f3d36-cb3a-4201-be71-84488eeb9a22
+		summarizeBy: none
+		sourceColumn: num_applications_by_fax
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_by_other
+		dataType: string
+		lineageTag: e9c2bd36-7804-4705-bfaf-43907e7b9c8d
+		summarizeBy: none
+		sourceColumn: num_applications_by_other
+
+		annotation SummarizationSetBy = Automatic
+
+	column special_remarks_en
+		dataType: string
+		lineageTag: 9e02467d-3c99-43d6-825d-5183b38005db
+		summarizeBy: none
+		sourceColumn: special_remarks_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column special_remarks_fr
+		dataType: string
+		lineageTag: 73b7d105-210d-43bb-8a20-6683fe4b5a4b
+		summarizeBy: none
+		sourceColumn: special_remarks_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_uri_en
+		dataType: string
+		lineageTag: 28d039d8-1301-4d11-ac47-ff2b6615ee7c
+		summarizeBy: none
+		sourceColumn: service_uri_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_uri_fr
+		dataType: string
+		lineageTag: d8437bcc-1e9d-450a-b574-e53e7c0b941b
+		summarizeBy: none
+		sourceColumn: service_uri_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_applications_total
+		dataType: string
+		lineageTag: db17647f-f351-4e8f-9db6-d5446dec2d38
+		summarizeBy: none
+		sourceColumn: num_applications_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_name_variant
+		dataType: string
+		lineageTag: 8f956b0a-c1b5-436c-be87-2b26f8c22ed7
+		summarizeBy: none
+		sourceColumn: org_name_variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: 574fda7d-e54a-412b-bdaa-48fe7f3cd07c
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_fr
+		dataType: string
+		lineageTag: cb637e09-610a-4c19-9c52-45e69f4a8e49
+		summarizeBy: none
+		sourceColumn: department_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_id
+		dataType: string
+		lineageTag: e500a280-9e88-4ad0-9adc-62467feb0269
+		summarizeBy: none
+		sourceColumn: program_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column automated_decision_system_description_en
+		dataType: string
+		lineageTag: d64877ef-0ee6-46ed-8562-91494df29c90
+		summarizeBy: none
+		sourceColumn: automated_decision_system_description_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column automated_decision_system
+		dataType: string
+		lineageTag: 33c7e3cc-af7f-49d4-80f4-e347f2e9c9c2
+		summarizeBy: none
+		sourceColumn: automated_decision_system
+
+		annotation SummarizationSetBy = Automatic
+
+	column automated_decision_system_description_fr
+		dataType: string
+		lineageTag: bc5cb169-abe3-4128-9343-f49a597bd206
+		summarizeBy: none
+		sourceColumn: automated_decision_system_description_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column fy_org_id_service_id
+		dataType: string
+		lineageTag: 07b10713-dd31-4bdf-989f-789064b8c3b2
+		summarizeBy: none
+		sourceColumn: fy_org_id_service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_service_id = si[org_id]&"_"&si[service_id]
+		lineageTag: 2148f9b1-54d7-4640-9d04-93f710f63baf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column fy_org_id = [fiscal_yr]&"_"&[org_id]
+		lineageTag: c73f35f1-14fc-45af-950e-32cbb17f3696
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition si = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/si.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

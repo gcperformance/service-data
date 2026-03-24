@@ -1,0 +1,63 @@
+table program_list
+	lineageTag: 747ed5a3-cd26-4104-98de-e56ce322e709
+
+	column org_id
+		dataType: string
+		lineageTag: c8b4fdd2-e6b5-4002-b920-2a27fa4db21e
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_id
+		dataType: string
+		lineageTag: ed21aa3b-ed31-46d8-bd21-dddfd7d42886
+		summarizeBy: none
+		sourceColumn: program_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_valid_fy
+		dataType: string
+		lineageTag: f2ce3869-e7ca-49aa-af8a-3d8f1680ecec
+		summarizeBy: none
+		sourceColumn: latest_valid_fy
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_en
+		dataType: string
+		lineageTag: e64bd0a4-a2b6-4a77-a4e2-a531bba81bdb
+		summarizeBy: none
+		sourceColumn: program_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_fr
+		dataType: string
+		lineageTag: 8686f763-a514-4507-b853-74ef1a7ebaaf
+		summarizeBy: none
+		sourceColumn: program_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_program_id = program_list[org_id]&"_"&program_list[program_id]
+		lineageTag: 34308901-cc25-4ff7-b9c6-b050ce88daa9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition program_list = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

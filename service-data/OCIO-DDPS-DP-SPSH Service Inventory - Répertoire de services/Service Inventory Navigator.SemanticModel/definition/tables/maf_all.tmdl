@@ -1,0 +1,215 @@
+table maf_all
+	lineageTag: 5748cca5-e5db-4102-9a65-7c9c3db6a1e3
+
+	measure maf1_score_pc = CALCULATE(sum(maf_all[service_with_std_count])/sum(maf_all[service_count_maf1]))
+		formatString: 0%;-0%;0%
+		lineageTag: fcd4434b-2e1d-4a20-94dd-cef16bee8748
+
+	measure maf2_score_pc = calculate(sum(maf_all[service_standard_met])/sum(maf_all[service_standard_count]))
+		formatString: 0%;-0%;0%
+		lineageTag: 63181218-a785-4e04-a959-c568c7422cdb
+
+	column fiscal_yr
+		dataType: string
+		lineageTag: d3fd4c97-4f5b-4a36-90c8-d08b8ddbe25f
+		summarizeBy: none
+		sourceColumn: fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: 4c01cdc9-838d-4bef-bb71-3c3060928389
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: ae54af89-0dcd-4152-8012-23622917e010
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_fr
+		dataType: string
+		lineageTag: 9600821a-0240-410a-b51f-cab5416d11d2
+		summarizeBy: none
+		sourceColumn: department_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_with_std_count
+		dataType: double
+		lineageTag: 11f9aa6d-c49b-4043-ae4a-6b8b46c95e0f
+		summarizeBy: sum
+		sourceColumn: service_with_std_count
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column service_count_maf1
+		dataType: double
+		lineageTag: 81cbd94c-f418-41d5-9098-d19822e7f2f2
+		summarizeBy: sum
+		sourceColumn: service_count_maf1
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maf1_score
+		dataType: double
+		formatString: 0
+		lineageTag: d98846b3-af03-4286-96f8-6b74d6856ba1
+		summarizeBy: none
+		sourceColumn: maf1_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column service_standard_met
+		dataType: double
+		lineageTag: 5939b0fc-1bbc-4fd0-9829-40472bfcf456
+		summarizeBy: sum
+		sourceColumn: service_standard_met
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column service_standard_count
+		dataType: double
+		lineageTag: d4b2614f-7553-451e-a83a-c720928bac24
+		summarizeBy: sum
+		sourceColumn: service_standard_count
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maf2_score
+		dataType: double
+		lineageTag: f72f14dd-792a-4d75-92a0-14634d3e261b
+		summarizeBy: none
+		sourceColumn: maf2_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column online_e2e_count
+		dataType: double
+		lineageTag: 32fa6a99-e726-48af-965c-4f202662dd99
+		summarizeBy: none
+		sourceColumn: online_e2e_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column service_count_maf5
+		dataType: double
+		lineageTag: c2595a17-b5a0-48e7-8a17-06d482992d04
+		summarizeBy: sum
+		sourceColumn: service_count_maf5
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maf5_score
+		dataType: double
+		lineageTag: 8433562f-5f59-42fd-a693-07207a7bbc74
+		summarizeBy: none
+		sourceColumn: maf5_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column activated_point_count
+		dataType: double
+		lineageTag: fe30bae1-f328-49b7-b4c6-45521f5f6ffb
+		summarizeBy: none
+		sourceColumn: activated_point_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column point_count
+		dataType: double
+		lineageTag: 784b5c07-87e7-45fe-800a-a1883424e3f6
+		summarizeBy: none
+		sourceColumn: point_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maf6_score
+		dataType: double
+		lineageTag: 07e983c3-b9a9-4786-a393-b05a0f9ad464
+		summarizeBy: none
+		sourceColumn: maf6_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column improved_services_count
+		dataType: double
+		lineageTag: 8821e841-704e-4559-87f4-4687d1f92cae
+		summarizeBy: none
+		sourceColumn: improved_services_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column service_count_maf8
+		dataType: double
+		lineageTag: 8975739e-4e0d-4f0d-826c-2b821f8a9269
+		summarizeBy: sum
+		sourceColumn: service_count_maf8
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column maf8_score
+		dataType: double
+		lineageTag: 32ec7fef-14c2-47cf-bc90-20726ce171ea
+		summarizeBy: none
+		sourceColumn: maf8_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fy_org_id = [fiscal_yr]&"_"&[org_id]
+		lineageTag: 4c4f957a-361d-4c75-8e78-6fda7a3efbc5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition maf_all = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/maf_all.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"service_with_std_count", type number}, {"service_count_maf1", type number}, {"maf1_score", type number}, {"service_standard_met", type number}, {"service_standard_count", type number}, {"maf2_score", type number}, {"online_e2e_count", type number}, {"service_count_maf5", type number}, {"maf5_score", type number}, {"activated_point_count", type number}, {"point_count", type number}, {"maf6_score", type number}, {"improved_services_count", type number}, {"service_count_maf8", type number}, {"maf8_score", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
