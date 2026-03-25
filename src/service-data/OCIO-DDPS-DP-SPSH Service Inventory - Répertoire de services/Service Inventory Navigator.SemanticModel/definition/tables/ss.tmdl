@@ -1,0 +1,261 @@
+table ss
+	lineageTag: ab4a485f-6fa9-4afa-a631-54e2989d6bf9
+
+	measure standards_with_performance = calculate(DISTINCTCOUNT(ss[fy_org_id_service_id_std_id]), filter(ss, ss[target_met]="NA"))
+		formatString: 0
+		lineageTag: 5f8b7c54-b979-4c96-ba27-a225edabe653
+
+	column fiscal_yr
+		dataType: string
+		lineageTag: 905bde5c-ed9a-4566-8b28-48864246e77f
+		summarizeBy: none
+		sourceColumn: fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: b930a398-c712-4bba-87d0-7de5a4ea91f5
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_id
+		dataType: string
+		lineageTag: 99ca8a15-1e3d-4f68-9c01-47d4f09cd954
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_en
+		dataType: string
+		lineageTag: ed7f9731-08bb-4cf5-aefc-a1ef12393c6e
+		summarizeBy: none
+		sourceColumn: service_name_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_fr
+		dataType: string
+		lineageTag: 38503cd5-648b-4bdf-a233-d13421b9dd38
+		summarizeBy: none
+		sourceColumn: service_name_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_standard_id
+		dataType: string
+		lineageTag: 58f51918-8400-461d-9707-5db1c399fbbc
+		summarizeBy: none
+		sourceColumn: service_standard_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_standard_en
+		dataType: string
+		lineageTag: d8e8b87e-5af6-430b-a99a-58d57028c645
+		summarizeBy: none
+		sourceColumn: service_standard_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_standard_fr
+		dataType: string
+		lineageTag: bd5f94f4-9652-454f-9bfb-8a3a1985338c
+		summarizeBy: none
+		sourceColumn: service_standard_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: a888f135-5c19-4576-aef5-a701688588e0
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column gcss_tool_fiscal_yr
+		dataType: string
+		lineageTag: 0db1dfb8-a308-4128-b6b1-d69b9ae32e90
+		summarizeBy: none
+		sourceColumn: gcss_tool_fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 3f579b7c-09fe-4849-ae34-03ce9f263d44
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_comments_en
+		dataType: string
+		lineageTag: 9aca0c33-ccfe-472a-92d2-7066c317c424
+		summarizeBy: none
+		sourceColumn: channel_comments_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel_comments_fr
+		dataType: string
+		lineageTag: 2e677c3e-dd5e-4224-a515-d71820d7ae8c
+		summarizeBy: none
+		sourceColumn: channel_comments_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_type
+		dataType: string
+		lineageTag: 7e4507c4-f938-4b9b-ba69-4bf361b45a01
+		summarizeBy: none
+		sourceColumn: target_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column target
+		dataType: string
+		lineageTag: 1fd903c1-aac2-4d0c-99f8-eaae1259c957
+		summarizeBy: none
+		sourceColumn: target
+
+		annotation SummarizationSetBy = Automatic
+
+	column volume_meeting_target
+		dataType: string
+		lineageTag: 87fffc68-29fc-434f-9b6f-a97b7ee39ef3
+		summarizeBy: none
+		sourceColumn: volume_meeting_target
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_volume
+		dataType: string
+		lineageTag: 5ce9ce0d-a3d5-439e-a99b-e6065f0a31a2
+		summarizeBy: none
+		sourceColumn: total_volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance
+		dataType: string
+		lineageTag: 35ea7d61-9775-4414-8330-dd76ba04ccf9
+		summarizeBy: none
+		sourceColumn: performance
+
+		annotation SummarizationSetBy = Automatic
+
+	column comments_en
+		dataType: string
+		lineageTag: 62439c92-de5f-4446-b568-f59135152d55
+		summarizeBy: none
+		sourceColumn: comments_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column comments_fr
+		dataType: string
+		lineageTag: a2119c4e-7775-4794-b6dd-910dbf64bde0
+		summarizeBy: none
+		sourceColumn: comments_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column target_met
+		dataType: string
+		lineageTag: 1f059c38-aa22-4372-bedf-f3aec918d787
+		summarizeBy: none
+		sourceColumn: target_met
+
+		annotation SummarizationSetBy = Automatic
+
+	column standards_targets_uri_en
+		dataType: string
+		lineageTag: ffe76c1e-99bc-4fb6-8ddd-27c5d95be285
+		summarizeBy: none
+		sourceColumn: standards_targets_uri_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column standards_targets_uri_fr
+		dataType: string
+		lineageTag: 2c8ded24-92e5-4e81-a473-08300c85c544
+		summarizeBy: none
+		sourceColumn: standards_targets_uri_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance_results_uri_en
+		dataType: string
+		lineageTag: 823c8c30-bb79-494e-bc71-1581991c568a
+		summarizeBy: none
+		sourceColumn: performance_results_uri_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance_results_uri_fr
+		dataType: string
+		lineageTag: ec4eb9b6-3d8b-4998-b989-b03d2e82076e
+		summarizeBy: none
+		sourceColumn: performance_results_uri_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_name_variant
+		dataType: string
+		lineageTag: 780efb47-c341-4f3a-9ddf-9dfd5b400931
+		summarizeBy: none
+		sourceColumn: org_name_variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: e36acc32-7a3d-4b5d-aa77-e50013a75226
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_fr
+		dataType: string
+		lineageTag: dc369890-862b-484d-a291-7374e373d731
+		summarizeBy: none
+		sourceColumn: department_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column fy_org_id_service_id
+		dataType: string
+		lineageTag: cf3ff970-99aa-43cf-803d-edde7d3ee55b
+		summarizeBy: none
+		sourceColumn: fy_org_id_service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fy_org_id_service_id_std_id
+		dataType: string
+		lineageTag: 6df1e174-2c31-46b1-a5c7-275538bf8633
+		summarizeBy: none
+		sourceColumn: fy_org_id_service_id_std_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ss = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/ss.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

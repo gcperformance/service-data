@@ -1,0 +1,95 @@
+table sid_list
+	lineageTag: 7cb58bcc-88ed-4475-80c2-62b49e28ef77
+
+	column service_id
+		dataType: string
+		lineageTag: 0309b517-46e3-4606-8f4f-bfda62f3a53e
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_en
+		dataType: string
+		lineageTag: 881f6cde-4260-4fff-b263-27dd13042418
+		summarizeBy: none
+		sourceColumn: service_name_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_name_fr
+		dataType: string
+		lineageTag: b26e5a8b-d8a5-4f92-afaa-4faf406cc3be
+		summarizeBy: none
+		sourceColumn: service_name_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: fb241205-09b4-4cbc-b39c-f5ae6cc981d9
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_fr
+		dataType: string
+		lineageTag: bac23049-3a3f-4598-a1f8-96fd46adfd9d
+		summarizeBy: none
+		sourceColumn: department_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: 5f74a1c3-a474-46ee-81e0-7a39cebf4f8c
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscal_yr_first
+		dataType: string
+		lineageTag: 155f39d8-7951-4c44-bc42-9be179692077
+		summarizeBy: none
+		sourceColumn: fiscal_yr_first
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscal_yr_latest
+		dataType: string
+		lineageTag: 99d0fcbf-62aa-4abd-a25f-ff29fe1e210b
+		summarizeBy: none
+		sourceColumn: fiscal_yr_latest
+
+		annotation SummarizationSetBy = Automatic
+
+	column service_scope_ext_or_ent
+		dataType: string
+		lineageTag: eca7ddc5-51a8-4c62-9d81-50b09dce53d0
+		summarizeBy: none
+		sourceColumn: service_scope_ext_or_ent
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_serivce_id = [org_id]&"_"&[service_id]
+		lineageTag: 875941ad-ccbb-46c8-a3eb-f7cd278e96c8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sid_list = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/sid_list.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

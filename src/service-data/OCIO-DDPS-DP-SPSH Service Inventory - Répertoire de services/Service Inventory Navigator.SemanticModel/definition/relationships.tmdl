@@ -1,0 +1,45 @@
+relationship AutoDetected_ba2ada93-f3c7-4d6e-83c5-b56a7a46f4ee
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: ss.fy_org_id_service_id
+	toColumn: si.fy_org_id_service_id
+
+relationship b4df974b-1c6a-72b4-a2ee-cca42cd29aa2
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: si.org_service_id
+	toColumn: service_fte_spending.org_service_id
+
+relationship AutoDetected_1ca8a4fb-3cbf-4d42-a2fa-9407c81e2af1
+	crossFilteringBehavior: bothDirections
+	fromColumn: si.org_id
+	toColumn: dept.org_id
+
+relationship ee7fd27c-af28-8a65-0f12-6f970d7966d5
+	crossFilteringBehavior: bothDirections
+	securityFilteringBehavior: bothDirections
+	fromColumn: service_fte_spending.org_program_id
+	toColumn: program_list.org_program_id
+
+relationship AutoDetected_78d2e121-7fb7-42ab-b3c0-edf03dc98dd4
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: RLS_test.org_id
+	toColumn: dept.org_id
+
+relationship 704f521b-83c9-976d-252e-3f73c89ddc89
+	crossFilteringBehavior: bothDirections
+	fromColumn: si_volume.fy_org_service_id
+	toColumn: si.fy_org_id_service_id
+
+relationship b610b6e1-f35c-d166-4824-4a82e550e40d
+	crossFilteringBehavior: bothDirections
+	fromColumn: si.fy_org_id
+	toColumn: maf_all.fy_org_id
+
+relationship c58fb1ce-b4d6-11ad-884d-944eb6f055dd
+	crossFilteringBehavior: bothDirections
+	fromColumn: si.org_service_id
+	toColumn: sid_list.org_serivce_id
+
