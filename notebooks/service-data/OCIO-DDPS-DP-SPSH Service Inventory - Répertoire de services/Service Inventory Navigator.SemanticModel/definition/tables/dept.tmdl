@@ -1,0 +1,41 @@
+table dept
+	lineageTag: 6f89efe7-12fc-4a20-9b5f-cb3d80ca1525
+
+	column org_id
+		dataType: string
+		lineageTag: 0e50b220-5346-413e-94b8-4e0c80008f53
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_en
+		dataType: string
+		lineageTag: a6dce2aa-4294-4500-a12b-ff30be501e36
+		summarizeBy: none
+		sourceColumn: department_en
+
+		annotation SummarizationSetBy = Automatic
+
+	column department_fr
+		dataType: string
+		lineageTag: 4e58e197-c76d-4b36-aa86-f8ebf6d90a8c
+		summarizeBy: none
+		sourceColumn: department_fr
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dept = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/dept.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

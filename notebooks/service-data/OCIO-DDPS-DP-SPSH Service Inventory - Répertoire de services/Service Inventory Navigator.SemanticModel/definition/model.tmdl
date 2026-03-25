@@ -1,0 +1,26 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["si","ss","service_fte_spending","dept","program_list","RLS_test","si_volume","maf_all","sid_list"]
+
+ref table ss
+ref table service_fte_spending
+ref table si
+ref table dept
+ref table program_list
+ref table RLS_test
+ref table maf_all
+ref table si_volume
+ref table sid_list
+
+ref role Departmental_access
+
+ref cultureInfo en-CA
+

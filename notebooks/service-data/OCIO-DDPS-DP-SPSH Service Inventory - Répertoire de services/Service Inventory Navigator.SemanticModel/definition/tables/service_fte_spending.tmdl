@@ -1,0 +1,121 @@
+table service_fte_spending
+	lineageTag: 46ddf55c-ae56-4333-84f9-7b70d897b62f
+
+	column service_id
+		dataType: string
+		lineageTag: 2ee3b2b5-e273-4e5b-9fa6-2d576ca19fe8
+		summarizeBy: none
+		sourceColumn: service_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscal_yr
+		dataType: string
+		lineageTag: 5e370a87-7545-4a8d-a5cd-d1a165d8c43e
+		summarizeBy: none
+		sourceColumn: fiscal_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column program_id
+		dataType: string
+		lineageTag: b79d0d63-9c83-4a74-b402-92997d88c083
+		summarizeBy: none
+		sourceColumn: program_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_id
+		dataType: string
+		lineageTag: 38c76619-15e2-4354-b958-464d59d9583d
+		summarizeBy: none
+		sourceColumn: org_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_si_yr
+		dataType: string
+		lineageTag: 05dca1f7-184f-4b8a-9661-bc7018af2eed
+		summarizeBy: none
+		sourceColumn: latest_si_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_yr
+		dataType: string
+		lineageTag: 85a9fd6b-bd01-497f-9a76-f32c23777e0e
+		summarizeBy: none
+		sourceColumn: report_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure_yr
+		dataType: string
+		lineageTag: ea6c7a32-1e94-41b0-a310-ea8d8f6587ee
+		summarizeBy: none
+		sourceColumn: measure_yr
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_actual
+		dataType: string
+		lineageTag: 80b2fcff-73d2-49aa-8377-405a69f4abe3
+		summarizeBy: none
+		sourceColumn: planned_actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column spending_fte
+		dataType: string
+		lineageTag: aa4dda24-767f-4ec2-b13f-2ce9fa5ab230
+		summarizeBy: none
+		sourceColumn: spending_fte
+
+		annotation SummarizationSetBy = Automatic
+
+	column measure
+		dataType: double
+		formatString: #,0
+		lineageTag: d905fa8a-41a3-4a88-8bfc-42b29978bb76
+		summarizeBy: sum
+		sourceColumn: measure
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column valid_program
+		dataType: string
+		lineageTag: 22d22569-57eb-4330-ad07-b561c9088ce0
+		summarizeBy: none
+		sourceColumn: valid_program
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_service_id = service_fte_spending[org_id]&"_"&service_fte_spending[service_id]
+		lineageTag: 49fc2124-b11e-49ef-bf03-5fbc52e4e4cd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column org_program_id = service_fte_spending[org_id]&"_"&service_fte_spending[program_id]
+		lineageTag: c0ddfdd9-ce1f-48c5-a886-bab9521730fc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition service_fte_spending = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://github.com/gcperformance/service-data/releases/latest/download/service_fte_spending.csv"),[Delimiter=";", Columns=null, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(Source,2),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Removed Bottom Rows", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"measure", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,7 @@
+role Departmental_access
+	modelPermission: read
+
+	tablePermission RLS_test = [UPN] = USERPRINCIPALNAME()
+
+	annotation PBI_Id = 91f49a84a4404e3caa25d13549e70421
+
