@@ -60,17 +60,21 @@ def qa_check(si, ss, config, snapshot=False):
 
         # === QUALITY ASSURANCE CHECKS ===
         # =================================
-        # Merge in the org_id from the service id registry
-        si = pd.merge(si, sid_registry[['service_id', 'org_id']], how='left', on='service_id', suffixes=['', '_sid_registry'])
-        si = pd.merge(si, dept.rename(columns={'org_id': 'org_id_sid_registry'}), how='left', on='org_id_sid_registry', suffixes=['', '_sid_registry'])
-        
+                
         # === QA check: unregistered service ID
         # This service id is not registered in the service id registry
-        si['qa_unregistered_sid'] = si['org_id_sid_registry'].isna()
+        si = pd.merge(si, sid_registry[['service_id']], how='left', indicator=True)
+        si['qa_unregistered_sid'] = (si['_merge'] == 'left_only')
+        si = si.drop(columns=['_merge'])
         
         # === QA check: reused service ID
-        # This service id is registered to a different organization
-        si['qa_reused_sid'] = (si['org_id'] != si['org_id_sid_registry']) & ~(si['qa_unregistered_sid'])
+        # This service id is valid, but registered to a different organization
+        si = pd.merge(si, sid_registry[['service_id', 'org_id']], how='left', indicator=True)
+        si['qa_reused_sid'] = (si['_merge'] == 'left_only') & ~(si['qa_unregistered_sid'])
+        si = si.drop(columns=['_merge'])
+
+        sid_registry_less_transfers = sid_registry.loc[~sid_registry['date_transferred'].isnull()]
+        
         si['reused_sid_correct_org'] = si['org_id'].astype(str) +' : ' + si['department_en_sid_registry'] + ' | ' + si['department_fr_sid_registry']
 
         # === QA check: Record is reported for a fiscal year that is incomplete or in the future.
@@ -106,7 +110,8 @@ def qa_check(si, ss, config, snapshot=False):
             .rename(columns={'total_volume':'total_volume_ss'})
         )
         
-        si = si.merge(ss_vol_by_service, on=['fiscal_yr', 'service_id'], how='left').fillna(0)
+        si = si.merge(ss_vol_by_service, on=['fiscal_yr', 'service_id'], how='left')
+        si['total_volume_ss'] = si['total_volume_ss'].fillna(0)
         
         si['qa_ss_vol_without_si_vol'] = (
             (si['total_volume_ss'] > 0) & (si['num_applications_total'] == 0)
