@@ -60,18 +60,48 @@ def qa_check(si, ss, config, snapshot=False):
 
         # === QUALITY ASSURANCE CHECKS ===
         # =================================
-        # Merge in the org_id from the service id registry
-        si = pd.merge(si, sid_registry[['service_id', 'org_id']], how='left', on='service_id', suffixes=['', '_sid_registry'])
-        si = pd.merge(si, dept.rename(columns={'org_id': 'org_id_sid_registry'}), how='left', on='org_id_sid_registry', suffixes=['', '_sid_registry'])
-        
+                
         # === QA check: unregistered service ID
         # This service id is not registered in the service id registry
-        si['qa_unregistered_sid'] = si['org_id_sid_registry'].isna()
-        
+        si['qa_unregistered_sid'] = ~si['service_id'].isin(sid_registry['service_id'])
+
         # === QA check: reused service ID
-        # This service id is registered to a different organization
-        si['qa_reused_sid'] = (si['org_id'] != si['org_id_sid_registry']) & ~(si['qa_unregistered_sid'])
-        si['reused_sid_correct_org'] = si['org_id'].astype(str) +' : ' + si['department_en_sid_registry'] + ' | ' + si['department_fr_sid_registry']
+        # This service id is being reported by the wrong organization
+        # Bring in the service id, organization, and transferred date, if applicable, from sid registry
+        si = pd.merge(si, sid_registry[['service_id', 'org_id', 'date_transferred']], on=['service_id', 'org_id'], how='left', indicator=True)
+
+        si['fiscal_yr_end_date'] = pd.to_datetime(si['fiscal_yr'].str.split('-').str[1]+'-03-31')
+        si['date_transferred'] = pd.to_datetime(si['date_transferred'])
+
+        # Consider the following 4 predicates:
+        # A = registry contains service ID (t/f)
+        # B = registry contains service-org combination (t/f)
+        # C = org-service combo in inventory has transferred date in registry (t/f) 
+        # D = org-service combo is reported in fiscal year that ends before the transfer date (t/f)
+        # qa_reused_id = A & ( !B | ( C & !D )) -> determined based on truth matrix and expected values
+
+        # # Verification using predicates
+        # si['qa_pA'] = si['service_id'].isin(sid_registry['service_id'])
+        # si['qa_pB'] = si['_merge'] == 'both'
+        # si['qa_pC'] = ~(si['date_transferred'].isnull())
+        # si['qa_pD'] = (si['fiscal_yr_end_date'] < si['date_transferred'])
+
+        # si['qa_reused_id'] = si['qa_pA'] & (
+        #     ~si['qa_pB'] | (
+        #         si['qa_pC'] & 
+        #         ~si['qa_pD']
+        #     )
+        # )
+
+        # Without intermediary predicates:
+        si['qa_reused_id'] = si['service_id'].isin(sid_registry['service_id']) & (
+            ~(si['_merge'] == 'both') | (
+                (~(si['date_transferred'].isnull())) & 
+                ~((si['fiscal_yr_end_date'] < si['date_transferred']))
+            )
+        )
+
+        si.drop(columns=['_merge'], inplace=True)
 
         # === QA check: Record is reported for a fiscal year that is incomplete or in the future.
         si['fiscal_yr_end_date'] = pd.to_datetime(si['fiscal_yr'].str.split('-').str[1]+'-04-01')
@@ -106,7 +136,8 @@ def qa_check(si, ss, config, snapshot=False):
             .rename(columns={'total_volume':'total_volume_ss'})
         )
         
-        si = si.merge(ss_vol_by_service, on=['fiscal_yr', 'service_id'], how='left').fillna(0)
+        si = si.merge(ss_vol_by_service, on=['fiscal_yr', 'service_id'], how='left')
+        si['total_volume_ss'] = si['total_volume_ss'].fillna(0)
         
         si['qa_ss_vol_without_si_vol'] = (
             (si['total_volume_ss'] > 0) & (si['num_applications_total'] == 0)
@@ -304,7 +335,6 @@ def qa_check(si, ss, config, snapshot=False):
 def qa_report(si_qa, ss_qa, config, snapshot=False):
     def generate_context(row):
         issue_messages = {
-            'qa_reused_sid': f"{row['reused_sid_correct_org']}",
             'qa_unregistered_sid': f"{row['service_id']}",
             'qa_program_id_wrong_org': f"{row['mismatched_program_ids']}",
             'qa_program_id_old': f"{row['program_id_latest_valid_fy']}",
@@ -360,7 +390,6 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
             'service_name_fr',
             'num_applications_total',
             'total_volume_ss',
-            'reused_sid_correct_org',
             'program_id',
             'program_id_latest_valid_fy',
             'mismatched_program_ids',
@@ -406,7 +435,6 @@ def qa_report(si_qa, ss_qa, config, snapshot=False):
             'qa_field_name',
             'num_applications_total', # replaced by context field
             'total_volume_ss',  # replaced by context field
-            'reused_sid_correct_org', # replaced by context field
             'program_id', # replaced by context field
             'program_id_latest_valid_fy', # replaced by context field
             'mismatched_program_ids', # replaced by context field
