@@ -2,6 +2,11 @@ import pandas as pd
 import requests, os
 from pathlib import Path
 import logging
+# urllib3 is a HTTP client library that provides error handling
+from urllib3.exceptions import InsecureRequestWarning
+# Suppress the certificate verfiication/insecure request warnings by using the urllib3 disable warnings method.
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+
 logger = logging.getLogger(__name__)
 
 class MissingInput(Exception):
