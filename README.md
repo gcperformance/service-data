@@ -27,7 +27,7 @@ Service inventory and service standard performance data are collected as a requi
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/gc-performance/service-data.git
+git clone https://github.com/gcperformance/service-data.git
 cd service-data
 
 # Install dependencies
