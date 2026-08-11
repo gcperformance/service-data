@@ -300,9 +300,10 @@ def program_list(config):
     by individual fiscal years in open gov. For use with QA validation"""
     try:
         org_var = load_csv('org_var.csv', config)
-        
+
         frames_en = []
         frames_fr = []
+        frames_enfr = []
         df = pd.DataFrame
 
         for fiscal_yr, url in config['program_csv_urls_en'].items():
@@ -321,6 +322,14 @@ def program_list(config):
             df['fiscal_yr'] = fiscal_yr
             frames_fr += [df]
 
+        for fiscal_yr, url in config['program_csv_urls_enfr'].items():
+            filename = url.split('/')[-1].split('.')[0]+'.csv'
+
+            df = load_csv(filename, config)
+            df['filename'] = filename
+            df['fiscal_yr'] = fiscal_yr
+            frames_enfr += [df]
+
         # --- Process English Program Data ---
         program_df_en = pd.concat(frames_en, ignore_index=True)
 
@@ -328,21 +337,21 @@ def program_list(config):
         program_df_en = program_df_en.merge(
             org_var,
             how='left',
-            left_on='EntityDept_name_Eng-EntitéMin_nom_ang',
+            left_on='Entity_Entite_eng', #This name is not always constant, changed in 2026 -GE
             right_on='org_name_variant'
         )
 
         # Resolve program codes and names, taking the core responsibility if the program is null
         program_df_en['program_id'] = program_df_en[
-            'ProgramInventory-Répertoiredesprogrammes_code_PROG'
+            'Prog-inv-code_Code-rep-prog'
         ].combine_first(
-            program_df_en['ProgramorCoreResponsibility-ProgrammeouResponsabilitéessentielle_code_PROG']
+            program_df_en['Prog-core-resp-code_Code-prog-resp-essent']
         )
 
         program_df_en['program_en'] = program_df_en[
-            'ProgramInventory_name-Répertoiredesprogrammes_nom_PROG'
+            'Prog-inv-name_Nom-rep-prog_eng'
         ].combine_first(
-            program_df_en['ProgramorCoreResponsibility_name-ProgrammeouResponsabilitéessentielle_nom_PROG']
+            program_df_en['Prog-core-resp-name_Nom-prog-resp-essent_eng']
         )
 
         # Set index for merging
@@ -355,36 +364,69 @@ def program_list(config):
         program_df_fr = program_df_fr.merge(
             org_var,
             how='left',
-            left_on='EntityDept_name_fra-EntitéMin_nom_fra',
+            left_on='Entity_Entite_fra', #This name is not always constant - beware.
             right_on='org_name_variant'
         )
 
         # Resolve program codes and names, taking the core responsibility if the program is null
         program_df_fr['program_id'] = program_df_fr[
-            'ProgramInventory-Répertoiredesprogrammes_code_PROG'
+            'Prog-inv-code_Code-rep-prog'
         ].combine_first(
-            program_df_fr['ProgramorCoreResponsibility-ProgrammeouResponsabilitéessentielle_code_PROG']
+            program_df_fr['Prog-core-resp-code_Code-prog-resp-essent']
         )
 
         program_df_fr['program_fr'] = program_df_fr[
-            'ProgramInventory_name-Répertoiredesprogrammes_nom_PROG'
+            'Prog-inv-name_Nom-rep-prog_fra'
         ].combine_first(
-            program_df_fr['ProgramorCoreResponsibility_name-ProgrammeouResponsabilitéessentielle_nom_PROG']
+            program_df_fr['Prog-core-resp-name_Nom-prog-resp-essent_fra']
         )
 
         program_df_fr.set_index(['fiscal_yr', 'org_id', 'program_id'], inplace=True)
 
-        # --- Merge English and French Data ---
+        # --- Process Bilingual Program Data ---
+        program_df_enfr = pd.concat(frames_enfr, ignore_index=True)
 
+        # Determine the org_id using the org name variants
+        program_df_enfr = program_df_enfr.merge(
+            org_var,
+            how='left',
+            left_on='Entity_Entite_eng',
+            right_on='org_name_variant'
+        )
+
+        # Resolve program codes and names, taking the core responsibility if the program is null
+        program_df_enfr['program_id'] = program_df_enfr[
+            'Prog-inv-code_Code-rep-prog'
+        ].combine_first(
+            program_df_enfr['Prog-core-resp-code_Code-prog-resp-essent']
+        )
+
+        program_df_enfr['program_en'] = program_df_enfr[
+            'Prog-inv-name_Nom-rep-prog_eng'
+        ].combine_first(
+            program_df_enfr['Prog-core-resp-name_Nom-prog-resp-essent_eng']
+        )
+
+        program_df_enfr['program_fr'] = program_df_enfr[
+            'Prog-inv-name_Nom-rep-prog_fra'
+        ].combine_first(
+            program_df_enfr['Prog-core-resp-name_Nom-prog-resp-essent_fra']
+        )
+
+        program_df_enfr.set_index(['fiscal_yr', 'org_id', 'program_id'], inplace=True)
+
+        # --- Merge English and French Data ---
         program_df = pd.merge(
             program_df_en,
             program_df_fr,
             how='outer',
             left_index=True,
             right_index=True,
-            suffixes=['_en', '_fr'],
             indicator=True
         )
+
+        # --- Concat bilingual data ---
+        program_df = pd.concat([program_df, program_df_enfr])    
 
         # Keep only necessary columns, noting that the index has org id, fiscal yr, and code
         program_df = program_df[['program_en', 'program_fr']].reset_index()

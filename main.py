@@ -59,8 +59,7 @@ def get_config():
         '2022-2023':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2223-eng.csv',
         '2023-2024':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2324-eng.csv',
         '2024-2025':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-eng.csv',
-        '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-eng.csv',
-        '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627-eng.csv'
+        '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-eng.csv'
     }
 
     program_urls_fr = {
@@ -71,8 +70,11 @@ def get_config():
         '2022-2023':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2223-fra.csv',
         '2023-2024':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2324-fra.csv',
         '2024-2025':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2425-fra.csv',
-        '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv',
-        '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627-fra.csv'
+        '2025-2026':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2526-fra.csv'
+        }
+
+    program_urls_enfr = {
+        '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627.csv'
     }
 
     APP_COLS = [
@@ -105,6 +107,7 @@ def get_config():
         "json_urls": json_urls,
         "program_csv_urls_en": program_urls_en,
         "program_csv_urls_fr": program_urls_fr,
+        "program_csv_urls_enfr": program_urls_enfr,
         "app_cols": APP_COLS,
         "oip_cols": OIP_COLS
     }

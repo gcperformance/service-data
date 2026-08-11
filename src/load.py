@@ -98,6 +98,34 @@ def download_program_csv_files(config):
             logger.error("Error: %s", e, exc_info=True)
             raise
 
+    for fiscal_yr, url in config['program_csv_urls_enfr'].items():
+            filename = url.split('/')[-1].split('.')[0]
+    
+            INPUT_DIR = config['input_dir']
+            file_path =  INPUT_DIR / f"{filename}.csv"
+            
+            try:
+                # Set up a session
+                s = requests.Session()
+    
+                # Fetch the file from the URL
+                # verify is set to false on advice from PSPC, who acknowledged they will not be fixing the SSL certificate issue
+                response = s.get(url, verify=False)
+                response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
+    
+                # Save the content to a file
+                with open(file_path, "wb") as file:
+                    file.write(response.content)
+    
+                logger.debug("Downloaded: %s.csv", filename)
+            
+            except requests.exceptions.RequestException as e:
+                logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
+    
+            except Exception as e:
+                logger.error("Error: %s", e, exc_info=True)
+                raise
+
 def download_csv_files(config):
     """
     Download CSV files from the given URLs into the appropriate directory. See config dictionary in main.py
