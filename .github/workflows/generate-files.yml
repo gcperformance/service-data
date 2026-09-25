@@ -1,102 +1,191 @@
 name: Process and Release Service Data
 
 on:
+  # Run the workflow whenever code is pushed to the master branch.
   push:
     branches:
-      - master  # Run on all pushes to master
+      - master
+  
+  # Run the workflow for pull requests that target the master branch.
+  # The workflow will still build and prepare files, but the release step
+  # is skipped later so PRs do not publish releases.
   pull_request:
     branches:
-      - master  # Run on all PRs targeting master
+      - master
+  
+  # Run automatically every weekday at 10:00 UTC.
   schedule:
-    - cron: '0 10 * * 1-5'  # daily runs monday to friday at 10:00 UTC
-  workflow_dispatch:  # Allow manual triggers
+    - cron: '0 10 * * 1-5'
+  
+  # Allow the workflow to be started manually from the Actions tab.
+  workflow_dispatch:
+
+# Prevent overlapping runs of this workflow from executing at the same time.
+# This helps avoid multiple runs trying to create or update releases together.
+concurrency:
+  group: service-data-release
+  cancel-in-progress: false
 
 jobs:
   generate-files:
+    # Use the latest Ubuntu GitHub-hosted runner.
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Needed for creating releases
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
+    # Grant permission to create tags/releases in the repository.
+    permissions:
+      contents: write
+
+    steps:
+      # Step: Check out the repository contents onto the runner.
+      # This makes workflow files and project files available locally.
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Step: Install the requested Python version on the runner.
+      # This ensures main.py and your dependencies run with Python 3.10.
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install requirements for python
+      # Step: Install Python dependencies from requirements.txt.
+      # These packages are needed before running your script.
+      - name: Install requirements
         run: pip install -r requirements.txt
 
-      - name: Get current date and commit hash
+      # Step: Capture metadata for this workflow run.
+      # We store the current date, current time, and short git commit hash
+      # so they can be reused in the release name and tag.
+      - name: Get metadata
         id: metadata
+        shell: bash
         run: |
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+          echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          echo "time=$(date +'%H:%M')" >> $GITHUB_OUTPUT
 
+      # Step: Execute your Python data-processing script.
+      # This is expected to generate or refresh the files placed under
+      # the outputs/ and inputs/ directories.
       - name: Run main.py
         run: python main.py
-
+        
+      # Step: Collect current non-snapshot CSV and LOG files into a dedicated
+      # folder that will be used as release assets.
+      #
+      # What this does:
+      # - creates the live_data_release directory
+      # - searches outputs/ and inputs/
+      # - includes only .csv and .log files
+      # - excludes anything under a snapshots directory
+      # - excludes empty files
+      # - copies each matching file into live_data_release/
       - name: Prepare live files for release
+        shell: bash
         id: prepare_live_files
         run: |
+          set -euo pipefail
           mkdir -p live_data_release
-          echo "Copying live data files (.csv and .log)..."
-          find outputs inputs -type f \( -name "*.csv" -o -name "*.log" \) \
-            ! -path "*/snapshots/*" -size +0c \
-            -exec cp {} live_data_release/ \; -exec echo "Copied: {}" \;
-          
-          echo "live_data_dir=live_data_release" >> $GITHUB_ENV
+          while IFS= read -r -d '' file; do
+            base="$(basename "$file")"
+            cp "$file" "live_data_release/$base"
+            echo "Copied live file: $file"
+          done < <(
+            find outputs inputs -type f \( -name '*.csv' -o -name '*.log' \) \
+              ! -path '*/snapshots/*' \
+              -size +0c \
+              -print0
+          )
 
-      - name: Prepare 2025-03-01 files for Release
-        id: prepare_files_2025-03-01
+      # Step: Collect snapshot CSV files for specific snapshot dates and rename
+      # them with the snapshot date as a prefix.
+      #
+      # What this does:
+      # - creates the snapshots_release directory
+      # - checks both outputs/snapshots/<date> and inputs/snapshots/<date>
+      # - copies all CSV files found there
+      # - renames each copied file to <date>_<original filename>
+      #   so users can tell which snapshot date it belongs to
+      - name: Prepare snapshot files for release
+        shell: bash
         run: |
-          mkdir -p snapshots_release/snapshot_2025-03-01
-          echo "Copying snapshot data files for 2025-03-01..."
-          find outputs/snapshots/2025-03-01 inputs/snapshots/2025-03-01 -type f -name "*.csv" \
-            -exec cp {} snapshots_release/snapshot_2025-03-01/ \; \
-            -exec echo "Copied: {}" \;
-          for file in snapshots_release/snapshot_2025-03-01/*.csv; do
-            mv "$file" "snapshots_release/2025-03-01_$(basename "$file")"
-          done
-          
-          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
+          set -euo pipefail
+          mkdir -p snapshots_release
 
-      - name: Prepare 2026-01-19 files for Release
-        id: prepare_files_2026-01-19
+          copy_snapshot_files() {
+            snapshot_date="$1"
+
+            for root in "outputs/snapshots/$snapshot_date" "inputs/snapshots/$snapshot_date"; do
+              if [ -d "$root" ]; then
+                while IFS= read -r -d '' file; do
+                  base="$(basename "$file")"
+                  dest="snapshots_release/${snapshot_date}_${base}"
+                  cp "$file" "$dest"
+                  echo "Copied snapshot file: $file -> $dest"
+                done < <(find "$root" -type f -name '*.csv' -print0)
+              fi
+            done
+          }
+
+          # Copy snapshot files for the first snapshot date.
+          copy_snapshot_files "2025-03-01"
+
+          # Copy snapshot files for the second snapshot date.
+          copy_snapshot_files "2026-01-19"
+
+      # Step: Build a simple manifest listing all files that are about to be
+      # uploaded as release assets.
+      #
+      # This is useful for debugging because the workflow log will show exactly
+      # which files were prepared before the release step runs.
+      - name: Create file manifest
+        shell: bash
         run: |
-          mkdir -p snapshots_release/snapshot_2026-01-19
-          echo "Copying snapshot data files for 2026-01-19..."
-          find outputs/snapshots/2026-01-19 inputs/snapshots/2026-01-19 -type f -name "*.csv" \
-            -exec cp {} snapshots_release/snapshot_2026-01-19/ \; \
-            -exec echo "Copied: {}" \;
-          for file in snapshots_release/snapshot_2026-01-19/*.csv; do
-            mv "$file" "snapshots_release/2026-01-19_$(basename "$file")"
-          done
-          
-          echo "snapshot_dir=snapshots_release" >> $GITHUB_ENV
+          set -euo pipefail
+          {
+            find live_data_release -maxdepth 1 -type f | sort
+            find snapshots_release -maxdepth 1 -type f | sort
+          } > release_files.txt
+
+          echo "Files to upload:"
+          cat release_files.txt          
+
+      # Step: Create a GitHub release and upload all prepared files as assets.
+      #
+      # Important behavior:
+      # - this step does not run for pull_request events
+      # - the tag is made unique using date, time, and commit hash
+      # - files from both live_data_release/ and snapshots_release/ are uploaded
+      # - make_latest: true marks this as the latest release
 
       - name: Create Release
+        if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: service_data-${{ steps.metadata.outputs.commit_hash }}
+          tag_name: service_data-${{ steps.metadata.outputs.date }}-${{ steps.metadata.outputs.time }}-${{ steps.metadata.outputs.commit_hash }}
           name: Service Data - ${{ steps.metadata.outputs.date }}
           body: |
             Automated service data release for ${{ steps.metadata.outputs.date }}
-              - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} EST
-              - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
+
+            - Generated on: ${{ steps.metadata.outputs.date }} at ${{ steps.metadata.outputs.time }} UTC
+            - Git Commit: ${{ steps.metadata.outputs.commit_hash }}
+
             Contains:
-              - Live data CSVs
-              - Snapshots pre-pended with date of snapshot
+            - Live data CSV and log files
+            - Snapshot CSV files prefixed with snapshot date
           files: |
-            live_data_release/**
-            snapshots_release/**
+            live_data_release/*
+            snapshots_release/*
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Cleanup
+      # Step: Remove temporary directories and manifest files from the runner.
+      #
+      # if: always() ensures cleanup still happens even if an earlier step fails.
       - name: Cleanup
-        run: rm -rf outputs inputs snapshots_release live_data_release
+        if: always()
+        shell: bash
+        run: |
+          rm -rf live_data_release snapshots_release release_files.txt
 
