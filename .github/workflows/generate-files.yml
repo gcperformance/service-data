@@ -61,7 +61,7 @@ jobs:
         shell: bash
         run: |
           echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-          echo "time=$(date +'%H:%M:%S')" >> $GITHUB_OUTPUT
+          echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       # Step: Execute your Python data-processing script.
