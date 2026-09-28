@@ -75,9 +75,9 @@ jobs:
       #
       # What this does:
       # - creates the live_data_release directory
-      # - searches outputs/ and inputs/
+      # - searches inputs/ and outputs/, with generated outputs taking precedence
       # - includes only .csv and .log files
-      # - excludes anything under a snapshots directory
+      # - excludes snapshots and backups
       # - excludes empty files
       # - copies each matching file into live_data_release/
       - name: Prepare live files for release
@@ -91,8 +91,9 @@ jobs:
             cp "$file" "live_data_release/$base"
             echo "Copied live file: $file"
           done < <(
-            find outputs inputs -type f \( -name '*.csv' -o -name '*.log' \) \
+            find inputs outputs -type f \( -name '*.csv' -o -name '*.log' \) \
               ! -path '*/snapshots/*' \
+              ! -path '*/backups/*' \
               -size +0c \
               -print0
           )
