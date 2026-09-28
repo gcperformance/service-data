@@ -27,7 +27,7 @@ def clean_out_input_directory(config):
             # Check if it is a file (not a subdirectory)
             if os.path.isfile(file_path):
                 os.remove(file_path)  # Remove the file
-                logger.debug("Deleted file: %s",filename)
+                logger.debug("Deleted file: %s",file_path)
 
     else: 
         logger.debug("Input directory already empty")
@@ -61,7 +61,7 @@ def download_program_csv_files(config):
             with open(file_path, "wb") as file:
                 file.write(response.content)
 
-            logger.debug("Downloaded: %s.csv", filename)
+            logger.debug("Downloaded: %s", file_path)
         
         except requests.exceptions.RequestException as e:
             logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
@@ -89,7 +89,7 @@ def download_program_csv_files(config):
             with open(file_path, "wb") as file:
                 file.write(response.content)
 
-            logger.debug("Downloaded: %s.csv", filename)
+            logger.debug("Downloaded: %s", file_path)
         
         except requests.exceptions.RequestException as e:
             logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
@@ -117,7 +117,7 @@ def download_program_csv_files(config):
                 with open(file_path, "wb") as file:
                     file.write(response.content)
     
-                logger.debug("Downloaded: %s.csv", filename)
+                logger.debug("Downloaded: %s", file_path)
             
             except requests.exceptions.RequestException as e:
                 logger.info("Failed to download %s.csv from %s: %s", filename, url, e)
@@ -149,7 +149,7 @@ def download_csv_files(config):
             with open(file_path, "wb") as file:
                 file.write(response.content)
 
-            logger.debug("Downloaded: %s.csv", name)
+            logger.debug("Downloaded: %s", file_path)
         
         except requests.exceptions.RequestException as e:
             logger.error("Failed to download %s.csv from %s: %s", name, url, e)
@@ -181,7 +181,7 @@ def download_json_files(config):
             with open(file_path, "wb") as file:
                 file.write(response.content)
 
-            logger.debug("Downloaded: %s.json", name)
+            logger.debug("Downloaded: %s", file_path)
 
         except requests.exceptions.RequestException as e:
             logger.error("Failed to download %s.json from %s: %s", name, url, e)
