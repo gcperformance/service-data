@@ -207,3 +207,10 @@ def compare(compare_dict):
     out = out.sort_values(by=["section", "key", "field"], kind="stable").reset_index(drop=True)
 
     return out
+
+def release():
+    '''
+    Produces a flag to indicate that a release should not take place since there was no change to the underlying data
+    '''
+
+    # Review generated files: si_all, ss_all, drf
