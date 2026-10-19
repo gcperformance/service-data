@@ -54,7 +54,6 @@ def output_si_ss(si, ss, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-
 def summary_si_ss(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
@@ -217,7 +216,6 @@ def summary_si_ss(si, ss, config, snapshot=False):
 
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
-
 
 def maf(si, ss, config, snapshot=False):
     try:
@@ -442,6 +440,241 @@ def maf(si, ss, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
+def rcp(si, ss, config, snapshot=False):
+    try:
+        # RCP 1: % of services that have been reviewed in the pst 5 years or improved in the past year
+
+        def fy_to_num(fiscal_yr): # Convert fiscal year strings to numbers.
+            if pd.isna(fiscal_yr):
+                return np.nan
+            return pd.to_numeric(str(fiscal_yr).split('-')[-1], errors='coerce')# Load and normalize
+
+        def rcp1(si, rcp_data_yr, config, snapshot=False):
+            REVIEW_LOOKBACK_YEARS = 4 # 5 years, inclusive
+
+            rcp_data_yr_num = fy_to_num(rcp_data_yr)
+
+            # Keep only relevant service inventory columns
+            service_records = si[
+                ['fiscal_yr','org_id','service_id', 'department_en', 'department_fr',
+                'last_service_review', 'last_service_improvement']
+            ].copy()
+
+            # Add numeric fiscal years to perform arithmetic
+            service_records['report_yr'] = service_records['fiscal_yr'].apply(fy_to_num)
+            service_records['review_yr'] = service_records['last_service_review'].apply(fy_to_num)
+            service_records['improve_yr'] = service_records['last_service_improvement'].apply(fy_to_num)
+
+            # Identify the services in a target fiscal year - the denominator set
+            # =================
+            # For RCP data year X, we want the list of services from SI report yr X
+            services_in_target_year = (
+                service_records.loc[service_records['fiscal_yr'] == rcp_data_yr, ['org_id', 'department_en', 'department_fr', 'service_id']]
+                .drop_duplicates()
+                .copy()
+            )
+
+            # Keep only historical rows for the services that are in the target year. In other words:
+            # “I only care about services active in the RCP data year”
+            # then I look back at all their prior records for those same services
+            service_history = service_records.merge(services_in_target_year, on=['org_id', 'service_id'], how='inner')
+
+            # Service reviews in previous 5 years
+            # =================
+            # Then select records from previous 5 years (SI report yrs X to X-REVIEW_LOOKBACK_YEARS (4))
+            rcp1_reviews = service_history[
+                (service_history['report_yr'] >= (rcp_data_yr_num-REVIEW_LOOKBACK_YEARS)) & 
+                (service_history['report_yr'] <= rcp_data_yr_num)
+            ]
+
+            # “A service is counted as reviewed in the last 5 years if 
+            # the latest recorded review happened in the 5-year window and no later than the report year.”
+            rcp1_reviews['last_service_review_within_5_yrs'] = (
+                (rcp1_reviews['review_yr'] >= (rcp_data_yr_num-REVIEW_LOOKBACK_YEARS)) & 
+                (rcp1_reviews['review_yr'] <= rcp1_reviews['report_yr'])
+            )
+
+            rcp1_reviews_confirmed = services_in_target_year.merge(rcp1_reviews[['org_id','service_id']][rcp1_reviews['last_service_review_within_5_yrs']].drop_duplicates(), how='inner')
+
+            rcp1_reviews_confirmed = rcp1_reviews_confirmed.groupby(['org_id'], as_index=False).agg(
+                rcp1_services_reviewed_last_5_yrs = ('service_id', 'count')
+            )
+
+            # Service improvements in previous year
+            # =================
+            # Select records from SI report year equal to RCP data year
+            rcp1_improves = service_history[
+                (service_history['report_yr'] == rcp_data_yr_num)
+            ]
+
+            # A service is considered having been improved in the past year if
+            # the last service improvement year is the same as the SI report year.
+            rcp1_improves['last_service_improvement_within_1_yr'] = (
+                rcp1_improves['improve_yr'] == rcp1_improves['report_yr']
+            )
+
+            rcp1_improves_confirmed = services_in_target_year.merge(rcp1_improves[['org_id','service_id']][rcp1_improves['last_service_improvement_within_1_yr']].drop_duplicates(), how='inner')
+
+            rcp1_improves_confirmed = rcp1_improves_confirmed.groupby(['org_id'], as_index=False).agg(
+                rcp1_services_improved_last_1_yr = ('service_id', 'count')
+            )
+
+
+            # Denominator and result compilation
+            # =================
+            services_by_org = services_in_target_year.groupby(['org_id', 'department_en', 'department_fr'], as_index=False).agg(
+                service_count_rcp1 = ('service_id', 'count')
+            )
+
+            rcp1_result = (services_by_org
+                        .merge(rcp1_reviews_confirmed, how='outer', on='org_id')
+                        .merge(rcp1_improves_confirmed, how='outer', on='org_id')
+                        .fillna(0)
+                        )
+
+            rcp1_result['fiscal_yr'] = rcp_data_yr
+            rcp1_result['rcp1_services_reviewed_last_5_yrs_pc'] = rcp1_result['rcp1_services_reviewed_last_5_yrs']/rcp1_result['service_count_rcp1']
+            rcp1_result['rcp1_services_improved_last_1_yr_pc'] = rcp1_result['rcp1_services_improved_last_1_yr']/rcp1_result['service_count_rcp1']
+
+            rcp1_result = rcp1_result[[
+                'fiscal_yr',
+                'org_id',
+                'department_en',
+                'department_fr',
+                'service_count_rcp1', 
+                'rcp1_services_reviewed_last_5_yrs', 
+                'rcp1_services_reviewed_last_5_yrs_pc',
+                'rcp1_services_improved_last_1_yr',
+                'rcp1_services_improved_last_1_yr_pc',
+            ]]
+
+            return rcp1_result
+
+        fiscal_yrs = si['fiscal_yr'].unique()
+        rcp1_table_list = []
+
+        for fy in fiscal_yrs:
+            rcp1_table = rcp1(si, fy, config)
+            rcp1_table_list.append(rcp1_table)
+
+        rcp1_final = pd.concat(rcp1_table_list)
+
+        # RCP 2: % of services that have a service standard for all active channels
+
+        # Dataframe aligning service standard channels to service inventory volume channels
+        channels_df = [
+            ['num_applications_by_phone', 'TEL', 'Telephone'],
+            ['num_applications_online', 'ONL', 'Online'],
+            ['num_applications_in_person', 'PERSON', 'In person'],
+            ['num_applications_by_mail', 'POST', 'Postal mail'],
+            ['num_applications_by_email', 'EML', 'Email'],
+            ['num_applications_by_fax', 'FAX', 'Fax'],
+            ['num_applications_by_other', 'OTH', 'Other']
+        ]
+
+        channels_df = pd.DataFrame(channels_df, columns=['si_volume_channel', 'ss_channel', 'channel_en'])
+
+        # si_channels: channels with volume >0 by service, i.e. active channels
+        si_channels = (
+            si
+            .melt(
+                id_vars=['fiscal_yr','org_id', 'service_id'], 
+                value_vars=channels_df['si_volume_channel'],
+                var_name='si_volume_channel',
+                value_name='volume')
+            .assign(volume=lambda x: pd.to_numeric(x['volume'], errors='coerce')) #convert all volume records to a number
+            .merge(channels_df[['si_volume_channel', 'ss_channel']], on='si_volume_channel', how='left') #merges in ss_channels
+            .loc[lambda x: x['volume']>0]
+        )
+
+        # ss_channels: which service-channels have defined service standards
+        ss_channels = (
+            ss
+            .loc[:, ['fiscal_yr', 'org_id', 'service_id', 'channel']]
+            .drop_duplicates()
+        )
+
+        # Join active service-channels from si to service standard channels
+        rcp2_long = (
+            si_channels
+            .merge(
+                ss_channels,
+                how='left',
+                left_on=['fiscal_yr', 'org_id', 'service_id', 'ss_channel'],
+                right_on=['fiscal_yr', 'org_id', 'service_id', 'channel'])
+            .drop(columns=["ss_channel", "volume"])
+        )
+
+        # Group and summarize the distinct service-channel records at the service level, counting the distinct channels from SI and SS
+        rcp2_service = (
+            rcp2_long
+            .groupby(['fiscal_yr', 'org_id', 'service_id'], as_index=False)
+            .agg(
+                active_channels = ('si_volume_channel', 'nunique'),
+                channels_with_ss = ('channel', 'nunique'))
+            )
+
+        # If there is the same number of channels, then all the active channels have a standard, given the earlier merge.
+        # The merge ensures that there are no false positives through services having the same number of channels in si and ss without them being the same channel 
+        rcp2_service['all_channels_have_standard'] = (rcp2_service['active_channels'] == rcp2_service['channels_with_ss'])
+
+        # Group and summarize by organization the number of services that have full coverage
+        rcp2 = (
+            rcp2_service
+            .groupby(['fiscal_yr', 'org_id'], as_index=False)
+            .agg(
+                rcp2_services_with_standards_for_all_channels = ('all_channels_have_standard', 'sum')
+            )
+        )
+
+        # Determine total services - note that we can't take the aggregate from rcp2 since services without volumes have been excluded from the counts
+        # We need services without volumes since even if there are no
+        service_count_by_fy_org = si.groupby(['fiscal_yr', 'org_id','department_en', 'department_fr'], as_index=False).agg(
+            service_count_rcp2=('service_id', 'nunique')  # Count all services
+        )
+
+        # merge in service count to rcp2
+        rcp2 = (
+            rcp2
+            .merge(
+                service_count_by_fy_org,
+                how='outer',
+                on=['fiscal_yr', 'org_id']
+            )
+            .fillna(0)
+        )
+
+        rcp2['rcp2_services_with_standards_for_all_channels_pc'] = (rcp2['rcp2_services_with_standards_for_all_channels']/rcp2['service_count_rcp2'])*100
+
+        # Combine all RCP tables
+        rcp_all = pd.merge(
+            rcp1_final,
+            rcp2,
+            how='outer',
+            on=['fiscal_yr', 'org_id','department_en', 'department_fr']
+        ).fillna(0)
+
+        # === EXPORT DATAFRAMES ===
+        indicator_exports = {
+            # "rcp1": rcp1_final,
+            # "rcp2": rcp2,
+            "rcp_all": rcp_all
+        }
+        
+        # If running a snapshot run, change output directory accordingly        
+        if snapshot:
+            INDICATORS_DIR = config['output_dir'] / 'snapshots' / snapshot / config['indicators_dir']
+        else:
+            INDICATORS_DIR = config['output_dir'] / config['indicators_dir']
+        
+        export_to_csv(
+            data_dict=indicator_exports,
+            output_dir=INDICATORS_DIR,
+            snapshot=snapshot
+        )
+
+    except Exception as e:
+        logger.error("Error: %s", e, exc_info=True)
 
 def drr(si, ss, config, snapshot=False):
     try:
@@ -635,7 +868,6 @@ def drr(si, ss, config, snapshot=False):
 
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
-
 
 def datapack(si, ss, config, snapshot=False):
     try:
@@ -1008,7 +1240,6 @@ def datapack(si, ss, config, snapshot=False):
     except Exception as e:
         logger.error("Error: %s", e, exc_info=True)
 
-
 def infobase(si, ss, config, snapshot=False):
     try:
         logger.debug('...')
@@ -1300,6 +1531,7 @@ def process_files(si, ss, config, snapshot=False):
         summary_si_ss(si, ss, config, snapshot)
         maf(si, ss, config, snapshot)
         drr(si, ss, config, snapshot)
+        rcp(si, ss, config, snapshot)
         datapack(si, ss, config, snapshot)
         infobase(si, ss, config, snapshot)
         oecd_digital_gov_survey(si, config, snapshot)
