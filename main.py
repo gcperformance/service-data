@@ -11,7 +11,7 @@ from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
 from src.utils import build_ifoi, copy_org_var, build_data_dictionary
-from src.comp import build_compare_file
+from src.comp import build_compare_file, publish_release
 
 
 def get_config():
@@ -33,6 +33,15 @@ def get_config():
         '2026-01-19'
     ]
 
+    # Paths to tables that must change in order to publish
+    local_and_live_paths = [
+        ['si_all', base_dir / 'outputs' / 'utils' / 'si_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/si_all.csv'],
+        ['ss_all', base_dir / 'outputs' / 'utils' / 'ss_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_all.csv'],
+        ['drf', base_dir / 'outputs' / 'utils' / 'drf.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/drf.csv'],
+        ['program_list', base_dir / 'outputs' / 'utils' / 'program_list.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv'],
+    ]
+
+    # Links to data for download
     csv_urls = {
         'si_2018': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/3acf79c0-a5f5-4d9a-a30d-fb5ceba4b60a/download/service_inventory_2018-2023.csv',
         'si_2024': 'https://open.canada.ca/data/dataset/3ac0d080-6149-499a-8b06-7ce5f00ec56c/resource/c0cf9766-b85b-48c3-b295-34f72305aaf6/download/service.csv',
@@ -77,6 +86,7 @@ def get_config():
         '2026-2027':'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/cp-pc/cp-pc-2627.csv'
     }
 
+    # Recurring column lists
     APP_COLS = [
         'num_applications_by_phone', 
         'num_applications_online', 
@@ -109,7 +119,8 @@ def get_config():
         "program_csv_urls_fr": program_urls_fr,
         "program_csv_urls_enfr": program_urls_enfr,
         "app_cols": APP_COLS,
-        "oip_cols": OIP_COLS
+        "oip_cols": OIP_COLS,
+        "local_and_live_paths": local_and_live_paths
     }
 
 def setup_logging():
@@ -164,8 +175,9 @@ def main():
     # Argument parsing
     parser = argparse.ArgumentParser(description="Process service data and generate outputs.")
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
-    parser.add_argument("--live", action="store_true", help="Run process without running update for snapshots.")
+    parser.add_argument("--live", action="store_true", help="Run process without snapshot updates.")
     parser.add_argument("--download", action="store_true", help="Download the input data without running the processing script.")
+    parser.add_argument("--forcepublish", action="store_true", help="Script will generate publish.flag without comparing datasets")
     args = parser.parse_args()
 
     # Set up logging
@@ -256,8 +268,20 @@ def main():
                         build_compare_file(ss_compare_dict, config, snapshot)
                     except:
                         logger.error("Comparing snapshot to live data failed", exc_info=True)
-                    
+        try:                
+            force_publish = args.forcepublish
+            # By default, do not publish, i.e. only publish if there is a difference
 
+            if force_publish or publish_release(config):
+                logger.info('Publishing new release')
+                flag_path = Path.cwd() / "publish.flag"
+                flag_path.write_text("Ok to publish", encoding="utf-8")
+            else:
+                logger.info('Not publishing a release')
+        except:
+            logger.error("Comparison of datasets to decide whether to publish release has failed", exc_info=True)
+
+            
         # Log completion time
         elapsed_time = time.perf_counter() - start_time
         logger.info(f"Processing completed in {elapsed_time:.2f} seconds")
