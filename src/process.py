@@ -482,9 +482,9 @@ def rcp(si, ss, config, snapshot=False):
             # Service reviews in previous 5 years
             # =================
             # Then select records from previous 5 years (SI report yrs X to X-REVIEW_LOOKBACK_YEARS (4))
-            rcp1_reviews = service_history[
+            rcp1_reviews = service_history.loc[
                 (service_history['report_yr'] >= (rcp_data_yr_num-REVIEW_LOOKBACK_YEARS)) & 
-                (service_history['report_yr'] <= rcp_data_yr_num)
+                (service_history['report_yr'] <= rcp_data_yr_num), :
             ]
 
             # “A service is counted as reviewed in the last 5 years if 
@@ -503,8 +503,8 @@ def rcp(si, ss, config, snapshot=False):
             # Service improvements in previous year
             # =================
             # Select records from SI report year equal to RCP data year
-            rcp1_improves = service_history[
-                (service_history['report_yr'] == rcp_data_yr_num)
+            rcp1_improves = service_history.loc[
+                (service_history['report_yr'] == rcp_data_yr_num), :
             ]
 
             # A service is considered having been improved in the past year if

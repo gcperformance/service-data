@@ -151,16 +151,31 @@ jobs:
           echo "Files to upload:"
           cat release_files.txt          
 
+      # Step: Check the presence of the publish.flag file
+      #
+      # Important behavior:
+      # - the main script generates a publish.flag file if it detects a difference
+      - name: Check release flag
+        id: publish_gate
+        shell: bash
+        run: |
+          if [[ -f publish.flag ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "publish.flag found; release is enabled."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "publish.flag not found; release will be skipped."
+          fi
+      
       # Step: Create a GitHub release and upload all prepared files as assets.
       #
       # Important behavior:
-      # - this step does not run for pull_request events
+      # - this step does not run for pull_request events or if there was no change with the latest 
       # - the tag is made unique using date, time, and commit hash
       # - files from both live_data_release/ and snapshots_release/ are uploaded
       # - make_latest: true marks this as the latest release
-
       - name: Create Release
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.publish_gate.outputs.enabled == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: service_data-${{ steps.metadata.outputs.date }}-${{ steps.metadata.outputs.time }}-${{ steps.metadata.outputs.commit_hash }}
