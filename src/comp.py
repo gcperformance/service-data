@@ -14,7 +14,6 @@ def build_compare_file(compare_dict,config,snapshot):
         snapshot=snapshot
     )
 
-
 def compare(compare_dict):
     """
     Return a long-format DataFrame with:
@@ -208,9 +207,40 @@ def compare(compare_dict):
 
     return out
 
-def release():
+def publish_release(config):
     '''
-    Produces a flag to indicate that a release should not take place since there was no change to the underlying data
+    Return True if any configured local table differs from its live version
     '''
+    # Compare each configured local file with its live counterpart.
+    # Pull relevant info from config file, convert to DataFrame for ease of use
+    local_and_live_paths = config['local_and_live_paths']
+    local_and_live_paths = pd.DataFrame(local_and_live_paths, columns=['table', 'local_path', 'live_url'])
+    publish_flag = False
 
-    # Review generated files: si_all, ss_all, drf
+    # Iterate over the set of tables
+    for table in local_and_live_paths['table']:
+        # Read the local file
+        local_path = local_and_live_paths.loc[local_and_live_paths['table']==table, 'local_path'].item()
+        local = pd.read_csv(local_path, dtype=str, keep_default_na=False, delimiter=';', engine='python', skipfooter=2)
+
+        # Read the remote file
+        live_url =  local_and_live_paths.loc[local_and_live_paths['table']==table, 'live_url'].item()
+        live = pd.read_csv(live_url, dtype=str, keep_default_na=False, delimiter=';', engine='python', skipfooter=2)
+
+        # Create a boolean mask of which cells differ from one DF to the other 
+        # ().ne() produces True if the cells differ; ne = not equal)
+        # then melt into a single column
+        check = live.ne(local).melt()
+
+        # Filter the single column for entries that are True (i.e. differences)
+        differences = check[check['value']]
+
+        # Publish flag is true when there are differences to report
+        # if the length of the differences column is greater than 0, then 
+        publish_flag = differences.shape[0] > 0
+
+        # Stop once a difference is found
+        if publish_flag:
+            break
+
+    return publish_flag
