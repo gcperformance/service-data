@@ -442,6 +442,7 @@ def maf(si, ss, config, snapshot=False):
 
 def rcp(si, ss, config, snapshot=False):
     try:
+        logger.debug('...')
         # RCP 1: % of services that have been reviewed in the pst 5 years or improved in the past year
 
         def fy_to_num(fiscal_yr): # Convert fiscal year strings to numbers.
@@ -485,7 +486,7 @@ def rcp(si, ss, config, snapshot=False):
             rcp1_reviews = service_history.loc[
                 (service_history['report_yr'] >= (rcp_data_yr_num-REVIEW_LOOKBACK_YEARS)) & 
                 (service_history['report_yr'] <= rcp_data_yr_num), :
-            ]
+            ].copy()
 
             # “A service is counted as reviewed in the last 5 years if 
             # the latest recorded review happened in the 5-year window and no later than the report year.”
@@ -505,7 +506,7 @@ def rcp(si, ss, config, snapshot=False):
             # Select records from SI report year equal to RCP data year
             rcp1_improves = service_history.loc[
                 (service_history['report_yr'] == rcp_data_yr_num), :
-            ]
+            ].copy()
 
             # A service is considered having been improved in the past year if
             # the last service improvement year is the same as the SI report year.
