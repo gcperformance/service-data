@@ -47,6 +47,10 @@ def download_program_csv_files(config):
 
         INPUT_DIR = config['input_dir']
         file_path =  INPUT_DIR / f"{filename}.csv"
+
+        headers = {
+            'User-Agent': 'tbs/service-policy/load.py'
+        }
         
         try:
             # Set up a session
@@ -54,7 +58,7 @@ def download_program_csv_files(config):
 
             # Fetch the file from the URL
             # verify is set to false on advice from PSPC, who acknowledged they will not be fixing the SSL certificate issue
-            response = s.get(url, verify=False)
+            response = s.get(url, verify=False, headers=headers)
             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
 
             # Save the content to a file
@@ -140,9 +144,13 @@ def download_csv_files(config):
     for name, url in config['csv_urls'].items():
         INPUT_DIR = config['input_dir']
         file_path =  INPUT_DIR / f"{name}.csv"
+        headers = {
+            'User-Agent': 'tbs/service-policy/load.py'
+        }
+
         try:
             # Fetch the file from the URL
-            response = requests.get(url)
+            response = requests.get(url, headers=headers)
             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
 
             # Save the content to a file
@@ -172,9 +180,13 @@ def download_json_files(config):
     for name, url in config['json_urls'].items():
         INPUT_DIR = config['input_dir']
         file_path = INPUT_DIR / f"{name}.json"
+        headers = {
+            'User-Agent': 'tbs/service-policy/load.py'
+        }
+
         try:
             # Fetch the file from the URL
-            response = requests.get(url)
+            response = requests.get(url, headers=headers)
             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
 
             # Save the content to a file
