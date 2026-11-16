@@ -39,6 +39,7 @@ def get_config():
         ['ss_all', base_dir / 'outputs' / 'utils' / 'ss_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_all.csv'],
         ['drf', base_dir / 'outputs' / 'utils' / 'drf.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/drf.csv'],
         ['program_list', base_dir / 'outputs' / 'utils' / 'program_list.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv'],
+        ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv']
     ]
 
     # Paths to tables that must change in order to run the script
@@ -48,6 +49,7 @@ def get_config():
         ['ss_2024', base_dir / 'inputs' / 'ss_2024.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2024.csv'],
         ['ss_2018', base_dir / 'inputs' / 'ss_2018.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2018.csv'],
         ['rbpo', base_dir / 'inputs' / 'rbpo.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/rbpo.csv'],
+        ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv']
     ]
 
     # Links to data for download
