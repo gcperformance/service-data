@@ -49,8 +49,8 @@ def download_program_csv_files(config):
         file_path =  INPUT_DIR / f"{filename}.csv"
 
         headers = {
-            'User-Agent': 'tbs/service-policy/load.py'
-        }
+                    'User-Agent': 'tbs/service-policy/load.py'
+                }
         
         try:
             # Set up a session
@@ -147,7 +147,6 @@ def download_csv_files(config):
         headers = {
             'User-Agent': 'tbs/service-policy/load.py'
         }
-
         try:
             # Fetch the file from the URL
             response = requests.get(url, headers=headers)
@@ -181,9 +180,8 @@ def download_json_files(config):
         INPUT_DIR = config['input_dir']
         file_path = INPUT_DIR / f"{name}.json"
         headers = {
-            'User-Agent': 'tbs/service-policy/load.py'
-        }
-
+                    'User-Agent': 'tbs/service-policy/load.py'
+                }
         try:
             # Fetch the file from the URL
             response = requests.get(url, headers=headers)
@@ -253,3 +251,48 @@ def load_csv(file_name, config, snapshot=False):
         df = pd.read_csv(file_path, keep_default_na=False, na_values='')
         logger.debug("Loaded %s from input (%d rows, %d columns)", file_path, df.shape[0], df.shape[1])
         return df
+
+def run_script_check(config):
+    '''
+    Return True if any configured local input table differs from its live version
+    '''
+    logger.info('Reviewing input files for differences with published data...')
+    # Compare each configured local file with its live counterpart.
+    # Pull relevant info from config file, convert to DataFrame for ease of use
+    local_and_live_paths = config['run_flag_paths']
+    local_and_live_paths = pd.DataFrame(local_and_live_paths, columns=['table', 'local_path', 'live_url'])
+    run_flag = False
+
+    # Iterate over the set of tables
+    for table in local_and_live_paths['table']:
+        # Read the local file
+        local_path = local_and_live_paths.loc[local_and_live_paths['table']==table, 'local_path'].item()
+        local = pd.read_csv(local_path, dtype=str, keep_default_na=False)
+
+        # Read the remote file
+        live_url =  local_and_live_paths.loc[local_and_live_paths['table']==table, 'live_url'].item()
+        live = pd.read_csv(live_url, dtype=str, keep_default_na=False)
+
+        # Create a boolean mask of which cells differ from one DF to the other 
+        # ().ne() produces True if the cells differ; ne = not equal)
+        # then melt into a single column
+        check = live.ne(local).melt()
+
+        # Filter the single column for entries that are True (i.e. differences)
+        differences = check.loc[check['value']]
+
+        # Publish flag is true when there are differences to report
+        # if the length of the differences column is greater than 0, then 
+        run_flag = differences.shape[0] > 0
+
+        # Stop once a difference is found
+        if run_flag:
+            logger.info(f'{differences.shape[0]} differences identified in {table}, running script')
+            break
+        else:
+            logger.info(f'No difference for input {table}. live:{live.shape[0]} rows, {live.shape[1]} cols; local:{local.shape[0]} rows, {local.shape[1]} cols')
+
+    if not run_flag:
+        logger.info('No differences identified in inputs. Script will not run.')    
+
+    return run_flag

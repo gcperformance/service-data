@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-from src.load import download_csv_files, download_json_files, download_program_csv_files, clean_out_input_directory
+from src.load import download_csv_files, download_json_files, download_program_csv_files, clean_out_input_directory, run_script_check
 from src.merge import merge_si, merge_ss
 from src.process import process_files
 from src.qa import qa_check
@@ -39,6 +39,15 @@ def get_config():
         ['ss_all', base_dir / 'outputs' / 'utils' / 'ss_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_all.csv'],
         ['drf', base_dir / 'outputs' / 'utils' / 'drf.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/drf.csv'],
         ['program_list', base_dir / 'outputs' / 'utils' / 'program_list.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv'],
+    ]
+
+    # Paths to tables that must change in order to run the script
+    run_flag_paths = [
+        ['si_2024', base_dir / 'inputs' / 'si_2024.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/si_2024.csv'],
+        ['si_2018', base_dir / 'inputs' / 'si_2018.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/si_2018.csv'],
+        ['ss_2024', base_dir / 'inputs' / 'ss_2024.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2024.csv'],
+        ['ss_2018', base_dir / 'inputs' / 'ss_2018.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2018.csv'],
+        ['rbpo', base_dir / 'inputs' / 'rbpo.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/rbpo.csv'],
     ]
 
     # Links to data for download
@@ -120,7 +129,8 @@ def get_config():
         "program_csv_urls_enfr": program_urls_enfr,
         "app_cols": APP_COLS,
         "oip_cols": OIP_COLS,
-        "local_and_live_paths": local_and_live_paths
+        "local_and_live_paths": local_and_live_paths,
+        "run_flag_paths": run_flag_paths
     }
 
 def setup_logging():
@@ -178,6 +188,7 @@ def main():
     parser.add_argument("--live", action="store_true", help="Run process without snapshot updates.")
     parser.add_argument("--download", action="store_true", help="Download the input data without running the processing script.")
     parser.add_argument("--forcepublish", action="store_true", help="Script will generate publish.flag without comparing datasets")
+    parser.add_argument("--forcerun", action="store_true", help="Script will run without comparing datasets")
     args = parser.parse_args()
 
     # Set up logging
@@ -202,86 +213,89 @@ def main():
             download_json_files(config)
             download_program_csv_files(config)
 
-        # Merge historical data
-        if not args.download: # If the "download" option was passed, do not run the process
-            try:
-                logger.info("Merging historical data...")
-                si = merge_si(config)
-                ss = merge_ss(config)
+        # Check if the inputs have changed to decide if a run is necessary
+        if args.forcerun or run_script_check(config):
+
+            # Merge historical data
+            if not args.download: # If the "download" option was passed, do not run the process
+                try:
+                    logger.info("Merging historical data...")
+                    si = merge_si(config)
+                    ss = merge_ss(config)
+                except:
+                    logger.error("Merging historical data failed", exc_info=True)
+                    sys.exit(1)
+
+                # Generate processed files
+                logger.info("Generating processed files...")
+                si_ss_dict = process_files(si, ss, config)
+                
+                # Run QA checks
+                logger.info("Running QA checks...")
+                qa_check(si, ss, config)
+                
+                # Copying files from raw to utils
+                logger.info("Copying files from input to utils...")
+                build_ifoi(config)
+                copy_org_var(config)
+                build_data_dictionary(config)
+                
+                # Run snapshots unless "live" arg was passed
+                if not args.live: # if the "live" option was passed, don't run the snapshots
+                    snapshots_list = config['snapshots_list']
+                    for snapshot in snapshots_list:
+                        # Merge historical snapshot data
+                        logger.info("Processing snapshots: %s", snapshot)
+                        try:
+                            logger.info("Merging historical data for snapshots...")
+                            si_snap = merge_si(config, snapshot)
+                            ss_snap = merge_ss(config, snapshot)
+                        except:
+                            logger.error("Merging historical data for snapshots failed", exc_info=True)
+                            sys.exit(1)
+                        
+                        # Generate processed files 
+                        logger.info("Generating processed snapshot files...")
+                        si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
+
+                        # Compare snapshots to live data
+                        try:
+                            logger.info("Comparing snapshot to live data...")
+                            si_compare_dict = {
+                                'df_base': si_ss_snap_dict['si'],
+                                'df_comp': si_ss_dict['si'],
+                                'base_name': f"{snapshot}_si",
+                                'comp_name':"si",
+                                'key_name':"fy_org_id_service_id",
+                                'file_name':"si_comparison"
+                            }
+                            build_compare_file(si_compare_dict, config, snapshot)
+
+                            ss_compare_dict = {
+                                'df_base': si_ss_snap_dict['ss'],
+                                'df_comp': si_ss_dict['ss'],
+                                'base_name': f"{snapshot}_ss",
+                                'comp_name':"ss",
+                                'key_name':"fy_org_id_service_id_std_id",
+                                'file_name':"ss_comparison"
+                            }
+                            build_compare_file(ss_compare_dict, config, snapshot)
+                        except:
+                            logger.error("Comparing snapshot to live data failed", exc_info=True)
+            try:                
+                force_publish = args.forcepublish
+                # By default, do not publish, i.e. only publish if there is a difference
+
+                if force_publish or publish_release(config):
+                    logger.info('Publishing new release')
+                    flag_path = Path.cwd() / "publish.flag"
+                    flag_path.write_text("Ok to publish", encoding="utf-8")
+                else:
+                    logger.info('Not publishing a release')
             except:
-                logger.error("Merging historical data failed", exc_info=True)
-                sys.exit(1)
+                logger.error("Comparison of datasets to decide whether to publish release has failed", exc_info=True)
 
-            # Generate processed files
-            logger.info("Generating processed files...")
-            si_ss_dict = process_files(si, ss, config)
-            
-            # Run QA checks
-            logger.info("Running QA checks...")
-            qa_check(si, ss, config)
-            
-            # Copying files from raw to utils
-            logger.info("Copying files from input to utils...")
-            build_ifoi(config)
-            copy_org_var(config)
-            build_data_dictionary(config)
-            
-            # Run snapshots unless "live" arg was passed
-            if not args.live: # if the "live" option was passed, don't run the snapshots
-                snapshots_list = config['snapshots_list']
-                for snapshot in snapshots_list:
-                    # Merge historical snapshot data
-                    logger.info("Processing snapshots: %s", snapshot)
-                    try:
-                        logger.info("Merging historical data for snapshots...")
-                        si_snap = merge_si(config, snapshot)
-                        ss_snap = merge_ss(config, snapshot)
-                    except:
-                        logger.error("Merging historical data for snapshots failed", exc_info=True)
-                        sys.exit(1)
-                    
-                    # Generate processed files 
-                    logger.info("Generating processed snapshot files...")
-                    si_ss_snap_dict = process_files(si_snap, ss_snap, config, snapshot)
-
-                    # Compare snapshots to live data
-                    try:
-                        logger.info("Comparing snapshot to live data...")
-                        si_compare_dict = {
-                            'df_base': si_ss_snap_dict['si'],
-                            'df_comp': si_ss_dict['si'],
-                            'base_name': f"{snapshot}_si",
-                            'comp_name':"si",
-                            'key_name':"fy_org_id_service_id",
-                            'file_name':"si_comparison"
-                        }
-                        build_compare_file(si_compare_dict, config, snapshot)
-
-                        ss_compare_dict = {
-                            'df_base': si_ss_snap_dict['ss'],
-                            'df_comp': si_ss_dict['ss'],
-                            'base_name': f"{snapshot}_ss",
-                            'comp_name':"ss",
-                            'key_name':"fy_org_id_service_id_std_id",
-                            'file_name':"ss_comparison"
-                        }
-                        build_compare_file(ss_compare_dict, config, snapshot)
-                    except:
-                        logger.error("Comparing snapshot to live data failed", exc_info=True)
-        try:                
-            force_publish = args.forcepublish
-            # By default, do not publish, i.e. only publish if there is a difference
-
-            if force_publish or publish_release(config):
-                logger.info('Publishing new release')
-                flag_path = Path.cwd() / "publish.flag"
-                flag_path.write_text("Ok to publish", encoding="utf-8")
-            else:
-                logger.info('Not publishing a release')
-        except:
-            logger.error("Comparison of datasets to decide whether to publish release has failed", exc_info=True)
-
-            
+                
         # Log completion time
         elapsed_time = time.perf_counter() - start_time
         logger.info(f"Processing completed in {elapsed_time:.2f} seconds")
