@@ -61,11 +61,13 @@ def get_config():
         'org_var': 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-org-variants.csv',
         'sid_registry': 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv',
         'serv_prog': 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-program.csv',
-        'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv',
-        'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv',
+        # 'ifoi_en': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/7c131a87-7784-4208-8e5c-043451240d95/download/ifoi_roif_en.csv', no longer in use
+        # 'ifoi_fr': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/45069fe9-abe3-437f-97dd-3f64958bfa85/download/ifoi_roif_fr.csv', no longer in use
         'rbpo': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/64774bc1-c90a-4ae2-a3ac-d9b50673a895/download/rbpo_rppo_en.csv',
         # 'op_cost': 'https://donnees-data.tpsgc-pwgsc.gc.ca/ba1/respessentielles-coreresp/respessentielles-coreresp.csv'   no longer in use
+        'infobase_orgs': 'https://open.canada.ca/data/dataset/a35cf382-690c-4221-a971-cf0fd189a46f/resource/d9f87f7f-62f9-4baf-a803-2d8743f38e76/download/organizations.csv'
     }
+
 
     json_urls = {
         'service_data_dict': 'https://open.canada.ca/data/en/recombinant-published-schema/service.json'
