@@ -13,33 +13,34 @@ def dept_list(config, export=False):
     Get a list of departments with their English and French names.
     """
     try:
-        ifoi_en = load_csv('ifoi_en.csv', config)
-        ifoi_fr = load_csv('ifoi_fr.csv', config)
-        
-        # Process English names
-        dept_en = ifoi_en.copy()
-        dept_en['department_en'] = dept_en.iloc[:,5].fillna(dept_en.iloc[:,4])
-        dept_en = dept_en[['org_id', 'department_en']]
-        
-        # Process French names
-        dept_fr = ifoi_fr.copy()
-        dept_fr['department_fr'] = dept_fr.iloc[:,5].fillna(dept_fr.iloc[:,4])
-        dept_fr = dept_fr[['org_id', 'department_fr']]
-        
-        # Merge English and French department names
-        dept = pd.merge(
-            dept_en,
-            dept_fr,
-            on='org_id',
-            how='outer'
-        )
-        
-        # Standardize column names and convert org_id to string
-        dept = standardize_column_names(dept)
-        dept['org_id'] = dept['org_id'].astype(str)
+        ib_orgs = load_csv('infobase_orgs.csv', config)
 
-        # Remove any duplicate entries
-        dept = dept.drop_duplicates()
+        # Restrict list of orgs to those active after the year 2000. Tidier dataset.
+        ib_orgs = ib_orgs.loc[ib_orgs['year']>=2000]
+
+        # Remove all but the latest year's worth of data for each org.
+        ib_orgs = pd.merge(
+            ib_orgs.groupby(['id'], as_index=False)['year'].max(),
+            ib_orgs[['year', 'id', 'legal_title_en', 'applied_title_en', 'legal_title_fr', 'applied_title_fr']],
+            on=['id', 'year']
+            )
+
+        # Define the preferred org name as the applied title, default to legal title if it doesn't exist.
+        ib_orgs['department_en'] = ib_orgs.loc[:, 'applied_title_en'].fillna(ib_orgs.loc[:, 'legal_title_en'])
+        ib_orgs['department_fr'] = ib_orgs.loc[:, 'applied_title_fr'].fillna(ib_orgs.loc[:, 'legal_title_fr'])
+
+        ib_orgs=(ib_orgs
+                    .rename(columns={'id':'org_id'})
+                    .drop(columns=['year', 'legal_title_en', 'applied_title_en', 'legal_title_fr', 'applied_title_fr'])
+                    .drop_duplicates()
+        )
+
+        # Define org type as a string rather than an integer
+        ib_orgs['org_id'] = ib_orgs['org_id'].astype(str)
+
+
+        # Standardize column names and convert org_id to string
+        dept = standardize_column_names(ib_orgs)
         
         if export:
             UTILS_DIR = config['output_dir'] / config['utils_dir']

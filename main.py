@@ -240,7 +240,7 @@ def main():
                 
                 # Copying files from raw to utils
                 logger.info("Copying files from input to utils...")
-                build_ifoi(config)
+                # build_ifoi(config)
                 copy_org_var(config)
                 build_data_dictionary(config)
                 
