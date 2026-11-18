@@ -64,12 +64,28 @@ jobs:
           echo "time=$(date +'%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "commit_hash=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      # Step: Execute your Python data-processing script.
+      # Step: Execute the Python data-processing script.
       # This is expected to generate or refresh the files placed under
       # the outputs/ and inputs/ directories.
       - name: Run main.py
         run: python main.py
         
+      # Step: Check the presence of the publish.flag file
+      #
+      # Important behavior:
+      # - the main script generates a publish.flag file if it detects a difference
+      - name: Check release flag
+        id: publish_gate
+        shell: bash
+        run: |
+          if [[ -f publish.flag ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "publish.flag found; release is enabled."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "publish.flag not found; release will be skipped."
+          fi
+
       # Step: Collect current non-snapshot CSV and LOG files into a dedicated
       # folder that will be used as release assets.
       #
@@ -81,6 +97,7 @@ jobs:
       # - excludes empty files
       # - copies each matching file into live_data_release/
       - name: Prepare live files for release
+        if: github.event_name != 'pull_request' && steps.publish_gate.outputs.enabled == 'true'
         shell: bash
         id: prepare_live_files
         run: |
@@ -108,6 +125,7 @@ jobs:
       # - renames each copied file to <date>_<original filename>
       #   so users can tell which snapshot date it belongs to
       - name: Prepare snapshot files for release
+        if: github.event_name != 'pull_request' && steps.publish_gate.outputs.enabled == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -140,6 +158,7 @@ jobs:
       # This is useful for debugging because the workflow log will show exactly
       # which files were prepared before the release step runs.
       - name: Create file manifest
+        if: github.event_name != 'pull_request' && steps.publish_gate.outputs.enabled == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -150,22 +169,6 @@ jobs:
 
           echo "Files to upload:"
           cat release_files.txt          
-
-      # Step: Check the presence of the publish.flag file
-      #
-      # Important behavior:
-      # - the main script generates a publish.flag file if it detects a difference
-      - name: Check release flag
-        id: publish_gate
-        shell: bash
-        run: |
-          if [[ -f publish.flag ]]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-            echo "publish.flag found; release is enabled."
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "publish.flag not found; release will be skipped."
-          fi
       
       # Step: Create a GitHub release and upload all prepared files as assets.
       #
