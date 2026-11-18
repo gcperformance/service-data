@@ -33,14 +33,14 @@ def get_config():
         '2026-01-19'
     ]
 
-    # Paths to tables that must change in order to publish
-    local_and_live_paths = [
-        ['si_all', base_dir / 'outputs' / 'utils' / 'si_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/si_all.csv'],
-        ['ss_all', base_dir / 'outputs' / 'utils' / 'ss_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_all.csv'],
-        ['drf', base_dir / 'outputs' / 'utils' / 'drf.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/drf.csv'],
-        ['program_list', base_dir / 'outputs' / 'utils' / 'program_list.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv'],
-        ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv']
-    ]
+    # # Paths to tables that must change in order to publish
+    # local_and_live_paths = [
+    #     ['si_all', base_dir / 'outputs' / 'utils' / 'si_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/si_all.csv'],
+    #     ['ss_all', base_dir / 'outputs' / 'utils' / 'ss_all.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_all.csv'],
+    #     ['drf', base_dir / 'outputs' / 'utils' / 'drf.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/drf.csv'],
+    #     ['program_list', base_dir / 'outputs' / 'utils' / 'program_list.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/program_list.csv'],
+    #     ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv']
+    # ]
 
     # Paths to tables that must change in order to run the script
     run_flag_paths = [
@@ -49,7 +49,7 @@ def get_config():
         ['ss_2024', base_dir / 'inputs' / 'ss_2024.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2024.csv'],
         ['ss_2018', base_dir / 'inputs' / 'ss_2018.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/ss_2018.csv'],
         ['rbpo', base_dir / 'inputs' / 'rbpo.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/rbpo.csv'],
-        ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://raw.githubusercontent.com/gcperformance/utilities/refs/heads/master/goc-service-id-registry.csv']
+        ['sid_registry', base_dir / 'inputs' / 'sid_registry.csv', 'https://github.com/gcperformance/service-data/releases/latest/download/sid_registry.csv']
     ]
 
     # Links to data for download
@@ -133,7 +133,6 @@ def get_config():
         "program_csv_urls_enfr": program_urls_enfr,
         "app_cols": APP_COLS,
         "oip_cols": OIP_COLS,
-        "local_and_live_paths": local_and_live_paths,
         "run_flag_paths": run_flag_paths
     }
 
@@ -191,7 +190,7 @@ def main():
     parser.add_argument("--local", action="store_true", help="Use local inputs without downloading new ones.")
     parser.add_argument("--live", action="store_true", help="Run process without snapshot updates.")
     parser.add_argument("--download", action="store_true", help="Download the input data without running the processing script.")
-    parser.add_argument("--forcepublish", action="store_true", help="Script will generate publish.flag without comparing datasets")
+    # parser.add_argument("--forcepublish", action="store_true", help="Script will generate publish.flag without comparing datasets")
     parser.add_argument("--forcerun", action="store_true", help="Script will run without comparing datasets")
     args = parser.parse_args()
 
@@ -217,9 +216,12 @@ def main():
             download_json_files(config)
             download_program_csv_files(config)
 
-        # Check if the inputs have changed to decide if a run is necessary
+        # Check if the inputs have changed to decide if a run and publication is necessary
         if args.forcerun or run_script_check(config):
-
+            logger.info('Running script and will publish new release...')
+            flag_path = Path.cwd() / "publish.flag"
+            flag_path.write_text("Ok to publish", encoding="utf-8")
+            
             # Merge historical data
             if not args.download: # If the "download" option was passed, do not run the process
                 try:
@@ -286,19 +288,6 @@ def main():
                             build_compare_file(ss_compare_dict, config, snapshot)
                         except:
                             logger.error("Comparing snapshot to live data failed", exc_info=True)
-            try:                
-                force_publish = args.forcepublish
-                # By default, do not publish, i.e. only publish if there is a difference
-
-                if force_publish or publish_release(config):
-                    logger.info('Publishing new release')
-                    flag_path = Path.cwd() / "publish.flag"
-                    flag_path.write_text("Ok to publish", encoding="utf-8")
-                else:
-                    logger.info('Not publishing a release')
-            except:
-                logger.error("Comparison of datasets to decide whether to publish release has failed", exc_info=True)
-
                 
         # Log completion time
         elapsed_time = time.perf_counter() - start_time

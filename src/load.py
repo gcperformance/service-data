@@ -258,6 +258,7 @@ def run_script_check(config):
     '''
     logger.info('Reviewing input files for differences with published data...')
     # Compare each configured local file with its live counterpart.
+
     # Pull relevant info from config file, convert to DataFrame for ease of use
     local_and_live_paths = config['run_flag_paths']
     local_and_live_paths = pd.DataFrame(local_and_live_paths, columns=['table', 'local_path', 'live_url'])
@@ -287,12 +288,12 @@ def run_script_check(config):
 
         # Stop once a difference is found
         if run_flag:
-            logger.info(f'{differences.shape[0]} differences identified in {table}, running script')
+            logger.info(f'{differences.shape[0]} differences identified in {table}, running script, publishing release')
             break
         else:
             logger.info(f'No difference for input {table}. live:{live.shape[0]} rows, {live.shape[1]} cols; local:{local.shape[0]} rows, {local.shape[1]} cols')
 
     if not run_flag:
-        logger.info('No differences identified in inputs. Script will not run.')    
+        logger.info('No differences identified in inputs. Script will not run, release will not publish.')    
 
     return run_flag
